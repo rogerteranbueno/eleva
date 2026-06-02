@@ -1,0 +1,322 @@
+import type {
+  Coach,
+  Specialist,
+  Cohorte,
+  Participant,
+  Mission,
+  FeedPost,
+  LeaderboardEntry,
+  CenterStats,
+} from "@/lib/types"
+
+export const CENTER = {
+  name: "Creania",
+  fullName: "Creania Transformación",
+  city: "Ciudad de México",
+  founder: "Carlos Mendoza",
+  model: "Despertar (3 días) → Expansión (4 días) → Vía Creania (5 meses)",
+}
+
+export const STATS: CenterStats = {
+  activeParticipants: 247,
+  atRiskCount: 14,
+  activeCohortes: 3,
+  nextEventDays: 4,
+  averageMomentum: 67,
+  monthlyGrowth: 12,
+}
+
+export const COACHES: Coach[] = [
+  { id: "c1", name: "Ana Reyes", avatar: "AR", cohorte: "Generación Omega", lastContactDaysAgo: 9 },
+  { id: "c2", name: "Marco Fuentes", avatar: "MF", cohorte: "Generación Norte", lastContactDaysAgo: 2 },
+  { id: "c3", name: "Daniela Torres", avatar: "DT", cohorte: "Generación Vía 12", lastContactDaysAgo: 0 },
+  { id: "c4", name: "Rodrigo Peña", avatar: "RP", cohorte: "General", lastContactDaysAgo: 5 },
+  { id: "c5", name: "Sofía Villanueva", avatar: "SV", cohorte: "General", lastContactDaysAgo: 1 },
+  { id: "c6", name: "Luis Herrera", avatar: "LH", cohorte: "General", lastContactDaysAgo: 3 },
+]
+
+export const SPECIALISTS: Specialist[] = [
+  { id: "s1", name: "Laura Medina", specialty: "Coach Financiero", avatar: "LM", available: true },
+  { id: "s2", name: "Dr. Arturo Vega", specialty: "Psicólogo", avatar: "AV", available: true },
+  { id: "s3", name: "Lic. Carla Soto", specialty: "Nutrióloga", avatar: "CS", available: false },
+  { id: "s4", name: "Fernanda Ruiz", specialty: "Terapeuta de Pareja", avatar: "FR", available: true },
+  { id: "s5", name: "Ing. Samuel Torres", specialty: "Coach de Negocios", avatar: "ST", available: true },
+  { id: "s6", name: "Dra. Mónica Lima", specialty: "Psicóloga", avatar: "ML", available: true },
+  { id: "s7", name: "Carlos Ibáñez", specialty: "Coach de Liderazgo", avatar: "CI", available: true },
+  { id: "s8", name: "Lic. Patricia Wong", specialty: "Coach Financiero", avatar: "PW", available: false },
+]
+
+export const COHORTES: Cohorte[] = [
+  {
+    id: "omega",
+    name: "Generación Omega",
+    phase: "Vía Creania",
+    phaseDetail: "Mes 3 de 5",
+    participants: 89,
+    momentum: 74,
+    status: "active",
+    coach: "Ana Reyes",
+  },
+  {
+    id: "norte",
+    name: "Generación Norte",
+    phase: "Expansión",
+    phaseDetail: "Completada",
+    participants: 67,
+    momentum: 58,
+    status: "attention",
+    coach: "Marco Fuentes",
+  },
+  {
+    id: "via12",
+    name: "Generación Vía 12",
+    phase: "Despertar",
+    phaseDetail: "Completado",
+    participants: 91,
+    momentum: 81,
+    status: "thriving",
+    coach: "Daniela Torres",
+  },
+]
+
+export const VALERIA: Participant = {
+  id: "p1",
+  name: "Valeria Romo",
+  avatar: "VR",
+  cohorte: "Generación Omega",
+  phase: "Vía Creania",
+  phaseDetail: "Mes 3 de 5",
+  momentum: 23,
+  streak: 0,
+  bestStreak: 22,
+  inactiveDays: 11,
+  coachId: "c1",
+  riskLevel: "high",
+  missionsCompleted: 3,
+  missionsTotal: 12,
+  pendingMissions: 3,
+  lastAccess: "hace 11 días",
+  objective: {
+    title: "Independencia financiera",
+    progress: 40,
+    specialistId: "s1",
+  },
+  coachNote: "Hablar con Valeria sobre sus compromisos de semana 8. Siento que está evitando la conversación de finanzas.",
+  coachNoteDate: "hace 9 días",
+  payments: [
+    { concept: "Vía Creania — Mes 1", amount: 4200, date: "1 mar 2025", status: "paid" },
+    { concept: "Vía Creania — Mes 2", amount: 4200, date: "1 abr 2025", status: "paid" },
+    { concept: "Vía Creania — Mes 3", amount: 4200, date: "1 may 2025", status: "paid" },
+    { concept: "Vía Creania — Mes 4", amount: 4200, date: "1 jun 2025", status: "pending" },
+  ],
+  activity: [
+    // 30 days of activity — true = active, false = inactive
+    // Last 11 days all inactive
+    ...Array.from({ length: 19 }, (_, i) => ({
+      date: `día ${30 - i}`,
+      active: Math.random() > 0.35,
+      daysAgo: 30 - i,
+    })),
+    ...Array.from({ length: 11 }, (_, i) => ({
+      date: `día ${11 - i}`,
+      active: false,
+      daysAgo: 11 - i,
+    })),
+  ],
+}
+
+export const DIEGO: Participant = {
+  id: "p2",
+  name: "Diego Salinas",
+  avatar: "DS",
+  cohorte: "Generación Vía 12",
+  phase: "Vía Creania",
+  phaseDetail: "Mes 1 de 5",
+  momentum: 94,
+  streak: 22,
+  bestStreak: 22,
+  inactiveDays: 0,
+  coachId: "c3",
+  riskLevel: "low",
+  missionsCompleted: 9,
+  missionsTotal: 12,
+  pendingMissions: 0,
+  lastAccess: "hoy",
+  objective: {
+    title: "Escalar mi negocio",
+    progress: 75,
+    specialistId: "s5",
+  },
+  coachNote: "Diego está siendo un embajador increíble. Considerar para mentor de próxima gen.",
+  coachNoteDate: "hace 2 días",
+  payments: [
+    { concept: "Despertar", amount: 6500, date: "15 ene 2025", status: "paid" },
+    { concept: "Expansión", amount: 8900, date: "8 feb 2025", status: "paid" },
+    { concept: "Vía Creania — Mes 1", amount: 4200, date: "1 may 2025", status: "paid" },
+  ],
+  activity: Array.from({ length: 30 }, (_, i) => ({
+    date: `día ${30 - i}`,
+    active: true,
+    daysAgo: 30 - i,
+  })),
+}
+
+export const MARIANA: Participant = {
+  id: "p3",
+  name: "Mariana Ortiz",
+  avatar: "MO",
+  cohorte: "Generación Norte",
+  phase: "Expansión",
+  phaseDetail: "Completada",
+  momentum: 51,
+  streak: 3,
+  bestStreak: 14,
+  inactiveDays: 0,
+  coachId: "c2",
+  riskLevel: "medium",
+  missionsCompleted: 6,
+  missionsTotal: 12,
+  pendingMissions: 1,
+  lastAccess: "hace 2 días",
+  objective: {
+    title: "Mejorar mis relaciones personales",
+    progress: 55,
+    specialistId: "s4",
+  },
+  coachNote: "Mariana asiste pero no se compromete entre sesiones. Necesita activación.",
+  coachNoteDate: "hace 4 días",
+  payments: [
+    { concept: "Despertar", amount: 6500, date: "10 dic 2024", status: "paid" },
+    { concept: "Expansión", amount: 8900, date: "18 ene 2025", status: "paid" },
+  ],
+  activity: Array.from({ length: 30 }, (_, i) => ({
+    date: `día ${30 - i}`,
+    active: Math.random() > 0.5,
+    daysAgo: 30 - i,
+  })),
+}
+
+export const AT_RISK_PARTICIPANTS = [
+  { ...VALERIA },
+  {
+    id: "p4", name: "Roberto Campos", avatar: "RC", momentum: 31, inactiveDays: 8,
+    cohorte: "Generación Norte", riskLevel: "high" as const, coachId: "c2",
+    pendingMissions: 2, phase: "Expansión" as const,
+  },
+  {
+    id: "p5", name: "Lucía Fernández", avatar: "LF", momentum: 38, inactiveDays: 6,
+    cohorte: "Generación Omega", riskLevel: "high" as const, coachId: "c1",
+    pendingMissions: 1, phase: "Vía Creania" as const,
+  },
+  {
+    id: "p6", name: "Andrés Mora", avatar: "AM", momentum: 42, inactiveDays: 4,
+    cohorte: "Generación Norte", riskLevel: "medium" as const, coachId: "c2",
+    pendingMissions: 1, phase: "Expansión" as const,
+  },
+  { ...MARIANA },
+  {
+    id: "p7", name: "Gabriela Cruz", avatar: "GC", momentum: 45, inactiveDays: 3,
+    cohorte: "Generación Vía 12", riskLevel: "medium" as const, coachId: "c3",
+    pendingMissions: 0, phase: "Despertar" as const,
+  },
+]
+
+export const CURRENT_MISSION: Mission = {
+  id: "m1",
+  week: 12,
+  title: "Tu compromiso de esta semana",
+  description: "15 minutos de reflexión diaria + una acción concreta hacia tu objetivo de independencia financiera. Documenta qué hiciste y qué aprendiste.",
+  completed: false,
+  dueInDays: 2,
+  requiresEvidence: true,
+}
+
+export const FEED_POSTS: FeedPost[] = [
+  {
+    id: "f0",
+    author: "Ana Reyes",
+    avatar: "AR",
+    content: "Generación Omega: esta semana el reto es la consistencia, no la intensidad. 15 minutos todos los días valen más que 2 horas una vez. Estoy con ustedes.",
+    minutesAgo: 45,
+    reactions: 34,
+    comments: 8,
+    isPinned: true,
+    isCoach: true,
+  },
+  {
+    id: "f1",
+    author: "Diego Salinas",
+    avatar: "DS",
+    content: "Día 22 de racha. Hoy tuve la conversación más difícil con mi socio sobre finanzas. No fue perfecta pero fue honesta. Eso cuenta.",
+    minutesAgo: 120,
+    reactions: 47,
+    comments: 12,
+  },
+  {
+    id: "f2",
+    author: "Carmen Valdés",
+    avatar: "CV",
+    content: "Completé la misión de la semana antes del miércoles por primera vez. Se siente diferente cuando lo haces por ti y no por el check.",
+    minutesAgo: 180,
+    reactions: 29,
+    comments: 6,
+  },
+  {
+    id: "f3",
+    author: "Héctor Ramírez",
+    avatar: "HR",
+    content: "Tuve mi primera sesión con Laura (coach financiero) y me voló la cabeza. Recomendado para todos los que tienen objetivos de dinero este mes.",
+    minutesAgo: 360,
+    reactions: 22,
+    comments: 9,
+  },
+]
+
+export const LEADERBOARD: LeaderboardEntry[] = [
+  { rank: 1, name: "Diego Salinas", avatar: "DS", streak: 22 },
+  { rank: 2, name: "Carmen Valdés", avatar: "CV", streak: 18 },
+  { rank: 3, name: "Héctor Ramírez", avatar: "HR", streak: 15 },
+  { rank: 4, name: "Priya Nair", avatar: "PN", streak: 12 },
+  { rank: 5, name: "Valeria Romo", avatar: "VR", streak: 0, isCurrentUser: true },
+]
+
+export const MOMENTUM_HISTORY = [
+  { day: "30", value: 68 },
+  { day: "29", value: 71 },
+  { day: "28", value: 65 },
+  { day: "27", value: 73 },
+  { day: "26", value: 70 },
+  { day: "25", value: 69 },
+  { day: "24", value: 72 },
+  { day: "23", value: 68 },
+  { day: "22", value: 74 },
+  { day: "21", value: 70 },
+  { day: "20", value: 66 },
+  { day: "19", value: 71 },
+  { day: "18", value: 63 },
+  { day: "17", value: 58 },
+  { day: "16", value: 52 },
+  { day: "15", value: 48 },
+  { day: "14", value: 43 },
+  { day: "13", value: 39 },
+  { day: "12", value: 35 },
+  { day: "11", value: 31 },
+  { day: "10", value: 28 },
+  { day: "9", value: 26 },
+  { day: "8", value: 25 },
+  { day: "7", value: 24 },
+  { day: "6", value: 24 },
+  { day: "5", value: 23 },
+  { day: "4", value: 23 },
+  { day: "3", value: 23 },
+  { day: "2", value: 23 },
+  { day: "hoy", value: 23 },
+]
+
+export const RECENT_ACTIVITY = [
+  { text: "Diego Salinas completó su misión de semana 22", time: "hace 45 min", type: "success" },
+  { text: "Carmen Valdés agendó sesión con Laura Medina (Coach Financiero)", time: "hace 2 hrs", type: "specialist" },
+  { text: "Nuevo participante en Generación Norte: Sofía Garza", time: "hace 3 hrs", type: "new" },
+  { text: "Héctor Ramírez rompió su racha de 15 días", time: "hace 5 hrs", type: "warning" },
+  { text: "Próximo evento: Sesión en vivo Generación Omega — jueves 7pm", time: "en 4 días", type: "event" },
+]

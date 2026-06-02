@@ -1,0 +1,316 @@
+"use client"
+
+import { useState } from "react"
+import { ArrowUpRight, CheckCircle, Clock, DollarSign, Target, FileText, Activity } from "lucide-react"
+import { AvatarBadge } from "@/components/demo/AvatarBadge"
+import { MomentumGauge } from "@/components/demo/MomentumGauge"
+import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
+import { useDemoStore } from "@/lib/demo-store"
+import { VALERIA, COACHES, SPECIALISTS } from "@/data/creania"
+import { cn, getMomentumColor } from "@/lib/utils"
+
+type Tab = "resumen" | "actividad" | "objetivos" | "pagos" | "notas"
+
+export default function ExpedientePage() {
+  const [tab, setTab] = useState<Tab>("resumen")
+  const [escalateNote, setEscalateNote] = useState("")
+  const { state, dispatch } = useDemoStore()
+  const { toast, show, hide } = useActionToast()
+
+  const coach = COACHES.find((c) => c.id === VALERIA.coachId)!
+  const specialist = SPECIALISTS.find((s) => s.id === VALERIA.objective.specialistId)!
+  const momentum = state.valeriaMomentum
+
+  function handleEscalate() {
+    dispatch({ type: "ESCALATE" })
+    dispatch({ type: "ADD_COACH_NOTE" })
+    show(`Escalado a ${coach.name} con nota ✓`)
+  }
+
+  const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
+    { id: "resumen", label: "Resumen", icon: <Activity className="w-3.5 h-3.5" /> },
+    { id: "actividad", label: "Actividad", icon: <Clock className="w-3.5 h-3.5" /> },
+    { id: "objetivos", label: "Objetivos", icon: <Target className="w-3.5 h-3.5" /> },
+    { id: "pagos", label: "Pagos", icon: <DollarSign className="w-3.5 h-3.5" /> },
+    { id: "notas", label: "Notas del coach", icon: <FileText className="w-3.5 h-3.5" /> },
+  ]
+
+  return (
+    <div className="p-6 max-w-4xl mx-auto space-y-6">
+      {/* Profile header */}
+      <div className="glass rounded-2xl p-6">
+        <div className="flex items-start gap-5 flex-wrap">
+          <AvatarBadge initials={VALERIA.avatar} size="lg" />
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-3 flex-wrap">
+              <h1 className="text-2xl font-bold text-white">{VALERIA.name}</h1>
+              <span className="text-[11px] px-2.5 py-1 rounded-full bg-red-500/15 text-red-400 border border-red-500/20 font-semibold">
+                En riesgo
+              </span>
+            </div>
+            <p className="text-muted-foreground text-sm mt-0.5">
+              {VALERIA.cohorte} · {VALERIA.phase} — {VALERIA.phaseDetail}
+            </p>
+            <div className="flex items-center gap-4 mt-3 text-sm flex-wrap">
+              <div>
+                <span className="text-muted-foreground">Último acceso: </span>
+                <span className="text-red-400 font-medium">{VALERIA.lastAccess}</span>
+              </div>
+              <div>
+                <span className="text-muted-foreground">Coach: </span>
+                <span className="text-white font-medium">{coach.name}</span>
+                <span className="text-red-400 text-xs ml-1">
+                  (sin contacto hace {coach.lastContactDaysAgo} días)
+                </span>
+              </div>
+            </div>
+          </div>
+          <MomentumGauge score={momentum} size="md" />
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-1 p-1 glass rounded-xl overflow-x-auto">
+        {TABS.map(({ id, label, icon }) => (
+          <button
+            key={id}
+            onClick={() => setTab(id)}
+            className={cn(
+              "flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap",
+              tab === id
+                ? "bg-violet-600 text-white"
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            {icon}
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {/* Tab content */}
+      {tab === "resumen" && <TabResumen momentum={momentum} />}
+      {tab === "actividad" && <TabActividad />}
+      {tab === "objetivos" && <TabObjetivos specialist={specialist} />}
+      {tab === "pagos" && <TabPagos />}
+      {tab === "notas" && (
+        <TabNotas
+          escalated={state.escalated}
+          noteAdded={state.coachNoteAdded}
+          coach={coach}
+          note={escalateNote}
+          setNote={setEscalateNote}
+          onEscalate={handleEscalate}
+        />
+      )}
+
+      <ActionToast message={toast.message} visible={toast.visible} onHide={hide} />
+    </div>
+  )
+}
+
+function TabResumen({ momentum }: { momentum: number }) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <StatBox label="Racha actual" value="0 días" sub="Rota hace 11 días" alert />
+      <StatBox label="Mejor racha" value="22 días" sub="Alcanzada hace 3 semanas" />
+      <StatBox label="Misiones completadas" value="3 / 12" sub="3 pendientes este mes" alert />
+      <StatBox label="Momentum" value={`${momentum}%`} sub="Cayó 47 puntos en 2 semanas" alert />
+      <StatBox label="Fase actual" value="Mes 3" sub="Vía Creania — 2 meses restantes" />
+      <StatBox label="Pagos" value="Al corriente" sub="Mes 4 vence en 29 días" />
+    </div>
+  )
+}
+
+function TabActividad() {
+  const days = VALERIA.activity.slice(-30).reverse()
+  return (
+    <div className="glass rounded-xl p-5 space-y-4">
+      <h3 className="font-semibold text-white">Últimos 30 días de actividad</h3>
+      <p className="text-xs text-muted-foreground">El hueco de los últimos 11 días es visible — sin check-ins, sin misiones.</p>
+      <div className="flex flex-wrap gap-1.5">
+        {days.map((d, i) => (
+          <div
+            key={i}
+            className={cn(
+              "w-7 h-7 rounded-md flex items-center justify-center text-[10px] font-bold transition-colors",
+              d.active
+                ? "bg-violet-600/60 text-violet-200 border border-violet-500/40"
+                : d.daysAgo <= 11
+                ? "bg-red-500/20 text-red-400 border border-red-500/20"
+                : "bg-white/5 text-muted-foreground border border-white/5"
+            )}
+            title={`Día ${d.daysAgo} — ${d.active ? "Activo" : "Inactivo"}`}
+          >
+            {d.daysAgo}
+          </div>
+        ))}
+      </div>
+      <div className="flex gap-4 text-xs text-muted-foreground">
+        <div className="flex items-center gap-1.5">
+          <div className="w-3 h-3 rounded bg-violet-600/60" />
+          Activo
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="w-3 h-3 rounded bg-red-500/20" />
+          Inactivo (últimos 11 días)
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="w-3 h-3 rounded bg-white/5" />
+          Sin actividad
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function TabObjetivos({ specialist }: { specialist: { name: string; specialty: string; avatar: string; available: boolean } }) {
+  return (
+    <div className="space-y-4">
+      <div className="glass rounded-xl p-5 space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="font-semibold text-white">{VALERIA.objective.title}</h3>
+          <span className="text-sm font-bold text-yellow-400">{VALERIA.objective.progress}%</span>
+        </div>
+        <div className="h-2 rounded-full bg-white/5 overflow-hidden">
+          <div
+            className="h-full rounded-full bg-yellow-400 transition-all duration-1000"
+            style={{ width: `${VALERIA.objective.progress}%` }}
+          />
+        </div>
+        <p className="text-xs text-muted-foreground">
+          Objetivo declarado en semana 1 de Vía Creania. Sin avance registrado en los últimos 11 días.
+        </p>
+      </div>
+      <div className="glass-violet rounded-xl p-5">
+        <p className="text-xs text-muted-foreground mb-3 font-medium">Especialista sugerido para este objetivo</p>
+        <div className="flex items-center gap-3">
+          <AvatarBadge initials={specialist.avatar} size="md" color="cyan" />
+          <div>
+            <p className="font-semibold text-white">{specialist.name}</p>
+            <p className="text-sm text-cyan-400">{specialist.specialty}</p>
+          </div>
+          <div className={cn(
+            "ml-auto px-3 py-1.5 rounded-lg text-xs font-medium",
+            specialist.available
+              ? "bg-green-500/15 text-green-400 border border-green-500/20"
+              : "bg-muted text-muted-foreground"
+          )}>
+            {specialist.available ? "Disponible" : "Ocupada"}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function TabPagos() {
+  return (
+    <div className="glass rounded-xl overflow-hidden">
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="border-b border-border">
+            <th className="text-left px-5 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Concepto</th>
+            <th className="text-right px-5 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Monto</th>
+            <th className="text-right px-5 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Fecha</th>
+            <th className="text-right px-5 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Estado</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-border">
+          {VALERIA.payments.map((p, i) => (
+            <tr key={i} className="hover:bg-white/2 transition-colors">
+              <td className="px-5 py-3 text-foreground">{p.concept}</td>
+              <td className="px-5 py-3 text-right font-medium text-white">${p.amount.toLocaleString()} MXN</td>
+              <td className="px-5 py-3 text-right text-muted-foreground">{p.date}</td>
+              <td className="px-5 py-3 text-right">
+                {p.status === "paid" ? (
+                  <span className="text-xs px-2 py-1 rounded-full bg-green-500/15 text-green-400">Pagado</span>
+                ) : (
+                  <span className="text-xs px-2 py-1 rounded-full bg-yellow-500/15 text-yellow-400">Pendiente</span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function TabNotas({
+  escalated,
+  noteAdded,
+  coach,
+  note,
+  setNote,
+  onEscalate,
+}: {
+  escalated: boolean
+  noteAdded: boolean
+  coach: { name: string; avatar: string; lastContactDaysAgo: number }
+  note: string
+  setNote: (v: string) => void
+  onEscalate: () => void
+}) {
+  return (
+    <div className="space-y-4">
+      {/* Existing note */}
+      <div className="glass rounded-xl p-5 space-y-3">
+        <div className="flex items-center gap-3">
+          <AvatarBadge initials={coach.avatar} size="sm" color="violet" />
+          <div>
+            <p className="font-semibold text-white text-sm">{coach.name}</p>
+            <p className="text-xs text-red-400">{VALERIA.coachNoteDate} (sin seguimiento desde entonces)</p>
+          </div>
+        </div>
+        <p className="text-sm text-foreground italic leading-relaxed">
+          &quot;{VALERIA.coachNote}&quot;
+        </p>
+      </div>
+
+      {/* Escalate */}
+      {!escalated ? (
+        <div className="glass-violet rounded-xl p-5 space-y-4">
+          <h3 className="font-semibold text-white">Escalar a {coach.name}</h3>
+          <p className="text-xs text-muted-foreground">
+            Envíale una nota + alerta para que contacte a Valeria hoy.
+          </p>
+          <textarea
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            placeholder={`Nota para ${coach.name}: Valeria lleva 11 días inactiva, necesita contacto urgente...`}
+            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground resize-none focus:outline-none focus:border-violet-500/50 transition-colors"
+            rows={3}
+          />
+          <button
+            onClick={onEscalate}
+            className="flex items-center gap-2 px-5 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-sm font-semibold transition-colors"
+          >
+            <ArrowUpRight className="w-4 h-4" />
+            Escalar a {coach.name}
+          </button>
+        </div>
+      ) : (
+        <div className="glass rounded-xl p-5 flex items-center gap-3 border border-green-500/20">
+          <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+          <div>
+            <p className="font-semibold text-green-400">Escalado exitosamente</p>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              {coach.name} recibió la alerta y tu nota. Notificación enviada.
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function StatBox({ label, value, sub, alert }: { label: string; value: string; sub: string; alert?: boolean }) {
+  return (
+    <div className={cn("glass rounded-xl p-4 space-y-1", alert ? "border border-red-500/20" : "")}>
+      <p className="text-xs text-muted-foreground font-medium">{label}</p>
+      <p className={cn("text-2xl font-bold", alert ? "text-red-400" : "text-white")}>{value}</p>
+      <p className="text-xs text-muted-foreground">{sub}</p>
+    </div>
+  )
+}
