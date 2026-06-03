@@ -4,8 +4,23 @@ import { useState } from "react"
 import { CheckCircle, Upload, Flame, ChevronRight, Lock } from "lucide-react"
 import { useDemoStore } from "@/lib/demo-store"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
+import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { CURRENT_MISSION } from "@/data/creania"
 import { cn } from "@/lib/utils"
+
+const ONBOARDING = {
+  screenId: "mision",
+  badge: "Vista del participante · Pantalla 2 de 4",
+  badgeColor: "cyan" as const,
+  title: "Misiones semanales",
+  description: "Cada semana Valeria tiene una misión personalizada a su fase y objetivo. No es un checklist genérico — es un arco de transformación diseñado por el centro.",
+  tips: [
+    { emoji: "🔥", text: "Su racha es 0 días — rota hace 11 días. Por eso está en riesgo en el panel del dueño." },
+    { emoji: "✅", text: "Toca 'Marcar como completada' y observa cómo sube el Momentum Score al instante." },
+    { emoji: "🗺️", text: "La lista de todas las misiones muestra su progreso completo en la ruta de Vía Creania." },
+  ],
+  cta: "Ver las misiones →",
+}
 
 const ALL_MISSIONS = [
   { week: 1, title: "Tu primera declaración de compromiso", completed: true },
@@ -32,6 +47,7 @@ export default function MisionPage() {
 
   return (
     <div className="p-6 max-w-2xl mx-auto space-y-6">
+      <OnboardingModal config={ONBOARDING} />
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-white">Mi Misión</h1>

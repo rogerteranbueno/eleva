@@ -205,7 +205,7 @@ function ProblemSection() {
   ]
 
   return (
-    <section className="px-6 py-20 max-w-5xl mx-auto">
+    <section className="px-6 py-16 max-w-5xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -259,7 +259,7 @@ function ContrastSection() {
   ]
 
   return (
-    <section className="px-6 py-20 max-w-5xl mx-auto">
+    <section className="px-6 py-16 max-w-5xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -272,7 +272,8 @@ function ContrastSection() {
         </h2>
       </motion.div>
 
-      <div className="glass rounded-2xl overflow-hidden">
+      {/* Desktop: 2-col table — Mobile: stacked cards */}
+      <div className="hidden sm:block glass rounded-2xl overflow-hidden">
         <div className="grid grid-cols-2 border-b border-border">
           <div className="p-4 text-center">
             <span className="text-xs font-bold text-red-400 uppercase tracking-wider">Hoy</span>
@@ -297,6 +298,27 @@ function ContrastSection() {
             <div className="p-4 flex items-center gap-2 border-l border-border">
               <CheckCircle className="w-3.5 h-3.5 text-violet-400 flex-shrink-0" />
               <span className="text-sm text-white font-medium">{row.after}</span>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+      <div className="sm:hidden space-y-3">
+        {rows.map((row, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.06 }}
+            className="glass rounded-xl overflow-hidden"
+          >
+            <div className="flex items-start gap-2 px-4 py-3 border-b border-border">
+              <div className="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5" />
+              <span className="text-sm text-muted-foreground leading-snug">{row.before}</span>
+            </div>
+            <div className="flex items-start gap-2 px-4 py-3 bg-violet-600/5">
+              <CheckCircle className="w-3.5 h-3.5 text-violet-400 flex-shrink-0 mt-0.5" />
+              <span className="text-sm text-white font-medium leading-snug">{row.after}</span>
             </div>
           </motion.div>
         ))}
@@ -424,7 +446,7 @@ function HowItWorksSection() {
   ]
 
   return (
-    <section className="px-6 py-20 max-w-5xl mx-auto">
+    <section className="px-6 py-16 max-w-5xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -462,7 +484,7 @@ function EcosystemSection() {
   ]
 
   return (
-    <section className="px-6 py-20 max-w-5xl mx-auto">
+    <section className="px-6 py-16 max-w-5xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -543,7 +565,7 @@ function RolesSection() {
   ]
 
   return (
-    <section className="px-6 py-20 max-w-5xl mx-auto">
+    <section className="px-6 py-16 max-w-5xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -594,7 +616,7 @@ function RolesSection() {
 
 function DemoSection() {
   return (
-    <section className="px-6 py-20 max-w-5xl mx-auto">
+    <section className="px-6 py-16 max-w-5xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -650,7 +672,7 @@ function ForWhoSection() {
   ]
 
   return (
-    <section className="px-6 py-20 max-w-5xl mx-auto">
+    <section className="px-6 py-16 max-w-5xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -719,7 +741,7 @@ function FAQSection() {
   ]
 
   return (
-    <section className="px-6 py-20 max-w-3xl mx-auto">
+    <section className="px-6 py-16 max-w-3xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

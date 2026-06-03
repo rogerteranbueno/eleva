@@ -6,9 +6,24 @@ import Link from "next/link"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
+import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { useDemoStore } from "@/lib/demo-store"
 import { FEED_POSTS, SPECIALISTS, COACHES } from "@/data/creania"
 import { cn } from "@/lib/utils"
+
+const ONBOARDING = {
+  screenId: "feed",
+  badge: "Vista del participante · Pantalla 1 de 4",
+  badgeColor: "cyan" as const,
+  title: "Mi Feed — como Valeria",
+  description: "Cambiaste al lado del participante. Esto es lo que Valeria ve cada mañana cuando abre ELEVA — todo lo que necesita en un solo lugar.",
+  tips: [
+    { emoji: "💜", text: "Ana Reyes (su coach) ya le dejó un mensaje de apoyo personalizado." },
+    { emoji: "✅", text: "Su misión de la semana vence en 2 días — puede completarla desde aquí." },
+    { emoji: "📅", text: "La sesión en vivo del jueves aparece con un botón de confirmación directo." },
+  ],
+  cta: "Ver el feed de Valeria →",
+}
 
 export default function FeedPage() {
   const { state, dispatch } = useDemoStore()
@@ -40,6 +55,7 @@ export default function FeedPage() {
 
   return (
     <div className="p-6 max-w-2xl mx-auto space-y-5">
+      <OnboardingModal config={ONBOARDING} />
       {/* Greeting */}
       <div className="flex items-center justify-between">
         <div>
@@ -94,7 +110,7 @@ export default function FeedPage() {
           </div>
           <div className="flex-1">
             <p className="font-semibold text-white text-sm">Sesión en vivo con Ana Reyes</p>
-            <p className="text-xs text-muted-foreground mt-0.5">Jueves 5 de junio · 7:00 pm · Generación Omega</p>
+            <p className="text-xs text-muted-foreground mt-0.5">Jueves 5 de junio · <span className="whitespace-nowrap">7:00 pm</span> · Generación Omega</p>
           </div>
           {!eventConfirmed ? (
             <button

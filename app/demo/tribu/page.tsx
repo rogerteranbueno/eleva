@@ -4,7 +4,22 @@ import { useState } from "react"
 import { Heart, MessageCircle, Trophy, Calendar, Users, Star, CheckCircle, Flame } from "lucide-react"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
+import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { useDemoStore } from "@/lib/demo-store"
+
+const ONBOARDING = {
+  screenId: "tribu",
+  badge: "Vista del participante · Pantalla 4 de 4",
+  badgeColor: "cyan" as const,
+  title: "Mi Tribu — Generación Omega",
+  description: "La comunidad viva donde los participantes se apoyan entre entrenamientos. No es un grupo de WhatsApp — es un espacio diseñado para que la transformación continúe.",
+  tips: [
+    { emoji: "📌", text: "El post fijado del coach establece el tono de la semana para toda la generación." },
+    { emoji: "🏆", text: "El reto de la semana es grupal — toca 'Unirme al reto' y ve cómo sube el contador." },
+    { emoji: "🔥", text: "El leaderboard de racha muestra quién tiene más días activos consecutivos — Valeria está al final." },
+  ],
+  cta: "Explorar la Tribu →",
+}
 import { FEED_POSTS, LEADERBOARD, COHORTES } from "@/data/creania"
 import { cn } from "@/lib/utils"
 
@@ -32,20 +47,21 @@ export default function TribuPage() {
 
   return (
     <div className="p-6 max-w-2xl mx-auto space-y-6">
+      <OnboardingModal config={ONBOARDING} />
       {/* Header */}
-      <div className="glass rounded-xl p-5">
-        <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-xl bg-violet-600/20 flex items-center justify-center flex-shrink-0">
-            <Users className="w-6 h-6 text-violet-400" />
+      <div className="glass rounded-xl p-4 sm:p-5">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-violet-600/20 flex items-center justify-center flex-shrink-0">
+            <Users className="w-5 h-5 sm:w-6 sm:h-6 text-violet-400" />
           </div>
-          <div className="flex-1">
-            <h1 className="text-xl font-bold text-white">{cohorte.name}</h1>
-            <p className="text-sm text-muted-foreground mt-0.5">
+          <div className="flex-1 min-w-0">
+            <h1 className="text-base sm:text-xl font-bold text-white leading-tight truncate">{cohorte.name}</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 truncate">
               {cohorte.participants} miembros · {cohorte.phase} · {cohorte.phaseDetail}
             </p>
           </div>
-          <div className="text-right">
-            <p className="text-2xl font-black text-violet-400">{cohorte.momentum}%</p>
+          <div className="text-right flex-shrink-0">
+            <p className="text-xl sm:text-2xl font-black text-violet-400">{cohorte.momentum}%</p>
             <p className="text-xs text-muted-foreground">momentum</p>
           </div>
         </div>

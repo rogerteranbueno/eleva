@@ -125,4 +125,5 @@ export interface DemoState {
   challengeJoined: boolean
   valeriaMomentum: number
   coachNoteAdded: boolean
+  seenOnboarding: string[]
 }

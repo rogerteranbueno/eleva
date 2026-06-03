@@ -3,9 +3,24 @@
 import Link from "next/link"
 import { AlertTriangle, Users, Calendar, TrendingUp, Activity, ArrowRight, Zap } from "lucide-react"
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
+import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { STATS, COHORTES, RECENT_ACTIVITY, CENTER } from "@/data/creania"
 import { getMomentumColor } from "@/lib/utils"
 import { cn } from "@/lib/utils"
+
+const ONBOARDING = {
+  screenId: "pulso",
+  badge: "Vista del dueño · Pantalla 1 de 3",
+  badgeColor: "violet" as const,
+  title: "Pulso del Centro",
+  description: "Aquí empieza cada mañana el dueño del centro. En 30 segundos sabes el estado completo de tu operación — sin abrir Excel ni revisar grupos de WhatsApp.",
+  tips: [
+    { emoji: "🔴", text: "La alerta roja muestra participantes en riesgo automáticamente. Tócala para intervenir." },
+    { emoji: "📊", text: "El Momentum Score es el promedio de todos tus participantes activos en tiempo real." },
+    { emoji: "⚡", text: "La actividad reciente reemplaza el caos de WhatsApp con señales claras de lo que está pasando." },
+  ],
+  cta: "Explorar el Pulso →",
+}
 
 const ACTIVITY_ICONS: Record<string, string> = {
   success: "🟢",
@@ -18,13 +33,15 @@ const ACTIVITY_ICONS: Record<string, string> = {
 export default function PulsoPage() {
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-6">
+      <OnboardingModal config={ONBOARDING} />
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-white">Pulso del Centro</h1>
-          <p className="text-muted-foreground text-sm mt-0.5">{CENTER.fullName} · lunes, 2 de junio</p>
+          <p className="text-muted-foreground text-sm mt-0.5 hidden sm:block">{CENTER.fullName} · lunes, 2 de junio</p>
+          <p className="text-muted-foreground text-xs mt-0.5 sm:hidden">Creania · lun 2 jun</p>
         </div>
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20">
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 flex-shrink-0 whitespace-nowrap">
           <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
           <span className="text-xs font-medium text-green-400">Sistema activo</span>
         </div>
@@ -102,7 +119,7 @@ export default function PulsoPage() {
         <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-3">
           Cohortes activas
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {COHORTES.map((c) => (
             <div key={c.id} className="glass rounded-xl p-4 space-y-3">
               <div className="flex items-start justify-between gap-2">

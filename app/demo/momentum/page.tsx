@@ -13,7 +13,22 @@ import {
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
+import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { useDemoStore } from "@/lib/demo-store"
+
+const ONBOARDING = {
+  screenId: "momentum",
+  badge: "Vista del participante · Pantalla 3 de 4",
+  badgeColor: "cyan" as const,
+  title: "Mi Momentum Score",
+  description: "Un número entre 0 y 100 que refleja el nivel de compromiso activo de Valeria. El dueño lo ve en tiempo real desde su panel.",
+  tips: [
+    { emoji: "📉", text: "La gráfica muestra la caída de los últimos 14 días. La línea amarilla es el umbral de riesgo (40%)." },
+    { emoji: "🎯", text: "Los factores explican exactamente qué actividades construyen el score y cuánto aporta cada una." },
+    { emoji: "⚡", text: "Las acciones sugeridas le muestran a Valeria cómo recuperar puntos hoy mismo." },
+  ],
+  cta: "Ver el Momentum →",
+}
 import { MOMENTUM_HISTORY, SPECIALISTS } from "@/data/creania"
 import { getMomentumColor, cn } from "@/lib/utils"
 
@@ -52,34 +67,38 @@ export default function MomentumPage() {
 
   return (
     <div className="p-6 max-w-3xl mx-auto space-y-6">
+      <OnboardingModal config={ONBOARDING} />
       <div>
         <h1 className="text-2xl font-bold text-white">Mi Momentum</h1>
         <p className="text-muted-foreground text-sm mt-0.5">Vía Creania · Semana 12</p>
       </div>
 
       {/* Score hero */}
-      <div className="glass rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-6">
-        <MomentumGauge score={score} size="lg" />
-        <div className="flex-1 space-y-3">
+      <div className="glass rounded-2xl p-5 sm:p-6">
+        <div className="flex items-center gap-5 sm:gap-6">
+          <MomentumGauge score={score} size="lg" />
+          <div className="flex-1 min-w-0 space-y-2">
+            <div>
+              <p className="text-xs text-muted-foreground font-medium">Tu score actual</p>
+              <p className="text-3xl sm:text-4xl font-black" style={{ color }}>{score}%</p>
+            </div>
+            <div className="flex items-start gap-1.5">
+              <TrendingDown className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-red-400 font-medium leading-snug">
+                Cayó 47 puntos <span className="text-muted-foreground font-normal">en 14 días</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="h-px bg-border mt-4 mb-3" />
+        <div className="grid grid-cols-2 gap-3 text-sm">
           <div>
-            <p className="text-sm text-muted-foreground font-medium">Tu score actual</p>
-            <p className="text-4xl font-black" style={{ color }}>{score}%</p>
+            <p className="text-muted-foreground text-xs">Tu mejor score</p>
+            <p className="font-bold text-white">74%</p>
           </div>
-          <div className="flex items-center gap-2 text-sm">
-            <TrendingDown className="w-4 h-4 text-red-400" />
-            <span className="text-red-400 font-medium">Cayó 47 puntos</span>
-            <span className="text-muted-foreground">en los últimos 14 días</span>
-          </div>
-          <div className="h-px bg-border" />
-          <div className="grid grid-cols-2 gap-3 text-sm">
-            <div>
-              <p className="text-muted-foreground text-xs">Tu mejor score</p>
-              <p className="font-bold text-white">74%</p>
-            </div>
-            <div>
-              <p className="text-muted-foreground text-xs">Promedio cohorte</p>
-              <p className="font-bold" style={{ color: getMomentumColor(74) }}>74%</p>
-            </div>
+          <div>
+            <p className="text-muted-foreground text-xs">Promedio cohorte</p>
+            <p className="font-bold" style={{ color: getMomentumColor(74) }}>74%</p>
           </div>
         </div>
       </div>
@@ -107,7 +126,7 @@ export default function MomentumPage() {
               contentStyle={{ background: "#1A1A26", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8 }}
               labelStyle={{ color: "#A0A0B8", fontSize: 11 }}
               itemStyle={{ color: "#7C3AED", fontSize: 12 }}
-              formatter={(v: number) => [`${v}%`, "Momentum"]}
+              formatter={(v) => [`${v}%`, "Momentum"]}
             />
             <ReferenceLine y={40} stroke="rgba(234,179,8,0.3)" strokeDasharray="4 4" />
             <Area

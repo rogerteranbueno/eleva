@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
@@ -18,29 +18,42 @@ import {
 import { cn } from "@/lib/utils"
 import { DemoProvider, useDemoStore } from "@/lib/demo-store"
 
-const OWNER_SCREENS = [
-  { href: "/demo/pulso", label: "Pulso del Centro", icon: Activity },
-  { href: "/demo/atencion", label: "Necesitan Atención", icon: AlertTriangle, badge: 14 },
-  { href: "/demo/expediente", label: "Expediente Valeria", icon: User },
+type NavScreen = {
+  href: string
+  label: string
+  shortLabel: string
+  icon: React.ComponentType<{ className?: string }>
+  badge?: number
+}
+
+const OWNER_SCREENS: NavScreen[] = [
+  { href: "/demo/pulso", label: "Pulso del Centro", shortLabel: "Pulso", icon: Activity },
+  { href: "/demo/atencion", label: "Necesitan Atención", shortLabel: "Atención", icon: AlertTriangle, badge: 14 },
+  { href: "/demo/expediente", label: "Expediente Valeria", shortLabel: "Expediente", icon: User },
 ]
 
-const PARTICIPANT_SCREENS = [
-  { href: "/demo/feed", label: "Mi Feed", icon: Home },
-  { href: "/demo/mision", label: "Mi Misión", icon: Target },
-  { href: "/demo/momentum", label: "Mi Momentum", icon: TrendingUp },
-  { href: "/demo/tribu", label: "Mi Tribu", icon: Users },
+const PARTICIPANT_SCREENS: NavScreen[] = [
+  { href: "/demo/feed", label: "Mi Feed", shortLabel: "Feed", icon: Home },
+  { href: "/demo/mision", label: "Mi Misión", shortLabel: "Misión", icon: Target },
+  { href: "/demo/momentum", label: "Mi Momentum", shortLabel: "Momentum", icon: TrendingUp },
+  { href: "/demo/tribu", label: "Mi Tribu", shortLabel: "Tribu", icon: Users },
 ]
 
-type View = "owner" | "participant"
+const OWNER_PATHS = OWNER_SCREENS.map((s) => s.href)
 
-function DemoNav({ view, setView }: { view: View; setView: (v: View) => void }) {
+function getViewFromPath(pathname: string): "owner" | "participant" {
+  return OWNER_PATHS.includes(pathname) ? "owner" : "participant"
+}
+
+function DemoNav() {
   const pathname = usePathname()
+  const router = useRouter()
   const { dispatch } = useDemoStore()
-
+  const view = getViewFromPath(pathname)
   const screens = view === "owner" ? OWNER_SCREENS : PARTICIPANT_SCREENS
 
   return (
-    <aside className="hidden md:flex flex-col w-64 min-h-screen bg-sidebar border-r border-sidebar-border flex-shrink-0">
+    <aside className="hidden md:flex flex-col w-60 min-h-screen bg-sidebar border-r border-sidebar-border flex-shrink-0">
       {/* Logo */}
       <div className="p-5 border-b border-sidebar-border">
         <Link href="/" className="flex items-center gap-2">
@@ -60,23 +73,19 @@ function DemoNav({ view, setView }: { view: View; setView: (v: View) => void }) 
         <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2 font-medium">Vista</p>
         <div className="flex rounded-lg overflow-hidden border border-sidebar-border">
           <button
-            onClick={() => setView("owner")}
+            onClick={() => router.push("/demo/pulso")}
             className={cn(
               "flex-1 py-1.5 text-xs font-semibold transition-colors",
-              view === "owner"
-                ? "bg-violet-600 text-white"
-                : "text-muted-foreground hover:text-foreground"
+              view === "owner" ? "bg-violet-600 text-white" : "text-muted-foreground hover:text-foreground"
             )}
           >
             Dueño
           </button>
           <button
-            onClick={() => setView("participant")}
+            onClick={() => router.push("/demo/feed")}
             className={cn(
               "flex-1 py-1.5 text-xs font-semibold transition-colors",
-              view === "participant"
-                ? "bg-violet-600 text-white"
-                : "text-muted-foreground hover:text-foreground"
+              view === "participant" ? "bg-violet-600 text-white" : "text-muted-foreground hover:text-foreground"
             )}
           >
             Participante
@@ -118,8 +127,8 @@ function DemoNav({ view, setView }: { view: View; setView: (v: View) => void }) 
         })}
       </nav>
 
-      {/* Reset */}
-      <div className="p-4 border-t border-sidebar-border">
+      {/* Reset + back */}
+      <div className="p-4 border-t border-sidebar-border space-y-0.5">
         <button
           onClick={() => dispatch({ type: "RESET" })}
           className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-xs text-muted-foreground hover:text-foreground hover:bg-sidebar-accent transition-colors"
@@ -129,7 +138,7 @@ function DemoNav({ view, setView }: { view: View; setView: (v: View) => void }) 
         </button>
         <Link
           href="/"
-          className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-xs text-muted-foreground hover:text-foreground hover:bg-sidebar-accent transition-colors mt-0.5"
+          className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-xs text-muted-foreground hover:text-foreground hover:bg-sidebar-accent transition-colors"
         >
           <ChevronRight className="w-3.5 h-3.5 rotate-180" />
           Volver al sitio
@@ -139,27 +148,39 @@ function DemoNav({ view, setView }: { view: View; setView: (v: View) => void }) 
   )
 }
 
-function MobileNav({ view, setView }: { view: View; setView: (v: View) => void }) {
+function MobileNav() {
   const pathname = usePathname()
+  const router = useRouter()
+  const { dispatch } = useDemoStore()
+  const view = getViewFromPath(pathname)
   const screens = view === "owner" ? OWNER_SCREENS : PARTICIPANT_SCREENS
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-sidebar border-t border-sidebar-border">
-      {/* View switcher mobile */}
+      {/* View switcher */}
       <div className="flex border-b border-sidebar-border">
         <button
-          onClick={() => setView("owner")}
+          onClick={() => router.push("/demo/pulso")}
           className={cn(
-            "flex-1 py-2 text-xs font-semibold transition-colors",
+            "flex-1 py-1.5 text-xs font-semibold transition-colors",
             view === "owner" ? "text-violet-400 border-b-2 border-violet-600" : "text-muted-foreground"
           )}
         >
           Dueño
         </button>
         <button
-          onClick={() => setView("participant")}
+          onClick={() => {
+            dispatch({ type: "RESET" })
+          }}
+          className="px-3 py-1.5 text-muted-foreground"
+          title="Reiniciar"
+        >
+          <RotateCcw className="w-3 h-3" />
+        </button>
+        <button
+          onClick={() => router.push("/demo/feed")}
           className={cn(
-            "flex-1 py-2 text-xs font-semibold transition-colors",
+            "flex-1 py-1.5 text-xs font-semibold transition-colors",
             view === "participant" ? "text-violet-400 border-b-2 border-violet-600" : "text-muted-foreground"
           )}
         >
@@ -168,19 +189,19 @@ function MobileNav({ view, setView }: { view: View; setView: (v: View) => void }
       </div>
       {/* Screen tabs */}
       <div className="flex">
-        {screens.map(({ href, label, icon: Icon }) => {
+        {screens.map(({ href, shortLabel, icon: Icon }) => {
           const active = pathname === href
           return (
             <Link
               key={href}
               href={href}
               className={cn(
-                "flex-1 flex flex-col items-center gap-1 py-2.5 transition-colors",
+                "flex-1 flex flex-col items-center gap-1 py-2 transition-colors",
                 active ? "text-violet-400" : "text-muted-foreground"
               )}
             >
               <Icon className="w-4 h-4" />
-              <span className="text-[9px] font-medium leading-tight text-center">{label.split(" ")[label.split(" ").length > 1 ? 1 : 0]}</span>
+              <span className="text-[9px] font-medium leading-tight text-center whitespace-nowrap">{shortLabel}</span>
             </Link>
           )
         })}
@@ -190,15 +211,13 @@ function MobileNav({ view, setView }: { view: View; setView: (v: View) => void }
 }
 
 function DemoShell({ children }: { children: React.ReactNode }) {
-  const [view, setView] = useState<View>("owner")
-
   return (
     <div className="flex min-h-screen">
-      <DemoNav view={view} setView={setView} />
-      <main className="flex-1 overflow-auto pb-32 md:pb-0">
+      <DemoNav />
+      <main className="flex-1 overflow-auto pb-28 md:pb-0">
         {children}
       </main>
-      <MobileNav view={view} setView={setView} />
+      <MobileNav />
     </div>
   )
 }

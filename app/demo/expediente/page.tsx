@@ -5,9 +5,24 @@ import { ArrowUpRight, CheckCircle, Clock, DollarSign, Target, FileText, Activit
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
+import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { useDemoStore } from "@/lib/demo-store"
 import { VALERIA, COACHES, SPECIALISTS } from "@/data/creania"
 import { cn, getMomentumColor } from "@/lib/utils"
+
+const ONBOARDING = {
+  screenId: "expediente",
+  badge: "Vista del dueño · Pantalla 3 de 3",
+  badgeColor: "violet" as const,
+  title: "Expediente del participante",
+  description: "Todo lo que necesitas saber sobre Valeria en una sola pantalla. Sin Excel, sin buscar en WhatsApp, sin llamar al coach.",
+  tips: [
+    { emoji: "📑", text: "Navega los tabs: Resumen, Actividad, Objetivos, Pagos y Notas — todo en un lugar." },
+    { emoji: "📉", text: "La tab 'Actividad' muestra exactamente cuándo se rompió la racha de Valeria." },
+    { emoji: "🚨", text: "En 'Notas' puedes escribir un mensaje y escalar al coach con un solo botón." },
+  ],
+  cta: "Ver el expediente →",
+}
 
 type Tab = "resumen" | "actividad" | "objetivos" | "pagos" | "notas"
 
@@ -32,51 +47,58 @@ export default function ExpedientePage() {
     { id: "actividad", label: "Actividad", icon: <Clock className="w-3.5 h-3.5" /> },
     { id: "objetivos", label: "Objetivos", icon: <Target className="w-3.5 h-3.5" /> },
     { id: "pagos", label: "Pagos", icon: <DollarSign className="w-3.5 h-3.5" /> },
-    { id: "notas", label: "Notas del coach", icon: <FileText className="w-3.5 h-3.5" /> },
+    { id: "notas", label: "Notas", icon: <FileText className="w-3.5 h-3.5" /> },
   ]
 
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-6">
-      {/* Profile header */}
-      <div className="glass rounded-2xl p-6">
-        <div className="flex items-start gap-5 flex-wrap">
-          <AvatarBadge initials={VALERIA.avatar} size="lg" />
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-2xl font-bold text-white">{VALERIA.name}</h1>
-              <span className="text-[11px] px-2.5 py-1 rounded-full bg-red-500/15 text-red-400 border border-red-500/20 font-semibold">
-                En riesgo
-              </span>
-            </div>
-            <p className="text-muted-foreground text-sm mt-0.5">
-              {VALERIA.cohorte} · {VALERIA.phase} — {VALERIA.phaseDetail}
-            </p>
-            <div className="flex items-center gap-4 mt-3 text-sm flex-wrap">
-              <div>
-                <span className="text-muted-foreground">Último acceso: </span>
-                <span className="text-red-400 font-medium">{VALERIA.lastAccess}</span>
-              </div>
-              <div>
-                <span className="text-muted-foreground">Coach: </span>
-                <span className="text-white font-medium">{coach.name}</span>
-                <span className="text-red-400 text-xs ml-1">
-                  (sin contacto hace {coach.lastContactDaysAgo} días)
+      <OnboardingModal config={ONBOARDING} />
+      {/* Profile header — stacks on mobile, row on md+ */}
+      <div className="glass rounded-2xl p-5">
+        {/* Top row: avatar + name + gauge */}
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <AvatarBadge initials={VALERIA.avatar} size="md" />
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h1 className="text-xl font-bold text-white">{VALERIA.name}</h1>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-red-500/15 text-red-400 border border-red-500/20 font-semibold whitespace-nowrap">
+                  En riesgo
                 </span>
               </div>
+              <p className="text-muted-foreground text-xs mt-0.5 truncate">
+                {VALERIA.cohorte} · {VALERIA.phase}
+              </p>
             </div>
           </div>
-          <MomentumGauge score={momentum} size="md" />
+          <MomentumGauge score={momentum} size="sm" />
+        </div>
+        {/* Bottom row: meta info */}
+        <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs">
+          <div>
+            <span className="text-muted-foreground">Acceso: </span>
+            <span className="text-red-400 font-medium">{VALERIA.lastAccess}</span>
+          </div>
+          <div>
+            <span className="text-muted-foreground">Fase: </span>
+            <span className="text-white font-medium">{VALERIA.phaseDetail}</span>
+          </div>
+          <div>
+            <span className="text-muted-foreground">Coach: </span>
+            <span className="text-white font-medium">{coach.name}</span>
+            <span className="text-red-400 ml-1">(sin contacto {coach.lastContactDaysAgo}d)</span>
+          </div>
         </div>
       </div>
 
-      {/* Tabs */}
-      <div className="flex gap-1 p-1 glass rounded-xl overflow-x-auto">
+      {/* Tabs — scrollable on mobile */}
+      <div className="flex gap-1 p-1 glass rounded-xl overflow-x-auto scrollbar-none">
         {TABS.map(({ id, label, icon }) => (
           <button
             key={id}
             onClick={() => setTab(id)}
             className={cn(
-              "flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap",
+              "flex items-center gap-1 px-3 py-2 rounded-lg text-xs sm:text-sm sm:gap-1.5 sm:px-4 font-medium transition-all whitespace-nowrap",
               tab === id
                 ? "bg-violet-600 text-white"
                 : "text-muted-foreground hover:text-foreground"
@@ -111,7 +133,7 @@ export default function ExpedientePage() {
 
 function TabResumen({ momentum }: { momentum: number }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
       <StatBox label="Racha actual" value="0 días" sub="Rota hace 11 días" alert />
       <StatBox label="Mejor racha" value="22 días" sub="Alcanzada hace 3 semanas" />
       <StatBox label="Misiones completadas" value="3 / 12" sub="3 pendientes este mes" alert />

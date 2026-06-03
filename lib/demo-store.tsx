@@ -13,6 +13,7 @@ const INITIAL_STATE: DemoState = {
   challengeJoined: false,
   valeriaMomentum: 23,
   coachNoteAdded: false,
+  seenOnboarding: [],
 }
 
 type Action =
@@ -24,6 +25,7 @@ type Action =
   | { type: "BOOK_SESSION" }
   | { type: "JOIN_CHALLENGE" }
   | { type: "ADD_COACH_NOTE" }
+  | { type: "MARK_ONBOARDING_SEEN"; screenId: string }
   | { type: "RESET" }
 
 function reducer(state: DemoState, action: Action): DemoState {
@@ -44,6 +46,8 @@ function reducer(state: DemoState, action: Action): DemoState {
       return { ...state, challengeJoined: true, valeriaMomentum: Math.min(state.valeriaMomentum + 3, 100) }
     case "ADD_COACH_NOTE":
       return { ...state, coachNoteAdded: true }
+    case "MARK_ONBOARDING_SEEN":
+      return { ...state, seenOnboarding: [...state.seenOnboarding, action.screenId] }
     case "RESET":
       return INITIAL_STATE
     default:
