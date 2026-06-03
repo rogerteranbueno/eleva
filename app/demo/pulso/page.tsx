@@ -1,9 +1,13 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
-import { AlertTriangle, Users, Calendar, TrendingUp, Activity, ArrowRight, Zap } from "lucide-react"
+import { AlertTriangle, Users, Calendar, Activity, ArrowRight, Zap, Lightbulb } from "lucide-react"
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
 import { OnboardingModal } from "@/components/demo/OnboardingModal"
+import { InsightCard } from "@/components/demo/InsightCard"
+import { CampaignComposer, type ComposerInsight } from "@/components/demo/CampaignComposer"
+import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { STATS, COHORTES, RECENT_ACTIVITY, CENTER } from "@/data/creania"
 import { getMomentumColor } from "@/lib/utils"
 import { cn } from "@/lib/utils"
@@ -22,6 +26,107 @@ const ONBOARDING = {
   cta: "Explorar el Pulso →",
 }
 
+type InsightDef = {
+  id: string
+  icon: string
+  severity: "high" | "medium" | "info"
+  title: string
+  description: string
+  actionLabel: string
+  composer: ComposerInsight
+}
+
+const INSIGHTS: InsightDef[] = [
+  {
+    id: "inactive",
+    icon: "🔴",
+    severity: "high",
+    title: "14 participantes sin actividad +7 días",
+    description: "Momentum del grupo cayó 8 pts. Sin acción, 3 cancelarán antes del mes 4.",
+    actionLabel: "Contactar",
+    composer: {
+      title: "Reactivar participantes inactivos (14)",
+      recipients: { count: 14, label: "Participantes sin actividad +7 días" },
+      defaultChannel: "whatsapp",
+      messages: {
+        whatsapp: "Hola {nombre} 🌟 Soy Carlos de Creania. Te he visto un poco desconectado estos días y quería saber cómo estás. Tu proceso nos importa — ¿hay algo en lo que pueda apoyarte? Aquí estoy para ti.",
+        emailSubject: "Carlos de Creania quería saber cómo estás 💙",
+        emailBody: "Hola {nombre},\n\nNos has faltado en Creania.\n\nSé que la vida tiene altibajos y eso está completamente bien. Lo que importa es que no estás solo en este proceso — el equipo y yo estamos aquí.\n\n¿Qué está pasando? ¿Cómo puedo apoyarte esta semana?\n\nCon cariño,\nCarlos Mendoza\nCreania Transformación",
+        sms: "Hola {nombre}, Carlos de Creania aquí. ¿Todo bien? Te echamos de menos. Escríbeme cuando puedas — aquí estoy. 🌟",
+        campaignSubject: "Tu proceso nos importa, {nombre}",
+        campaignBody: "Hola {nombre},\n\nNotamos que has estado desconectado y queremos saber cómo estás. En Creania nadie se queda atrás. Responde este mensaje y hablamos.",
+        segment: "14 participantes — sin actividad 7+ días, momentum <40%",
+      },
+    },
+  },
+  {
+    id: "norte",
+    icon: "📉",
+    severity: "medium",
+    title: "Gen. Norte: momentum cayó de 65% a 58%",
+    description: "Bajó 7 pts en 2 semanas. Coach Marco sin contacto grupal hace 12 días.",
+    actionLabel: "Activar cohorte",
+    composer: {
+      title: "Activar Generación Norte (67 participantes)",
+      recipients: { count: 67, label: "Generación Norte — Expansión completada" },
+      defaultChannel: "campaign",
+      messages: {
+        whatsapp: "Generación Norte 💪 Esta semana nos volvemos a conectar. Marco tiene algo especial preparado para ustedes. Más info en el grupo.",
+        emailSubject: "Generación Norte — algo importante esta semana",
+        emailBody: "Hola {nombre},\n\nGeneración Norte está lista para el siguiente nivel.\n\nMarco tiene preparada una sesión especial para reactivar el grupo. No te la pierdas.\n\n¿Estás adentro?\n\nCreania Transformación",
+        sms: "Gen. Norte: sesión especial con Marco esta semana. Confirma asistencia respondiendo SÍ. Creania 🔥",
+        campaignSubject: "Gen. Norte — no dejes que el momentum caiga",
+        campaignBody: "Hola {nombre},\n\nLa Generación Norte tiene una energía increíble y queremos que se mantenga. Esta semana hay una activación grupal. Más detalles muy pronto.",
+        segment: "67 participantes — Generación Norte, momentum <65%",
+      },
+    },
+  },
+  {
+    id: "pago",
+    icon: "💳",
+    severity: "info",
+    title: "Pago pendiente: Valeria Romo — $4,200",
+    description: "Vía Creania Mes 4 — vencido hace 3 días. Único atraso en todo su historial.",
+    actionLabel: "Enviar recordatorio",
+    composer: {
+      title: "Recordatorio de pago — Valeria Romo",
+      recipients: { count: 1, label: "Valeria Romo · Vía Creania Mes 4" },
+      defaultChannel: "email",
+      messages: {
+        whatsapp: "Hola Valeria 😊 Pasando a recordarte que el pago de Mes 4 de Vía Creania está pendiente. ¿Puedo ayudarte a coordinarlo? Cualquier cosa, aquí estoy.",
+        emailSubject: "Recordatorio: Pago Mes 4 — Vía Creania",
+        emailBody: "Hola Valeria,\n\nTe escribimos para recordarte que el pago correspondiente al Mes 4 de Vía Creania ($4,200 MXN) está pendiente.\n\nSabemos que a veces se pasan estas cosas — no hay problema. Puedes realizarlo por transferencia a la cuenta de siempre o escribirnos si necesitas coordinar.\n\nGracias por confiar en Creania,\nEl equipo",
+        sms: "Hola Valeria, recordatorio del pago Mes 4 de Vía Creania ($4,200). Escríbenos si necesitas ayuda. Creania.",
+        campaignSubject: "Recordatorio: Pago Mes 4 pendiente",
+        campaignBody: "Hola Valeria, tienes un pago pendiente del Mes 4. Coordínalo cuando puedas.",
+        segment: "1 participante — Valeria Romo, pago pendiente",
+      },
+    },
+  },
+  {
+    id: "evento",
+    icon: "📅",
+    severity: "medium",
+    title: "Evento en 4 días — solo 34% confirmó asistencia",
+    description: "Sesión en vivo jueves 7pm. 59 de 89 sin confirmar — un recordatorio sube asistencia 40%.",
+    actionLabel: "Recordar evento",
+    composer: {
+      title: "Confirmación de asistencia — Sesión Gen. Omega",
+      recipients: { count: 59, label: "Generación Omega sin confirmar asistencia" },
+      defaultChannel: "sms",
+      messages: {
+        whatsapp: "Hola {nombre} 👋 Recordatorio: sesión en vivo de Generación Omega este JUEVES a las 7pm. ¡No te la pierdas! Responde '✅' para confirmar tu lugar.",
+        emailSubject: "Te esperamos el jueves — Sesión Gen. Omega 7pm",
+        emailBody: "Hola {nombre},\n\n¡Este JUEVES es la sesión en vivo de Generación Omega!\n\n📅 Jueves, 5 de junio\n⏰ 7:00 PM (hora CDMX)\n📍 Zoom — link en el grupo\n\nEsta sesión es especial — Ana tiene algo importante que compartir con el grupo.\n\n¿Confirmamos tu lugar?\n\nEquipo Creania",
+        sms: "Hola {nombre}! Sesión Gen. Omega JUEVES 7pm. Confirma respondiendo SÍ. ¡Te esperamos! Creania",
+        campaignSubject: "Tu lugar en la sesión del jueves — confirma ahora",
+        campaignBody: "Hola {nombre}, este jueves a las 7pm es tu sesión en vivo. Confirma asistencia para reservar tu lugar. Ana tiene algo importante para ti.",
+        segment: "59 participantes Gen. Omega — sin confirmar asistencia",
+      },
+    },
+  },
+]
+
 const ACTIVITY_ICONS: Record<string, string> = {
   success: "🟢",
   specialist: "🔵",
@@ -31,9 +136,19 @@ const ACTIVITY_ICONS: Record<string, string> = {
 }
 
 export default function PulsoPage() {
+  const [activeInsight, setActiveInsight] = useState<InsightDef | null>(null)
+  const { toast, show, hide } = useActionToast()
+
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-6">
       <OnboardingModal config={ONBOARDING} />
+      {activeInsight && (
+        <CampaignComposer
+          insight={activeInsight.composer}
+          onClose={() => setActiveInsight(null)}
+          onSent={(msg) => { setActiveInsight(null); show(msg) }}
+        />
+      )}
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div>
@@ -157,6 +272,32 @@ export default function PulsoPage() {
         </div>
       </div>
 
+      {/* Insights accionables */}
+      <div>
+        <div className="flex items-center gap-2 mb-3">
+          <Lightbulb className="w-4 h-4 text-violet-400" />
+          <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">
+            Insights del sistema
+          </h2>
+          <span className="ml-auto text-[10px] px-2 py-0.5 rounded-full bg-violet-500/10 text-violet-400 border border-violet-500/20 font-semibold">
+            IA
+          </span>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {INSIGHTS.map((insight) => (
+            <InsightCard
+              key={insight.id}
+              icon={insight.icon}
+              severity={insight.severity}
+              title={insight.title}
+              description={insight.description}
+              actionLabel={insight.actionLabel}
+              onClick={() => setActiveInsight(insight)}
+            />
+          ))}
+        </div>
+      </div>
+
       {/* Recent activity */}
       <div>
         <div className="flex items-center gap-2 mb-3">
@@ -177,6 +318,7 @@ export default function PulsoPage() {
           ))}
         </div>
       </div>
+      <ActionToast message={toast.message} visible={toast.visible} onHide={hide} />
     </div>
   )
 }
