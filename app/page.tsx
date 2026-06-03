@@ -332,121 +332,125 @@ function ContrastSection() {
 
 // ─── How It Works ─────────────────────────────────────────────────────────────
 
+const STAGE_DATA = [
+  {
+    id: "adquirir",
+    num: "01",
+    label: "Adquirir",
+    color: "cyan" as const,
+    headline: "El enrolamiento empieza mucho antes de vender",
+    story: "Tu centro organiza webinars y eventos abiertos. Tus participantes actuales invitan a su gente — es un ganar-ganar: ellos llevan a alguien a probar la experiencia, tu comunidad crece y el prospecto conoce el centro sin presión.\n\nELEVA registra cada asistente en el CRM, identifica señales de interés (abrió el email, asistió al webinar, preguntó en el chat) y automáticamente les envía contenido de valor. Cuando llega el momento de enrolar, el prospecto ya te conoce — el proceso puede ser hasta un 80% más sencillo que vender en frío.",
+    stat: { value: "80%", label: "más fácil enrolar un lead nutrido" },
+    features: [
+      { icon: "🎙️", text: "Webinars y eventos gratuitos de demostración" },
+      { icon: "🔗", text: "Link de referido para participantes — tracking de quién trajo a quién" },
+      { icon: "📋", text: "CRM integrado: registro automático de cada asistente o lead" },
+      { icon: "📡", text: "Detección de señales: clics, aperturas, preguntas, asistencias" },
+      { icon: "✉️", text: "Secuencias de contenido de valor por WhatsApp, Email y SMS" },
+      { icon: "🌐", text: "Sitio web propio del centro, optimizado en AEO + SEO" },
+    ],
+    visual: [
+      { step: "Evento gratuito", note: "Tu participante trae a un amigo" },
+      { step: "CRM registra la señal", note: "Asistió, preguntó, interactuó" },
+      { step: "Contenido de valor", note: "WhatsApp · Email · SMS automático" },
+      { step: "Momento de enrolamiento", note: "Ya confía en ti. El sí es natural." },
+    ],
+  },
+  {
+    id: "activar",
+    num: "02",
+    label: "Activar",
+    color: "yellow" as const,
+    headline: "De inscrito a comprometido en los primeros 7 días",
+    story: "La emoción del enrolamiento dura poco si no hay un sistema que la sostenga. ELEVA activa al participante desde el momento en que firma — con un onboarding claro, su expediente completo y su primera misión lista.\n\nNadie llega en frío al primer día. Nadie se pierde en el grupo de WhatsApp preguntando qué sigue.",
+    stat: { value: "7 días", label: "para consolidar el hábito de participación" },
+    features: [
+      { icon: "🚀", text: "Portal de bienvenida automático al inscribirse" },
+      { icon: "📝", text: "Expediente digital desde el día uno: objetivos, historial, coach asignado" },
+      { icon: "🎯", text: "Primera misión activa antes del primer entrenamiento" },
+      { icon: "🔔", text: "Notificaciones personalizadas por WhatsApp, Email o SMS" },
+      { icon: "📊", text: "Dashboard del participante: progreso, racha, misiones" },
+      { icon: "👥", text: "Asignación automática a cohorte y coach desde el CRM" },
+    ],
+    visual: [],
+  },
+  {
+    id: "retener",
+    num: "03",
+    label: "Retener",
+    color: "pink" as const,
+    headline: "Que nadie abandone en silencio",
+    story: "Retener no es solo evitar que se vayan — es darles razones para quedarse cada día. ELEVA combina comunicación multicanal, contenido de expertos, gamificación y una comunidad que se auto-refuerza.\n\nY cuando alguien empieza a desconectarse, el sistema lo detecta primero que el coach — con tiempo para intervenir antes de que sea tarde.",
+    stat: { value: "3x", label: "más retención con gamificación activa" },
+    features: [
+      { icon: "📱", text: "Seguimiento multicanal: WhatsApp, Email, SMS, notificaciones push" },
+      { icon: "🎙️", text: "Webinars y contenido exclusivo de expertos internos y externos" },
+      { icon: "🏆", text: "Gamificación: Momentum Score, racha de días, leaderboard de cohorte" },
+      { icon: "🔍", text: "Directorio de profesionales — busca coaches, especialistas y expertos en tu comunidad, con reseñas reales" },
+      { icon: "⚠️", text: "Alerta temprana de riesgo: intervención antes de abandono" },
+      { icon: "🩺", text: "Especialistas integrados — nutriólogos, psicólogos, coaches financieros agendables desde el sistema" },
+    ],
+    visual: [],
+  },
+  {
+    id: "escalar",
+    num: "04",
+    label: "Escalar",
+    color: "violet" as const,
+    headline: "Crecer sin reinventar el modelo",
+    story: "El escalamiento real no es traer más gente — es convertir tu centro en una operación que funciona con o sin un buen fin de semana. ELEVA te da visibilidad total: cuántos pasan de fase, qué cohort está en riesgo, qué ciudad está creciendo más.\n\nUn panel para varias sedes, varios coaches, varios formatos — sin caos.",
+    stat: { value: "1 panel", label: "para todas las sedes, coaches y cohortes" },
+    features: [
+      { icon: "📈", text: "Conversión fase a fase: cuántos pasan de Básico a Avanzado a Vía" },
+      { icon: "⚡", text: "Campañas de enrolamiento automatizadas al siguiente nivel" },
+      { icon: "🏅", text: "Alumni activos: egresados que refieren y mentorean a nuevos" },
+      { icon: "🌎", text: "Multi-sede: un sistema para varias ciudades o formatos" },
+      { icon: "🔐", text: "Roles diferenciados: dueño, director, coach, participante" },
+      { icon: "📊", text: "KPIs de negocio reales: ingresos, retención, NPS, momentum promedio" },
+    ],
+    visual: [],
+  },
+]
+
+const STAGE_COLORS = {
+  cyan: {
+    tab: "border-cyan-500 text-cyan-400 bg-cyan-500/10",
+    tabInactive: "border-transparent text-muted-foreground hover:text-white hover:border-white/20",
+    num: "text-cyan-400",
+    stat: "text-cyan-400",
+    dot: "bg-cyan-400",
+    icon: "bg-cyan-500/10 text-cyan-400",
+  },
+  yellow: {
+    tab: "border-yellow-500 text-yellow-400 bg-yellow-500/10",
+    tabInactive: "border-transparent text-muted-foreground hover:text-white hover:border-white/20",
+    num: "text-yellow-400",
+    stat: "text-yellow-400",
+    dot: "bg-yellow-400",
+    icon: "bg-yellow-500/10 text-yellow-400",
+  },
+  pink: {
+    tab: "border-pink-500 text-pink-400 bg-pink-500/10",
+    tabInactive: "border-transparent text-muted-foreground hover:text-white hover:border-white/20",
+    num: "text-pink-400",
+    stat: "text-pink-400",
+    dot: "bg-pink-400",
+    icon: "bg-pink-500/10 text-pink-400",
+  },
+  violet: {
+    tab: "border-violet-500 text-violet-400 bg-violet-500/10",
+    tabInactive: "border-transparent text-muted-foreground hover:text-white hover:border-white/20",
+    num: "text-violet-400",
+    stat: "text-violet-400",
+    dot: "bg-violet-400",
+    icon: "bg-violet-500/10 text-violet-400",
+  },
+}
+
 function HowItWorksSection() {
-  const stages = [
-    {
-      badge: "01",
-      title: "Adquirir",
-      subtitle: "Llenar tu centro de forma predecible, no solo por impulso emocional",
-      content: (
-        <div className="space-y-3">
-          <p className="text-sm text-foreground/80 leading-relaxed">
-            Hoy casi toda la adquisición depende de que alguien invite a alguien. Eso funciona, pero tiene techo.
-            ELEVA amplifica ese motor con canales digitales sin reemplazar lo que ya funciona.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {[
-              "Webinars de introducción abiertos al público",
-              "Pláticas presenciales abiertas para inscritos y no inscritos",
-              "Funnels de inscripción con landing pages propias del centro",
-              "CRM de prospectos con seguimiento y etapas",
-              "Referidos con tracking — se sabe de dónde vino cada participante",
-              "Campañas de email y WhatsApp automatizadas para nutrir prospectos",
-            ].map((item) => (
-              <div key={item} className="flex items-start gap-2 text-sm">
-                <ChevronRight className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0 mt-0.5" />
-                <span className="text-foreground/80">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      ),
-    },
-    {
-      badge: "02",
-      title: "Activar",
-      subtitle: "Que el participante llegue listo y quiera quedarse desde el primer día",
-      content: (
-        <div className="space-y-3">
-          <p className="text-sm text-foreground/80 leading-relaxed">
-            La activación empieza antes del primer entrenamiento y continúa durante los primeros 30 días.
-            Ningún participante llega en frío ni se pierde después de la emoción inicial.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {[
-              "Portal de bienvenida automático al inscribirse",
-              "Preparación pre-entrenamiento: lecturas, videos, formularios",
-              "Registro de asistencia digital (QR o código)",
-              "Expediente completo desde el primer día",
-              "Asignación automática de coach y cohorte",
-              "App activa desde el primer evento — no semanas después",
-            ].map((item) => (
-              <div key={item} className="flex items-start gap-2 text-sm">
-                <ChevronRight className="w-3.5 h-3.5 text-yellow-400 flex-shrink-0 mt-0.5" />
-                <span className="text-foreground/80">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      ),
-    },
-    {
-      badge: "03",
-      title: "Retener",
-      subtitle: "Mantener viva la transformación entre entrenamientos",
-      content: (
-        <div className="space-y-3">
-          <p className="text-sm text-foreground/80 leading-relaxed">
-            Aquí está el diferenciador más grande de ELEVA. La retención no es enviar recordatorios
-            — es construir una razón para volver mañana.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {[
-              "Feed vivo: mensaje del coach, misión del día, retos, comunidad",
-              "Momentum Score: score dinámico basado en comportamiento real",
-              "Racha / streak: días consecutivos de compromiso",
-              "Cohorte como tribu: feed, chat, retos, leaderboard, calendario",
-              "Especialistas integrados: nutriólogos, psicólogos, coaches financieros",
-              "Intervención del coach cuando alguien cae — con un solo clic",
-            ].map((item) => (
-              <div key={item} className="flex items-start gap-2 text-sm">
-                <ChevronRight className="w-3.5 h-3.5 text-pink-400 flex-shrink-0 mt-0.5" />
-                <span className="text-foreground/80">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      ),
-    },
-    {
-      badge: "04",
-      title: "Escalar",
-      subtitle: "Crecer de forma estructurada, no solo por intensidad emocional",
-      content: (
-        <div className="space-y-3">
-          <p className="text-sm text-foreground/80 leading-relaxed">
-            El escalamiento no es solo traer más gente. Es convertir el centro en una operación
-            que crece con o sin un buen fin de semana.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {[
-              "Conversión fase a fase con visibilidad real — cuántos pasan de fase",
-              "Campañas de enrolamiento automatizadas al siguiente nivel",
-              "Alumni activos: egresados que refieren y mentorean",
-              "Embajadores con herramientas: contenido, links y tracking propio",
-              "Multi-sede: un solo sistema para varias ciudades",
-              "KPIs de negocio reales: ingresos, retención, NPS, momentum promedio",
-            ].map((item) => (
-              <div key={item} className="flex items-start gap-2 text-sm">
-                <ChevronRight className="w-3.5 h-3.5 text-violet-400 flex-shrink-0 mt-0.5" />
-                <span className="text-foreground/80">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      ),
-    },
-  ]
+  const [active, setActive] = useState(0)
+  const stage = STAGE_DATA[active]
+  const colors = STAGE_COLORS[stage.color]
 
   return (
     <section className="px-6 py-16 max-w-5xl mx-auto">
@@ -454,20 +458,101 @@ function HowItWorksSection() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-12"
+        className="text-center mb-10"
       >
         <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-4">Cómo funciona</p>
         <h2 className="text-4xl sm:text-5xl font-black text-white">Las 4 etapas del sistema.</h2>
-        <p className="text-muted-foreground mt-4">Toca cada etapa para ver qué incluye.</p>
+        <p className="text-muted-foreground mt-3 text-sm">Toca cada etapa para ver exactamente qué incluye.</p>
       </motion.div>
 
-      <div className="space-y-3">
-        {stages.map((stage) => (
-          <ExpandableSection key={stage.badge} badge={stage.badge} title={stage.title} subtitle={stage.subtitle}>
-            {stage.content}
-          </ExpandableSection>
-        ))}
+      {/* Stage tabs */}
+      <div className="flex gap-1 sm:gap-2 mb-8 overflow-x-auto pb-1">
+        {STAGE_DATA.map((s, i) => {
+          const c = STAGE_COLORS[s.color]
+          const isActive = i === active
+          return (
+            <button
+              key={s.id}
+              onClick={() => setActive(i)}
+              className={cn(
+                "flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all whitespace-nowrap flex-shrink-0",
+                isActive ? c.tab : c.tabInactive
+              )}
+            >
+              <span className={cn("text-xs font-black", isActive ? c.num : "text-muted-foreground")}>{s.num}</span>
+              {s.label}
+            </button>
+          )
+        })}
       </div>
+
+      {/* Active stage content */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={stage.id}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -16 }}
+          transition={{ duration: 0.25 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+        >
+          {/* Left — narrative */}
+          <div className="space-y-6">
+            <div>
+              <p className={cn("text-xs font-bold uppercase tracking-widest mb-2", colors.num)}>
+                {stage.num} — {stage.label}
+              </p>
+              <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight mb-4">
+                {stage.headline}
+              </h3>
+              {stage.story.split("\n\n").map((para, i) => (
+                <p key={i} className="text-sm text-foreground/75 leading-relaxed mb-3">{para}</p>
+              ))}
+            </div>
+
+            {/* Stat */}
+            <div className={cn("inline-flex items-center gap-3 px-4 py-3 rounded-xl border bg-white/3", `border-${stage.color}-500/20`)}>
+              <p className={cn("text-3xl font-black", colors.stat)}>{stage.stat.value}</p>
+              <p className="text-sm text-muted-foreground leading-snug max-w-[180px]">{stage.stat.label}</p>
+            </div>
+
+            {/* Visual flow (Adquirir only) */}
+            {stage.visual.length > 0 && (
+              <div className="space-y-2">
+                {stage.visual.map((step, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <div className="flex flex-col items-center">
+                      <div className={cn("w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black text-white", `bg-${stage.color}-500/30 border border-${stage.color}-500/40`)}>
+                        {i + 1}
+                      </div>
+                      {i < stage.visual.length - 1 && (
+                        <div className="w-px h-5 bg-white/10 mt-1" />
+                      )}
+                    </div>
+                    <div className="pb-2">
+                      <p className="text-sm font-semibold text-white">{step.step}</p>
+                      <p className="text-xs text-muted-foreground">{step.note}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Right — features */}
+          <div className="glass rounded-2xl p-6 space-y-3">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-4">
+              Qué incluye este módulo
+            </p>
+            {stage.features.map(({ icon, text }) => (
+              <div key={text} className="flex items-start gap-3 p-3 rounded-xl bg-white/3 border border-white/5 hover:border-white/10 transition-colors">
+                <span className="text-lg flex-shrink-0 leading-none">{icon}</span>
+                <p className="text-sm text-foreground/80 leading-relaxed">{text}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </section>
   )
 }

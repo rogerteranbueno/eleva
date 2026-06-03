@@ -8,6 +8,7 @@ import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { InsightCard } from "@/components/demo/InsightCard"
 import { CampaignComposer, type ComposerInsight } from "@/components/demo/CampaignComposer"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
+import { PlanGenerator } from "@/components/demo/PlanGenerator"
 import { STATS, COHORTES, RECENT_ACTIVITY, CENTER } from "@/data/creania"
 import { getMomentumColor } from "@/lib/utils"
 import { cn } from "@/lib/utils"
@@ -318,6 +319,9 @@ export default function PulsoPage() {
           ))}
         </div>
       </div>
+      {/* Convertir en Plan */}
+      <PlanGenerator />
+
       <ActionToast message={toast.message} visible={toast.visible} onHide={hide} />
     </div>
   )
