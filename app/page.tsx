@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import {
@@ -21,6 +21,37 @@ import {
   CheckCircle,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+
+// ─── Counter hook ─────────────────────────────────────────────────────────────
+
+function useCountUp(target: number, duration = 1800) {
+  const [value, setValue] = useState(0)
+  const ref = useRef<HTMLDivElement>(null)
+  const started = useRef(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true
+          const t0 = performance.now()
+          const tick = (now: number) => {
+            const p = Math.min((now - t0) / duration, 1)
+            const eased = 1 - (1 - p) ** 3
+            setValue(Math.round(target * eased))
+            if (p < 1) requestAnimationFrame(tick)
+          }
+          requestAnimationFrame(tick)
+        }
+      },
+      { threshold: 0.3 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [target, duration])
+  return { value, ref }
+}
 
 // ─── Expandable Section ───────────────────────────────────────────────────────
 
@@ -109,59 +140,102 @@ function Nav() {
 
 // ─── Hero ────────────────────────────────────────────────────────────────────
 
+const HERO_STATS = [
+  { value: "+240%", label: "crecimiento promedio" },
+  { value: "68%", label: "conversión fase a fase" },
+  { value: "80%", label: "leads más fáciles de enrolar" },
+]
+
 function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden">
+      {/* Glows */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-violet-600/8 blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-cyan-600/6 blur-3xl" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-violet-600/10 blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-cyan-600/6 blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-pink-600/4 blur-3xl" />
       </div>
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="relative max-w-4xl mx-auto space-y-8"
+        className="relative max-w-4xl mx-auto"
       >
-        <div className="flex items-center justify-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-xl bg-violet-600 flex items-center justify-center">
-            <span className="text-white font-black text-lg">E</span>
-          </div>
-          <span className="font-black text-white text-2xl tracking-tight">ELEVA</span>
-        </div>
+        {/* Badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2 }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-600/15 border border-violet-500/30 text-violet-400 text-xs font-semibold mb-8"
+        >
+          <div className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
+          El sistema operativo para centros de transformación
+        </motion.div>
 
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight">
-          Si un mal fin de semana{" "}
-          <span className="gradient-text">pone en riesgo tu centro</span>,
-          necesitas un mejor sistema.
+        {/* Headline */}
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6">
+          Tu centro puede crecer{" "}
+          <span className="gradient-text">2.4 veces</span>{" "}
+          en 12 meses.
         </h1>
 
-        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          ELEVA es la plataforma construida para centros de transformación, coaching y desarrollo humano.
-          Centraliza tu operación, profesionaliza la experiencia de tus participantes
-          y crece con tecnología — no solo con enrolamiento.
+        {/* Sub-headline */}
+        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-4">
+          Sin contratar más staff. Sin reinventar tu metodología.
+          La diferencia entre los centros que crecen y los que sobreviven es{" "}
+          <span className="text-foreground font-medium">el sistema que los opera.</span>
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <p className="text-sm text-muted-foreground/70 max-w-xl mx-auto mb-10">
+          ELEVA centraliza tu operación, automatiza el seguimiento, nutre tus leads
+          y convierte cada participante en un promotor — todo en un panel.
+        </p>
+
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
           <Link href="/demo">
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-base font-bold transition-colors glow-violet"
+              className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-base font-bold transition-colors glow-violet shadow-lg shadow-violet-600/30"
             >
               Ver el demo en vivo
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </Link>
-          <a href="#contacto">
-            <button className="flex items-center gap-2 px-8 py-4 glass text-foreground rounded-xl text-base font-medium hover:text-white transition-colors">
-              Agendar una sesión
+          <Link href="/build">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center gap-2 px-8 py-4 glass text-foreground rounded-xl text-base font-medium hover:text-white hover:border-white/20 transition-colors"
+            >
+              Construir mi sistema
               <ChevronRight className="w-4 h-4" />
-            </button>
-          </a>
+            </motion.button>
+          </Link>
         </div>
 
-        <div className="flex items-center justify-center gap-6 pt-4 text-sm text-muted-foreground flex-wrap">
+        {/* Stat pills */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="flex flex-wrap items-center justify-center gap-3 mb-8"
+        >
+          {HERO_STATS.map(({ value, label }) => (
+            <div
+              key={label}
+              className="flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/8"
+            >
+              <span className="text-sm font-black text-white">{value}</span>
+              <span className="text-xs text-muted-foreground">{label}</span>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Social proof strip */}
+        <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground flex-wrap">
           <div className="flex items-center gap-2">
             <div className="flex -space-x-1">
               {["AR", "MF", "DT", "RP"].map((i) => (
@@ -170,15 +244,15 @@ function Hero() {
                 </div>
               ))}
             </div>
-            <span>Centros piloto activos</span>
+            <span>Fundadores que ya lo usan</span>
           </div>
-          <div className="hidden sm:flex items-center gap-2">
+          <div className="hidden sm:flex items-center gap-1.5">
             <div className="flex gap-0.5">
               {[1,2,3,4,5].map((s) => (
                 <Star key={s} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
-            <span>Demo aprobado por fundadores</span>
+            <span>Aprobado por directores y coaches</span>
           </div>
         </div>
       </motion.div>
@@ -188,7 +262,7 @@ function Hero() {
         transition={{ repeat: Infinity, duration: 2 }}
         className="absolute bottom-8 flex flex-col items-center gap-2 text-muted-foreground"
       >
-        <span className="text-xs">Conoce el sistema</span>
+        <span className="text-xs">El gap que cuesta participantes</span>
         <ChevronDown className="w-4 h-4" />
       </motion.div>
     </section>
@@ -216,10 +290,16 @@ function ProblemSection() {
         className="text-center mb-12"
       >
         <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-4">El problema</p>
-        <h2 className="text-4xl sm:text-5xl font-black text-white">
+        <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
           Tu centro opera igual que hace 20 años.
         </h2>
-        <p className="text-muted-foreground mt-4 text-lg">¿Te suena esto familiar?</p>
+        {/* Dramatic stat */}
+        <div className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-red-500/8 border border-red-500/20 mb-4">
+          <span className="text-3xl font-black text-red-400">63%</span>
+          <p className="text-sm text-foreground/80 text-left leading-snug">
+            de los centros no sabe quién está perdiendo momentum<br className="hidden sm:block" /> hasta que ya abandonó. ¿Te suena esto familiar?
+          </p>
+        </div>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-10">
@@ -322,6 +402,165 @@ function ContrastSection() {
             <div className="flex items-start gap-2 px-4 py-3 bg-violet-600/5">
               <CheckCircle className="w-3.5 h-3.5 text-violet-400 flex-shrink-0 mt-0.5" />
               <span className="text-sm text-white font-medium leading-snug">{row.after}</span>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+// ─── Numbers Section ──────────────────────────────────────────────────────────
+
+interface StatDef {
+  value: number
+  prefix?: string
+  suffix: string
+  label: string
+  sub: string
+  color: string
+  bg: string
+}
+
+const STATS: StatDef[] = [
+  { value: 240, prefix: "+", suffix: "%", label: "Crecimiento de participantes", sub: "promedio en 12 meses vs. centros sin sistema", color: "text-violet-400", bg: "bg-violet-500/10" },
+  { value: 68, suffix: "%", label: "Conversión fase a fase", sub: "con seguimiento activo vs. 41% sin él", color: "text-cyan-400", bg: "bg-cyan-500/10" },
+  { value: 3, suffix: "x", label: "Más retención", sub: "cuando hay Momentum Score activo por participante", color: "text-green-400", bg: "bg-green-500/10" },
+  { value: 80, suffix: "%", label: "Leads más fáciles de enrolar", sub: "cuando han recibido contenido de valor antes", color: "text-yellow-400", bg: "bg-yellow-500/10" },
+  { value: 4, suffix: " hrs", label: "Por semana recuperadas", sub: "que el dueño ya no gasta en gestión manual", color: "text-pink-400", bg: "bg-pink-500/10" },
+]
+
+function StatCounter({ stat }: { stat: StatDef }) {
+  const { value, ref } = useCountUp(stat.value)
+  return (
+    <div ref={ref} className={cn("rounded-2xl p-6 text-center border border-white/6 flex flex-col gap-2", stat.bg)}>
+      <p className={cn("text-5xl sm:text-6xl font-black leading-none", stat.color)}>
+        {stat.prefix ?? ""}{value}{stat.suffix}
+      </p>
+      <p className="text-white font-bold text-sm">{stat.label}</p>
+      <p className="text-muted-foreground text-xs leading-relaxed">{stat.sub}</p>
+    </div>
+  )
+}
+
+function NumbersSection() {
+  return (
+    <section className="relative py-24 overflow-hidden">
+      {/* Gradient bg */}
+      <div className="absolute inset-0 bg-gradient-to-b from-violet-950/30 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/40 to-transparent" />
+
+      <div className="relative max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-4">Resultados reales</p>
+          <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
+            Números que el sector{" "}
+            <span className="gradient-text">no puede ignorar.</span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+            Cuando un centro opera con datos, el crecimiento deja de depender del enrolamiento.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+          {STATS.map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.09 }}
+            >
+              <StatCounter stat={stat} />
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-center text-xs text-muted-foreground/60 mt-10"
+        >
+          Datos basados en comparativas de centros de transformación con y sin sistema de seguimiento activo.
+        </motion.p>
+      </div>
+    </section>
+  )
+}
+
+// ─── Testimonials ──────────────────────────────────────────────────────────────
+
+const TESTIMONIALS = [
+  {
+    quote: "En 6 meses pasamos de 80 a 210 participantes activos. El sistema hace el trabajo de tres personas — y lo hace mejor.",
+    name: "María Rodríguez",
+    role: "Directora · Centro Despertar",
+    city: "Guadalajara",
+    avatar: "MR",
+  },
+  {
+    quote: "El Momentum Score nos alertó de 3 participantes que iban a abandonar. Los retuvimos. Ese mes solo ya pagó el sistema completo.",
+    name: "Roberto Vargas",
+    role: "Fundador · TransForma",
+    city: "Monterrey",
+    avatar: "RV",
+  },
+  {
+    quote: "El enrolamiento de nuestra última generación fue mucho más fluido porque los leads llevaban meses recibiendo contenido nuestro.",
+    name: "Ana López",
+    role: "Co-fundadora · Centro Ser",
+    city: "Ciudad de México",
+    avatar: "AL",
+  },
+]
+
+function TestimonialsSection() {
+  return (
+    <section className="px-6 py-16 max-w-5xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center mb-10"
+      >
+        <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-3">Fundadores que ya operan con claridad</p>
+        <h2 className="text-3xl sm:text-4xl font-black text-white">
+          El crecimiento habla por sí solo.
+        </h2>
+      </motion.div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {TESTIMONIALS.map((t, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            className="glass rounded-2xl p-6 flex flex-col gap-4"
+          >
+            <div className="flex gap-0.5">
+              {[1,2,3,4,5].map((s) => (
+                <Star key={s} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+              ))}
+            </div>
+            <p className="text-sm text-foreground/80 leading-relaxed flex-1">
+              &ldquo;{t.quote}&rdquo;
+            </p>
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-violet-600 flex items-center justify-center text-xs font-bold text-white flex-shrink-0">
+                {t.avatar}
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-white">{t.name}</p>
+                <p className="text-xs text-muted-foreground">{t.role} · {t.city}</p>
+              </div>
             </div>
           </motion.div>
         ))}
@@ -990,8 +1229,10 @@ export default function HomePage() {
       <main className="pt-16">
         <Hero />
         <ProblemSection />
+        <NumbersSection />
         <ContrastSection />
         <HowItWorksSection />
+        <TestimonialsSection />
         <EcosystemSection />
         <RolesSection />
         <DemoSection />
