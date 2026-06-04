@@ -1,4 +1,18 @@
-export type Phase = "Despertar" | "Expansión" | "Vía Creania"
+export type Phase = "Despertar" | "Expansión" | "Vía Potencius"
+
+export interface Center {
+  id: string
+  name: string
+  fullName: string
+  city: string
+  country: string
+  founder: string
+  activeParticipants: number
+  atRiskCount: number
+  averageMomentum: number
+  mrr: number
+  coaches: number
+}
 export type RiskLevel = "high" | "medium" | "low"
 
 export interface Coach {
@@ -165,4 +179,5 @@ export interface DemoState {
   valeriaMomentum: number
   coachNoteAdded: boolean
   seenOnboarding: string[]
+  selectedCenter: string
 }

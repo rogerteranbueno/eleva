@@ -74,7 +74,7 @@ export default function DemoIntroPage() {
         </div>
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <Building2 className="w-3.5 h-3.5" />
-          Demo — Creania Transformación
+          Demo — Potencius Transformación
         </div>
       </div>
 
@@ -83,7 +83,7 @@ export default function DemoIntroPage() {
         <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs text-violet-300 font-medium">
             <div className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
-            Sistema operativo de Creania Transformación
+            Sistema operativo de Potencius Transformación
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-white leading-tight">
             Primero la metodología.<br />

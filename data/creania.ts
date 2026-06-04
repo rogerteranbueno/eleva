@@ -9,15 +9,58 @@ import type {
   CenterStats,
   CRMParticipant,
   CoachMetrics,
+  Center,
 } from "@/lib/types"
 
 export const CENTER = {
-  name: "Creania",
-  fullName: "Creania Transformación",
+  name: "Potencius",
+  fullName: "Potencius Transformación",
   city: "Ciudad de México",
   founder: "Carlos Mendoza",
-  model: "Despertar (3 días) → Expansión (4 días) → Vía Creania (5 meses)",
+  model: "Despertar (3 días) → Expansión (4 días) → Vía Potencius (5 meses)",
 }
+
+export const CENTERS: Center[] = [
+  {
+    id: "cdmx",
+    name: "Potencius CDMX",
+    fullName: "Potencius Transformación CDMX",
+    city: "Ciudad de México",
+    country: "México",
+    founder: "Carlos Mendoza",
+    activeParticipants: 247,
+    atRiskCount: 14,
+    averageMomentum: 67,
+    mrr: 247400,
+    coaches: 3,
+  },
+  {
+    id: "mty",
+    name: "Potencius Monterrey",
+    fullName: "Potencius Transformación Monterrey",
+    city: "Monterrey",
+    country: "México",
+    founder: "Gabriela Salazar",
+    activeParticipants: 134,
+    atRiskCount: 7,
+    averageMomentum: 71,
+    mrr: 148600,
+    coaches: 2,
+  },
+  {
+    id: "mia",
+    name: "Potencius Miami",
+    fullName: "Potencius Transformation Miami",
+    city: "Miami",
+    country: "USA",
+    founder: "Andrés Bermúdez",
+    activeParticipants: 89,
+    atRiskCount: 4,
+    averageMomentum: 74,
+    mrr: 112000,
+    coaches: 2,
+  },
+]
 
 export const STATS: CenterStats = {
   activeParticipants: 247,
@@ -52,7 +95,7 @@ export const COHORTES: Cohorte[] = [
   {
     id: "omega",
     name: "Generación Omega",
-    phase: "Vía Creania",
+    phase: "Vía Potencius",
     phaseDetail: "Mes 3 de 5",
     participants: 89,
     momentum: 74,
@@ -86,7 +129,7 @@ export const VALERIA: Participant = {
   name: "Valeria Romo",
   avatar: "VR",
   cohorte: "Generación Omega",
-  phase: "Vía Creania",
+  phase: "Vía Potencius",
   phaseDetail: "Mes 3 de 5",
   momentum: 23,
   streak: 0,
@@ -106,14 +149,12 @@ export const VALERIA: Participant = {
   coachNote: "Hablar con Valeria sobre sus compromisos de semana 8. Siento que está evitando la conversación de finanzas.",
   coachNoteDate: "hace 9 días",
   payments: [
-    { concept: "Vía Creania — Mes 1", amount: 4200, date: "1 mar 2025", status: "paid" },
-    { concept: "Vía Creania — Mes 2", amount: 4200, date: "1 abr 2025", status: "paid" },
-    { concept: "Vía Creania — Mes 3", amount: 4200, date: "1 may 2025", status: "paid" },
-    { concept: "Vía Creania — Mes 4", amount: 4200, date: "1 jun 2025", status: "pending" },
+    { concept: "Vía Potencius — Mes 1", amount: 4200, date: "1 mar 2025", status: "paid" },
+    { concept: "Vía Potencius — Mes 2", amount: 4200, date: "1 abr 2025", status: "paid" },
+    { concept: "Vía Potencius — Mes 3", amount: 4200, date: "1 may 2025", status: "paid" },
+    { concept: "Vía Potencius — Mes 4", amount: 4200, date: "1 jun 2025", status: "pending" },
   ],
   activity: [
-    // 30 days of activity — true = active, false = inactive
-    // Last 11 days all inactive
     ...Array.from({ length: 19 }, (_, i) => ({
       date: `día ${30 - i}`,
       active: Math.random() > 0.35,
@@ -132,7 +173,7 @@ export const DIEGO: Participant = {
   name: "Diego Salinas",
   avatar: "DS",
   cohorte: "Generación Vía 12",
-  phase: "Vía Creania",
+  phase: "Vía Potencius",
   phaseDetail: "Mes 1 de 5",
   momentum: 94,
   streak: 22,
@@ -154,7 +195,7 @@ export const DIEGO: Participant = {
   payments: [
     { concept: "Despertar", amount: 6500, date: "15 ene 2025", status: "paid" },
     { concept: "Expansión", amount: 8900, date: "8 feb 2025", status: "paid" },
-    { concept: "Vía Creania — Mes 1", amount: 4200, date: "1 may 2025", status: "paid" },
+    { concept: "Vía Potencius — Mes 1", amount: 4200, date: "1 may 2025", status: "paid" },
   ],
   activity: Array.from({ length: 30 }, (_, i) => ({
     date: `día ${30 - i}`,
@@ -208,7 +249,7 @@ export const AT_RISK_PARTICIPANTS = [
   {
     id: "p5", name: "Lucía Fernández", avatar: "LF", momentum: 38, inactiveDays: 6,
     cohorte: "Generación Omega", riskLevel: "high" as const, coachId: "c1",
-    pendingMissions: 1, phase: "Vía Creania" as const,
+    pendingMissions: 1, phase: "Vía Potencius" as const,
   },
   {
     id: "p6", name: "Andrés Mora", avatar: "AM", momentum: 42, inactiveDays: 4,
@@ -329,7 +370,7 @@ export const VALERIA_JOURNEY = {
     date: "27 feb 2025",
     contentPct: 82,
     missionsCompleted: 7,
-    coachNote: "Muy aplicada durante Expansión. Conectó bien con el módulo de creencias sobre dinero. Entró a Vía Creania con momentum alto.",
+    coachNote: "Muy aplicada durante Expansión. Conectó bien con el módulo de creencias sobre dinero. Entró a Vía Potencius con momentum alto.",
     momentumAtEntry: 71,
   },
 }
@@ -368,7 +409,7 @@ export const REGISTRATION_COHORTES = [
     name: "Generación Omega",
     coach: "Ana Reyes",
     coachAvatar: "AR",
-    phase: "Vía Creania" as const,
+    phase: "Vía Potencius" as const,
     phaseDetail: "Mes 3 de 5",
     participants: 89,
     capacity: 100,
@@ -392,7 +433,7 @@ export const REGISTRATION_COHORTES = [
     name: "Generación Vía 12",
     coach: "Daniela Torres",
     coachAvatar: "DT",
-    phase: "Vía Creania" as const,
+    phase: "Vía Potencius" as const,
     phaseDetail: "Mes 1 de 5",
     participants: 91,
     capacity: 100,
@@ -411,32 +452,44 @@ export const RECENT_ACTIVITY = [
 
 export const CRM_PARTICIPANTS: CRMParticipant[] = [
   // Generación Omega — coach Ana Reyes (c1)
-  { id: "p1",  name: "Valeria Romo",       avatar: "VR", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Creania", phaseDetail: "Mes 3 de 5", momentum: 23,  lastAccessDays: 11, paymentStatus: "pending",  paymentAmount: 4200, riskLevel: "high",   coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 3,  missionsTotal: 12 },
-  { id: "p10", name: "Carmen Valdés",      avatar: "CV", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Creania", phaseDetail: "Mes 3 de 5", momentum: 88,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 11, missionsTotal: 12, tag: "destacado" },
-  { id: "p11", name: "Héctor Ramírez",     avatar: "HR", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Creania", phaseDetail: "Mes 3 de 5", momentum: 62,  lastAccessDays: 1,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 8,  missionsTotal: 12 },
-  { id: "p12", name: "Lucía Fernández",    avatar: "LF", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Creania", phaseDetail: "Mes 3 de 5", momentum: 38,  lastAccessDays: 6,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "high",   coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 4,  missionsTotal: 12 },
-  { id: "p13", name: "Priya Nair",         avatar: "PN", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Creania", phaseDetail: "Mes 3 de 5", momentum: 79,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 10, missionsTotal: 12 },
-  { id: "p14", name: "Fernando Ríos",      avatar: "FR", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Creania", phaseDetail: "Mes 3 de 5", momentum: 55,  lastAccessDays: 3,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "medium", coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 7,  missionsTotal: 12 },
-  { id: "p15", name: "Isabel Gutiérrez",   avatar: "IG", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Creania", phaseDetail: "Mes 3 de 5", momentum: 71,  lastAccessDays: 1,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 9,  missionsTotal: 12 },
-  { id: "p16", name: "Omar Castillo",      avatar: "OC", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Creania", phaseDetail: "Mes 3 de 5", momentum: 44,  lastAccessDays: 5,  paymentStatus: "overdue", paymentAmount: 4200, riskLevel: "medium", coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 5,  missionsTotal: 12 },
+  { id: "p1",  name: "Valeria Romo",       avatar: "VR", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Potencius", phaseDetail: "Mes 3 de 5", momentum: 23,  lastAccessDays: 11, paymentStatus: "pending",  paymentAmount: 4200, riskLevel: "high",   coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 3,  missionsTotal: 12 },
+  { id: "p10", name: "Carmen Valdés",      avatar: "CV", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Potencius", phaseDetail: "Mes 3 de 5", momentum: 88,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 11, missionsTotal: 12, tag: "destacado" },
+  { id: "p11", name: "Héctor Ramírez",     avatar: "HR", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Potencius", phaseDetail: "Mes 3 de 5", momentum: 62,  lastAccessDays: 1,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 8,  missionsTotal: 12 },
+  { id: "p12", name: "Lucía Fernández",    avatar: "LF", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Potencius", phaseDetail: "Mes 3 de 5", momentum: 38,  lastAccessDays: 6,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "high",   coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 4,  missionsTotal: 12 },
+  { id: "p13", name: "Priya Nair",         avatar: "PN", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Potencius", phaseDetail: "Mes 3 de 5", momentum: 79,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 10, missionsTotal: 12 },
+  { id: "p14", name: "Fernando Ríos",      avatar: "FR", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Potencius", phaseDetail: "Mes 3 de 5", momentum: 55,  lastAccessDays: 3,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "medium", coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 7,  missionsTotal: 12 },
+  { id: "p15", name: "Isabel Gutiérrez",   avatar: "IG", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Potencius", phaseDetail: "Mes 3 de 5", momentum: 71,  lastAccessDays: 1,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 9,  missionsTotal: 12 },
+  { id: "p16", name: "Omar Castillo",      avatar: "OC", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Potencius", phaseDetail: "Mes 3 de 5", momentum: 44,  lastAccessDays: 5,  paymentStatus: "overdue", paymentAmount: 4200, riskLevel: "medium", coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 5,  missionsTotal: 12 },
+  { id: "p17", name: "Daniela Espinosa",   avatar: "DE", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Potencius", phaseDetail: "Mes 3 de 5", momentum: 83,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 10, missionsTotal: 12 },
+  { id: "p18", name: "Javier Montes",      avatar: "JM", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Potencius", phaseDetail: "Mes 3 de 5", momentum: 49,  lastAccessDays: 4,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "medium", coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 6,  missionsTotal: 12 },
+  { id: "p19", name: "Claudia Méndez",     avatar: "CM", cohorte: "Generación Omega", cohorteId: "omega", phase: "Vía Potencius", phaseDetail: "Mes 3 de 5", momentum: 92,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 12, missionsTotal: 12, tag: "destacado" },
 
   // Generación Norte — coach Marco Fuentes (c2)
-  { id: "p4",  name: "Roberto Campos",     avatar: "RC", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",   phaseDetail: "Completada",  momentum: 31,  lastAccessDays: 8,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "high",   coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 2,  missionsTotal: 8 },
-  { id: "p6",  name: "Andrés Mora",        avatar: "AM", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",   phaseDetail: "Completada",  momentum: 42,  lastAccessDays: 4,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "medium", coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 5,  missionsTotal: 8 },
-  { id: "p3",  name: "Mariana Ortiz",      avatar: "MO", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",   phaseDetail: "Completada",  momentum: 51,  lastAccessDays: 2,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "medium", coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 6,  missionsTotal: 8 },
-  { id: "p20", name: "Sofía Garza",        avatar: "SG", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",   phaseDetail: "Completada",  momentum: 67,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "low",    coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 7,  missionsTotal: 8, tag: "nuevo" },
-  { id: "p21", name: "Miguel Ángel Lara",  avatar: "ML", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",   phaseDetail: "Completada",  momentum: 73,  lastAccessDays: 1,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "low",    coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 8,  missionsTotal: 8 },
-  { id: "p22", name: "Paola Serrano",      avatar: "PS", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",   phaseDetail: "Completada",  momentum: 29,  lastAccessDays: 9,  paymentStatus: "overdue", paymentAmount: 8900, riskLevel: "high",   coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 1,  missionsTotal: 8 },
-  { id: "p23", name: "Tomás Ibarra",       avatar: "TI", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",   phaseDetail: "Completada",  momentum: 60,  lastAccessDays: 2,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "low",    coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 6,  missionsTotal: 8 },
+  { id: "p4",  name: "Roberto Campos",     avatar: "RC", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",     phaseDetail: "Completada",  momentum: 31,  lastAccessDays: 8,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "high",   coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 2,  missionsTotal: 8 },
+  { id: "p6",  name: "Andrés Mora",        avatar: "AM", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",     phaseDetail: "Completada",  momentum: 42,  lastAccessDays: 4,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "medium", coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 5,  missionsTotal: 8 },
+  { id: "p3",  name: "Mariana Ortiz",      avatar: "MO", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",     phaseDetail: "Completada",  momentum: 51,  lastAccessDays: 2,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "medium", coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 6,  missionsTotal: 8 },
+  { id: "p20", name: "Sofía Garza",        avatar: "SG", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",     phaseDetail: "Completada",  momentum: 67,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "low",    coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 7,  missionsTotal: 8, tag: "nuevo" },
+  { id: "p21", name: "Miguel Ángel Lara",  avatar: "ML", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",     phaseDetail: "Completada",  momentum: 73,  lastAccessDays: 1,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "low",    coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 8,  missionsTotal: 8 },
+  { id: "p22", name: "Paola Serrano",      avatar: "PS", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",     phaseDetail: "Completada",  momentum: 29,  lastAccessDays: 9,  paymentStatus: "overdue", paymentAmount: 8900, riskLevel: "high",   coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 1,  missionsTotal: 8 },
+  { id: "p23", name: "Tomás Ibarra",       avatar: "TI", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",     phaseDetail: "Completada",  momentum: 60,  lastAccessDays: 2,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "low",    coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 6,  missionsTotal: 8 },
+  { id: "p24", name: "Rebeca Alonso",      avatar: "RA", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",     phaseDetail: "Completada",  momentum: 55,  lastAccessDays: 3,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "low",    coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 5,  missionsTotal: 8 },
+  { id: "p25", name: "Ernesto Vargas",     avatar: "EV", cohorte: "Generación Norte", cohorteId: "norte", phase: "Expansión",     phaseDetail: "Completada",  momentum: 37,  lastAccessDays: 7,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "high",   coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 2,  missionsTotal: 8 },
 
   // Generación Vía 12 — coach Daniela Torres (c3)
-  { id: "p2",  name: "Diego Salinas",      avatar: "DS", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Creania", phaseDetail: "Mes 1 de 5", momentum: 94,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 9,  missionsTotal: 12, tag: "destacado" },
-  { id: "p7",  name: "Gabriela Cruz",      avatar: "GC", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Despertar",  phaseDetail: "Completado", momentum: 45,  lastAccessDays: 3,  paymentStatus: "paid",    paymentAmount: 6500, riskLevel: "medium", coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 4,  missionsTotal: 8 },
-  { id: "p30", name: "Renata Domínguez",   avatar: "RD", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Creania", phaseDetail: "Mes 1 de 5", momentum: 82,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 8,  missionsTotal: 12 },
-  { id: "p31", name: "Alejandro Fuente",   avatar: "AF", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Creania", phaseDetail: "Mes 1 de 5", momentum: 77,  lastAccessDays: 1,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 7,  missionsTotal: 12 },
-  { id: "p32", name: "Natalia Vega",       avatar: "NV", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Creania", phaseDetail: "Mes 1 de 5", momentum: 88,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 10, missionsTotal: 12, tag: "destacado" },
-  { id: "p33", name: "Ximena Palacios",    avatar: "XP", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Creania", phaseDetail: "Mes 1 de 5", momentum: 56,  lastAccessDays: 2,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 6,  missionsTotal: 12 },
-  { id: "p34", name: "Carlos Peñafiel",    avatar: "CP", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Creania", phaseDetail: "Mes 1 de 5", momentum: 35,  lastAccessDays: 7,  paymentStatus: "pending", paymentAmount: 4200, riskLevel: "high",   coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 3,  missionsTotal: 12 },
+  { id: "p2",  name: "Diego Salinas",      avatar: "DS", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Potencius", phaseDetail: "Mes 1 de 5", momentum: 94,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 9,  missionsTotal: 12, tag: "destacado" },
+  { id: "p7",  name: "Gabriela Cruz",      avatar: "GC", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Despertar",    phaseDetail: "Completado", momentum: 45,  lastAccessDays: 3,  paymentStatus: "paid",    paymentAmount: 6500, riskLevel: "medium", coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 4,  missionsTotal: 8 },
+  { id: "p30", name: "Renata Domínguez",   avatar: "RD", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Potencius", phaseDetail: "Mes 1 de 5", momentum: 82,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 8,  missionsTotal: 12 },
+  { id: "p31", name: "Alejandro Fuente",   avatar: "AF", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Potencius", phaseDetail: "Mes 1 de 5", momentum: 77,  lastAccessDays: 1,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 7,  missionsTotal: 12 },
+  { id: "p32", name: "Natalia Vega",       avatar: "NV", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Potencius", phaseDetail: "Mes 1 de 5", momentum: 88,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 10, missionsTotal: 12, tag: "destacado" },
+  { id: "p33", name: "Ximena Palacios",    avatar: "XP", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Potencius", phaseDetail: "Mes 1 de 5", momentum: 56,  lastAccessDays: 2,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 6,  missionsTotal: 12 },
+  { id: "p34", name: "Carlos Peñafiel",    avatar: "CP", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Potencius", phaseDetail: "Mes 1 de 5", momentum: 35,  lastAccessDays: 7,  paymentStatus: "pending", paymentAmount: 4200, riskLevel: "high",   coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 3,  missionsTotal: 12 },
+  { id: "p35", name: "Beatriz Huerta",     avatar: "BH", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Potencius", phaseDetail: "Mes 1 de 5", momentum: 69,  lastAccessDays: 1,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 7,  missionsTotal: 12 },
+  { id: "p36", name: "Rodrigo Sánchez",    avatar: "RS", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Potencius", phaseDetail: "Mes 1 de 5", momentum: 91,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 11, missionsTotal: 12, tag: "destacado" },
+  { id: "p37", name: "Andrea Castañeda",   avatar: "AC", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Potencius", phaseDetail: "Mes 1 de 5", momentum: 74,  lastAccessDays: 1,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 8,  missionsTotal: 12 },
+  { id: "p38", name: "Pablo Guerrero",     avatar: "PG", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Despertar",    phaseDetail: "Completado", momentum: 52,  lastAccessDays: 4,  paymentStatus: "paid",    paymentAmount: 6500, riskLevel: "medium", coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 5,  missionsTotal: 8 },
+  { id: "p39", name: "Valeria Torres",     avatar: "VT", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Potencius", phaseDetail: "Mes 1 de 5", momentum: 63,  lastAccessDays: 2,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 6,  missionsTotal: 12 },
+  { id: "p40", name: "Eduardo Blanco",     avatar: "EB", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Potencius", phaseDetail: "Mes 1 de 5", momentum: 78,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 9,  missionsTotal: 12 },
+  { id: "p41", name: "Mónica Estrella",    avatar: "ME", cohorte: "Generación Vía 12", cohorteId: "via12", phase: "Vía Potencius", phaseDetail: "Mes 1 de 5", momentum: 43,  lastAccessDays: 6,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "medium", coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 4,  missionsTotal: 12 },
 ]
 
 export const COACH_METRICS: CoachMetrics[] = [
@@ -488,4 +541,37 @@ export const COACH_METRICS: CoachMetrics[] = [
     atRiskCount: 2,
     missedSessions: 0,
   },
+]
+
+// Event for today's Mesa de Registro
+export const TODAY_EVENT = {
+  id: "ev1",
+  name: "Sesión en Vivo — Generación Omega",
+  date: "Jueves 5 de junio 2025",
+  time: "7:00 pm",
+  location: "Sala Principal · Potencius CDMX",
+  cohorte: "Generación Omega",
+  expectedAttendees: 89,
+  registeredCount: 62,
+  checkedInCount: 0,
+}
+
+export const EVENT_CHECKIN_LIST = [
+  { id: "p1",  name: "Valeria Romo",     avatar: "VR", phone: "+52 55 1234 5678", confirmed: true,  checkedIn: false, paymentStatus: "pending" as const },
+  { id: "p10", name: "Carmen Valdés",    avatar: "CV", phone: "+52 55 2345 6789", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const },
+  { id: "p11", name: "Héctor Ramírez",   avatar: "HR", phone: "+52 55 3456 7890", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const },
+  { id: "p12", name: "Lucía Fernández",  avatar: "LF", phone: "+52 55 4567 8901", confirmed: false, checkedIn: false, paymentStatus: "paid" as const },
+  { id: "p13", name: "Priya Nair",       avatar: "PN", phone: "+52 55 5678 9012", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const },
+  { id: "p14", name: "Fernando Ríos",    avatar: "FR", phone: "+52 55 6789 0123", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const },
+  { id: "p15", name: "Isabel Gutiérrez", avatar: "IG", phone: "+52 55 7890 1234", confirmed: false, checkedIn: false, paymentStatus: "paid" as const },
+  { id: "p16", name: "Omar Castillo",    avatar: "OC", phone: "+52 55 8901 2345", confirmed: true,  checkedIn: false, paymentStatus: "overdue" as const },
+  { id: "p17", name: "Daniela Espinosa", avatar: "DE", phone: "+52 55 9012 3456", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const },
+  { id: "p18", name: "Javier Montes",    avatar: "JM", phone: "+52 55 0123 4567", confirmed: false, checkedIn: false, paymentStatus: "paid" as const },
+  { id: "p19", name: "Claudia Méndez",   avatar: "CM", phone: "+52 55 1234 0001", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const },
+]
+
+export const STAFF_ACCOUNTS = [
+  { id: "s1", name: "Karla Ríos",    avatar: "KR", role: "Mesa de Registro", email: "karla@potencius.mx" },
+  { id: "s2", name: "Daniel Mora",   avatar: "DM", role: "Mesa de Registro", email: "daniel@potencius.mx" },
+  { id: "s3", name: "Paola Juárez",  avatar: "PJ", role: "Operaciones",      email: "paola@potencius.mx" },
 ]

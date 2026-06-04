@@ -73,7 +73,7 @@ export default function MomentumPage() {
       <OnboardingModal config={ONBOARDING} />
       <div>
         <h1 className="text-2xl font-bold text-white">Mi Momentum</h1>
-        <p className="text-muted-foreground text-sm mt-0.5">Vía Creania · Semana 12</p>
+        <p className="text-muted-foreground text-sm mt-0.5">Vía Potencius · Semana 12</p>
       </div>
 
       {/* Score hero */}
@@ -240,7 +240,7 @@ export default function MomentumPage() {
           name="Valeria Romo"
           momentum={score}
           streak={0}
-          phase="Vía Creania · Mes 3"
+          phase="Vía Potencius · Mes 3"
           onClose={() => setShareOpen(false)}
         />
       )}

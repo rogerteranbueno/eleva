@@ -60,7 +60,7 @@ export default function FinanzasPage() {
       <div className="flex items-start justify-between gap-3 flex-wrap">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-white">Finanzas</h1>
-          <p className="text-muted-foreground text-sm mt-0.5">Junio 2025 · Creania Transformación</p>
+          <p className="text-muted-foreground text-sm mt-0.5">Junio 2025 · Potencius Transformación</p>
         </div>
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl glass border border-green-500/20 text-xs font-semibold text-green-400">
           <TrendingUp className="w-3.5 h-3.5" />
@@ -171,7 +171,7 @@ export default function FinanzasPage() {
           <div>
             <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Ingresos</p>
             <div className="space-y-1.5">
-              <PLRow label="Mensualidades Vía Creania" value={FINANCIALS.mrr} color="text-green-400" />
+              <PLRow label="Mensualidades Vía Potencius" value={FINANCIALS.mrr} color="text-green-400" />
               <PLRow label="Inscripciones (Despertar + Expansión)" value={FINANCIALS.enrollments} color="text-green-400" />
               <PLRow label="Total ingresos cobrados" value={FINANCIALS.collected} color="text-green-400" bold />
             </div>

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useState } from "react"
 import {
   Activity,
   AlertTriangle,
@@ -17,9 +18,15 @@ import {
   Database,
   ShieldCheck,
   DollarSign,
+  ClipboardList,
+  UserPlus,
+  ChevronDown,
+  Check,
+  Globe,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { DemoProvider, useDemoStore } from "@/lib/demo-store"
+import { CENTERS } from "@/data/creania"
 
 type NavScreen = {
   href: string
@@ -29,34 +36,121 @@ type NavScreen = {
   badge?: number
 }
 
+type View = "owner" | "ops" | "participant"
+
 const OWNER_SCREENS: NavScreen[] = [
-  { href: "/demo/pulso", label: "Pulso del Centro", shortLabel: "Pulso", icon: Activity },
-  { href: "/demo/atencion", label: "Necesitan Atención", shortLabel: "Atención", icon: AlertTriangle, badge: 14 },
-  { href: "/demo/crm", label: "Directorio CRM", shortLabel: "CRM", icon: Database },
-  { href: "/demo/equipo", label: "Visibilidad de Equipo", shortLabel: "Equipo", icon: ShieldCheck },
-  { href: "/demo/finanzas", label: "Finanzas", shortLabel: "Finanzas", icon: DollarSign },
-  { href: "/demo/expediente", label: "Expediente Valeria", shortLabel: "Exp.", icon: User },
+  { href: "/demo/pulso",     label: "Pulso del Centro",    shortLabel: "Pulso",    icon: Activity },
+  { href: "/demo/atencion",  label: "Necesitan Atención",  shortLabel: "Atención", icon: AlertTriangle, badge: 14 },
+  { href: "/demo/crm",       label: "Directorio CRM",      shortLabel: "CRM",      icon: Database },
+  { href: "/demo/equipo",    label: "Visibilidad de Equipo", shortLabel: "Equipo", icon: ShieldCheck },
+  { href: "/demo/finanzas",  label: "Finanzas",            shortLabel: "Finanzas", icon: DollarSign },
+  { href: "/demo/expediente",label: "Expediente Valeria",  shortLabel: "Exp.",     icon: User },
+]
+
+const OPS_SCREENS: NavScreen[] = [
+  { href: "/demo/ops/registro", label: "Mesa de Registro",   shortLabel: "Registro",  icon: ClipboardList },
+  { href: "/demo/crm",          label: "Agregar Participante", shortLabel: "Agregar", icon: UserPlus },
 ]
 
 const PARTICIPANT_SCREENS: NavScreen[] = [
-  { href: "/demo/feed", label: "Mi Feed", shortLabel: "Feed", icon: Home },
-  { href: "/demo/mision", label: "Mi Misión", shortLabel: "Misión", icon: Target },
+  { href: "/demo/feed",     label: "Mi Feed",     shortLabel: "Feed",     icon: Home },
+  { href: "/demo/mision",   label: "Mi Misión",   shortLabel: "Misión",   icon: Target },
   { href: "/demo/momentum", label: "Mi Momentum", shortLabel: "Momentum", icon: TrendingUp },
-  { href: "/demo/tribu", label: "Mi Tribu", shortLabel: "Tribu", icon: Users },
+  { href: "/demo/tribu",    label: "Mi Tribu",    shortLabel: "Tribu",    icon: Users },
 ]
 
 const OWNER_PATHS = OWNER_SCREENS.map((s) => s.href)
+const OPS_PATHS   = OPS_SCREENS.map((s) => s.href)
 
-function getViewFromPath(pathname: string): "owner" | "participant" {
-  return OWNER_PATHS.includes(pathname) ? "owner" : "participant"
+function getViewFromPath(pathname: string): View {
+  if (OWNER_PATHS.includes(pathname)) return "owner"
+  if (OPS_PATHS.includes(pathname) || pathname.startsWith("/demo/ops")) return "ops"
+  return "participant"
+}
+
+function CenterSelector() {
+  const [open, setOpen] = useState(false)
+  const { state, dispatch } = useDemoStore()
+  const selected = CENTERS.find((c) => c.id === state.selectedCenter) ?? CENTERS[0]
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setOpen((p) => !p)}
+        className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs bg-sidebar-accent hover:bg-sidebar-accent/80 transition-colors text-left"
+      >
+        <Globe className="w-3.5 h-3.5 text-violet-400 flex-shrink-0" />
+        <span className="flex-1 font-medium text-foreground truncate">{selected.name}</span>
+        <ChevronDown className={cn("w-3.5 h-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
+      </button>
+      {open && (
+        <div className="absolute top-full left-0 right-0 mt-1 z-50 bg-sidebar border border-sidebar-border rounded-lg shadow-lg overflow-hidden">
+          {CENTERS.map((center) => (
+            <button
+              key={center.id}
+              onClick={() => { dispatch({ type: "SET_CENTER", centerId: center.id }); setOpen(false) }}
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 text-left hover:bg-sidebar-accent transition-colors"
+            >
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-semibold text-foreground truncate">{center.name}</p>
+                <p className="text-[10px] text-muted-foreground">{center.city} · {center.activeParticipants} participantes</p>
+              </div>
+              {center.id === state.selectedCenter && (
+                <Check className="w-3.5 h-3.5 text-violet-400 flex-shrink-0" />
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function ViewSwitcher({ view, className }: { view: View; className?: string }) {
+  const router = useRouter()
+  return (
+    <div className={cn("flex rounded-lg overflow-hidden border border-sidebar-border", className)}>
+      <button
+        onClick={() => router.push("/demo/pulso")}
+        className={cn(
+          "flex-1 py-1.5 text-xs font-semibold transition-colors",
+          view === "owner" ? "bg-violet-600 text-white" : "text-muted-foreground hover:text-foreground"
+        )}
+      >
+        Dueño
+      </button>
+      <button
+        onClick={() => router.push("/demo/ops/registro")}
+        className={cn(
+          "flex-1 py-1.5 text-xs font-semibold transition-colors border-x border-sidebar-border",
+          view === "ops" ? "bg-cyan-600 text-white" : "text-muted-foreground hover:text-foreground"
+        )}
+      >
+        Ops
+      </button>
+      <button
+        onClick={() => router.push("/demo/feed")}
+        className={cn(
+          "flex-1 py-1.5 text-xs font-semibold transition-colors",
+          view === "participant" ? "bg-violet-600 text-white" : "text-muted-foreground hover:text-foreground"
+        )}
+      >
+        Usuario
+      </button>
+    </div>
+  )
 }
 
 function DemoNav() {
   const pathname = usePathname()
-  const router = useRouter()
-  const { dispatch } = useDemoStore()
+  const { dispatch, state } = useDemoStore()
   const view = getViewFromPath(pathname)
-  const screens = view === "owner" ? OWNER_SCREENS : PARTICIPANT_SCREENS
+  const screens = view === "owner" ? OWNER_SCREENS : view === "ops" ? OPS_SCREENS : PARTICIPANT_SCREENS
+
+  const navLabel =
+    view === "owner" ? "Panel del dueño" :
+    view === "ops"   ? "Operaciones" :
+    "Mi espacio"
 
   return (
     <aside className="hidden md:flex flex-col w-60 min-h-screen bg-sidebar border-r border-sidebar-border flex-shrink-0">
@@ -64,48 +158,40 @@ function DemoNav() {
       <div className="p-5 border-b border-sidebar-border">
         <Link href="/" className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center">
-            <span className="text-white font-black text-sm">E</span>
+            <span className="text-white font-black text-sm">P</span>
           </div>
-          <span className="font-black text-white text-lg tracking-tight">ELEVA</span>
+          <span className="font-black text-white text-lg tracking-tight">POTENCIUS</span>
         </Link>
         <div className="mt-1 flex items-center gap-1.5">
           <Building2 className="w-3 h-3 text-muted-foreground" />
-          <span className="text-[11px] text-muted-foreground">Demo — Creania</span>
+          <span className="text-[11px] text-muted-foreground">Demo interactivo</span>
         </div>
       </div>
+
+      {/* Center selector — only in owner view */}
+      {view === "owner" && (
+        <div className="p-4 border-b border-sidebar-border">
+          <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2 font-medium">Centro</p>
+          <CenterSelector />
+        </div>
+      )}
 
       {/* View switcher */}
       <div className="p-4 border-b border-sidebar-border">
         <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2 font-medium">Vista</p>
-        <div className="flex rounded-lg overflow-hidden border border-sidebar-border">
-          <button
-            onClick={() => router.push("/demo/pulso")}
-            className={cn(
-              "flex-1 py-1.5 text-xs font-semibold transition-colors",
-              view === "owner" ? "bg-violet-600 text-white" : "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            Dueño
-          </button>
-          <button
-            onClick={() => router.push("/demo/feed")}
-            className={cn(
-              "flex-1 py-1.5 text-xs font-semibold transition-colors",
-              view === "participant" ? "bg-violet-600 text-white" : "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            Participante
-          </button>
-        </div>
+        <ViewSwitcher view={view} />
         {view === "participant" && (
           <p className="text-[10px] text-muted-foreground mt-2 text-center">Como Valeria Romo</p>
+        )}
+        {view === "ops" && (
+          <p className="text-[10px] text-muted-foreground mt-2 text-center">Como Karla Ríos · Mesa de Registro</p>
         )}
       </div>
 
       {/* Navigation */}
       <nav className="flex-1 p-3 space-y-0.5">
         <p className="text-[10px] uppercase tracking-widest text-muted-foreground px-3 py-2 font-medium">
-          {view === "owner" ? "Panel del dueño" : "Mi espacio"}
+          {navLabel}
         </p>
         {screens.map(({ href, label, icon: Icon, badge }) => {
           const active = pathname === href
@@ -159,12 +245,12 @@ function MobileNav() {
   const router = useRouter()
   const { dispatch } = useDemoStore()
   const view = getViewFromPath(pathname)
-  const screens = view === "owner" ? OWNER_SCREENS : PARTICIPANT_SCREENS
+  const screens = view === "owner" ? OWNER_SCREENS : view === "ops" ? OPS_SCREENS : PARTICIPANT_SCREENS
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-sidebar border-t border-sidebar-border">
       {/* View switcher */}
-      <div className="flex border-b border-sidebar-border">
+      <div className="flex items-center border-b border-sidebar-border px-2 gap-1">
         <button
           onClick={() => router.push("/demo/pulso")}
           className={cn(
@@ -175,10 +261,17 @@ function MobileNav() {
           Dueño
         </button>
         <button
-          onClick={() => {
-            dispatch({ type: "RESET" })
-          }}
-          className="px-3 py-1.5 text-muted-foreground"
+          onClick={() => router.push("/demo/ops/registro")}
+          className={cn(
+            "flex-1 py-1.5 text-xs font-semibold transition-colors",
+            view === "ops" ? "text-cyan-400 border-b-2 border-cyan-500" : "text-muted-foreground"
+          )}
+        >
+          Ops
+        </button>
+        <button
+          onClick={() => dispatch({ type: "RESET" })}
+          className="px-2 py-1.5 text-muted-foreground"
           title="Reiniciar"
         >
           <RotateCcw className="w-3 h-3" />
@@ -190,7 +283,7 @@ function MobileNav() {
             view === "participant" ? "text-violet-400 border-b-2 border-violet-600" : "text-muted-foreground"
           )}
         >
-          Participante
+          Usuario
         </button>
       </div>
       {/* Screen tabs */}

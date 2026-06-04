@@ -178,13 +178,13 @@ function TabJourney({ momentum }: { momentum: number }) {
         { label: "Fecha de Expansión", value: VALERIA_JOURNEY.expansion.date },
         { label: "Contenido consumido", value: `${VALERIA_JOURNEY.expansion.contentPct}%` },
         { label: "Misiones completadas", value: `${VALERIA_JOURNEY.expansion.missionsCompleted} de 8` },
-        { label: "Momentum al entrar a Vía Creania", value: `${VALERIA_JOURNEY.expansion.momentumAtEntry}%` },
+        { label: "Momentum al entrar a Vía Potencius", value: `${VALERIA_JOURNEY.expansion.momentumAtEntry}%` },
       ],
     },
     {
       id: "retener",
       icon: Heart,
-      label: "Retener · Vía Creania",
+      label: "Retener · Vía Potencius",
       color: "pink",
       status: "active" as const,
       title: "Mes 3 de 5 — activa",
@@ -201,7 +201,7 @@ function TabJourney({ momentum }: { momentum: number }) {
       label: "Escalar",
       color: "violet",
       status: "locked" as const,
-      title: "Disponible al completar Vía Creania",
+      title: "Disponible al completar Vía Potencius",
       items: [
         { label: "Mentoría de pares", value: "—" },
         { label: "Referidos generados", value: "—" },
@@ -293,7 +293,7 @@ function TabJourney({ momentum }: { momentum: number }) {
                 {isActive && (
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between text-[11px]">
-                      <span className="text-muted-foreground">Progreso en Vía Creania</span>
+                      <span className="text-muted-foreground">Progreso en Vía Potencius</span>
                       <span className="text-pink-400 font-semibold">Mes 3/5</span>
                     </div>
                     <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
@@ -305,7 +305,7 @@ function TabJourney({ momentum }: { momentum: number }) {
                 {isLocked && (
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Lock className="w-3 h-3" />
-                    Se desbloquea al completar Vía Creania
+                    Se desbloquea al completar Vía Potencius
                   </div>
                 )}
               </div>
@@ -324,7 +324,7 @@ function TabResumen({ momentum }: { momentum: number }) {
       <StatBox label="Mejor racha" value="22 días" sub="Alcanzada hace 3 semanas" />
       <StatBox label="Misiones completadas" value="3 / 12" sub="3 pendientes este mes" alert />
       <StatBox label="Momentum" value={`${momentum}%`} sub="Cayó 47 puntos en 2 semanas" alert />
-      <StatBox label="Fase actual" value="Mes 3" sub="Vía Creania — 2 meses restantes" />
+      <StatBox label="Fase actual" value="Mes 3" sub="Vía Potencius — 2 meses restantes" />
       <StatBox label="Pagos" value="Al corriente" sub="Mes 4 vence en 29 días" />
     </div>
   )
@@ -387,7 +387,7 @@ function TabObjetivos({ specialist }: { specialist: { name: string; specialty: s
           />
         </div>
         <p className="text-xs text-muted-foreground">
-          Objetivo declarado en semana 1 de Vía Creania. Sin avance registrado en los últimos 11 días.
+          Objetivo declarado en semana 1 de Vía Potencius. Sin avance registrado en los últimos 11 días.
         </p>
       </div>
       <div className="glass-violet rounded-xl p-5">

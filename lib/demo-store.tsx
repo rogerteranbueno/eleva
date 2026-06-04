@@ -14,6 +14,7 @@ const INITIAL_STATE: DemoState = {
   valeriaMomentum: 23,
   coachNoteAdded: false,
   seenOnboarding: [],
+  selectedCenter: "cdmx",
 }
 
 type Action =
@@ -26,6 +27,7 @@ type Action =
   | { type: "JOIN_CHALLENGE" }
   | { type: "ADD_COACH_NOTE" }
   | { type: "MARK_ONBOARDING_SEEN"; screenId: string }
+  | { type: "SET_CENTER"; centerId: string }
   | { type: "RESET" }
 
 function reducer(state: DemoState, action: Action): DemoState {
@@ -48,6 +50,8 @@ function reducer(state: DemoState, action: Action): DemoState {
       return { ...state, coachNoteAdded: true }
     case "MARK_ONBOARDING_SEEN":
       return { ...state, seenOnboarding: [...state.seenOnboarding, action.screenId] }
+    case "SET_CENTER":
+      return { ...state, selectedCenter: action.centerId }
     case "RESET":
       return INITIAL_STATE
     default:
