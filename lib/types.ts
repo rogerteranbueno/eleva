@@ -106,6 +106,45 @@ export interface Participant {
   activity: ActivityDay[]
 }
 
+export type PaymentStatus = "paid" | "pending" | "overdue"
+
+export interface CRMParticipant {
+  id: string
+  name: string
+  avatar: string
+  cohorte: string
+  cohorteId: string
+  phase: Phase
+  phaseDetail: string
+  momentum: number
+  lastAccessDays: number
+  paymentStatus: PaymentStatus
+  paymentAmount: number
+  riskLevel: RiskLevel
+  coachId: string
+  enrollDate: string
+  missionsCompleted: number
+  missionsTotal: number
+  tag?: "nuevo" | "destacado"
+}
+
+export interface CoachMetrics {
+  id: string
+  name: string
+  avatar: string
+  cohorte: string
+  cohorteId: string
+  participantCount: number
+  lastGroupContactDays: number
+  lastOneOnOneDays: number
+  sessionsThisMonth: number
+  sessionsPlanned: number
+  groupMomentum: number
+  momentumTrend: number
+  atRiskCount: number
+  missedSessions: number
+}
+
 export interface CenterStats {
   activeParticipants: number
   atRiskCount: number

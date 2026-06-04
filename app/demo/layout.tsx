@@ -14,6 +14,8 @@ import {
   RotateCcw,
   Building2,
   ChevronRight,
+  Database,
+  ShieldCheck,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { DemoProvider, useDemoStore } from "@/lib/demo-store"
@@ -29,6 +31,8 @@ type NavScreen = {
 const OWNER_SCREENS: NavScreen[] = [
   { href: "/demo/pulso", label: "Pulso del Centro", shortLabel: "Pulso", icon: Activity },
   { href: "/demo/atencion", label: "Necesitan Atención", shortLabel: "Atención", icon: AlertTriangle, badge: 14 },
+  { href: "/demo/crm", label: "Directorio CRM", shortLabel: "CRM", icon: Database },
+  { href: "/demo/equipo", label: "Visibilidad de Equipo", shortLabel: "Equipo", icon: ShieldCheck },
   { href: "/demo/expediente", label: "Expediente Valeria", shortLabel: "Expediente", icon: User },
 ]
 
