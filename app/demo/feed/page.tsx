@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Heart, MessageCircle, Calendar, Star, CheckCircle, ChevronRight } from "lucide-react"
+import { Heart, MessageCircle, Calendar, Star, CheckCircle, ChevronRight, Share2 } from "lucide-react"
+import { ShareEventModal } from "@/components/demo/ShareEventModal"
 import Link from "next/link"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
@@ -30,6 +31,7 @@ export default function FeedPage() {
   const { toast, show, hide } = useActionToast()
   const [liked, setLiked] = useState<Set<string>>(new Set())
   const [eventConfirmed, setEventConfirmed] = useState(false)
+  const [shareEventOpen, setShareEventOpen] = useState(false)
 
   const coach = COACHES[0]
   const specialist = SPECIALISTS[0]
@@ -112,19 +114,28 @@ export default function FeedPage() {
             <p className="font-semibold text-white text-sm">Sesión en vivo con Ana Reyes</p>
             <p className="text-xs text-muted-foreground mt-0.5">Jueves 5 de junio · <span className="whitespace-nowrap">7:00 pm</span> · Generación Omega</p>
           </div>
-          {!eventConfirmed ? (
+          <div className="flex items-center gap-1.5 flex-shrink-0">
             <button
-              onClick={handleConfirmEvent}
-              className="px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white text-xs font-semibold transition-colors flex-shrink-0"
+              onClick={() => setShareEventOpen(true)}
+              className="p-1.5 rounded-lg text-muted-foreground hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors"
+              title="Compartir evento"
             >
-              Confirmar
+              <Share2 className="w-3.5 h-3.5" />
             </button>
-          ) : (
-            <div className="flex items-center gap-1.5 text-green-400 text-xs font-semibold flex-shrink-0">
-              <CheckCircle className="w-3.5 h-3.5" />
-              Confirmado
-            </div>
-          )}
+            {!eventConfirmed ? (
+              <button
+                onClick={handleConfirmEvent}
+                className="px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white text-xs font-semibold transition-colors"
+              >
+                Confirmar
+              </button>
+            ) : (
+              <div className="flex items-center gap-1.5 text-green-400 text-xs font-semibold">
+                <CheckCircle className="w-3.5 h-3.5" />
+                Confirmado
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -172,6 +183,9 @@ export default function FeedPage() {
         </div>
       </div>
 
+      {shareEventOpen && (
+        <ShareEventModal onClose={() => setShareEventOpen(false)} />
+      )}
       <ActionToast message={toast.message} visible={toast.visible} onHide={hide} />
     </div>
   )

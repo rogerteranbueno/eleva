@@ -1,6 +1,8 @@
 "use client"
 
-import { CheckCircle, Calendar, MessageSquare, Target, Zap, TrendingDown } from "lucide-react"
+import { useState } from "react"
+import { CheckCircle, Calendar, MessageSquare, Target, Zap, TrendingDown, Share2 } from "lucide-react"
+import { ShareProgressCard } from "@/components/demo/ShareProgressCard"
 import {
   AreaChart,
   Area,
@@ -49,6 +51,7 @@ const SUGGESTED_ACTIONS = [
 export default function MomentumPage() {
   const { state, dispatch } = useDemoStore()
   const { toast, show, hide } = useActionToast()
+  const [shareOpen, setShareOpen] = useState(false)
   const specialist = SPECIALISTS[0]
 
   const score = state.valeriaMomentum
@@ -223,6 +226,24 @@ export default function MomentumPage() {
         </div>
       </div>
 
+      {/* Share progress */}
+      <button
+        onClick={() => setShareOpen(true)}
+        className="flex items-center justify-center gap-2 w-full py-3 rounded-xl glass border border-white/10 hover:border-violet-500/30 text-sm font-medium text-muted-foreground hover:text-white transition-all"
+      >
+        <Share2 className="w-4 h-4" />
+        Compartir mi progreso
+      </button>
+
+      {shareOpen && (
+        <ShareProgressCard
+          name="Valeria Romo"
+          momentum={score}
+          streak={0}
+          phase="Vía Creania · Mes 3"
+          onClose={() => setShareOpen(false)}
+        />
+      )}
       <ActionToast message={toast.message} visible={toast.visible} onHide={hide} />
     </div>
   )

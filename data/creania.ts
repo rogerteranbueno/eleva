@@ -315,6 +315,92 @@ export const MOMENTUM_HISTORY = [
   { day: "hoy", value: 23 },
 ]
 
+export const VALERIA_JOURNEY = {
+  leadSource: "Referida por Diego Salinas",
+  leadDate: "20 ene 2025",
+  webinarAttended: "Webinar: Poder Sin Límites — 18 ene 2025",
+  despertar: {
+    date: "15 feb 2025",
+    coachNote: "Valeria llegó cerrada el día 1 pero al día 3 tuvo un quiebre poderoso. Potencial alto, objetivo financiero claro. Recomiendo seguimiento semanal.",
+    activationScore: "Alta" as const,
+    daysToExpansion: 12,
+  },
+  expansion: {
+    date: "27 feb 2025",
+    contentPct: 82,
+    missionsCompleted: 7,
+    coachNote: "Muy aplicada durante Expansión. Conectó bien con el módulo de creencias sobre dinero. Entró a Vía Creania con momentum alto.",
+    momentumAtEntry: 71,
+  },
+}
+
+export const FINANCIALS = {
+  monthlyRevenue: 342200,
+  mrr: 247400,
+  enrollments: 94800,
+  collected: 293600,
+  pending: 48600,
+  vsLastMonth: 12,
+  coachesCost: 54000,
+  staffCost: 18000,
+  platformCost: 8500,
+  totalCosts: 80500,
+  netMargin: 72.6,
+  netIncome: 213100,
+  projectionNextMonth: 361000,
+  projectionGrowth: 6,
+  byCohorte: [
+    { name: "Generación Omega", participants: 89, rate: 4200, expected: 373800, collected: 344400, pending: 29400 },
+    { name: "Generación Norte", rate: null, inscriptions: 14, avgTicket: 7700, expected: 107800, collected: 98900, pending: 8900 },
+    { name: "Generación Vía 12", participants: 91, rate: 4200, expected: 382200, collected: 343800, pending: 38400 },
+  ],
+  pendingParticipants: [
+    { name: "Valeria Romo", avatar: "VR", amount: 4200, cohorte: "Gen. Omega", overdueDays: 3 },
+    { name: "Omar Castillo", avatar: "OC", amount: 4200, cohorte: "Gen. Omega", overdueDays: 5 },
+    { name: "Paola Serrano", avatar: "PS", amount: 8900, cohorte: "Gen. Norte", overdueDays: 7 },
+    { name: "Carlos Peñafiel", avatar: "CP", amount: 4200, cohorte: "Gen. Vía 12", overdueDays: 0 },
+  ],
+}
+
+export const REGISTRATION_COHORTES = [
+  {
+    id: "omega",
+    name: "Generación Omega",
+    coach: "Ana Reyes",
+    coachAvatar: "AR",
+    phase: "Vía Creania" as const,
+    phaseDetail: "Mes 3 de 5",
+    participants: 89,
+    capacity: 100,
+    momentum: 74,
+    available: 11,
+  },
+  {
+    id: "norte",
+    name: "Generación Norte",
+    coach: "Marco Fuentes",
+    coachAvatar: "MF",
+    phase: "Expansión" as const,
+    phaseDetail: "Completada",
+    participants: 67,
+    capacity: 80,
+    momentum: 58,
+    available: 13,
+  },
+  {
+    id: "via12",
+    name: "Generación Vía 12",
+    coach: "Daniela Torres",
+    coachAvatar: "DT",
+    phase: "Vía Creania" as const,
+    phaseDetail: "Mes 1 de 5",
+    participants: 91,
+    capacity: 100,
+    momentum: 81,
+    available: 9,
+  },
+]
+
 export const RECENT_ACTIVITY = [
   { text: "Diego Salinas completó su misión de semana 22", time: "hace 45 min", type: "success" },
   { text: "Carmen Valdés agendó sesión con Laura Medina (Coach Financiero)", time: "hace 2 hrs", type: "specialist" },

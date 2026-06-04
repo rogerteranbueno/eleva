@@ -16,6 +16,7 @@ import {
   ChevronRight,
   Database,
   ShieldCheck,
+  DollarSign,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { DemoProvider, useDemoStore } from "@/lib/demo-store"
@@ -33,7 +34,8 @@ const OWNER_SCREENS: NavScreen[] = [
   { href: "/demo/atencion", label: "Necesitan Atención", shortLabel: "Atención", icon: AlertTriangle, badge: 14 },
   { href: "/demo/crm", label: "Directorio CRM", shortLabel: "CRM", icon: Database },
   { href: "/demo/equipo", label: "Visibilidad de Equipo", shortLabel: "Equipo", icon: ShieldCheck },
-  { href: "/demo/expediente", label: "Expediente Valeria", shortLabel: "Expediente", icon: User },
+  { href: "/demo/finanzas", label: "Finanzas", shortLabel: "Finanzas", icon: DollarSign },
+  { href: "/demo/expediente", label: "Expediente Valeria", shortLabel: "Exp.", icon: User },
 ]
 
 const PARTICIPANT_SCREENS: NavScreen[] = [

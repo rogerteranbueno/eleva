@@ -1,13 +1,17 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowUpRight, CheckCircle, Clock, DollarSign, Target, FileText, Activity } from "lucide-react"
+import {
+  ArrowUpRight, CheckCircle, Clock, DollarSign, Target, FileText, Activity,
+  MapPin, Zap, Heart, TrendingUp, Lock, Star, ChevronRight,
+  BookOpen, Users,
+} from "lucide-react"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { useDemoStore } from "@/lib/demo-store"
-import { VALERIA, COACHES, SPECIALISTS } from "@/data/creania"
+import { VALERIA, COACHES, SPECIALISTS, VALERIA_JOURNEY } from "@/data/creania"
 import { cn, getMomentumColor } from "@/lib/utils"
 
 const ONBOARDING = {
@@ -24,10 +28,10 @@ const ONBOARDING = {
   cta: "Ver el expediente →",
 }
 
-type Tab = "resumen" | "actividad" | "objetivos" | "pagos" | "notas"
+type Tab = "journey" | "resumen" | "actividad" | "objetivos" | "pagos" | "notas"
 
 export default function ExpedientePage() {
-  const [tab, setTab] = useState<Tab>("resumen")
+  const [tab, setTab] = useState<Tab>("journey")
   const [escalateNote, setEscalateNote] = useState("")
   const { state, dispatch } = useDemoStore()
   const { toast, show, hide } = useActionToast()
@@ -43,6 +47,7 @@ export default function ExpedientePage() {
   }
 
   const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
+    { id: "journey", label: "Journey", icon: <MapPin className="w-3.5 h-3.5" /> },
     { id: "resumen", label: "Resumen", icon: <Activity className="w-3.5 h-3.5" /> },
     { id: "actividad", label: "Actividad", icon: <Clock className="w-3.5 h-3.5" /> },
     { id: "objetivos", label: "Objetivos", icon: <Target className="w-3.5 h-3.5" /> },
@@ -111,6 +116,7 @@ export default function ExpedientePage() {
       </div>
 
       {/* Tab content */}
+      {tab === "journey" && <TabJourney momentum={momentum} />}
       {tab === "resumen" && <TabResumen momentum={momentum} />}
       {tab === "actividad" && <TabActividad />}
       {tab === "objetivos" && <TabObjetivos specialist={specialist} />}
@@ -127,6 +133,186 @@ export default function ExpedientePage() {
       )}
 
       <ActionToast message={toast.message} visible={toast.visible} onHide={hide} />
+    </div>
+  )
+}
+
+function TabJourney({ momentum }: { momentum: number }) {
+  const stages = [
+    {
+      id: "adquirir",
+      icon: MapPin,
+      label: "Adquirir",
+      color: "cyan",
+      status: "done" as const,
+      title: "Primer contacto",
+      items: [
+        { label: "Cómo llegó", value: VALERIA_JOURNEY.leadSource },
+        { label: "Fecha de contacto", value: VALERIA_JOURNEY.leadDate },
+        { label: "Evento de entrada", value: VALERIA_JOURNEY.webinarAttended },
+      ],
+    },
+    {
+      id: "activar-despertar",
+      icon: Zap,
+      label: "Activar · Despertar",
+      color: "yellow",
+      status: "done" as const,
+      title: "Curso inicial (3 días)",
+      note: VALERIA_JOURNEY.despertar.coachNote,
+      items: [
+        { label: "Fecha del Despertar", value: VALERIA_JOURNEY.despertar.date },
+        { label: "Score de activación", value: VALERIA_JOURNEY.despertar.activationScore },
+        { label: "Días hasta Expansión", value: `${VALERIA_JOURNEY.despertar.daysToExpansion} días` },
+      ],
+    },
+    {
+      id: "activar-expansion",
+      icon: BookOpen,
+      label: "Activar · Expansión",
+      color: "orange",
+      status: "done" as const,
+      title: "Preparación profunda (4 días)",
+      note: VALERIA_JOURNEY.expansion.coachNote,
+      items: [
+        { label: "Fecha de Expansión", value: VALERIA_JOURNEY.expansion.date },
+        { label: "Contenido consumido", value: `${VALERIA_JOURNEY.expansion.contentPct}%` },
+        { label: "Misiones completadas", value: `${VALERIA_JOURNEY.expansion.missionsCompleted} de 8` },
+        { label: "Momentum al entrar a Vía Creania", value: `${VALERIA_JOURNEY.expansion.momentumAtEntry}%` },
+      ],
+    },
+    {
+      id: "retener",
+      icon: Heart,
+      label: "Retener · Vía Creania",
+      color: "pink",
+      status: "active" as const,
+      title: "Mes 3 de 5 — activa",
+      items: [
+        { label: "Objetivo principal", value: VALERIA.objective.title },
+        { label: "Avance del objetivo", value: `${VALERIA.objective.progress}%` },
+        { label: "Momentum actual", value: `${momentum}%` },
+        { label: "Último acceso", value: VALERIA.lastAccess },
+      ],
+    },
+    {
+      id: "escalar",
+      icon: TrendingUp,
+      label: "Escalar",
+      color: "violet",
+      status: "locked" as const,
+      title: "Disponible al completar Vía Creania",
+      items: [
+        { label: "Mentoría de pares", value: "—" },
+        { label: "Referidos generados", value: "—" },
+        { label: "Rol en comunidad", value: "—" },
+      ],
+    },
+  ]
+
+  const COLORS: Record<string, { badge: string; dot: string; line: string; icon: string; noteBg: string }> = {
+    cyan:   { badge: "bg-cyan-500/15 text-cyan-400 border-cyan-500/20",   dot: "bg-cyan-500",   line: "bg-cyan-500/30",   icon: "text-cyan-400",   noteBg: "bg-cyan-500/8 border-cyan-500/20" },
+    yellow: { badge: "bg-yellow-500/15 text-yellow-400 border-yellow-500/20", dot: "bg-yellow-500", line: "bg-yellow-500/30", icon: "text-yellow-400", noteBg: "bg-yellow-500/8 border-yellow-500/20" },
+    orange: { badge: "bg-orange-500/15 text-orange-400 border-orange-500/20", dot: "bg-orange-500", line: "bg-orange-500/30", icon: "text-orange-400", noteBg: "bg-orange-500/8 border-orange-500/20" },
+    pink:   { badge: "bg-pink-500/15 text-pink-400 border-pink-500/20",   dot: "bg-pink-500",   line: "bg-pink-500/30",   icon: "text-pink-400",   noteBg: "bg-pink-500/8 border-pink-500/20" },
+    violet: { badge: "bg-violet-500/15 text-violet-400 border-violet-500/20", dot: "bg-violet-500/40", line: "bg-violet-500/20", icon: "text-violet-400/50", noteBg: "" },
+  }
+
+  return (
+    <div className="space-y-0">
+      {stages.map((stage, i) => {
+        const c = COLORS[stage.color]
+        const Icon = stage.icon
+        const isLast = i === stages.length - 1
+        const isLocked = stage.status === "locked"
+        const isActive = stage.status === "active"
+
+        return (
+          <div key={stage.id} className="flex gap-4">
+            {/* Timeline line + dot */}
+            <div className="flex flex-col items-center flex-shrink-0">
+              <div className={cn(
+                "w-8 h-8 rounded-full flex items-center justify-center border-2 flex-shrink-0",
+                isLocked
+                  ? "bg-white/5 border-white/10"
+                  : isActive
+                  ? "bg-pink-500/20 border-pink-500/40 ring-2 ring-pink-500/20"
+                  : "bg-white/8 border-white/15"
+              )}>
+                {isLocked
+                  ? <Lock className="w-3.5 h-3.5 text-muted-foreground" />
+                  : <Icon className={cn("w-3.5 h-3.5", c.icon)} />}
+              </div>
+              {!isLast && (
+                <div className={cn("w-0.5 flex-1 min-h-[24px] my-1", c.line)} />
+              )}
+            </div>
+
+            {/* Content */}
+            <div className={cn("flex-1 pb-5", isLast ? "pb-2" : "")}>
+              <div className="flex items-center gap-2 mb-2 flex-wrap">
+                <span className={cn("text-[10px] px-2 py-0.5 rounded-full border font-bold", c.badge)}>
+                  {stage.label}
+                </span>
+                {isActive && (
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-pink-500/15 text-pink-400 border border-pink-500/20 font-bold flex items-center gap-1">
+                    <div className="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse" />
+                    En curso
+                  </span>
+                )}
+              </div>
+
+              <div className={cn(
+                "glass rounded-xl p-4 space-y-3",
+                isLocked ? "opacity-50" : "",
+                isActive ? "border border-pink-500/25 bg-pink-500/5" : ""
+              )}>
+                <p className="font-semibold text-white text-sm">{stage.title}</p>
+
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                  {stage.items.map((item) => (
+                    <div key={item.label}>
+                      <p className="text-[10px] text-muted-foreground">{item.label}</p>
+                      <p className={cn(
+                        "text-xs font-semibold mt-0.5",
+                        item.value === "—" ? "text-muted-foreground" : "text-white"
+                      )}>{item.value}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {"note" in stage && stage.note && (
+                  <div className={cn("rounded-lg px-3 py-2 border", c.noteBg)}>
+                    <p className="text-[10px] text-muted-foreground mb-0.5 flex items-center gap-1">
+                      <Star className="w-2.5 h-2.5" /> Nota del coach
+                    </p>
+                    <p className="text-xs text-foreground italic leading-relaxed">&ldquo;{stage.note}&rdquo;</p>
+                  </div>
+                )}
+
+                {isActive && (
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span className="text-muted-foreground">Progreso en Vía Creania</span>
+                      <span className="text-pink-400 font-semibold">Mes 3/5</span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
+                      <div className="h-full rounded-full bg-pink-500" style={{ width: "60%" }} />
+                    </div>
+                  </div>
+                )}
+
+                {isLocked && (
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Lock className="w-3 h-3" />
+                    Se desbloquea al completar Vía Creania
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 }

@@ -10,6 +10,7 @@ import {
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { OnboardingModal } from "@/components/demo/OnboardingModal"
+import { RegistrationDrawer } from "@/components/demo/RegistrationDrawer"
 import { CRM_PARTICIPANTS, COHORTES } from "@/data/creania"
 import type { CRMParticipant, PaymentStatus, RiskLevel } from "@/lib/types"
 import { cn } from "@/lib/utils"
@@ -93,6 +94,7 @@ function LastAccess({ days }: { days: number }) {
 
 export default function CRMPage() {
   const { toast, show, hide } = useActionToast()
+  const [drawerOpen, setDrawerOpen] = useState(false)
   const [query, setQuery] = useState("")
   const [filter, setFilter] = useState<Filter>("todos")
   const [cohorteFilter, setCohorteFilter] = useState<string>("todas")
@@ -168,7 +170,7 @@ export default function CRMPage() {
           </p>
         </div>
         <button
-          onClick={() => show("Nuevo participante — flujo próximamente ✓")}
+          onClick={() => setDrawerOpen(true)}
           className="flex items-center gap-2 px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold transition-colors"
         >
           <UserPlus className="w-4 h-4" />
@@ -270,6 +272,15 @@ export default function CRMPage() {
         </div>
       </div>
 
+      {drawerOpen && (
+        <RegistrationDrawer
+          onClose={() => setDrawerOpen(false)}
+          onSuccess={(name) => {
+            setDrawerOpen(false)
+            show(`${name} agregado al CRM ✓`)
+          }}
+        />
+      )}
       <ActionToast message={toast.message} visible={toast.visible} onHide={hide} />
     </div>
   )
