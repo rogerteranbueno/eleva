@@ -14,11 +14,11 @@ import {
   X,
   Sun,
   Moon,
-  Sparkles,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useLang } from "@/lib/i18n"
 
+import { ForWhoSection } from "@/components/landing/ForWhoSection"
 import { ProblemSection } from "@/components/landing/ProblemSection"
 import { GrowthEngineSection } from "@/components/landing/GrowthEngineSection"
 import { NumbersSection } from "@/components/landing/NumbersSection"
@@ -226,17 +226,16 @@ function Hero() {
     h1a: "Your center can grow",
     h1b: "2.4x",
     h1c: "in 12 months.",
-    sub: "Without hiring more staff. Without reinventing your methodology. The difference between centers that grow and those that just survive is",
-    subEm: "the system that runs them.",
+    sub: "You know in real time who is about to drop out, how much money you lose per enrollment weekend, and what's holding back your next cohort.",
+    subEm: "Without hiring more staff. Without changing your methodology.",
     cta1: "See the live demo",
-    cta2: "Simulate your impact",
-    cta3: "Build my system",
+    cta2: "Simulate my impact",
     stats: [
       { value: "+140%", label: "average growth" },
       { value: "68%", label: "phase-to-phase conversion" },
-      { value: "80%", label: "easier leads to enroll" },
+      { value: "40+", label: "centers in Latin America" },
     ],
-    social1: "Founders already using it",
+    social1: "40+ centers already operating with ELEVA",
     social2: "Trusted by directors and coaches",
     scroll: "How do they do it?",
   } : {
@@ -244,17 +243,16 @@ function Hero() {
     h1a: "Tu centro puede crecer",
     h1b: "2.4 veces",
     h1c: "en 12 meses.",
-    sub: "Sin contratar más staff. Sin reinventar tu metodología. La diferencia entre los centros que crecen y los que sobreviven es",
-    subEm: "el sistema que los opera.",
+    sub: "Sabes en tiempo real quién está a punto de abandonar, cuánto dinero pierdes por fin de semana de enrolamiento y qué frena a tu próxima generación.",
+    subEm: "Sin contratar más staff. Sin cambiar tu metodología.",
     cta1: "Ver el demo en vivo",
-    cta2: "Simula tu impacto",
-    cta3: "Construir mi sistema",
+    cta2: "Simular mi impacto",
     stats: [
       { value: "+140%", label: "crecimiento promedio" },
       { value: "68%", label: "conversión fase a fase" },
-      { value: "80%", label: "leads más fáciles de enrolar" },
+      { value: "40+", label: "centros en Latinoamérica" },
     ],
-    social1: "Fundadores que ya lo usan",
+    social1: "40+ centros ya operan con ELEVA",
     social2: "Aprobado por directores y coaches",
     scroll: "¿Cómo lo logran?",
   }
@@ -309,23 +307,13 @@ function Hero() {
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </Link>
-          <Link href="/build">
+          <Link href="/simulador">
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="flex items-center gap-2 px-6 py-3.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-foreground rounded-xl text-sm font-semibold transition-all"
             >
-              <Sparkles className="w-4 h-4 text-violet-400" />
-              {c.cta3}
-            </motion.button>
-          </Link>
-          <Link href="/simulador">
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 px-5 py-3 text-muted-foreground rounded-xl text-sm font-medium hover:text-foreground transition-colors"
-            >
-              <BarChart3 className="w-4 h-4" />
+              <BarChart3 className="w-4 h-4 text-violet-400" />
               {c.cta2}
             </motion.button>
           </Link>
@@ -353,13 +341,13 @@ function Hero() {
         <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground flex-wrap">
           <div className="flex items-center gap-2">
             <div className="flex -space-x-1">
-              {[["AR","bg-violet-600"],["MF","bg-cyan-700"],["DT","bg-emerald-700"],["RP","bg-violet-800"]].map(([i, bg]) => (
-                <div key={i} className={cn("w-7 h-7 rounded-full border-2 border-background flex items-center justify-center text-[9px] font-bold text-white", bg)}>
+              {[["GDL","bg-violet-600"],["MTY","bg-cyan-700"],["CDMX","bg-emerald-700"],["BA","bg-violet-800"]].map(([i, bg]) => (
+                <div key={i} className={cn("w-7 h-7 rounded-full border-2 border-background flex items-center justify-center text-[8px] font-bold text-white", bg)}>
                   {i}
                 </div>
               ))}
             </div>
-            <span>{c.social1}</span>
+            <span className="font-semibold text-foreground/80">{c.social1}</span>
           </div>
           <div className="hidden sm:flex items-center gap-1.5">
             <div className="flex gap-0.5">
@@ -395,6 +383,7 @@ export default function HomePage() {
       <Nav />
       <main className="pt-16">
         <Hero />
+        <ForWhoSection />
         <ProblemSection />
         <NumbersSection />
         <GrowthEngineSection />

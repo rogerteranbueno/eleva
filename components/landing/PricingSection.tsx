@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { CheckCircle, Clock, CalendarDays, Zap } from "lucide-react"
+import { CheckCircle, Clock, CalendarDays, Zap, Lock, TrendingUp } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useLang } from "@/lib/i18n"
 
@@ -13,6 +13,8 @@ export function PricingSection() {
     h2a: "A system that pays for itself",
     h2b: "in the first month.",
     sub: "Reducing delinquency by 20%, retaining 10 more participants and enrolling a better-prepared generation covers the investment. What remains is pure profit.",
+    ndaBanner: "All clients operate under NDA. Your strategy, your numbers and your growth are confidential.",
+    growthLabel: "Expected growth",
     packages: [
       {
         name: "Base Implementation",
@@ -24,7 +26,9 @@ export function PricingSection() {
         accentColor: "text-foreground",
         months: 2,
         weeklyHours: null as null | string,
-        description: "We are with you for 2 active months: diagnosis, system setup, team training, and launch. After that, async support continues via email and WhatsApp.",
+        growthMultiple: "2x – 3x",
+        growthNote: "Expected with disciplined operation over 12 months",
+        description: "We implement the system, train your team, and accompany you for the first 2 active months. With the system well-operated, most centers achieve 2x to 3x growth in the first 12 months.",
         involvementNote: "2 months of active accompaniment",
         followUp: "3 months of post-launch remote support included (email + WhatsApp). After that, coverage continues through the monthly maintenance plan.",
         features: [
@@ -53,18 +57,21 @@ export function PricingSection() {
         accentColor: "text-violet-300",
         months: 6,
         weeklyHours: "160–200 hrs/wk",
-        description: "We are with you for 6 months total: 2 of intensive implementation + 4 of strategic accompaniment. We dedicate 160–200 hrs/week to making everything work.",
+        growthMultiple: "5x – 10x",
+        growthNote: "Potential with full team + industry specialists",
+        description: "We bring in the best in the industry: positioning consultants, marketing strategists, and transformation center operations specialists. 6 months fully involved — implementing, redesigning, and making everything work.",
         involvementNote: "6 months · 160–200 hrs/week",
-        followUp: "6 months of strategic accompaniment with monthly sessions. We solve operational problems with your team, adapt marketing so your community embraces the change, and stay until the system is running on its own.",
+        followUp: "6 months of strategic accompaniment with monthly sessions. We solve operational problems with your team, adapt marketing so your community embraces the change, and stay until the system runs itself.",
         features: [
           { text: "Everything in Base Implementation", included: true },
+          { text: "Industry specialists: positioning, marketing strategy, operations", included: true },
           { text: "Advanced AI module: auto plans, dropout prediction, financial anomaly detection", included: true },
           { text: "Native mobile app with center branding (iOS + Android)", included: true },
           { text: "Social media strategy: identity, tone, content calendar", included: true },
           { text: "Traditional media strategy: PR, alliances, events and public positioning", included: true },
           { text: "Positioning: from 'transformation center' to 'professional human potential center'", included: true },
           { text: "Operational troubleshooting with your team in real time", included: true },
-          { text: "Marketing for adoption: we ensure your community embraces the change", included: true },
+          { text: "Marketing for adoption: community embrace of the change", included: true },
           { text: "6 months of strategic sessions until the system runs itself", included: true },
         ],
         cta: "Schedule strategy session",
@@ -91,6 +98,8 @@ export function PricingSection() {
     h2a: "Un sistema que se paga",
     h2b: "solo en el primer mes.",
     sub: "Reducir morosidad un 20%, retener 10 participantes más y enrolar una generación mejor preparada cubre la inversión. Lo que queda es pura utilidad.",
+    ndaBanner: "Todos los clientes operan bajo NDA. Tu estrategia, tus números y tu crecimiento son confidenciales.",
+    growthLabel: "Crecimiento esperado",
     packages: [
       {
         name: "Implementación Base",
@@ -102,7 +111,9 @@ export function PricingSection() {
         accentColor: "text-foreground",
         months: 2,
         weeklyHours: null as null | string,
-        description: "Estamos contigo 2 meses activos: diagnóstico, configuración del sistema, capacitación del equipo y lanzamiento. Después continúa el soporte remoto por email y WhatsApp.",
+        growthMultiple: "2x – 3x",
+        growthNote: "Esperado con operación disciplinada en 12 meses",
+        description: "Implementamos el sistema, capacitamos a tu equipo y te acompañamos los primeros 2 meses activos. Con el sistema bien operado, la mayoría de centros logra un crecimiento de 2x a 3x en los primeros 12 meses.",
         involvementNote: "2 meses de acompañamiento activo",
         followUp: "3 meses de soporte remoto post-lanzamiento incluido (email + WhatsApp). A partir de ahí, la cobertura continúa a través del plan de mantenimiento mensual.",
         features: [
@@ -131,18 +142,21 @@ export function PricingSection() {
         accentColor: "text-violet-300",
         months: 6,
         weeklyHours: "160–200 hrs/sem",
-        description: "Estamos contigo 6 meses en total: 2 de implementación intensiva + 4 de acompañamiento estratégico. Dedicamos 160–200 hrs/semana a que todo funcione.",
+        growthMultiple: "5x – 10x",
+        growthNote: "Potencial con equipo completo + especialistas de la industria",
+        description: "Traemos a los mejores de la industria: consultores de posicionamiento, estrategas de marketing y especialistas en operaciones de centros de transformación. 6 meses al 100% involucrados — implementando, rediseñando y haciendo funcionar todo.",
         involvementNote: "6 meses · 160–200 hrs/semana",
         followUp: "6 meses de acompañamiento estratégico con sesiones mensuales. Resolvemos problemas operativos con tu equipo, adaptamos el marketing para que tu comunidad abrace el cambio y nos quedamos hasta que el sistema corra solo.",
         features: [
           { text: "Todo lo de Implementación Base", included: true },
+          { text: "Especialistas de la industria: posicionamiento, estrategia de marketing, operaciones", included: true },
           { text: "Módulo de IA avanzado: planes automáticos, predicción de abandono, anomalías financieras", included: true },
           { text: "App móvil nativa con branding del centro (iOS + Android)", included: true },
           { text: "Estrategia de comunicación para redes sociales: identidad, tono, calendario de contenidos", included: true },
           { text: "Estrategia para medios tradicionales: PR, alianzas, eventos y posicionamiento público", included: true },
           { text: "Posicionamiento: de 'centro de transformación' a 'referente profesional del potencial humano'", included: true },
           { text: "Resolución de problemas operativos con tu equipo en tiempo real", included: true },
-          { text: "Marketing de adopción: nos aseguramos de que tu comunidad abrace el cambio", included: true },
+          { text: "Marketing de adopción: que tu comunidad abrace el cambio", included: true },
           { text: "6 meses de sesiones estratégicas hasta que el sistema corra solo", included: true },
         ],
         cta: "Agendar sesión estratégica",
@@ -181,6 +195,11 @@ export function PricingSection() {
         <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg leading-relaxed">
           {c.sub}
         </p>
+        {/* NDA banner */}
+        <div className="mt-6 inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white/4 border border-white/10 text-sm text-muted-foreground">
+          <Lock className="w-3.5 h-3.5 text-green-400 flex-shrink-0" />
+          <span>{c.ndaBanner}</span>
+        </div>
       </motion.div>
 
       <div className="grid md:grid-cols-2 gap-6 mb-10">
@@ -212,7 +231,7 @@ export function PricingSection() {
             </div>
 
             {/* Involvement indicators */}
-            <div className={cn("flex items-center gap-3 mb-4 p-3 rounded-xl", pkg.highlight ? "bg-violet-500/10 border border-violet-500/20" : "bg-white/4 border border-white/8")}>
+            <div className={cn("flex items-center gap-3 mb-3 p-3 rounded-xl", pkg.highlight ? "bg-violet-500/10 border border-violet-500/20" : "bg-white/4 border border-white/8")}>
               <div className="flex items-center gap-1.5 text-xs font-semibold">
                 <CalendarDays className={cn("w-3.5 h-3.5", pkg.highlight ? "text-violet-400" : "text-muted-foreground")} />
                 <span className={pkg.highlight ? "text-violet-300" : "text-foreground/70"}>
@@ -234,6 +253,18 @@ export function PricingSection() {
                   <span className="text-xs text-muted-foreground">{lang === "en" ? "Remote support after launch" : "Soporte remoto post-lanzamiento"}</span>
                 </>
               )}
+            </div>
+
+            {/* Growth multiplier badge */}
+            <div className={cn("flex items-center gap-2.5 mb-4 p-3 rounded-xl", pkg.highlight ? "bg-emerald-500/10 border border-emerald-500/25" : "bg-white/3 border border-white/6")}>
+              <TrendingUp className={cn("w-4 h-4 flex-shrink-0", pkg.highlight ? "text-emerald-400" : "text-green-400")} />
+              <div>
+                <div className="flex items-baseline gap-2">
+                  <span className={cn("text-lg font-black leading-none", pkg.highlight ? "text-emerald-400" : "text-green-400")}>{pkg.growthMultiple}</span>
+                  <span className="text-[10px] text-muted-foreground">{lang === "en" ? "growth" : "crecimiento"}</span>
+                </div>
+                <p className="text-[10px] text-muted-foreground mt-0.5 leading-snug">{pkg.growthNote}</p>
+              </div>
             </div>
 
             <p className="text-sm text-foreground/80 leading-relaxed mb-5">{pkg.description}</p>

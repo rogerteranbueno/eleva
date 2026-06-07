@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Lock } from "lucide-react"
 import { useLang } from "@/lib/i18n"
 
 export function PricingTeaser() {
@@ -13,9 +13,10 @@ export function PricingTeaser() {
     h2a: "A system that pays for itself",
     h2b: "in the first month.",
     sub: "No enrollment commissions. No per-participant pricing. No surprises.",
+    ndaNote: "All clients operate under NDA",
     items: [
-      { label: "Base Implementation", value: "from $15,000 USD", note: "Full system in 60 days", highlight: false },
-      { label: "Elite Implementation", value: "up to $30,000 USD", note: "With native app, advanced AI and brand strategy", highlight: true },
+      { label: "Base Implementation", value: "from $15,000 USD", note: "2 months active · Expected 2x–3x growth", highlight: false },
+      { label: "Elite Implementation", value: "up to $30,000 USD", note: "6 months · Industry specialists · Potential 5x–10x", highlight: true },
       { label: "Monthly maintenance", value: "$699 USD / mo", note: "Fixed price regardless of how many participants you have", highlight: false },
     ],
     cta: "See what each plan includes",
@@ -24,9 +25,10 @@ export function PricingTeaser() {
     h2a: "Un sistema que se paga",
     h2b: "solo en el primer mes.",
     sub: "Sin comisiones por enrolamiento. Sin precio por participante. Sin sorpresas.",
+    ndaNote: "Todos los clientes operan bajo NDA",
     items: [
-      { label: "Implementación Base", value: "desde $15,000 USD", note: "Sistema completo en 60 días", highlight: false },
-      { label: "Implementación Elite", value: "hasta $30,000 USD", note: "Con app nativa, IA avanzada y estrategia de marca", highlight: true },
+      { label: "Implementación Base", value: "desde $15,000 USD", note: "2 meses activos · Crecimiento esperado 2x–3x", highlight: false },
+      { label: "Implementación Elite", value: "hasta $30,000 USD", note: "6 meses · Especialistas de la industria · Potencial 5x–10x", highlight: true },
       { label: "Mantenimiento mensual", value: "$699 USD / mes", note: "Precio fijo sin importar cuántos participantes tengas", highlight: false },
     ],
     cta: "Ver qué incluye cada plan",
@@ -43,6 +45,10 @@ export function PricingTeaser() {
           <p className="text-muted-foreground text-base max-w-xl mx-auto">
             {c.sub}
           </p>
+          <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-xs text-green-400 font-medium">
+            <Lock className="w-3 h-3" />
+            {c.ndaNote}
+          </div>
         </motion.div>
 
         <div className="space-y-3 mb-8">

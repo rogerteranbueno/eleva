@@ -48,7 +48,7 @@ const STAGES = [
     color: "violet",
     headline: "Crece sin perder el control",
     description: "Visibilidad total del equipo, finanzas en tiempo real y CRM completo. El dueño sabe qué pasa en su centro antes de que alguien se lo tenga que decir.",
-    metric: "+240%",
+    metric: "+140%",
     metricLabel: "crecimiento promedio",
     bullets: ["Dashboard financiero", "Visibilidad de coaches", "CRM completo", "Plan de acción con IA"],
   },
