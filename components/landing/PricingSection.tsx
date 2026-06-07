@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { CheckCircle } from "lucide-react"
+import { CheckCircle, Clock, CalendarDays, Zap } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useLang } from "@/lib/i18n"
 
@@ -22,8 +22,11 @@ export function PricingSection() {
         highlight: false,
         color: "border-white/12",
         accentColor: "text-foreground",
-        description: "For centers that want to leave operational chaos behind and have a professional system running in 60 days.",
-        followUp: "Follow-up included via email and WhatsApp for 3 months post-launch.",
+        months: 2,
+        weeklyHours: null as null | string,
+        description: "We are with you for 2 active months: diagnosis, system setup, team training, and launch. After that, async support continues via email and WhatsApp.",
+        involvementNote: "2 months of active accompaniment",
+        followUp: "3 months of post-launch remote support included (email + WhatsApp). After that, coverage continues through the monthly maintenance plan.",
         features: [
           { text: "Full center diagnosis (~40 hrs)", included: true },
           { text: "System design and implementation (~50 hrs)", included: true },
@@ -31,36 +34,42 @@ export function PricingSection() {
           { text: "Team training: staff, coaches and director", included: true },
           { text: "WhatsApp and email automations live from day 1", included: true },
           { text: "Accompanied launch to coaches and participants (~20 hrs)", included: true },
-          { text: "3 months of post-launch support (email + WhatsApp)", included: true },
+          { text: "3 months of remote post-launch support (email + WhatsApp)", included: true },
           { text: "Advanced AI module: predictive analytics and anomaly detection", included: false },
           { text: "Native mobile app with center branding (iOS + Android)", included: false },
           { text: "Brand communication and positioning strategy", included: false },
         ],
         cta: "Schedule free diagnosis",
         ctaStyle: "bg-muted hover:bg-muted/80 border border-border text-foreground",
+        recommendedNote: null as null | string,
       },
       {
         name: "Elite Implementation",
         price: "up to $30,000",
         currency: "USD",
-        badge: "Full transformation",
+        badge: "Recommended",
         highlight: true,
         color: "border-violet-500/50",
         accentColor: "text-violet-300",
-        description: "For centers that don't just want to operate better, but to position themselves as professional leaders in human development in their market.",
-        followUp: "Strategic accompaniment for 6 months post-launch.",
+        months: 6,
+        weeklyHours: "160–200 hrs/wk",
+        description: "We are with you for 6 months total: 2 of intensive implementation + 4 of strategic accompaniment. We dedicate 160–200 hrs/week to making everything work.",
+        involvementNote: "6 months · 160–200 hrs/week",
+        followUp: "6 months of strategic accompaniment with monthly sessions. We solve operational problems with your team, adapt marketing so your community embraces the change, and stay until the system is running on its own.",
         features: [
           { text: "Everything in Base Implementation", included: true },
           { text: "Advanced AI module: auto plans, dropout prediction, financial anomaly detection", included: true },
           { text: "Native mobile app with center branding (iOS + Android)", included: true },
-          { text: "20 additional hours of strategic consulting with the ELEVA team", included: true },
-          { text: "Social media communication strategy: identity, tone, content calendar", included: true },
+          { text: "Social media strategy: identity, tone, content calendar", included: true },
           { text: "Traditional media strategy: PR, alliances, events and public positioning", included: true },
           { text: "Positioning: from 'transformation center' to 'professional human potential center'", included: true },
-          { text: "6 months of post-launch support with monthly strategic sessions", included: true },
+          { text: "Operational troubleshooting with your team in real time", included: true },
+          { text: "Marketing for adoption: we ensure your community embraces the change", included: true },
+          { text: "6 months of strategic sessions until the system runs itself", included: true },
         ],
         cta: "Schedule strategy session",
         ctaStyle: "bg-violet-600 hover:bg-violet-500 text-white",
+        recommendedNote: "We recommend this plan because, without counting travel expenses, it gives you our team 100% involved in implementing, redesigning and making everything work. You're not alone — we're in it with you.",
       },
     ],
     maintenanceLabel: "Monthly maintenance",
@@ -91,8 +100,11 @@ export function PricingSection() {
         highlight: false,
         color: "border-white/12",
         accentColor: "text-foreground",
-        description: "Para centros que quieren dejar el caos operativo atrás y tener un sistema profesional funcionando en 60 días.",
-        followUp: "Seguimiento incluido por email y WhatsApp durante 3 meses post-lanzamiento.",
+        months: 2,
+        weeklyHours: null as null | string,
+        description: "Estamos contigo 2 meses activos: diagnóstico, configuración del sistema, capacitación del equipo y lanzamiento. Después continúa el soporte remoto por email y WhatsApp.",
+        involvementNote: "2 meses de acompañamiento activo",
+        followUp: "3 meses de soporte remoto post-lanzamiento incluido (email + WhatsApp). A partir de ahí, la cobertura continúa a través del plan de mantenimiento mensual.",
         features: [
           { text: "Diagnóstico completo del centro (~40 hrs)", included: true },
           { text: "Diseño e implementación del sistema (~50 hrs)", included: true },
@@ -100,36 +112,42 @@ export function PricingSection() {
           { text: "Capacitación del equipo: staff, coaches y director", included: true },
           { text: "Automatizaciones de WhatsApp y email activas desde día 1", included: true },
           { text: "Lanzamiento acompañado a coaches y participantes (~20 hrs)", included: true },
-          { text: "3 meses de acompañamiento post-lanzamiento (email + WhatsApp)", included: true },
+          { text: "3 meses de soporte remoto post-lanzamiento (email + WhatsApp)", included: true },
           { text: "Módulo de IA avanzado: análisis predictivo y detección de anomalías", included: false },
           { text: "App móvil nativa con branding del centro (iOS + Android)", included: false },
           { text: "Estrategia de comunicación y posicionamiento de marca", included: false },
         ],
         cta: "Agendar diagnóstico gratuito",
         ctaStyle: "bg-muted hover:bg-muted/80 border border-border text-foreground",
+        recommendedNote: null as null | string,
       },
       {
         name: "Implementación Elite",
         price: "hasta $30,000",
         currency: "USD",
-        badge: "Transformación completa",
+        badge: "Recomendado",
         highlight: true,
         color: "border-violet-500/50",
         accentColor: "text-violet-300",
-        description: "Para centros que no solo quieren operar mejor, sino posicionarse como referentes profesionales del desarrollo humano en su mercado.",
-        followUp: "Acompañamiento estratégico durante 6 meses post-lanzamiento.",
+        months: 6,
+        weeklyHours: "160–200 hrs/sem",
+        description: "Estamos contigo 6 meses en total: 2 de implementación intensiva + 4 de acompañamiento estratégico. Dedicamos 160–200 hrs/semana a que todo funcione.",
+        involvementNote: "6 meses · 160–200 hrs/semana",
+        followUp: "6 meses de acompañamiento estratégico con sesiones mensuales. Resolvemos problemas operativos con tu equipo, adaptamos el marketing para que tu comunidad abrace el cambio y nos quedamos hasta que el sistema corra solo.",
         features: [
           { text: "Todo lo de Implementación Base", included: true },
-          { text: "Módulo de IA avanzado: planes automáticos, predicción de abandono, detección de anomalías financieras", included: true },
+          { text: "Módulo de IA avanzado: planes automáticos, predicción de abandono, anomalías financieras", included: true },
           { text: "App móvil nativa con branding del centro (iOS + Android)", included: true },
-          { text: "20 hrs adicionales de consultoría estratégica con el equipo ELEVA", included: true },
           { text: "Estrategia de comunicación para redes sociales: identidad, tono, calendario de contenidos", included: true },
           { text: "Estrategia para medios tradicionales: PR, alianzas, eventos y posicionamiento público", included: true },
-          { text: "Posicionamiento: de 'centro de transformación' a 'centro profesional de potencial humano'", included: true },
-          { text: "6 meses de acompañamiento post-lanzamiento con sesiones estratégicas mensuales", included: true },
+          { text: "Posicionamiento: de 'centro de transformación' a 'referente profesional del potencial humano'", included: true },
+          { text: "Resolución de problemas operativos con tu equipo en tiempo real", included: true },
+          { text: "Marketing de adopción: nos aseguramos de que tu comunidad abrace el cambio", included: true },
+          { text: "6 meses de sesiones estratégicas hasta que el sistema corra solo", included: true },
         ],
         cta: "Agendar sesión estratégica",
         ctaStyle: "bg-violet-600 hover:bg-violet-500 text-white",
+        recommendedNote: "Recomendamos este plan porque, sin contar gastos de viáticos, nos tiene al 100% involucrados en implementar, rediseñar y hacer funcionar. No estás solo — estamos dentro contigo.",
       },
     ],
     maintenanceLabel: "Mantenimiento mensual",
@@ -193,6 +211,31 @@ export function PricingSection() {
               <p className="text-xs text-muted-foreground mt-1">{lang === "en" ? "Price subject to final characteristics and follow-up agreements" : "Precio sujeto a características finales y acuerdos de seguimiento"}</p>
             </div>
 
+            {/* Involvement indicators */}
+            <div className={cn("flex items-center gap-3 mb-4 p-3 rounded-xl", pkg.highlight ? "bg-violet-500/10 border border-violet-500/20" : "bg-white/4 border border-white/8")}>
+              <div className="flex items-center gap-1.5 text-xs font-semibold">
+                <CalendarDays className={cn("w-3.5 h-3.5", pkg.highlight ? "text-violet-400" : "text-muted-foreground")} />
+                <span className={pkg.highlight ? "text-violet-300" : "text-foreground/70"}>
+                  {pkg.months} {lang === "en" ? "months" : "meses"}
+                </span>
+              </div>
+              {pkg.weeklyHours && (
+                <>
+                  <span className="text-white/20">·</span>
+                  <div className="flex items-center gap-1.5 text-xs font-semibold">
+                    <Clock className="w-3.5 h-3.5 text-violet-400" />
+                    <span className="text-violet-300">{pkg.weeklyHours}</span>
+                  </div>
+                </>
+              )}
+              {!pkg.weeklyHours && (
+                <>
+                  <span className="text-white/20">·</span>
+                  <span className="text-xs text-muted-foreground">{lang === "en" ? "Remote support after launch" : "Soporte remoto post-lanzamiento"}</span>
+                </>
+              )}
+            </div>
+
             <p className="text-sm text-foreground/80 leading-relaxed mb-5">{pkg.description}</p>
 
             <ul className="space-y-2.5 flex-1 mb-5">
@@ -205,6 +248,14 @@ export function PricingSection() {
             </ul>
 
             <p className="text-[11px] text-muted-foreground italic mb-5">{pkg.followUp}</p>
+
+            {/* Recommended callout — Elite only */}
+            {pkg.recommendedNote && (
+              <div className="flex items-start gap-2.5 mb-5 p-3.5 rounded-xl bg-violet-600/15 border border-violet-500/30">
+                <Zap className="w-4 h-4 text-violet-400 flex-shrink-0 mt-0.5" />
+                <p className="text-xs text-violet-200 leading-relaxed">{pkg.recommendedNote}</p>
+              </div>
+            )}
 
             <button className={cn("w-full py-3 rounded-xl text-sm font-bold transition-all", pkg.ctaStyle)}>
               {pkg.cta}
