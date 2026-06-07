@@ -17,7 +17,7 @@ const ONBOARDING = {
   tips: [
     { emoji: "🔥", text: "Su racha es 0 días — rota hace 11 días. Por eso está en riesgo en el panel del dueño." },
     { emoji: "✅", text: "Toca 'Marcar como completada' y observa cómo sube el Momentum Score al instante." },
-    { emoji: "🗺️", text: "La lista de todas las misiones muestra su progreso completo en la ruta de Vía Potencius." },
+    { emoji: "🗺️", text: "La lista de todas las misiones muestra su progreso completo en la ruta de Vía Creania." },
   ],
   cta: "Ver las misiones →",
 }
@@ -51,7 +51,7 @@ export default function MisionPage() {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-white">Mi Misión</h1>
-        <p className="text-muted-foreground text-sm mt-0.5">Vía Potencius · Semana 12 de 20</p>
+        <p className="text-muted-foreground text-sm mt-0.5">Vía Creania · Semana 12 de 20</p>
       </div>
 
       {/* Streak */}
@@ -163,7 +163,7 @@ export default function MisionPage() {
       {/* Progress */}
       <div className="glass rounded-xl p-5 space-y-3">
         <div className="flex items-center justify-between">
-          <h3 className="font-semibold text-white text-sm">Progreso en Vía Potencius</h3>
+          <h3 className="font-semibold text-white text-sm">Progreso en Vía Creania</h3>
           <span className="text-sm font-bold text-violet-400">
             {completed ? 4 : 3} / 12 misiones
           </span>

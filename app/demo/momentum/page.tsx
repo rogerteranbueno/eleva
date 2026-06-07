@@ -17,6 +17,7 @@ import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { useDemoStore } from "@/lib/demo-store"
+import { InfoTooltip } from "@/components/demo/InfoTooltip"
 
 const ONBOARDING = {
   screenId: "momentum",
@@ -73,7 +74,7 @@ export default function MomentumPage() {
       <OnboardingModal config={ONBOARDING} />
       <div>
         <h1 className="text-2xl font-bold text-white">Mi Momentum</h1>
-        <p className="text-muted-foreground text-sm mt-0.5">Vía Potencius · Semana 12</p>
+        <p className="text-muted-foreground text-sm mt-0.5">Vía Creania · Semana 12</p>
       </div>
 
       {/* Score hero */}
@@ -82,7 +83,18 @@ export default function MomentumPage() {
           <MomentumGauge score={score} size="lg" />
           <div className="flex-1 min-w-0 space-y-2">
             <div>
-              <p className="text-xs text-muted-foreground font-medium">Tu score actual</p>
+              <div className="flex items-center gap-1.5">
+                <p className="text-xs text-muted-foreground font-medium">Tu score actual</p>
+                <InfoTooltip
+                  title="Momentum Score"
+                  source="Calculado diariamente a las 12am. Combina 4 factores ponderados: check-ins (30%), misiones (35%), participación grupal (20%) y eventos (15%)."
+                  formula="Score = Σ(factor_i × peso_i)"
+                  why="Un número único que refleja tu nivel de compromiso activo. El dueño y tu coach lo ven en tiempo real — sirve para saber cuándo alguien necesita apoyo antes de que lo pida."
+                  benchmark=">65 activo · 40-65 en riesgo · <40 crítico"
+                  action="Si caes por debajo de 40, tu coach recibe una alerta automática."
+                  side="right"
+                />
+              </div>
               <p className="text-3xl sm:text-4xl font-black" style={{ color }}>{score}%</p>
             </div>
             <div className="flex items-start gap-1.5">
@@ -240,7 +252,7 @@ export default function MomentumPage() {
           name="Valeria Romo"
           momentum={score}
           streak={0}
-          phase="Vía Potencius · Mes 3"
+          phase="Vía Creania · Mes 3"
           onClose={() => setShareOpen(false)}
         />
       )}

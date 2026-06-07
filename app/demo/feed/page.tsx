@@ -1,8 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { Heart, MessageCircle, Calendar, Star, CheckCircle, ChevronRight, Share2 } from "lucide-react"
+import { Heart, MessageCircle, Calendar, Star, CheckCircle, ChevronRight, Share2, UserPlus } from "lucide-react"
 import { ShareEventModal } from "@/components/demo/ShareEventModal"
+import { InvitarDrawer } from "@/components/demo/InvitarDrawer"
+import { AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
@@ -32,6 +34,8 @@ export default function FeedPage() {
   const [liked, setLiked] = useState<Set<string>>(new Set())
   const [eventConfirmed, setEventConfirmed] = useState(false)
   const [shareEventOpen, setShareEventOpen] = useState(false)
+  const [invitarOpen, setInvitarOpen] = useState(false)
+  const [enrolledCount, setEnrolledCount] = useState(0)
 
   const coach = COACHES[0]
   const specialist = SPECIALISTS[0]
@@ -53,6 +57,12 @@ export default function FeedPage() {
   function handleConfirmEvent() {
     setEventConfirmed(true)
     show("Asistencia confirmada al evento ✓")
+  }
+
+  function handleInviteSuccess(name: string) {
+    setEnrolledCount((n) => n + 1)
+    dispatch({ type: "ASSIGN_MISSION" }) // momentum boost
+    show(`Mensaje de bienvenida enviado a ${name} ✓`)
   }
 
   return (
@@ -139,6 +149,53 @@ export default function FeedPage() {
         </div>
       </div>
 
+      {/* Enrollment card */}
+      <div className="rounded-xl border border-violet-500/25 bg-violet-500/8 p-4 space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-lg bg-violet-500/20 flex items-center justify-center">
+              <UserPlus className="w-3.5 h-3.5 text-violet-400" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-violet-300">Tu compromiso de impacto</p>
+              <p className="text-[10px] text-muted-foreground">Vía Creania · Fin de semana 2 de 3</p>
+            </div>
+          </div>
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-violet-500/20 border border-violet-500/30 text-violet-300 font-semibold">
+            {enrolledCount}/2 enrolados
+          </span>
+        </div>
+
+        {/* Progress */}
+        <div className="flex gap-2">
+          {[0, 1].map((i) => (
+            <div
+              key={i}
+              className={`flex-1 h-2 rounded-full transition-all duration-500 ${
+                i < enrolledCount ? "bg-violet-500" : "bg-white/8"
+              }`}
+            />
+          ))}
+        </div>
+
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          {enrolledCount === 0
+            ? "Este fin de semana es tu oportunidad de crear impacto. Enrola a dos personas que quieran transformar su vida — comienzan en el próximo Entrenamiento 1."
+            : enrolledCount === 1
+            ? "¡Ya enrolaste a una persona! Un enrolado más y cumples tu compromiso de este fin de semana."
+            : "🎉 ¡Completaste tu compromiso de enrolamiento! Tu generación sigue creciendo."}
+        </p>
+
+        <button
+          onClick={() => setInvitarOpen(true)}
+          disabled={enrolledCount >= 2}
+          className="w-full py-2.5 rounded-xl bg-violet-600 hover:bg-violet-700 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm transition-colors flex items-center justify-center gap-2"
+        >
+          <UserPlus className="w-4 h-4" />
+          {enrolledCount >= 2 ? "Compromiso cumplido ✓" : "Invitar a alguien"}
+        </button>
+      </div>
+
       {/* Feed posts */}
       <div>
         <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium mb-3">Generación Omega</p>
@@ -186,6 +243,14 @@ export default function FeedPage() {
       {shareEventOpen && (
         <ShareEventModal onClose={() => setShareEventOpen(false)} />
       )}
+      <AnimatePresence>
+        {invitarOpen && (
+          <InvitarDrawer
+            onClose={() => setInvitarOpen(false)}
+            onSuccess={(name) => { setInvitarOpen(false); handleInviteSuccess(name) }}
+          />
+        )}
+      </AnimatePresence>
       <ActionToast message={toast.message} visible={toast.visible} onHide={hide} />
     </div>
   )

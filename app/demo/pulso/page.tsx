@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { AnimatePresence } from "framer-motion"
 import { AlertTriangle, Users, Calendar, Activity, ArrowRight, Zap, Lightbulb } from "lucide-react"
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
 import { OnboardingModal } from "@/components/demo/OnboardingModal"
@@ -9,9 +10,12 @@ import { InsightCard } from "@/components/demo/InsightCard"
 import { CampaignComposer, type ComposerInsight } from "@/components/demo/CampaignComposer"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { PlanGenerator } from "@/components/demo/PlanGenerator"
-import { STATS, COHORTES, RECENT_ACTIVITY, CENTER } from "@/data/creania"
+import { PlanTipsDrawer, PlanTrigger, PLAN_CONFIGS } from "@/components/demo/PlanTipsDrawer"
+import { COHORTES, RECENT_ACTIVITY, CENTERS } from "@/data/creania"
 import { getMomentumColor } from "@/lib/utils"
 import { cn } from "@/lib/utils"
+import { InfoTooltip } from "@/components/demo/InfoTooltip"
+import { useDemoStore } from "@/lib/demo-store"
 
 const ONBOARDING = {
   screenId: "pulso",
@@ -50,12 +54,12 @@ const INSIGHTS: InsightDef[] = [
       recipients: { count: 14, label: "Participantes sin actividad +7 días" },
       defaultChannel: "whatsapp",
       messages: {
-        whatsapp: "Hola {nombre} 🌟 Soy Carlos de Potencius. Te he visto un poco desconectado estos días y quería saber cómo estás. Tu proceso nos importa — ¿hay algo en lo que pueda apoyarte? Aquí estoy para ti.",
-        emailSubject: "Carlos de Potencius quería saber cómo estás 💙",
-        emailBody: "Hola {nombre},\n\nNos has faltado en Potencius.\n\nSé que la vida tiene altibajos y eso está completamente bien. Lo que importa es que no estás solo en este proceso — el equipo y yo estamos aquí.\n\n¿Qué está pasando? ¿Cómo puedo apoyarte esta semana?\n\nCon cariño,\nCarlos Mendoza\nPotencius Transformación",
-        sms: "Hola {nombre}, Carlos de Potencius aquí. ¿Todo bien? Te echamos de menos. Escríbeme cuando puedas — aquí estoy. 🌟",
+        whatsapp: "Hola {nombre} 🌟 Soy Carlos de Creania. Te he visto un poco desconectado estos días y quería saber cómo estás. Tu proceso nos importa — ¿hay algo en lo que pueda apoyarte? Aquí estoy para ti.",
+        emailSubject: "Carlos de Creania quería saber cómo estás 💙",
+        emailBody: "Hola {nombre},\n\nNos has faltado en Creania.\n\nSé que la vida tiene altibajos y eso está completamente bien. Lo que importa es que no estás solo en este proceso — el equipo y yo estamos aquí.\n\n¿Qué está pasando? ¿Cómo puedo apoyarte esta semana?\n\nCon cariño,\nCarlos Mendoza\nCreania Transformación",
+        sms: "Hola {nombre}, Carlos de Creania aquí. ¿Todo bien? Te echamos de menos. Escríbeme cuando puedas — aquí estoy. 🌟",
         campaignSubject: "Tu proceso nos importa, {nombre}",
-        campaignBody: "Hola {nombre},\n\nNotamos que has estado desconectado y queremos saber cómo estás. En Potencius nadie se queda atrás. Responde este mensaje y hablamos.",
+        campaignBody: "Hola {nombre},\n\nNotamos que has estado desconectado y queremos saber cómo estás. En Creania nadie se queda atrás. Responde este mensaje y hablamos.",
         segment: "14 participantes — sin actividad 7+ días, momentum <40%",
       },
     },
@@ -74,8 +78,8 @@ const INSIGHTS: InsightDef[] = [
       messages: {
         whatsapp: "Generación Norte 💪 Esta semana nos volvemos a conectar. Marco tiene algo especial preparado para ustedes. Más info en el grupo.",
         emailSubject: "Generación Norte — algo importante esta semana",
-        emailBody: "Hola {nombre},\n\nGeneración Norte está lista para el siguiente nivel.\n\nMarco tiene preparada una sesión especial para reactivar el grupo. No te la pierdas.\n\n¿Estás adentro?\n\nPotencius Transformación",
-        sms: "Gen. Norte: sesión especial con Marco esta semana. Confirma asistencia respondiendo SÍ. Potencius 🔥",
+        emailBody: "Hola {nombre},\n\nGeneración Norte está lista para el siguiente nivel.\n\nMarco tiene preparada una sesión especial para reactivar el grupo. No te la pierdas.\n\n¿Estás adentro?\n\nCreania Transformación",
+        sms: "Gen. Norte: sesión especial con Marco esta semana. Confirma asistencia respondiendo SÍ. Creania 🔥",
         campaignSubject: "Gen. Norte — no dejes que el momentum caiga",
         campaignBody: "Hola {nombre},\n\nLa Generación Norte tiene una energía increíble y queremos que se mantenga. Esta semana hay una activación grupal. Más detalles muy pronto.",
         segment: "67 participantes — Generación Norte, momentum <65%",
@@ -87,17 +91,17 @@ const INSIGHTS: InsightDef[] = [
     icon: "💳",
     severity: "info",
     title: "Pago pendiente: Valeria Romo — $4,200",
-    description: "Vía Potencius Mes 4 — vencido hace 3 días. Único atraso en todo su historial.",
+    description: "Vía Creania Mes 4 — vencido hace 3 días. Único atraso en todo su historial.",
     actionLabel: "Enviar recordatorio",
     composer: {
       title: "Recordatorio de pago — Valeria Romo",
-      recipients: { count: 1, label: "Valeria Romo · Vía Potencius Mes 4" },
+      recipients: { count: 1, label: "Valeria Romo · Vía Creania Mes 4" },
       defaultChannel: "email",
       messages: {
-        whatsapp: "Hola Valeria 😊 Pasando a recordarte que el pago de Mes 4 de Vía Potencius está pendiente. ¿Puedo ayudarte a coordinarlo? Cualquier cosa, aquí estoy.",
-        emailSubject: "Recordatorio: Pago Mes 4 — Vía Potencius",
-        emailBody: "Hola Valeria,\n\nTe escribimos para recordarte que el pago correspondiente al Mes 4 de Vía Potencius ($4,200 MXN) está pendiente.\n\nSabemos que a veces se pasan estas cosas — no hay problema. Puedes realizarlo por transferencia a la cuenta de siempre o escribirnos si necesitas coordinar.\n\nGracias por confiar en Potencius,\nEl equipo",
-        sms: "Hola Valeria, recordatorio del pago Mes 4 de Vía Potencius ($4,200). Escríbenos si necesitas ayuda. Potencius.",
+        whatsapp: "Hola Valeria 😊 Pasando a recordarte que el pago de Mes 4 de Vía Creania está pendiente. ¿Puedo ayudarte a coordinarlo? Cualquier cosa, aquí estoy.",
+        emailSubject: "Recordatorio: Pago Mes 4 — Vía Creania",
+        emailBody: "Hola Valeria,\n\nTe escribimos para recordarte que el pago correspondiente al Mes 4 de Vía Creania ($4,200 MXN) está pendiente.\n\nSabemos que a veces se pasan estas cosas — no hay problema. Puedes realizarlo por transferencia a la cuenta de siempre o escribirnos si necesitas coordinar.\n\nGracias por confiar en Creania,\nEl equipo",
+        sms: "Hola Valeria, recordatorio del pago Mes 4 de Vía Creania ($4,200). Escríbenos si necesitas ayuda. Creania.",
         campaignSubject: "Recordatorio: Pago Mes 4 pendiente",
         campaignBody: "Hola Valeria, tienes un pago pendiente del Mes 4. Coordínalo cuando puedas.",
         segment: "1 participante — Valeria Romo, pago pendiente",
@@ -118,8 +122,8 @@ const INSIGHTS: InsightDef[] = [
       messages: {
         whatsapp: "Hola {nombre} 👋 Recordatorio: sesión en vivo de Generación Omega este JUEVES a las 7pm. ¡No te la pierdas! Responde '✅' para confirmar tu lugar.",
         emailSubject: "Te esperamos el jueves — Sesión Gen. Omega 7pm",
-        emailBody: "Hola {nombre},\n\n¡Este JUEVES es la sesión en vivo de Generación Omega!\n\n📅 Jueves, 5 de junio\n⏰ 7:00 PM (hora CDMX)\n📍 Zoom — link en el grupo\n\nEsta sesión es especial — Ana tiene algo importante que compartir con el grupo.\n\n¿Confirmamos tu lugar?\n\nEquipo Potencius",
-        sms: "Hola {nombre}! Sesión Gen. Omega JUEVES 7pm. Confirma respondiendo SÍ. ¡Te esperamos! Potencius",
+        emailBody: "Hola {nombre},\n\n¡Este JUEVES es la sesión en vivo de Generación Omega!\n\n📅 Jueves, 5 de junio\n⏰ 7:00 PM (hora CDMX)\n📍 Zoom — link en el grupo\n\nEsta sesión es especial — Ana tiene algo importante que compartir con el grupo.\n\n¿Confirmamos tu lugar?\n\nEquipo Creania",
+        sms: "Hola {nombre}! Sesión Gen. Omega JUEVES 7pm. Confirma respondiendo SÍ. ¡Te esperamos! Creania",
         campaignSubject: "Tu lugar en la sesión del jueves — confirma ahora",
         campaignBody: "Hola {nombre}, este jueves a las 7pm es tu sesión en vivo. Confirma asistencia para reservar tu lugar. Ana tiene algo importante para ti.",
         segment: "59 participantes Gen. Omega — sin confirmar asistencia",
@@ -138,7 +142,10 @@ const ACTIVITY_ICONS: Record<string, string> = {
 
 export default function PulsoPage() {
   const [activeInsight, setActiveInsight] = useState<InsightDef | null>(null)
+  const [activePlan, setActivePlan] = useState<string | null>(null)
   const { toast, show, hide } = useActionToast()
+  const { state } = useDemoStore()
+  const center = CENTERS.find((c) => c.id === state.selectedCenter) ?? CENTERS[0]
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-6">
@@ -150,12 +157,20 @@ export default function PulsoPage() {
           onSent={(msg) => { setActiveInsight(null); show(msg) }}
         />
       )}
+      <AnimatePresence>
+        {activePlan && PLAN_CONFIGS[activePlan] && (
+          <PlanTipsDrawer
+            config={PLAN_CONFIGS[activePlan]}
+            onClose={() => setActivePlan(null)}
+          />
+        )}
+      </AnimatePresence>
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-white">Pulso del Centro</h1>
-          <p className="text-muted-foreground text-sm mt-0.5 hidden sm:block">{CENTER.fullName} · lunes, 2 de junio</p>
-          <p className="text-muted-foreground text-xs mt-0.5 sm:hidden">Potencius · lun 2 jun</p>
+          <p className="text-muted-foreground text-sm mt-0.5 hidden sm:block">{center.fullName} · lunes, 2 de junio</p>
+          <p className="text-muted-foreground text-xs mt-0.5 sm:hidden">{center.name} · lun 2 jun</p>
         </div>
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 flex-shrink-0 whitespace-nowrap">
           <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -171,7 +186,7 @@ export default function PulsoPage() {
           </div>
           <div className="flex-1">
             <p className="font-semibold text-white">
-              {STATS.atRiskCount} participantes necesitan atención hoy
+              {center.atRiskCount} participantes necesitan atención hoy
             </p>
             <p className="text-sm text-muted-foreground">
               Valeria Romo lleva 11 días inactiva · Momentum crítico: 23%
@@ -185,47 +200,80 @@ export default function PulsoPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Momentum gauge */}
         <div className="glass rounded-2xl p-6 flex flex-col items-center justify-center gap-4">
-          <div className="text-xs uppercase tracking-widest text-muted-foreground font-medium">
+          <div className="flex items-center gap-1.5 text-xs uppercase tracking-widest text-muted-foreground font-medium">
             Momentum del Centro
+            <InfoTooltip
+              title="Momentum del Centro"
+              source="Promedio ponderado del Momentum Score individual de cada participante activo. Se recalcula cada 24h."
+              formula="Σ(momentum_i) / n_activos"
+              why="Un centro sano mantiene momentum >65%. Por debajo de 55% indica que el programa necesita intervención sistémica, no solo individual."
+              benchmark=">65% saludable · <50% crítico"
+              action="Si cae más de 8 puntos en una semana, revisar asistencia a eventos y actividad de coaches."
+              side="bottom"
+            />
           </div>
-          <MomentumGauge score={STATS.averageMomentum} size="lg" />
+          <MomentumGauge score={center.averageMomentum} size="lg" />
           <p className="text-xs text-muted-foreground text-center">
-            Promedio de {STATS.activeParticipants} participantes activos
+            Promedio de {center.activeParticipants} participantes activos
           </p>
+          <PlanTrigger onClick={() => setActivePlan("momentum")} />
         </div>
 
         {/* Stats grid */}
         <div className="lg:col-span-2 grid grid-cols-2 gap-4">
           <StatCard
             icon={<Users className="w-5 h-5 text-cyan-400" />}
-            value={STATS.activeParticipants}
+            value={center.activeParticipants}
             label="Participantes activos"
-            sub="+12% vs mes anterior"
+            sub={`+${center.monthlyGrowth}% vs mes anterior`}
             color="cyan"
+            onPlan={() => setActivePlan("participantes")}
+            tooltip={
+              <InfoTooltip
+                title="Participantes activos"
+                source="Personas con al menos una interacción registrada en los últimos 30 días (misión completada, evento asistido, o mensaje enviado)."
+                why="Es la métrica base de salud operativa. Define cuántas personas realmente viven el programa vs. cuántas están inscritas pero ausentes."
+                benchmark=">80% de inscritos activos · <60% requiere campaña de reactivación"
+                action="Si baja semana a semana por más de 3%, lanzar campaña de reactivación segmentada."
+              />
+            }
           />
           <Link href="/demo/atencion">
             <StatCard
               icon={<AlertTriangle className="w-5 h-5 text-red-400" />}
-              value={STATS.atRiskCount}
+              value={center.atRiskCount}
               label="Necesitan atención"
               sub="Toca para intervenir →"
               color="red"
               clickable
+              onPlan={() => setActivePlan("riesgo")}
+              tooltip={
+                <InfoTooltip
+                  title="Participantes en riesgo"
+                  source="Personas con Momentum <40% O sin actividad >7 días O pago vencido >5 días. Se combina en una sola alerta priorizada."
+                  why="El riesgo de churn se dispara cuando se cruzan dos señales al mismo tiempo. Intervenir en las primeras 72h reduce cancelaciones hasta 60%."
+                  benchmark="<5% del total activo · >10% requiere revisión de programa"
+                  action="Si supera 15 personas, revisar si hay patrón por cohorte o por coach."
+                  side="bottom"
+                />
+              }
             />
           </Link>
           <StatCard
             icon={<Activity className="w-5 h-5 text-violet-400" />}
-            value={STATS.activeCohortes}
+            value={center.activeCohortes}
             label="Cohortes activas"
             sub="Gen. Omega · Norte · Vía 12"
             color="violet"
+            onPlan={() => setActivePlan("cohortes")}
           />
           <StatCard
             icon={<Calendar className="w-5 h-5 text-yellow-400" />}
-            value={`${STATS.nextEventDays} días`}
+            value={`${center.nextEventDays} días`}
             label="Próximo evento"
             sub="Sesión en vivo — Gen. Omega"
             color="yellow"
+            onPlan={() => setActivePlan("evento")}
           />
         </div>
       </div>
@@ -236,40 +284,44 @@ export default function PulsoPage() {
           Cohortes activas
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {COHORTES.map((c) => (
-            <div key={c.id} className="glass rounded-xl p-4 space-y-3">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <p className="font-semibold text-white text-sm">{c.name}</p>
-                  <p className="text-xs text-muted-foreground">{c.phase} · {c.phaseDetail}</p>
+          {COHORTES.map((c) => {
+            const planKey = c.name.toLowerCase().includes("omega") ? "omega"
+              : c.name.toLowerCase().includes("norte") ? "norte"
+              : "via12"
+            return (
+              <div key={c.id} className="glass rounded-xl p-4 space-y-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <p className="font-semibold text-white text-sm">{c.name}</p>
+                    <p className="text-xs text-muted-foreground">{c.phase} · {c.phaseDetail}</p>
+                  </div>
+                  <StatusBadge status={c.status} />
                 </div>
-                <StatusBadge status={c.status} />
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-2xl font-bold" style={{ color: getMomentumColor(c.momentum) }}>
-                    {c.momentum}%
-                  </p>
-                  <p className="text-[11px] text-muted-foreground">momentum</p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-2xl font-bold" style={{ color: getMomentumColor(c.momentum) }}>
+                      {c.momentum}%
+                    </p>
+                    <p className="text-[11px] text-muted-foreground">momentum</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-lg font-bold text-white">{c.participants}</p>
+                    <p className="text-[11px] text-muted-foreground">participantes</p>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-lg font-bold text-white">{c.participants}</p>
-                  <p className="text-[11px] text-muted-foreground">participantes</p>
+                <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
+                  <div
+                    className="h-full rounded-full transition-all duration-1000"
+                    style={{ width: `${c.momentum}%`, backgroundColor: getMomentumColor(c.momentum) }}
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <p className="text-[11px] text-muted-foreground">Coach: {c.coach}</p>
+                  <PlanTrigger onClick={() => setActivePlan(planKey)} />
                 </div>
               </div>
-              {/* Mini bar */}
-              <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
-                <div
-                  className="h-full rounded-full transition-all duration-1000"
-                  style={{
-                    width: `${c.momentum}%`,
-                    backgroundColor: getMomentumColor(c.momentum),
-                  }}
-                />
-              </div>
-              <p className="text-[11px] text-muted-foreground">Coach: {c.coach}</p>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
 
@@ -334,6 +386,8 @@ function StatCard({
   sub,
   color,
   clickable,
+  tooltip,
+  onPlan,
 }: {
   icon: React.ReactNode
   value: string | number
@@ -341,6 +395,8 @@ function StatCard({
   sub: string
   color: "cyan" | "red" | "violet" | "yellow"
   clickable?: boolean
+  tooltip?: React.ReactNode
+  onPlan?: () => void
 }) {
   const borders = {
     cyan: "border-cyan-500/20 hover:border-cyan-500/40",
@@ -360,9 +416,13 @@ function StatCard({
       <div className="flex items-center gap-2">
         {icon}
         <span className="text-xs text-muted-foreground font-medium">{label}</span>
+        {tooltip}
       </div>
       <p className="text-3xl font-black text-white">{value}</p>
-      <p className="text-xs text-muted-foreground">{sub}</p>
+      <div className="flex items-center justify-between">
+        <p className="text-xs text-muted-foreground">{sub}</p>
+        {onPlan && <PlanTrigger onClick={(e) => { e?.preventDefault(); e?.stopPropagation(); onPlan() }} />}
+      </div>
     </div>
   )
 }

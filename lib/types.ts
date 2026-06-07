@@ -1,4 +1,4 @@
-export type Phase = "Despertar" | "Expansión" | "Vía Potencius"
+export type Phase = "Despertar" | "Expansión" | "Vía Creania"
 
 export interface Center {
   id: string
@@ -12,6 +12,15 @@ export interface Center {
   averageMomentum: number
   mrr: number
   coaches: number
+  // Operational stats
+  activeCohortes: number
+  nextEventDays: number
+  monthlyGrowth: number
+  // Financial snapshot
+  monthlyRevenue: number
+  collected: number
+  pending: number
+  netMargin: number
 }
 export type RiskLevel = "high" | "medium" | "low"
 

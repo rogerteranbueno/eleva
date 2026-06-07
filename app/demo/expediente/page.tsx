@@ -4,7 +4,8 @@ import { useState } from "react"
 import {
   ArrowUpRight, CheckCircle, Clock, DollarSign, Target, FileText, Activity,
   MapPin, Zap, Heart, TrendingUp, Lock, Star, ChevronRight,
-  BookOpen, Users,
+  BookOpen, Users, Brain, MessageSquare, AlertCircle, Sparkles, CalendarPlus,
+  Send, Mail, Smartphone, MessageCircle, CheckCheck,
 } from "lucide-react"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
@@ -28,10 +29,10 @@ const ONBOARDING = {
   cta: "Ver el expediente →",
 }
 
-type Tab = "journey" | "resumen" | "actividad" | "objetivos" | "pagos" | "notas"
+type Tab = "ia" | "journey" | "resumen" | "actividad" | "objetivos" | "pagos" | "comunicacion" | "notas"
 
 export default function ExpedientePage() {
-  const [tab, setTab] = useState<Tab>("journey")
+  const [tab, setTab] = useState<Tab>("ia")
   const [escalateNote, setEscalateNote] = useState("")
   const { state, dispatch } = useDemoStore()
   const { toast, show, hide } = useActionToast()
@@ -47,11 +48,13 @@ export default function ExpedientePage() {
   }
 
   const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
+    { id: "ia",      label: "IA",      icon: <Brain className="w-3.5 h-3.5" /> },
     { id: "journey", label: "Journey", icon: <MapPin className="w-3.5 h-3.5" /> },
     { id: "resumen", label: "Resumen", icon: <Activity className="w-3.5 h-3.5" /> },
     { id: "actividad", label: "Actividad", icon: <Clock className="w-3.5 h-3.5" /> },
     { id: "objetivos", label: "Objetivos", icon: <Target className="w-3.5 h-3.5" /> },
     { id: "pagos", label: "Pagos", icon: <DollarSign className="w-3.5 h-3.5" /> },
+    { id: "comunicacion", label: "Comunicación", icon: <MessageCircle className="w-3.5 h-3.5" /> },
     { id: "notas", label: "Notas", icon: <FileText className="w-3.5 h-3.5" /> },
   ]
 
@@ -116,11 +119,13 @@ export default function ExpedientePage() {
       </div>
 
       {/* Tab content */}
+      {tab === "ia" && <TabIA specialist={specialist} coach={coach} momentum={momentum} />}
       {tab === "journey" && <TabJourney momentum={momentum} />}
       {tab === "resumen" && <TabResumen momentum={momentum} />}
       {tab === "actividad" && <TabActividad />}
       {tab === "objetivos" && <TabObjetivos specialist={specialist} />}
       {tab === "pagos" && <TabPagos />}
+      {tab === "comunicacion" && <TabComunicacion coach={coach} onSend={(msg) => show(`Mensaje enviado a Valeria ✓`)} />}
       {tab === "notas" && (
         <TabNotas
           escalated={state.escalated}
@@ -133,6 +138,197 @@ export default function ExpedientePage() {
       )}
 
       <ActionToast message={toast.message} visible={toast.visible} onHide={hide} />
+    </div>
+  )
+}
+
+// ─── Tab IA ───────────────────────────────────────────────────────────────────
+
+const REFERRER = {
+  name: "Diego Salinas",
+  avatar: "DS",
+  cohorte: "Generación Omega",
+  phase: "Vía Creania · Mes 3",
+  momentum: 81,
+  totalReferrals: 3,
+}
+
+const AI_QUESTIONS = [
+  { q: "¿Qué es lo que más te preocupa de tu objetivo de finanzas en este momento?", why: "Abre el bloqueo emocional real sin juzgar el progreso." },
+  { q: "Si pudieras cambiar una cosa de las últimas dos semanas, ¿qué sería?", why: "Activa reflexión sin generar culpa por la inactividad." },
+  { q: "¿Qué necesitas de mí específicamente para retomar el ritmo esta semana?", why: "Desplaza el rol del coach de evaluador a aliado." },
+  { q: "¿Hay algo que no te hemos preguntado que crees que debería saber tu coach?", why: "Abre espacio para información que no captura el sistema." },
+]
+
+const AI_AVOID = [
+  "No menciones los 11 días de inactividad como un número — genera defensividad.",
+  "Evita comparar su progreso con el de otros en la generación.",
+  "No empezar la llamada con '¿cómo vas con tus metas?' — es lo que espera y cierra.",
+]
+
+const AI_FOCUS = [
+  { label: "Patrón detectado", value: "Desconexión post-evento. Su última actividad fue 1 día después de la sesión del mes 2.", icon: "🔍" },
+  { label: "Fortaleza clave", value: "Activación inicial muy alta (score: Alta). Cuando está conectada, su ritmo es consistente.", icon: "💪" },
+  { label: "Riesgo principal", value: "El objetivo de finanzas puede estar generando presión sin soporte técnico. Recomendar sesión con especialista.", icon: "⚠️" },
+  { label: "Ventana de oportunidad", value: "Evento en 4 días. Confirmar asistencia personal sube probabilidad de reactivación 70%.", icon: "🎯" },
+]
+
+function TabIA({
+  specialist,
+  coach,
+  momentum,
+}: {
+  specialist: { name: string; specialty: string; avatar: string; available: boolean }
+  coach: { name: string; avatar: string; lastContactDaysAgo: number }
+  momentum: number
+}) {
+  const [sessionSuggested, setSessionSuggested] = useState(false)
+  const [expandQuestion, setExpandQuestion] = useState<number | null>(null)
+
+  return (
+    <div className="space-y-5">
+      {/* AI header */}
+      <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-violet-500/8 border border-violet-500/20">
+        <div className="w-8 h-8 rounded-lg bg-violet-500/20 flex items-center justify-center flex-shrink-0">
+          <Brain className="w-4 h-4 text-violet-400" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-xs font-bold text-violet-300">Inteligencia del participante</p>
+          <p className="text-[10px] text-muted-foreground">Basado en journey, actividad, pagos y perfil de ingreso · Actualizado hace 2h</p>
+        </div>
+        <span className="text-[9px] px-2 py-0.5 rounded-full bg-violet-500/20 border border-violet-500/30 text-violet-400 font-bold uppercase tracking-wider whitespace-nowrap">
+          IA activa
+        </span>
+      </div>
+
+      {/* Referral chain */}
+      <div className="glass rounded-xl p-4 space-y-3">
+        <div className="flex items-center gap-2">
+          <Users className="w-3.5 h-3.5 text-cyan-400" />
+          <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">¿Quién la trajo?</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-sm font-black text-cyan-300 flex-shrink-0">
+            {REFERRER.avatar}
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-bold text-white">{REFERRER.name}</p>
+            <p className="text-xs text-muted-foreground">{REFERRER.cohorte} · {REFERRER.phase}</p>
+            <p className="text-[10px] text-cyan-400 mt-0.5">Ha referido {REFERRER.totalReferrals} personas en total · Momentum {REFERRER.momentum}%</p>
+          </div>
+          <div className="text-right flex-shrink-0">
+            <p className="text-[10px] text-muted-foreground">Referido</p>
+            <p className="text-xs font-bold text-white">Amigo</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-cyan-500/5 border border-cyan-500/15 text-xs text-cyan-300">
+          <Sparkles className="w-3 h-3 flex-shrink-0" />
+          Diego tiene momentum alto — puede ser un aliado para motivar a Valeria si hay resistencia al contacto directo del coach.
+        </div>
+      </div>
+
+      {/* What we know */}
+      <div className="glass rounded-xl p-4 space-y-3">
+        <div className="flex items-center gap-2">
+          <AlertCircle className="w-3.5 h-3.5 text-yellow-400" />
+          <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">Lo que sabemos</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {AI_FOCUS.map((f) => (
+            <div key={f.label} className="bg-white/3 border border-white/6 rounded-xl p-3 space-y-1">
+              <div className="flex items-center gap-1.5">
+                <span className="text-base leading-none">{f.icon}</span>
+                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wide">{f.label}</p>
+              </div>
+              <p className="text-xs text-white leading-snug">{f.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Questions to ask */}
+      <div className="glass rounded-xl p-4 space-y-3">
+        <div className="flex items-center gap-2">
+          <MessageSquare className="w-3.5 h-3.5 text-violet-400" />
+          <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">Preguntas para hacerle</p>
+          <span className="ml-auto text-[9px] px-1.5 py-0.5 rounded bg-violet-500/15 text-violet-400 border border-violet-500/20 font-bold">IA</span>
+        </div>
+        <p className="text-[11px] text-muted-foreground leading-relaxed">
+          Generadas según su perfil, objetivo declarado y patrón de desconexión. Úsalas en ese orden.
+        </p>
+        <div className="space-y-2">
+          {AI_QUESTIONS.map((item, i) => (
+            <button
+              key={i}
+              onClick={() => setExpandQuestion(expandQuestion === i ? null : i)}
+              className="w-full text-left bg-white/3 border border-white/6 rounded-xl p-3 hover:border-violet-500/30 transition-colors"
+            >
+              <div className="flex items-start gap-2.5">
+                <span className="text-[10px] font-black text-violet-400 w-4 flex-shrink-0 mt-0.5">{i + 1}</span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-semibold text-white leading-snug">&ldquo;{item.q}&rdquo;</p>
+                  {expandQuestion === i && (
+                    <p className="text-[11px] text-violet-300 mt-2 leading-relaxed border-t border-violet-500/20 pt-2">
+                      💡 {item.why}
+                    </p>
+                  )}
+                </div>
+                <ChevronRight className={cn("w-3.5 h-3.5 text-muted-foreground flex-shrink-0 mt-0.5 transition-transform", expandQuestion === i && "rotate-90")} />
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* What to avoid */}
+      <div className="glass rounded-xl p-4 space-y-3">
+        <div className="flex items-center gap-2">
+          <AlertCircle className="w-3.5 h-3.5 text-red-400" />
+          <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">Qué evitar en la conversación</p>
+        </div>
+        <div className="space-y-1.5">
+          {AI_AVOID.map((tip, i) => (
+            <div key={i} className="flex items-start gap-2 px-3 py-2 rounded-lg bg-red-500/5 border border-red-500/10">
+              <span className="text-red-400 text-xs flex-shrink-0 mt-0.5">✕</span>
+              <p className="text-[11px] text-muted-foreground leading-snug">{tip}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Advanced coach CTA */}
+      <div className="rounded-xl border border-cyan-500/25 bg-cyan-500/5 p-4 space-y-3">
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+          <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">Acción recomendada por IA</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-sm font-black text-cyan-300 flex-shrink-0">
+            {specialist.avatar}
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-bold text-white">{specialist.name}</p>
+            <p className="text-xs text-cyan-400">{specialist.specialty} · Coach avanzada</p>
+            <p className="text-[10px] text-muted-foreground mt-0.5">
+              El objetivo de Valeria es financiero. Una sesión de 45 min con Laura puede desbloquear el avance y reactivar su momentum.
+            </p>
+          </div>
+        </div>
+        {!sessionSuggested ? (
+          <button
+            onClick={() => setSessionSuggested(true)}
+            className="w-full py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white font-semibold text-sm transition-colors flex items-center justify-center gap-2"
+          >
+            <CalendarPlus className="w-4 h-4" />
+            Proponer sesión a Valeria con {specialist.name}
+          </button>
+        ) : (
+          <div className="w-full py-2.5 rounded-xl border border-green-500/30 text-green-400 text-sm font-semibold flex items-center justify-center gap-2">
+            <CheckCircle className="w-4 h-4" />
+            Propuesta enviada a Valeria · Esperando confirmación
+          </div>
+        )}
+      </div>
     </div>
   )
 }
@@ -178,13 +374,13 @@ function TabJourney({ momentum }: { momentum: number }) {
         { label: "Fecha de Expansión", value: VALERIA_JOURNEY.expansion.date },
         { label: "Contenido consumido", value: `${VALERIA_JOURNEY.expansion.contentPct}%` },
         { label: "Misiones completadas", value: `${VALERIA_JOURNEY.expansion.missionsCompleted} de 8` },
-        { label: "Momentum al entrar a Vía Potencius", value: `${VALERIA_JOURNEY.expansion.momentumAtEntry}%` },
+        { label: "Momentum al entrar a Vía Creania", value: `${VALERIA_JOURNEY.expansion.momentumAtEntry}%` },
       ],
     },
     {
       id: "retener",
       icon: Heart,
-      label: "Retener · Vía Potencius",
+      label: "Retener · Vía Creania",
       color: "pink",
       status: "active" as const,
       title: "Mes 3 de 5 — activa",
@@ -201,7 +397,7 @@ function TabJourney({ momentum }: { momentum: number }) {
       label: "Escalar",
       color: "violet",
       status: "locked" as const,
-      title: "Disponible al completar Vía Potencius",
+      title: "Disponible al completar Vía Creania",
       items: [
         { label: "Mentoría de pares", value: "—" },
         { label: "Referidos generados", value: "—" },
@@ -293,7 +489,7 @@ function TabJourney({ momentum }: { momentum: number }) {
                 {isActive && (
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between text-[11px]">
-                      <span className="text-muted-foreground">Progreso en Vía Potencius</span>
+                      <span className="text-muted-foreground">Progreso en Vía Creania</span>
                       <span className="text-pink-400 font-semibold">Mes 3/5</span>
                     </div>
                     <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
@@ -305,7 +501,7 @@ function TabJourney({ momentum }: { momentum: number }) {
                 {isLocked && (
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Lock className="w-3 h-3" />
-                    Se desbloquea al completar Vía Potencius
+                    Se desbloquea al completar Vía Creania
                   </div>
                 )}
               </div>
@@ -324,7 +520,7 @@ function TabResumen({ momentum }: { momentum: number }) {
       <StatBox label="Mejor racha" value="22 días" sub="Alcanzada hace 3 semanas" />
       <StatBox label="Misiones completadas" value="3 / 12" sub="3 pendientes este mes" alert />
       <StatBox label="Momentum" value={`${momentum}%`} sub="Cayó 47 puntos en 2 semanas" alert />
-      <StatBox label="Fase actual" value="Mes 3" sub="Vía Potencius — 2 meses restantes" />
+      <StatBox label="Fase actual" value="Mes 3" sub="Vía Creania — 2 meses restantes" />
       <StatBox label="Pagos" value="Al corriente" sub="Mes 4 vence en 29 días" />
     </div>
   )
@@ -387,7 +583,7 @@ function TabObjetivos({ specialist }: { specialist: { name: string; specialty: s
           />
         </div>
         <p className="text-xs text-muted-foreground">
-          Objetivo declarado en semana 1 de Vía Potencius. Sin avance registrado en los últimos 11 días.
+          Objetivo declarado en semana 1 de Vía Creania. Sin avance registrado en los últimos 11 días.
         </p>
       </div>
       <div className="glass-violet rounded-xl p-5">
@@ -519,6 +715,185 @@ function StatBox({ label, value, sub, alert }: { label: string; value: string; s
       <p className="text-xs text-muted-foreground font-medium">{label}</p>
       <p className={cn("text-2xl font-bold", alert ? "text-red-400" : "text-white")}>{value}</p>
       <p className="text-xs text-muted-foreground">{sub}</p>
+    </div>
+  )
+}
+
+// ─── Tab Comunicación ──────────────────────────────────────────────────────────
+
+const COMMS_LOG = [
+  { id: "c1", canal: "whatsapp" as const, fecha: "04 jun 2026 · 10:15", contenido: "Hola Valeria 👋 Soy Ana, tu coach. ¿Cómo vas esta semana con tu objetivo? Aquí para ti.", estado: "respondido" as const, respuesta: "Hola Ana, gracias. Ha sido difícil pero voy a retomar. 🙏" },
+  { id: "c2", canal: "email" as const,    fecha: "01 jun 2026 · 09:00", contenido: "Recap de la semana 12 de Vía Creania — tus avances y lo que viene.", estado: "abierto" as const },
+  { id: "c3", canal: "app" as const,      fecha: "28 may 2026 · 08:00", contenido: "Nueva misión disponible: Registro de hábitos semana 3. Tienes hasta el viernes.", estado: "enviado" as const },
+  { id: "c4", canal: "whatsapp" as const, fecha: "25 may 2026 · 18:30", contenido: "Recordatorio: sesión grupal Gen. Omega mañana domingo 10am. ¡Te esperamos! 🌟", estado: "leido" as const },
+  { id: "c5", canal: "email" as const,    fecha: "20 may 2026 · 09:00", contenido: "Recap semana 10 — Valeria, esta semana fue increíble para tu generación. Lee aquí.", estado: "abierto" as const },
+  { id: "c6", canal: "sms" as const,      fecha: "15 may 2026 · 11:00", contenido: "Hola Valeria, recordatorio pago Mes 4 ($4,200) — vence el 1 de junio. Escríbenos.", estado: "enviado" as const },
+  { id: "c7", canal: "app" as const,      fecha: "10 may 2026 · 08:00", contenido: "¡Felicidades! Completaste la misión de la semana 8. Tu racha llega a 15 días 🔥", estado: "leido" as const },
+]
+
+const CANAL_META: Record<string, { icon: React.ReactNode; label: string; color: string; bg: string }> = {
+  whatsapp: { icon: <MessageSquare className="w-3 h-3" />, label: "WhatsApp", color: "text-green-400",  bg: "bg-green-500/10 border-green-500/20" },
+  email:    { icon: <Mail className="w-3 h-3" />,          label: "Email",     color: "text-blue-400",   bg: "bg-blue-500/10 border-blue-500/20" },
+  app:      { icon: <Smartphone className="w-3 h-3" />,    label: "In-app",    color: "text-violet-400", bg: "bg-violet-500/10 border-violet-500/20" },
+  sms:      { icon: <Send className="w-3 h-3" />,          label: "SMS",       color: "text-cyan-400",   bg: "bg-cyan-500/10 border-cyan-500/20" },
+}
+
+const ESTADO_META: Record<string, { label: string; color: string; icon: React.ReactNode }> = {
+  enviado:    { label: "Enviado",    color: "text-muted-foreground", icon: <CheckCheck className="w-3 h-3" /> },
+  leido:      { label: "Leído",      color: "text-blue-400",         icon: <CheckCheck className="w-3 h-3" /> },
+  abierto:    { label: "Abierto",    color: "text-yellow-400",       icon: <CheckCheck className="w-3 h-3" /> },
+  respondido: { label: "Respondido", color: "text-green-400",        icon: <CheckCircle className="w-3 h-3" /> },
+}
+
+function TabComunicacion({
+  coach,
+  onSend,
+}: {
+  coach: { name: string; avatar: string }
+  onSend: (msg: string) => void
+}) {
+  const [composing, setComposing] = useState(false)
+  const [draft, setDraft] = useState("")
+  const [canal, setCanal] = useState<"whatsapp" | "email">("whatsapp")
+  const [sent, setSent] = useState(false)
+
+  function handleSend() {
+    if (!draft.trim()) return
+    setSent(true)
+    onSend(draft)
+    setTimeout(() => { setSent(false); setComposing(false); setDraft("") }, 2000)
+  }
+
+  return (
+    <div className="space-y-5">
+      {/* Summary bar */}
+      <div className="grid grid-cols-3 gap-3">
+        <div className="glass rounded-xl p-3 text-center">
+          <p className="text-lg font-black text-white">7</p>
+          <p className="text-[10px] text-muted-foreground mt-0.5">Mensajes enviados</p>
+        </div>
+        <div className="glass rounded-xl p-3 text-center">
+          <p className="text-lg font-black text-green-400">1</p>
+          <p className="text-[10px] text-muted-foreground mt-0.5">Respuestas recibidas</p>
+        </div>
+        <div className="glass rounded-xl p-3 text-center">
+          <p className="text-lg font-black text-red-400">hace 2d</p>
+          <p className="text-[10px] text-muted-foreground mt-0.5">Último contacto</p>
+        </div>
+      </div>
+
+      {/* Next followup banner */}
+      <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-yellow-500/8 border border-yellow-500/20">
+        <Clock className="w-4 h-4 text-yellow-400 flex-shrink-0" />
+        <div className="flex-1">
+          <p className="text-xs font-semibold text-yellow-300">Próximo seguimiento sugerido</p>
+          <p className="text-[11px] text-muted-foreground">Viernes 7 de junio — llamada de 15 min con Ana Reyes</p>
+        </div>
+        <button
+          onClick={() => { setComposing(true); setCanal("whatsapp") }}
+          className="text-[10px] px-2.5 py-1 rounded-lg bg-yellow-500/20 border border-yellow-500/30 text-yellow-300 font-bold whitespace-nowrap hover:bg-yellow-500/30 transition-colors"
+        >
+          Contactar ahora
+        </button>
+      </div>
+
+      {/* Compose toggle */}
+      {!composing ? (
+        <button
+          onClick={() => setComposing(true)}
+          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-white/10 hover:border-violet-500/40 text-sm text-muted-foreground hover:text-white transition-colors"
+        >
+          <Send className="w-4 h-4" />
+          Enviar mensaje a Valeria
+        </button>
+      ) : (
+        <div className="glass rounded-xl p-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-semibold text-white">Nuevo mensaje</p>
+            <button onClick={() => setComposing(false)} className="text-xs text-muted-foreground hover:text-foreground">Cancelar</button>
+          </div>
+          <div className="flex gap-2">
+            {(["whatsapp", "email"] as const).map((c) => {
+              const m = CANAL_META[c]
+              return (
+                <button
+                  key={c}
+                  onClick={() => setCanal(c)}
+                  className={cn(
+                    "flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-colors",
+                    canal === c ? `${m.bg} ${m.color}` : "border-white/10 text-muted-foreground hover:border-white/20"
+                  )}
+                >
+                  {m.icon}{m.label}
+                </button>
+              )
+            })}
+          </div>
+          <textarea
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            placeholder={canal === "whatsapp" ? "Escribe tu WhatsApp aquí..." : "Escribe tu email aquí..."}
+            rows={3}
+            className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground resize-none focus:outline-none focus:border-violet-500/50 transition-colors"
+          />
+          {!sent ? (
+            <button
+              onClick={handleSend}
+              disabled={!draft.trim()}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-700 disabled:opacity-40 text-white text-sm font-semibold transition-colors"
+            >
+              <Send className="w-3.5 h-3.5" />
+              Enviar {canal === "whatsapp" ? "WhatsApp" : "Email"}
+            </button>
+          ) : (
+            <div className="flex items-center gap-2 text-green-400 text-sm font-semibold">
+              <CheckCircle className="w-4 h-4" />
+              Mensaje enviado a Valeria ✓
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Communication log */}
+      <div className="space-y-0">
+        <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-3 px-1">Historial de comunicación</p>
+        {COMMS_LOG.map((entry, i) => {
+          const cMeta = CANAL_META[entry.canal]
+          const eMeta = ESTADO_META[entry.estado]
+          const isLast = i === COMMS_LOG.length - 1
+          return (
+            <div key={entry.id} className="flex gap-3">
+              <div className="flex flex-col items-center flex-shrink-0">
+                <div className={cn("w-7 h-7 rounded-full flex items-center justify-center border flex-shrink-0", cMeta.bg, cMeta.color)}>
+                  {cMeta.icon}
+                </div>
+                {!isLast && <div className="w-px flex-1 bg-white/8 my-1 min-h-[12px]" />}
+              </div>
+              <div className={cn("flex-1 pb-4", isLast ? "pb-1" : "")}>
+                <div className="glass rounded-xl p-3 space-y-1.5">
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <div className="flex items-center gap-1.5">
+                      <span className={cn("text-[10px] font-bold px-1.5 py-0.5 rounded border", cMeta.bg, cMeta.color)}>{cMeta.label}</span>
+                      <span className="text-[10px] text-muted-foreground">{entry.fecha}</span>
+                    </div>
+                    <div className={cn("flex items-center gap-1 text-[10px] font-semibold", eMeta.color)}>
+                      {eMeta.icon}
+                      {eMeta.label}
+                    </div>
+                  </div>
+                  <p className="text-xs text-foreground leading-snug">{entry.contenido}</p>
+                  {"respuesta" in entry && entry.respuesta && (
+                    <div className="mt-2 pl-3 border-l-2 border-green-500/30">
+                      <p className="text-[10px] text-muted-foreground mb-0.5">Respuesta de Valeria</p>
+                      <p className="text-xs text-green-300 italic">&ldquo;{entry.respuesta}&rdquo;</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

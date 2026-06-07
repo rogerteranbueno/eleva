@@ -10,13 +10,121 @@ import {
   Users,
   MapPin,
   Calendar,
-  ChevronRight,
+  ChevronDown,
   X,
+  Zap,
+  Info,
 } from "lucide-react"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { TODAY_EVENT, EVENT_CHECKIN_LIST } from "@/data/creania"
 import { cn } from "@/lib/utils"
+
+// ─── Ops Guide ────────────────────────────────────────────────────────────────
+
+const STEPS = [
+  { num: "1", icon: "🔍", title: "Busca", desc: "Por nombre o teléfono — filtra en tiempo real" },
+  { num: "2", icon: "✅", title: "Confirma entrada", desc: 'Toca el botón verde "Entrada"' },
+  { num: "3", icon: "✗", title: "Marca ausentes", desc: "Después de 30 min sin llegar" },
+  { num: "4", icon: "➕", title: "Walk-in", desc: "Para quienes no están en la lista" },
+]
+
+const EFFECTS = [
+  { emoji: "📈", action: "Entrada registrada", effect: "Suma al Momentum Score del participante en tiempo real" },
+  { emoji: "🔔", action: "Ausencia marcada", effect: "Genera alerta automática al coach de su cohorte" },
+  { emoji: "🗂️", action: "Walk-in registrado", effect: 'Se crea en CRM con estado "por completar" para seguimiento' },
+  { emoji: "📊", action: "Asistencia general", effect: "El dueño lo ve en el panel del centro en vivo" },
+]
+
+function OpsGuide({ checkedIn, total }: { checkedIn: number; total: number }) {
+  const [open, setOpen] = useState(true)
+
+  return (
+    <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 overflow-hidden">
+      {/* Header */}
+      <button
+        onClick={() => setOpen((p) => !p)}
+        className="w-full flex items-center justify-between px-4 py-3 hover:bg-cyan-500/5 transition-colors"
+      >
+        <div className="flex items-center gap-2.5">
+          <div className="w-6 h-6 rounded-lg bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
+            <Info className="w-3.5 h-3.5 text-cyan-400" />
+          </div>
+          <div className="text-left">
+            <p className="text-xs font-bold text-cyan-400">Guía de operación · Mesa de Registro</p>
+            {!open && (
+              <p className="text-[10px] text-muted-foreground">
+                {checkedIn} entradas confirmadas · toca para ver el flujo
+              </p>
+            )}
+          </div>
+        </div>
+        <ChevronDown className={cn("w-4 h-4 text-cyan-400 transition-transform", open && "rotate-180")} />
+      </button>
+
+      {open && (
+        <div className="px-4 pb-4 space-y-4 border-t border-cyan-500/15">
+          {/* Flow steps */}
+          <div>
+            <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mt-3 mb-2.5">
+              Flujo de registro
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {STEPS.map((s) => (
+                <div key={s.num} className="bg-white/3 border border-white/6 rounded-xl p-3 space-y-1.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] font-black text-cyan-400 w-4">{s.num}</span>
+                    <span className="text-base leading-none">{s.icon}</span>
+                  </div>
+                  <p className="text-xs font-bold text-white">{s.title}</p>
+                  <p className="text-[10px] text-muted-foreground leading-snug">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick tips */}
+          <div>
+            <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-2">
+              Tips para ir rápido
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+              {[
+                "El buscador filtra al escribir — no necesitas Enter",
+                "Busca por teléfono si el nombre tiene variaciones",
+                "Los participantes con pago vencido tienen badge rojo — solo informa, no bloquea la entrada",
+                "Si alguien tiene problemas con su pago, anota en CRM — no lo detengas en la puerta",
+              ].map((tip, i) => (
+                <div key={i} className="flex items-start gap-2">
+                  <Zap className="w-3 h-3 text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <p className="text-[11px] text-muted-foreground leading-snug">{tip}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Data effects */}
+          <div>
+            <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-2">
+              Qué pasa con los datos que capturas
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+              {EFFECTS.map((e) => (
+                <div key={e.action} className="flex items-start gap-2 bg-white/2 rounded-lg px-2.5 py-2">
+                  <span className="text-sm flex-shrink-0">{e.emoji}</span>
+                  <div>
+                    <p className="text-[10px] font-semibold text-white">{e.action}</p>
+                    <p className="text-[10px] text-muted-foreground leading-snug">{e.effect}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
 
 type AttendeeStatus = "pending" | "checked-in" | "absent"
 
@@ -155,7 +263,7 @@ export default function RegistroPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-bold text-white">Mesa de Registro</h1>
-          <p className="text-muted-foreground text-xs mt-0.5">Karla Ríos · Staff Potencius CDMX</p>
+          <p className="text-muted-foreground text-xs mt-0.5">Karla Ríos · Staff Creania CDMX</p>
         </div>
         <button
           onClick={() => setWalkInOpen(true)}
@@ -165,6 +273,9 @@ export default function RegistroPage() {
           Walk-in
         </button>
       </div>
+
+      {/* Ops guide */}
+      <OpsGuide checkedIn={checkedInCount} total={attendees.length} />
 
       {/* Event card */}
       <div className="glass rounded-xl p-4 space-y-3">

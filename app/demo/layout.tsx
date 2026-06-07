@@ -23,6 +23,14 @@ import {
   ChevronDown,
   Check,
   Globe,
+  Brain,
+  Trophy,
+  GraduationCap,
+  Send,
+  Video,
+  Star,
+  GitMerge,
+  LayoutDashboard,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { DemoProvider, useDemoStore } from "@/lib/demo-store"
@@ -36,15 +44,19 @@ type NavScreen = {
   badge?: number
 }
 
-type View = "owner" | "ops" | "participant"
+type View = "owner" | "ops" | "participant" | "coach"
 
 const OWNER_SCREENS: NavScreen[] = [
-  { href: "/demo/pulso",     label: "Pulso del Centro",    shortLabel: "Pulso",    icon: Activity },
-  { href: "/demo/atencion",  label: "Necesitan Atención",  shortLabel: "Atención", icon: AlertTriangle, badge: 14 },
-  { href: "/demo/crm",       label: "Directorio CRM",      shortLabel: "CRM",      icon: Database },
-  { href: "/demo/equipo",    label: "Visibilidad de Equipo", shortLabel: "Equipo", icon: ShieldCheck },
-  { href: "/demo/finanzas",  label: "Finanzas",            shortLabel: "Finanzas", icon: DollarSign },
-  { href: "/demo/expediente",label: "Expediente Valeria",  shortLabel: "Exp.",     icon: User },
+  { href: "/demo/pulso",        label: "Pulso del Centro",      shortLabel: "Pulso",    icon: Activity },
+  { href: "/demo/atencion",     label: "Necesitan Atención",    shortLabel: "Atención", icon: AlertTriangle, badge: 14 },
+  { href: "/demo/cohortes",     label: "Generaciones",          shortLabel: "Cohortes", icon: GitMerge },
+  { href: "/demo/crm",          label: "Directorio CRM",        shortLabel: "CRM",      icon: Database },
+  { href: "/demo/equipo",       label: "Visibilidad de Equipo", shortLabel: "Equipo",   icon: ShieldCheck },
+  { href: "/demo/finanzas",     label: "Finanzas",              shortLabel: "Finanzas", icon: DollarSign },
+  { href: "/demo/campanas",     label: "Campañas",              shortLabel: "Campañas", icon: Send },
+  { href: "/demo/webinars",     label: "Noches de invitados",   shortLabel: "Webinars", icon: Video },
+  { href: "/demo/inteligencia", label: "Motor de IA",           shortLabel: "IA",       icon: Brain },
+  { href: "/demo/expediente",   label: "Expediente Valeria",    shortLabel: "Exp.",     icon: User },
 ]
 
 const OPS_SCREENS: NavScreen[] = [
@@ -53,18 +65,30 @@ const OPS_SCREENS: NavScreen[] = [
 ]
 
 const PARTICIPANT_SCREENS: NavScreen[] = [
-  { href: "/demo/feed",     label: "Mi Feed",     shortLabel: "Feed",     icon: Home },
-  { href: "/demo/mision",   label: "Mi Misión",   shortLabel: "Misión",   icon: Target },
-  { href: "/demo/momentum", label: "Mi Momentum", shortLabel: "Momentum", icon: TrendingUp },
-  { href: "/demo/tribu",    label: "Mi Tribu",    shortLabel: "Tribu",    icon: Users },
+  { href: "/demo/mi-panel",       label: "Mi Panel",      shortLabel: "Panel",     icon: LayoutDashboard },
+  { href: "/demo/feed",           label: "Mi Feed",       shortLabel: "Feed",      icon: Home },
+  { href: "/demo/mision",         label: "Mi Misión",     shortLabel: "Misión",    icon: Target },
+  { href: "/demo/momentum",       label: "Mi Momentum",   shortLabel: "Momentum",  icon: TrendingUp },
+  { href: "/demo/tribu",          label: "Mi Tribu",      shortLabel: "Tribu",     icon: Users },
+  { href: "/demo/logros",         label: "Mis Logros",    shortLabel: "Logros",    icon: Trophy },
+  { href: "/demo/especialistas",  label: "Expertos",      shortLabel: "Expertos",  icon: Star },
+]
+
+const COACH_SCREENS: NavScreen[] = [
+  { href: "/demo/coach", label: "Panel del Coach", shortLabel: "Panel", icon: GraduationCap },
+  { href: "/demo/expediente", label: "Expediente IA", shortLabel: "IA", icon: Brain },
+  { href: "/demo/crm", label: "Directorio", shortLabel: "CRM", icon: Database },
 ]
 
 const OWNER_PATHS = OWNER_SCREENS.map((s) => s.href)
 const OPS_PATHS   = OPS_SCREENS.map((s) => s.href)
+const COACH_PATHS = COACH_SCREENS.map((s) => s.href)
 
 function getViewFromPath(pathname: string): View {
   if (OWNER_PATHS.includes(pathname)) return "owner"
   if (OPS_PATHS.includes(pathname) || pathname.startsWith("/demo/ops")) return "ops"
+  if (COACH_PATHS.includes(pathname) || pathname.startsWith("/demo/coach")) return "coach"
+  if (pathname === "/demo/mi-panel") return "participant"
   return "participant"
 }
 
@@ -108,35 +132,27 @@ function CenterSelector() {
 
 function ViewSwitcher({ view, className }: { view: View; className?: string }) {
   const router = useRouter()
+  const views = [
+    { id: "owner" as View,       label: "Dueño",  href: "/demo/pulso",        activeColor: "bg-violet-600" },
+    { id: "coach" as View,       label: "Coach",  href: "/demo/coach",        activeColor: "bg-emerald-600" },
+    { id: "ops" as View,         label: "Ops",    href: "/demo/ops/registro", activeColor: "bg-cyan-600" },
+    { id: "participant" as View, label: "Usuario",href: "/demo/feed",         activeColor: "bg-violet-600" },
+  ]
   return (
     <div className={cn("flex rounded-lg overflow-hidden border border-sidebar-border", className)}>
-      <button
-        onClick={() => router.push("/demo/pulso")}
-        className={cn(
-          "flex-1 py-1.5 text-xs font-semibold transition-colors",
-          view === "owner" ? "bg-violet-600 text-white" : "text-muted-foreground hover:text-foreground"
-        )}
-      >
-        Dueño
-      </button>
-      <button
-        onClick={() => router.push("/demo/ops/registro")}
-        className={cn(
-          "flex-1 py-1.5 text-xs font-semibold transition-colors border-x border-sidebar-border",
-          view === "ops" ? "bg-cyan-600 text-white" : "text-muted-foreground hover:text-foreground"
-        )}
-      >
-        Ops
-      </button>
-      <button
-        onClick={() => router.push("/demo/feed")}
-        className={cn(
-          "flex-1 py-1.5 text-xs font-semibold transition-colors",
-          view === "participant" ? "bg-violet-600 text-white" : "text-muted-foreground hover:text-foreground"
-        )}
-      >
-        Usuario
-      </button>
+      {views.map((v, i) => (
+        <button
+          key={v.id}
+          onClick={() => router.push(v.href)}
+          className={cn(
+            "flex-1 py-1.5 text-[10px] font-semibold transition-colors",
+            i > 0 && "border-l border-sidebar-border",
+            view === v.id ? `${v.activeColor} text-white` : "text-muted-foreground hover:text-foreground"
+          )}
+        >
+          {v.label}
+        </button>
+      ))}
     </div>
   )
 }
@@ -145,22 +161,27 @@ function DemoNav() {
   const pathname = usePathname()
   const { dispatch, state } = useDemoStore()
   const view = getViewFromPath(pathname)
-  const screens = view === "owner" ? OWNER_SCREENS : view === "ops" ? OPS_SCREENS : PARTICIPANT_SCREENS
+  const screens =
+    view === "owner" ? OWNER_SCREENS :
+    view === "ops"   ? OPS_SCREENS :
+    view === "coach" ? COACH_SCREENS :
+    PARTICIPANT_SCREENS
 
   const navLabel =
     view === "owner" ? "Panel del dueño" :
     view === "ops"   ? "Operaciones" :
+    view === "coach" ? "Vista del coach" :
     "Mi espacio"
 
   return (
-    <aside className="hidden md:flex flex-col w-60 min-h-screen bg-sidebar border-r border-sidebar-border flex-shrink-0">
+    <aside className="hidden md:flex flex-col w-60 h-screen sticky top-0 overflow-y-auto bg-sidebar border-r border-sidebar-border flex-shrink-0">
       {/* Logo */}
       <div className="p-5 border-b border-sidebar-border">
         <Link href="/" className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center">
-            <span className="text-white font-black text-sm">P</span>
+            <span className="text-white font-black text-sm">E</span>
           </div>
-          <span className="font-black text-white text-lg tracking-tight">POTENCIUS</span>
+          <span className="font-black text-white text-lg tracking-tight">ELEVA</span>
         </Link>
         <div className="mt-1 flex items-center gap-1.5">
           <Building2 className="w-3 h-3 text-muted-foreground" />
@@ -185,6 +206,9 @@ function DemoNav() {
         )}
         {view === "ops" && (
           <p className="text-[10px] text-muted-foreground mt-2 text-center">Como Karla Ríos · Mesa de Registro</p>
+        )}
+        {view === "coach" && (
+          <p className="text-[10px] text-muted-foreground mt-2 text-center">Como Ana Reyes · Gen. Omega</p>
         )}
       </div>
 
@@ -245,45 +269,32 @@ function MobileNav() {
   const router = useRouter()
   const { dispatch } = useDemoStore()
   const view = getViewFromPath(pathname)
-  const screens = view === "owner" ? OWNER_SCREENS : view === "ops" ? OPS_SCREENS : PARTICIPANT_SCREENS
+  const screens =
+    view === "owner" ? OWNER_SCREENS :
+    view === "ops"   ? OPS_SCREENS :
+    view === "coach" ? COACH_SCREENS :
+    PARTICIPANT_SCREENS
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-sidebar border-t border-sidebar-border">
       {/* View switcher */}
-      <div className="flex items-center border-b border-sidebar-border px-2 gap-1">
-        <button
-          onClick={() => router.push("/demo/pulso")}
-          className={cn(
-            "flex-1 py-1.5 text-xs font-semibold transition-colors",
-            view === "owner" ? "text-violet-400 border-b-2 border-violet-600" : "text-muted-foreground"
-          )}
-        >
-          Dueño
-        </button>
-        <button
-          onClick={() => router.push("/demo/ops/registro")}
-          className={cn(
-            "flex-1 py-1.5 text-xs font-semibold transition-colors",
-            view === "ops" ? "text-cyan-400 border-b-2 border-cyan-500" : "text-muted-foreground"
-          )}
-        >
-          Ops
-        </button>
-        <button
-          onClick={() => dispatch({ type: "RESET" })}
-          className="px-2 py-1.5 text-muted-foreground"
-          title="Reiniciar"
-        >
+      <div className="flex items-center border-b border-sidebar-border px-1 gap-0">
+        {[
+          { id: "owner" as View,       label: "Dueño",  href: "/demo/pulso",        active: "text-violet-400 border-b-2 border-violet-600" },
+          { id: "coach" as View,       label: "Coach",  href: "/demo/coach",        active: "text-emerald-400 border-b-2 border-emerald-500" },
+          { id: "ops" as View,         label: "Ops",    href: "/demo/ops/registro", active: "text-cyan-400 border-b-2 border-cyan-500" },
+          { id: "participant" as View, label: "Usuario",href: "/demo/feed",         active: "text-violet-400 border-b-2 border-violet-600" },
+        ].map((v) => (
+          <button
+            key={v.id}
+            onClick={() => router.push(v.href)}
+            className={cn("flex-1 py-1.5 text-[10px] font-semibold transition-colors", view === v.id ? v.active : "text-muted-foreground")}
+          >
+            {v.label}
+          </button>
+        ))}
+        <button onClick={() => dispatch({ type: "RESET" })} className="px-2 py-1.5 text-muted-foreground" title="Reiniciar">
           <RotateCcw className="w-3 h-3" />
-        </button>
-        <button
-          onClick={() => router.push("/demo/feed")}
-          className={cn(
-            "flex-1 py-1.5 text-xs font-semibold transition-colors",
-            view === "participant" ? "text-violet-400 border-b-2 border-violet-600" : "text-muted-foreground"
-          )}
-        >
-          Usuario
         </button>
       </div>
       {/* Screen tabs */}

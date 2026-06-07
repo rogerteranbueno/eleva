@@ -1,166 +1,277 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   ArrowRight,
   ChevronDown,
   ChevronRight,
-  Activity,
-  Users,
-  TrendingUp,
   Star,
-  Building2,
-  Globe,
-  Zap,
-  Heart,
   BarChart3,
-  Target,
-  Shield,
-  CheckCircle,
+  AlertTriangle,
+  Menu,
+  X,
+  Sun,
+  Moon,
+  Sparkles,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useLang } from "@/lib/i18n"
 
-// ─── Counter hook ─────────────────────────────────────────────────────────────
+import { ProblemSection } from "@/components/landing/ProblemSection"
+import { GrowthEngineSection } from "@/components/landing/GrowthEngineSection"
+import { NumbersSection } from "@/components/landing/NumbersSection"
+import { InsightsSection } from "@/components/landing/InsightsSection"
+import { HowItWorksSection } from "@/components/landing/HowItWorksSection"
+import { TestimonialsSection } from "@/components/landing/TestimonialsSection"
+import { PricingTeaser } from "@/components/landing/PricingTeaser"
+import { DemoSection } from "@/components/landing/DemoSection"
+import { FinalCTASection } from "@/components/landing/FinalCTASection"
+import { Footer } from "@/components/landing/Footer"
 
-function useCountUp(target: number, duration = 1800) {
-  const [value, setValue] = useState(0)
-  const ref = useRef<HTMLDivElement>(null)
-  const started = useRef(false)
+// ─── Theme hook ───────────────────────────────────────────────────────────────
+
+function useTheme() {
+  const [light, setLight] = useState(false)
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true
-          const t0 = performance.now()
-          const tick = (now: number) => {
-            const p = Math.min((now - t0) / duration, 1)
-            const eased = 1 - (1 - p) ** 3
-            setValue(Math.round(target * eased))
-            if (p < 1) requestAnimationFrame(tick)
-          }
-          requestAnimationFrame(tick)
-        }
-      },
-      { threshold: 0.3 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [target, duration])
-  return { value, ref }
-}
-
-// ─── Expandable Section ───────────────────────────────────────────────────────
-
-function ExpandableSection({
-  title,
-  subtitle,
-  badge,
-  children,
-}: {
-  title: string
-  subtitle: string
-  badge?: string
-  children: React.ReactNode
-}) {
-  const [open, setOpen] = useState(false)
-
-  return (
-    <div className="glass rounded-2xl overflow-hidden">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-start gap-4 p-6 text-left hover:bg-white/2 transition-colors"
-      >
-        {badge && (
-          <span className="flex-shrink-0 px-2.5 py-1 rounded-full bg-violet-600/20 text-violet-400 text-xs font-semibold border border-violet-600/30">
-            {badge}
-          </span>
-        )}
-        <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-bold text-white">{title}</h3>
-          {subtitle && <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>}
-        </div>
-        <motion.div
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-          className="flex-shrink-0 mt-1"
-        >
-          <ChevronDown className="w-5 h-5 text-muted-foreground" />
-        </motion.div>
-      </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <div className="px-6 pb-6 border-t border-border pt-5">
-              {children}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  )
+    const saved = localStorage.getItem("eleva-theme")
+    if (saved === "light") { setLight(true); document.documentElement.classList.add("light") }
+  }, [])
+  const toggle = () => {
+    setLight((prev) => {
+      const next = !prev
+      document.documentElement.classList.toggle("light", next)
+      localStorage.setItem("eleva-theme", next ? "light" : "dark")
+      return next
+    })
+  }
+  return { light, toggle }
 }
 
 // ─── Nav ──────────────────────────────────────────────────────────────────────
 
 function Nav() {
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const { light, toggle } = useTheme()
+  const { lang, setLang } = useLang()
+
+  const navLinks = lang === "en"
+    ? { features: "Features", pricing: "Pricing", simulate: "Simulate impact", demo: "See demo" }
+    : { features: "Funcionalidades", pricing: "Precios", simulate: "Simular impacto", demo: "Ver demo" }
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-background/80 backdrop-blur-xl border-b border-border">
-      <div className="flex items-center gap-2">
-        <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center">
-          <span className="text-white font-black text-sm">E</span>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-xl border-b border-border transition-colors duration-300">
+      <div className="flex items-center justify-between px-6 py-3.5 max-w-7xl mx-auto">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center flex-shrink-0">
+            <span className="text-white font-black text-sm">E</span>
+          </div>
+          <span className="font-black text-foreground text-lg tracking-tight">ELEVA</span>
         </div>
-        <span className="font-black text-white text-lg tracking-tight">ELEVA</span>
-      </div>
-      <div className="flex items-center gap-3">
-        <Link href="/build" className="text-sm text-muted-foreground hover:text-white transition-colors hidden sm:block">
-          Construye tu sistema
-        </Link>
-        <a href="#contacto" className="text-sm text-muted-foreground hover:text-white transition-colors hidden sm:block">
-          Contacto
-        </a>
-        <Link href="/demo">
-          <button className="flex items-center gap-1.5 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-sm font-semibold transition-colors">
-            Ver demo
-            <ArrowRight className="w-3.5 h-3.5" />
+        <div className="flex items-center gap-1">
+          <Link href="/funcionalidades" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors hidden sm:block px-3 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5">
+            {navLinks.features}
+          </Link>
+          <Link href="/precios" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors hidden sm:block px-3 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5">
+            {navLinks.pricing}
+          </Link>
+          <Link href="/simulador" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors hidden sm:block px-3 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5">
+            {navLinks.simulate}
+          </Link>
+          <button
+            onClick={toggle}
+            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors hidden sm:flex items-center"
+            aria-label={lang === "en" ? "Toggle theme" : "Cambiar tema"}
+            title={light ? (lang === "en" ? "Dark mode" : "Modo oscuro") : (lang === "en" ? "Light mode" : "Modo claro")}
+          >
+            {light ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
           </button>
-        </Link>
+          <button
+            onClick={() => setLang(lang === "es" ? "en" : "es")}
+            className="hidden sm:flex items-center px-2.5 py-1.5 rounded-lg text-[12px] font-bold text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors tracking-wider"
+            aria-label="Toggle language"
+          >
+            {lang === "es" ? "EN" : "ES"}
+          </button>
+          <Link href="/demo">
+            <button className="flex items-center gap-1.5 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-[13px] font-semibold transition-colors ml-1">
+              {navLinks.demo} <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </Link>
+          <button
+            onClick={() => setMobileOpen((p) => !p)}
+            className="sm:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+            aria-label="Menú"
+          >
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="sm:hidden border-t border-border overflow-hidden"
+          >
+            <div className="px-6 py-4 space-y-1 bg-background/95">
+              <Link href="/funcionalidades" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <ChevronRight className="w-4 h-4 text-violet-400" />{navLinks.features}
+              </Link>
+              <Link href="/precios" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <ChevronRight className="w-4 h-4 text-violet-400" />{navLinks.pricing}
+              </Link>
+              <Link href="/simulador" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <ChevronRight className="w-4 h-4 text-violet-400" />{navLinks.simulate}
+              </Link>
+              <button onClick={() => { toggle(); setMobileOpen(false) }} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors w-full text-left">
+                {light ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+                {light ? (lang === "en" ? "Dark mode" : "Modo oscuro") : (lang === "en" ? "Light mode" : "Modo claro")}
+              </button>
+              <button onClick={() => { setLang(lang === "es" ? "en" : "es"); setMobileOpen(false) }} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors w-full text-left font-bold tracking-wider">
+                {lang === "es" ? "🇺🇸 English" : "🇲🇽 Español"}
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   )
 }
 
-// ─── Hero ────────────────────────────────────────────────────────────────────
+// ─── Product Preview Mockup ───────────────────────────────────────────────────
 
-const HERO_STATS = [
-  { value: "+240%", label: "crecimiento promedio" },
-  { value: "68%", label: "conversión fase a fase" },
-  { value: "80%", label: "leads más fáciles de enrolar" },
-]
+function ProductPreview() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.7, duration: 0.6 }}
+      className="relative mt-14 max-w-3xl mx-auto"
+    >
+      <div className="absolute inset-x-0 top-8 h-40 bg-violet-600/25 blur-3xl rounded-full pointer-events-none" />
+      <div className="relative rounded-2xl border border-white/12 overflow-hidden shadow-2xl bg-[#0e0e1a]">
+        {/* App bar */}
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-white/8 bg-white/2">
+          <div className="w-5 h-5 rounded bg-violet-600 flex items-center justify-center flex-shrink-0">
+            <span className="text-white font-black text-[9px]">E</span>
+          </div>
+          <span className="text-[11px] font-bold text-white">ELEVA</span>
+          <span className="text-[10px] text-muted-foreground">· Pulso del Centro</span>
+          <div className="ml-auto flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-green-500/15 border border-green-500/25">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+            <span className="text-[9px] font-semibold text-green-400">Sistema activo</span>
+          </div>
+        </div>
+        {/* Alert */}
+        <div className="mx-4 mt-4 flex items-center gap-3 bg-red-500/10 border border-red-500/20 rounded-xl px-3 py-2.5">
+          <AlertTriangle className="w-4 h-4 text-red-400 flex-shrink-0" />
+          <div className="flex-1 min-w-0">
+            <p className="text-[11px] font-semibold text-white">14 participantes necesitan atención hoy</p>
+            <p className="text-[10px] text-muted-foreground">Momentum crítico · intervención recomendada</p>
+          </div>
+          <span className="text-[10px] font-semibold text-violet-400 whitespace-nowrap">Ver →</span>
+        </div>
+        {/* Stats row */}
+        <div className="grid grid-cols-4 gap-3 p-4">
+          {[
+            { label: "Momentum", val: "71%", color: "text-violet-400", trend: "+4 pts" },
+            { label: "Activos", val: "247", color: "text-cyan-400", trend: "+12%" },
+            { label: "En riesgo", val: "14", color: "text-red-400", trend: "↑3" },
+            { label: "Próx. evento", val: "4 días", color: "text-yellow-400", trend: "34% conf." },
+          ].map((s) => (
+            <div key={s.label} className="bg-white/3 rounded-xl p-3">
+              <p className={cn("text-lg font-black leading-none", s.color)}>{s.val}</p>
+              <p className="text-[9px] text-muted-foreground mt-1">{s.label}</p>
+              <p className="text-[9px] text-white/40 mt-0.5">{s.trend}</p>
+            </div>
+          ))}
+        </div>
+        {/* Mini cohortes */}
+        <div className="mx-4 mb-4 grid grid-cols-3 gap-2">
+          {[
+            { name: "Gen. Omega", pct: 78, color: "#7C3AED" },
+            { name: "Gen. Norte", pct: 58, color: "#f97316" },
+            { name: "Vía 12", pct: 84, color: "#10b981" },
+          ].map((c) => (
+            <div key={c.name} className="bg-white/3 rounded-xl p-3 space-y-2">
+              <p className="text-[10px] font-semibold text-white">{c.name}</p>
+              <div className="h-1 rounded-full bg-white/8 overflow-hidden">
+                <div className="h-full rounded-full" style={{ width: `${c.pct}%`, backgroundColor: c.color }} />
+              </div>
+              <p className="text-[9px] text-muted-foreground">{c.pct}% momentum</p>
+            </div>
+          ))}
+        </div>
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-[#0e0e1a] to-transparent pointer-events-none" />
+      </div>
+      <p className="text-center text-[11px] text-muted-foreground/60 mt-3">
+        Vista del dueño · datos ficticios del demo
+      </p>
+    </motion.div>
+  )
+}
+
+// ─── Hero ─────────────────────────────────────────────────────────────────────
 
 function Hero() {
+  const { lang } = useLang()
+
+  const c = lang === "en" ? {
+    badge: "The operating system for transformation centers",
+    h1a: "Your center can grow",
+    h1b: "2.4x",
+    h1c: "in 12 months.",
+    sub: "Without hiring more staff. Without reinventing your methodology. The difference between centers that grow and those that just survive is",
+    subEm: "the system that runs them.",
+    cta1: "See the live demo",
+    cta2: "Simulate your impact",
+    cta3: "Build my system",
+    stats: [
+      { value: "+140%", label: "average growth" },
+      { value: "68%", label: "phase-to-phase conversion" },
+      { value: "80%", label: "easier leads to enroll" },
+    ],
+    social1: "Founders already using it",
+    social2: "Trusted by directors and coaches",
+    scroll: "How do they do it?",
+  } : {
+    badge: "El sistema operativo para centros de transformación",
+    h1a: "Tu centro puede crecer",
+    h1b: "2.4 veces",
+    h1c: "en 12 meses.",
+    sub: "Sin contratar más staff. Sin reinventar tu metodología. La diferencia entre los centros que crecen y los que sobreviven es",
+    subEm: "el sistema que los opera.",
+    cta1: "Ver el demo en vivo",
+    cta2: "Simula tu impacto",
+    cta3: "Construir mi sistema",
+    stats: [
+      { value: "+140%", label: "crecimiento promedio" },
+      { value: "68%", label: "conversión fase a fase" },
+      { value: "80%", label: "leads más fáciles de enrolar" },
+    ],
+    social1: "Fundadores que ya lo usan",
+    social2: "Aprobado por directores y coaches",
+    scroll: "¿Cómo lo logran?",
+  }
+
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden pt-28 pb-16">
       {/* Glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-violet-600/10 blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-cyan-600/6 blur-3xl" />
-        <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-pink-600/4 blur-3xl" />
       </div>
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="relative max-w-4xl mx-auto"
+        className="relative max-w-4xl mx-auto w-full"
       >
         {/* Badge */}
         <motion.div
@@ -170,37 +281,31 @@ function Hero() {
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-600/15 border border-violet-500/30 text-violet-400 text-xs font-semibold mb-8"
         >
           <div className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
-          El sistema operativo para centros de transformación
+          {c.badge}
         </motion.div>
 
         {/* Headline */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6">
-          Tu centro puede crecer{" "}
-          <span className="gradient-text">2.4 veces</span>{" "}
-          en 12 meses.
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-foreground leading-[1.05] tracking-tight mb-6">
+          {c.h1a}{" "}
+          <span className="gradient-text">{c.h1b}</span>{" "}
+          {c.h1c}
         </h1>
 
         {/* Sub-headline */}
-        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-4">
-          Sin contratar más staff. Sin reinventar tu metodología.
-          La diferencia entre los centros que crecen y los que sobreviven es{" "}
-          <span className="text-foreground font-medium">el sistema que los opera.</span>
-        </p>
-
-        <p className="text-sm text-muted-foreground/70 max-w-xl mx-auto mb-10">
-          ELEVA centraliza tu operación, automatiza el seguimiento, nutre tus leads
-          y convierte cada participante en un promotor — todo en un panel.
+        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10">
+          {c.sub}{" "}
+          <span className="text-foreground font-medium">{c.subEm}</span>
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
           <Link href="/demo">
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-base font-bold transition-colors glow-violet shadow-lg shadow-violet-600/30"
             >
-              Ver el demo en vivo
+              {c.cta1}
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </Link>
@@ -208,10 +313,20 @@ function Hero() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 px-8 py-4 glass text-foreground rounded-xl text-base font-medium hover:text-white hover:border-white/20 transition-colors"
+              className="flex items-center gap-2 px-6 py-3.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-foreground rounded-xl text-sm font-semibold transition-all"
             >
-              Construir mi sistema
-              <ChevronRight className="w-4 h-4" />
+              <Sparkles className="w-4 h-4 text-violet-400" />
+              {c.cta3}
+            </motion.button>
+          </Link>
+          <Link href="/simulador">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center gap-2 px-5 py-3 text-muted-foreground rounded-xl text-sm font-medium hover:text-foreground transition-colors"
+            >
+              <BarChart3 className="w-4 h-4" />
+              {c.cta2}
             </motion.button>
           </Link>
         </div>
@@ -221,30 +336,30 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="flex flex-wrap items-center justify-center gap-3 mb-8"
+          className="flex flex-wrap items-center justify-center gap-3 mb-6"
         >
-          {HERO_STATS.map(({ value, label }) => (
+          {c.stats.map(({ value, label }) => (
             <div
               key={label}
               className="flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/8"
             >
-              <span className="text-sm font-black text-white">{value}</span>
+              <span className="text-sm font-black text-foreground">{value}</span>
               <span className="text-xs text-muted-foreground">{label}</span>
             </div>
           ))}
         </motion.div>
 
-        {/* Social proof strip */}
+        {/* Social proof */}
         <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground flex-wrap">
           <div className="flex items-center gap-2">
             <div className="flex -space-x-1">
-              {["AR", "MF", "DT", "RP"].map((i) => (
-                <div key={i} className="w-7 h-7 rounded-full bg-violet-600 border-2 border-background flex items-center justify-center text-[9px] font-bold text-white">
+              {[["AR","bg-violet-600"],["MF","bg-cyan-700"],["DT","bg-emerald-700"],["RP","bg-violet-800"]].map(([i, bg]) => (
+                <div key={i} className={cn("w-7 h-7 rounded-full border-2 border-background flex items-center justify-center text-[9px] font-bold text-white", bg)}>
                   {i}
                 </div>
               ))}
             </div>
-            <span>Fundadores que ya lo usan</span>
+            <span>{c.social1}</span>
           </div>
           <div className="hidden sm:flex items-center gap-1.5">
             <div className="flex gap-0.5">
@@ -252,9 +367,12 @@ function Hero() {
                 <Star key={s} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
-            <span>Aprobado por directores y coaches</span>
+            <span>{c.social2}</span>
           </div>
         </div>
+
+        {/* Product preview */}
+        <ProductPreview />
       </motion.div>
 
       <motion.div
@@ -262,961 +380,10 @@ function Hero() {
         transition={{ repeat: Infinity, duration: 2 }}
         className="absolute bottom-8 flex flex-col items-center gap-2 text-muted-foreground"
       >
-        <span className="text-xs">El gap que cuesta participantes</span>
+        <span className="text-xs">{c.scroll}</span>
         <ChevronDown className="w-4 h-4" />
       </motion.div>
     </section>
-  )
-}
-
-// ─── Problem Section ──────────────────────────────────────────────────────────
-
-function ProblemSection() {
-  const items = [
-    "Las inscripciones llegan por WhatsApp",
-    "El expediente del participante es una hoja de Excel",
-    "El seguimiento post-entrenamiento depende del criterio del coach",
-    "La comunicación son grupos con 200 personas que nadie puede gestionar",
-    "No sabes quién está avanzando y quién se está perdiendo hasta que ya es tarde",
-    "El crecimiento depende casi por completo de que la última generación enrole bien",
-  ]
-
-  return (
-    <section className="px-6 py-16 max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-12"
-      >
-        <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-4">El problema</p>
-        <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-          Tu centro opera igual que hace 20 años.
-        </h2>
-        {/* Dramatic stat */}
-        <div className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-red-500/8 border border-red-500/20 mb-4">
-          <span className="text-3xl font-black text-red-400">63%</span>
-          <p className="text-sm text-foreground/80 text-left leading-snug">
-            de los centros no sabe quién está perdiendo momentum<br className="hidden sm:block" /> hasta que ya abandonó. ¿Te suena esto familiar?
-          </p>
-        </div>
-      </motion.div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-10">
-        {items.map((item, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className="flex items-start gap-3 glass rounded-xl p-4"
-          >
-            <div className="w-2 h-2 rounded-full bg-red-400 flex-shrink-0 mt-1.5" />
-            <p className="text-sm text-foreground leading-relaxed">{item}</p>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="text-center">
-        <p className="text-2xl font-black text-muted-foreground italic">
-          La metodología evolucionó.{" "}
-          <span className="text-white">La tecnología no.</span>
-        </p>
-      </div>
-    </section>
-  )
-}
-
-// ─── Contrast Section ─────────────────────────────────────────────────────────
-
-function ContrastSection() {
-  const rows = [
-    { before: "WhatsApp para todo", after: "Comunicación centralizada y segmentada" },
-    { before: "Excel con datos dispersos", after: "Expediente vivo por participante" },
-    { before: "Seguimiento a ojo", after: "Momentum Score en tiempo real" },
-    { before: "Comunidad fragmentada", after: "Cohortes vivas con feed, chat y retos" },
-    { before: "Sin soporte entre fases", after: "Especialistas, contenido y misiones todos los días" },
-    { before: "Crecimiento por presión", after: "Crecimiento por valor percibido" },
-    { before: "No sabes qué está pasando", after: "Panel de control del dueño en tiempo real" },
-  ]
-
-  return (
-    <section className="px-6 py-16 max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-12"
-      >
-        <p className="text-xs uppercase tracking-widest text-cyan-400 font-semibold mb-4">El contraste</p>
-        <h2 className="text-4xl sm:text-5xl font-black text-white">
-          Esto es lo que cambia con ELEVA.
-        </h2>
-      </motion.div>
-
-      {/* Desktop: 2-col table — Mobile: stacked cards */}
-      <div className="hidden sm:block glass rounded-2xl overflow-hidden">
-        <div className="grid grid-cols-2 border-b border-border">
-          <div className="p-4 text-center">
-            <span className="text-xs font-bold text-red-400 uppercase tracking-wider">Hoy</span>
-          </div>
-          <div className="p-4 text-center border-l border-border">
-            <span className="text-xs font-bold text-violet-400 uppercase tracking-wider">Con ELEVA</span>
-          </div>
-        </div>
-        {rows.map((row, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.06 }}
-            className="grid grid-cols-2 border-b border-border last:border-0 hover:bg-white/2 transition-colors"
-          >
-            <div className="p-4 flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0" />
-              <span className="text-sm text-muted-foreground">{row.before}</span>
-            </div>
-            <div className="p-4 flex items-center gap-2 border-l border-border">
-              <CheckCircle className="w-3.5 h-3.5 text-violet-400 flex-shrink-0" />
-              <span className="text-sm text-white font-medium">{row.after}</span>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-      <div className="sm:hidden space-y-3">
-        {rows.map((row, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.06 }}
-            className="glass rounded-xl overflow-hidden"
-          >
-            <div className="flex items-start gap-2 px-4 py-3 border-b border-border">
-              <div className="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5" />
-              <span className="text-sm text-muted-foreground leading-snug">{row.before}</span>
-            </div>
-            <div className="flex items-start gap-2 px-4 py-3 bg-violet-600/5">
-              <CheckCircle className="w-3.5 h-3.5 text-violet-400 flex-shrink-0 mt-0.5" />
-              <span className="text-sm text-white font-medium leading-snug">{row.after}</span>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-// ─── Numbers Section ──────────────────────────────────────────────────────────
-
-interface StatDef {
-  value: number
-  prefix?: string
-  suffix: string
-  label: string
-  sub: string
-  color: string
-  bg: string
-}
-
-const STATS: StatDef[] = [
-  { value: 240, prefix: "+", suffix: "%", label: "Crecimiento de participantes", sub: "promedio en 12 meses vs. centros sin sistema", color: "text-violet-400", bg: "bg-violet-500/10" },
-  { value: 68, suffix: "%", label: "Conversión fase a fase", sub: "con seguimiento activo vs. 41% sin él", color: "text-cyan-400", bg: "bg-cyan-500/10" },
-  { value: 3, suffix: "x", label: "Más retención", sub: "cuando hay Momentum Score activo por participante", color: "text-green-400", bg: "bg-green-500/10" },
-  { value: 80, suffix: "%", label: "Leads más fáciles de enrolar", sub: "cuando han recibido contenido de valor antes", color: "text-yellow-400", bg: "bg-yellow-500/10" },
-  { value: 4, suffix: " hrs", label: "Por semana recuperadas", sub: "que el dueño ya no gasta en gestión manual", color: "text-pink-400", bg: "bg-pink-500/10" },
-]
-
-function StatCounter({ stat }: { stat: StatDef }) {
-  const { value, ref } = useCountUp(stat.value)
-  return (
-    <div ref={ref} className={cn("rounded-2xl p-6 text-center border border-white/6 flex flex-col gap-2", stat.bg)}>
-      <p className={cn("text-5xl sm:text-6xl font-black leading-none", stat.color)}>
-        {stat.prefix ?? ""}{value}{stat.suffix}
-      </p>
-      <p className="text-white font-bold text-sm">{stat.label}</p>
-      <p className="text-muted-foreground text-xs leading-relaxed">{stat.sub}</p>
-    </div>
-  )
-}
-
-function NumbersSection() {
-  return (
-    <section className="relative py-24 overflow-hidden">
-      {/* Gradient bg */}
-      <div className="absolute inset-0 bg-gradient-to-b from-violet-950/30 via-transparent to-transparent pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/40 to-transparent" />
-
-      <div className="relative max-w-5xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-4">Resultados reales</p>
-          <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-            Números que el sector{" "}
-            <span className="gradient-text">no puede ignorar.</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Cuando un centro opera con datos, el crecimiento deja de depender del enrolamiento.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-          {STATS.map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.09 }}
-            >
-              <StatCounter stat={stat} />
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center text-xs text-muted-foreground/60 mt-10"
-        >
-          Datos basados en comparativas de centros de transformación con y sin sistema de seguimiento activo.
-        </motion.p>
-      </div>
-    </section>
-  )
-}
-
-// ─── Testimonials ──────────────────────────────────────────────────────────────
-
-const TESTIMONIALS = [
-  {
-    quote: "En 6 meses pasamos de 80 a 210 participantes activos. El sistema hace el trabajo de tres personas — y lo hace mejor.",
-    name: "María Rodríguez",
-    role: "Directora · Centro Despertar",
-    city: "Guadalajara",
-    avatar: "MR",
-  },
-  {
-    quote: "El Momentum Score nos alertó de 3 participantes que iban a abandonar. Los retuvimos. Ese mes solo ya pagó el sistema completo.",
-    name: "Roberto Vargas",
-    role: "Fundador · TransForma",
-    city: "Monterrey",
-    avatar: "RV",
-  },
-  {
-    quote: "El enrolamiento de nuestra última generación fue mucho más fluido porque los leads llevaban meses recibiendo contenido nuestro.",
-    name: "Ana López",
-    role: "Co-fundadora · Centro Ser",
-    city: "Ciudad de México",
-    avatar: "AL",
-  },
-]
-
-function TestimonialsSection() {
-  return (
-    <section className="px-6 py-16 max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-10"
-      >
-        <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-3">Fundadores que ya operan con claridad</p>
-        <h2 className="text-3xl sm:text-4xl font-black text-white">
-          El crecimiento habla por sí solo.
-        </h2>
-      </motion.div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {TESTIMONIALS.map((t, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="glass rounded-2xl p-6 flex flex-col gap-4"
-          >
-            <div className="flex gap-0.5">
-              {[1,2,3,4,5].map((s) => (
-                <Star key={s} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-              ))}
-            </div>
-            <p className="text-sm text-foreground/80 leading-relaxed flex-1">
-              &ldquo;{t.quote}&rdquo;
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-violet-600 flex items-center justify-center text-xs font-bold text-white flex-shrink-0">
-                {t.avatar}
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-white">{t.name}</p>
-                <p className="text-xs text-muted-foreground">{t.role} · {t.city}</p>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-// ─── How It Works ─────────────────────────────────────────────────────────────
-
-const STAGE_DATA = [
-  {
-    id: "adquirir",
-    num: "01",
-    label: "Adquirir",
-    color: "cyan" as const,
-    headline: "El enrolamiento empieza mucho antes de vender",
-    story: "Tu centro organiza webinars y eventos abiertos. Tus participantes actuales invitan a su gente — es un ganar-ganar: ellos llevan a alguien a probar la experiencia, tu comunidad crece y el prospecto conoce el centro sin presión.\n\nELEVA registra cada asistente en el CRM, identifica señales de interés (abrió el email, asistió al webinar, preguntó en el chat) y automáticamente les envía contenido de valor. Cuando llega el momento de enrolar, el prospecto ya te conoce — el proceso puede ser hasta un 80% más sencillo que vender en frío.",
-    stat: { value: "80%", label: "más fácil enrolar un lead nutrido" },
-    features: [
-      { icon: "🎙️", text: "Webinars y eventos gratuitos de demostración" },
-      { icon: "🔗", text: "Link de referido para participantes — tracking de quién trajo a quién" },
-      { icon: "📋", text: "CRM integrado: registro automático de cada asistente o lead" },
-      { icon: "📡", text: "Detección de señales: clics, aperturas, preguntas, asistencias" },
-      { icon: "✉️", text: "Secuencias de contenido de valor por WhatsApp, Email y SMS" },
-      { icon: "🌐", text: "Sitio web propio del centro, optimizado en AEO + SEO" },
-    ],
-    visual: [
-      { step: "Evento gratuito", note: "Tu participante trae a un amigo" },
-      { step: "CRM registra la señal", note: "Asistió, preguntó, interactuó" },
-      { step: "Contenido de valor", note: "WhatsApp · Email · SMS automático" },
-      { step: "Momento de enrolamiento", note: "Ya confía en ti. El sí es natural." },
-    ],
-  },
-  {
-    id: "activar",
-    num: "02",
-    label: "Activar",
-    color: "yellow" as const,
-    headline: "De inscrito a comprometido en los primeros 7 días",
-    story: "La emoción del enrolamiento dura poco si no hay un sistema que la sostenga. ELEVA activa al participante desde el momento en que firma — con un onboarding claro, su expediente completo y su primera misión lista.\n\nNadie llega en frío al primer día. Nadie se pierde en el grupo de WhatsApp preguntando qué sigue.",
-    stat: { value: "7 días", label: "para consolidar el hábito de participación" },
-    features: [
-      { icon: "🚀", text: "Portal de bienvenida automático al inscribirse" },
-      { icon: "📝", text: "Expediente digital desde el día uno: objetivos, historial, coach asignado" },
-      { icon: "🎯", text: "Primera misión activa antes del primer entrenamiento" },
-      { icon: "🔔", text: "Notificaciones personalizadas por WhatsApp, Email o SMS" },
-      { icon: "📊", text: "Dashboard del participante: progreso, racha, misiones" },
-      { icon: "👥", text: "Asignación automática a cohorte y coach desde el CRM" },
-    ],
-    visual: [],
-  },
-  {
-    id: "retener",
-    num: "03",
-    label: "Retener",
-    color: "pink" as const,
-    headline: "Que nadie abandone en silencio",
-    story: "Retener no es solo evitar que se vayan — es darles razones para quedarse cada día. ELEVA combina comunicación multicanal, contenido de expertos, gamificación y una comunidad que se auto-refuerza.\n\nY cuando alguien empieza a desconectarse, el sistema lo detecta primero que el coach — con tiempo para intervenir antes de que sea tarde.",
-    stat: { value: "3x", label: "más retención con gamificación activa" },
-    features: [
-      { icon: "📱", text: "Seguimiento multicanal: WhatsApp, Email, SMS, notificaciones push" },
-      { icon: "🎙️", text: "Webinars y contenido exclusivo de expertos internos y externos" },
-      { icon: "🏆", text: "Gamificación: Momentum Score, racha de días, leaderboard de cohorte" },
-      { icon: "🔍", text: "Directorio de profesionales — busca coaches, especialistas y expertos en tu comunidad, con reseñas reales" },
-      { icon: "⚠️", text: "Alerta temprana de riesgo: intervención antes de abandono" },
-      { icon: "🩺", text: "Especialistas integrados — nutriólogos, psicólogos, coaches financieros agendables desde el sistema" },
-    ],
-    visual: [],
-  },
-  {
-    id: "escalar",
-    num: "04",
-    label: "Escalar",
-    color: "violet" as const,
-    headline: "Crecer sin reinventar el modelo",
-    story: "El escalamiento real no es traer más gente — es convertir tu centro en una operación que funciona con o sin un buen fin de semana. ELEVA te da visibilidad total: cuántos pasan de fase, qué cohort está en riesgo, qué ciudad está creciendo más.\n\nUn panel para varias sedes, varios coaches, varios formatos — sin caos.",
-    stat: { value: "1 panel", label: "para todas las sedes, coaches y cohortes" },
-    features: [
-      { icon: "📈", text: "Conversión fase a fase: cuántos pasan de Básico a Avanzado a Vía" },
-      { icon: "⚡", text: "Campañas de enrolamiento automatizadas al siguiente nivel" },
-      { icon: "🏅", text: "Alumni activos: egresados que refieren y mentorean a nuevos" },
-      { icon: "🌎", text: "Multi-sede: un sistema para varias ciudades o formatos" },
-      { icon: "🔐", text: "Roles diferenciados: dueño, director, coach, participante" },
-      { icon: "📊", text: "KPIs de negocio reales: ingresos, retención, NPS, momentum promedio" },
-    ],
-    visual: [],
-  },
-]
-
-const STAGE_COLORS = {
-  cyan: {
-    tab: "border-cyan-500 text-cyan-400 bg-cyan-500/10",
-    tabInactive: "border-transparent text-muted-foreground hover:text-white hover:border-white/20",
-    num: "text-cyan-400",
-    stat: "text-cyan-400",
-    dot: "bg-cyan-400",
-    icon: "bg-cyan-500/10 text-cyan-400",
-  },
-  yellow: {
-    tab: "border-yellow-500 text-yellow-400 bg-yellow-500/10",
-    tabInactive: "border-transparent text-muted-foreground hover:text-white hover:border-white/20",
-    num: "text-yellow-400",
-    stat: "text-yellow-400",
-    dot: "bg-yellow-400",
-    icon: "bg-yellow-500/10 text-yellow-400",
-  },
-  pink: {
-    tab: "border-pink-500 text-pink-400 bg-pink-500/10",
-    tabInactive: "border-transparent text-muted-foreground hover:text-white hover:border-white/20",
-    num: "text-pink-400",
-    stat: "text-pink-400",
-    dot: "bg-pink-400",
-    icon: "bg-pink-500/10 text-pink-400",
-  },
-  violet: {
-    tab: "border-violet-500 text-violet-400 bg-violet-500/10",
-    tabInactive: "border-transparent text-muted-foreground hover:text-white hover:border-white/20",
-    num: "text-violet-400",
-    stat: "text-violet-400",
-    dot: "bg-violet-400",
-    icon: "bg-violet-500/10 text-violet-400",
-  },
-}
-
-function HowItWorksSection() {
-  const [active, setActive] = useState(0)
-  const stage = STAGE_DATA[active]
-  const colors = STAGE_COLORS[stage.color]
-
-  return (
-    <section className="px-6 py-16 max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-10"
-      >
-        <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-4">Cómo funciona</p>
-        <h2 className="text-4xl sm:text-5xl font-black text-white">Las 4 etapas del sistema.</h2>
-        <p className="text-muted-foreground mt-3 text-sm">Toca cada etapa para ver exactamente qué incluye.</p>
-      </motion.div>
-
-      {/* Stage tabs */}
-      <div className="flex gap-1 sm:gap-2 mb-8 overflow-x-auto pb-1">
-        {STAGE_DATA.map((s, i) => {
-          const c = STAGE_COLORS[s.color]
-          const isActive = i === active
-          return (
-            <button
-              key={s.id}
-              onClick={() => setActive(i)}
-              className={cn(
-                "flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all whitespace-nowrap flex-shrink-0",
-                isActive ? c.tab : c.tabInactive
-              )}
-            >
-              <span className={cn("text-xs font-black", isActive ? c.num : "text-muted-foreground")}>{s.num}</span>
-              {s.label}
-            </button>
-          )
-        })}
-      </div>
-
-      {/* Active stage content */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={stage.id}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
-          transition={{ duration: 0.25 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
-        >
-          {/* Left — narrative */}
-          <div className="space-y-6">
-            <div>
-              <p className={cn("text-xs font-bold uppercase tracking-widest mb-2", colors.num)}>
-                {stage.num} — {stage.label}
-              </p>
-              <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight mb-4">
-                {stage.headline}
-              </h3>
-              {stage.story.split("\n\n").map((para, i) => (
-                <p key={i} className="text-sm text-foreground/75 leading-relaxed mb-3">{para}</p>
-              ))}
-            </div>
-
-            {/* Stat */}
-            <div className={cn("inline-flex items-center gap-3 px-4 py-3 rounded-xl border bg-white/3", `border-${stage.color}-500/20`)}>
-              <p className={cn("text-3xl font-black", colors.stat)}>{stage.stat.value}</p>
-              <p className="text-sm text-muted-foreground leading-snug max-w-[180px]">{stage.stat.label}</p>
-            </div>
-
-            {/* Visual flow (Adquirir only) */}
-            {stage.visual.length > 0 && (
-              <div className="space-y-2">
-                {stage.visual.map((step, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <div className="flex flex-col items-center">
-                      <div className={cn("w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black text-white", `bg-${stage.color}-500/30 border border-${stage.color}-500/40`)}>
-                        {i + 1}
-                      </div>
-                      {i < stage.visual.length - 1 && (
-                        <div className="w-px h-5 bg-white/10 mt-1" />
-                      )}
-                    </div>
-                    <div className="pb-2">
-                      <p className="text-sm font-semibold text-white">{step.step}</p>
-                      <p className="text-xs text-muted-foreground">{step.note}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Right — features */}
-          <div className="glass rounded-2xl p-6 space-y-3">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-4">
-              Qué incluye este módulo
-            </p>
-            {stage.features.map(({ icon, text }) => (
-              <div key={text} className="flex items-start gap-3 p-3 rounded-xl bg-white/3 border border-white/5 hover:border-white/10 transition-colors">
-                <span className="text-lg flex-shrink-0 leading-none">{icon}</span>
-                <p className="text-sm text-foreground/80 leading-relaxed">{text}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </AnimatePresence>
-    </section>
-  )
-}
-
-// ─── Ecosystem Section ────────────────────────────────────────────────────────
-
-function EcosystemSection() {
-  const specialists = [
-    { icon: "🥗", title: "Nutriólogos", desc: "Para compromisos de salud y bienestar" },
-    { icon: "🧠", title: "Psicólogos", desc: "Para relaciones y salud mental" },
-    { icon: "💰", title: "Coaches financieros", desc: "Para independencia y dinero" },
-    { icon: "💑", title: "Terapeutas de pareja", desc: "Para compromisos de vida amorosa" },
-    { icon: "🚀", title: "Coaches de negocios", desc: "Para compromisos profesionales" },
-    { icon: "📚", title: "Cursos online", desc: "Biblioteca de contenido por fase" },
-    { icon: "🎥", title: "Webinars en vivo", desc: "Abiertos para atraer, privados para retener" },
-    { icon: "🤝", title: "Red de alumni", desc: "Egresados activos, embajadores, mentores" },
-  ]
-
-  return (
-    <section className="px-6 py-16 max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-12"
-      >
-        <p className="text-xs uppercase tracking-widest text-cyan-400 font-semibold mb-4">El diferenciador</p>
-        <h2 className="text-4xl sm:text-5xl font-black text-white">Más allá de los entrenamientos.</h2>
-        <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg leading-relaxed">
-          Cuando el participante recibe valor real todos los días, el enrolamiento deja de sentirse
-          como presión y empieza a sentirse como consecuencia.
-        </p>
-      </motion.div>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {specialists.map((s, i) => (
-          <motion.div
-            key={s.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.06 }}
-            className="glass rounded-xl p-4 text-center space-y-2 hover:border-violet-500/30 transition-colors"
-          >
-            <div className="text-3xl">{s.icon}</div>
-            <p className="font-semibold text-white text-sm">{s.title}</p>
-            <p className="text-xs text-muted-foreground leading-snug">{s.desc}</p>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-// ─── Roles Section ────────────────────────────────────────────────────────────
-
-function RolesSection() {
-  const roles = [
-    {
-      title: "El dueño ve",
-      icon: <BarChart3 className="w-6 h-6 text-violet-400" />,
-      color: "violet" as const,
-      items: [
-        "Salud del centro en tiempo real",
-        "Participantes en riesgo con alertas automáticas",
-        "Conversión fase a fase",
-        "Performance por coach",
-        "KPIs de negocio: ingresos, retención, NPS",
-        "Campañas activas y pagos pendientes",
-      ],
-    },
-    {
-      title: "El coach ve",
-      icon: <Users className="w-6 h-6 text-cyan-400" />,
-      color: "cyan" as const,
-      items: [
-        "Sus cohortes y el estado de cada una",
-        "Sus participantes con Momentum Score",
-        "Quién necesita intervención urgente hoy",
-        "Historial de notas y actividad por persona",
-        "Calendario de eventos de sus grupos",
-        "Herramientas para activar participantes en un clic",
-      ],
-    },
-    {
-      title: "El participante vive",
-      icon: <Heart className="w-6 h-6 text-pink-400" />,
-      color: "pink" as const,
-      items: [
-        "Feed vivo de su comunidad y coach",
-        "Sus misiones y compromisos semanales",
-        "Su Momentum Score y racha personal",
-        "Su tribu — la cohorte como comunidad real",
-        "Especialistas conectados a sus objetivos de vida",
-        "Progreso visible en su proceso",
-      ],
-    },
-  ]
-
-  return (
-    <section className="px-6 py-16 max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-12"
-      >
-        <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-4">Para cada rol</p>
-        <h2 className="text-4xl sm:text-5xl font-black text-white">Un sistema para todos.</h2>
-      </motion.div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {roles.map((role, i) => (
-          <motion.div
-            key={role.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="glass rounded-2xl p-5 space-y-4"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
-                {role.icon}
-              </div>
-              <h3 className="font-bold text-white">{role.title}</h3>
-            </div>
-            <ul className="space-y-2">
-              {role.items.map((item) => (
-                <li key={item} className="flex items-start gap-2 text-sm">
-                  <ChevronRight className={cn(
-                    "w-3.5 h-3.5 flex-shrink-0 mt-0.5",
-                    role.color === "violet" ? "text-violet-400"
-                    : role.color === "cyan" ? "text-cyan-400"
-                    : "text-pink-400"
-                  )} />
-                  <span className="text-foreground/80">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-// ─── Demo CTA Section ─────────────────────────────────────────────────────────
-
-function DemoSection() {
-  return (
-    <section className="px-6 py-16 max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="glass-violet rounded-3xl p-10 text-center space-y-6"
-      >
-        <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold">Demo interactivo</p>
-        <h2 className="text-4xl sm:text-5xl font-black text-white">
-          Míralo funcionando en{" "}
-          <span className="gradient-text">Creania.</span>
-        </h2>
-        <p className="text-muted-foreground max-w-xl mx-auto text-lg leading-relaxed">
-          Un demo completamente interactivo con datos reales de un centro ficticio. Navega como el dueño,
-          actúa sobre participantes en riesgo, y luego entra como participante a ver qué vive Valeria.
-        </p>
-        <Link href="/demo">
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-base font-bold transition-colors"
-          >
-            Entrar al demo
-            <ArrowRight className="w-5 h-5" />
-          </motion.button>
-        </Link>
-        <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground flex-wrap">
-          <div className="flex items-center gap-1.5">
-            <Shield className="w-4 h-4 text-green-400" />
-            Sin registro requerido
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Activity className="w-4 h-4 text-cyan-400" />
-            Datos ficticios — se siente real
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Target className="w-4 h-4 text-violet-400" />
-            2 minutos para entender todo
-          </div>
-        </div>
-      </motion.div>
-    </section>
-  )
-}
-
-// ─── Build Section ────────────────────────────────────────────────────────────
-
-function BuildSection() {
-  return (
-    <section className="px-6 py-16 max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="relative overflow-hidden rounded-3xl border border-white/8 bg-gradient-to-br from-white/3 to-violet-600/5 p-10"
-      >
-        {/* Glow */}
-        <div className="absolute -right-20 -top-20 w-72 h-72 rounded-full bg-violet-600/10 blur-3xl pointer-events-none" />
-        <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12">
-          {/* Left */}
-          <div className="flex-1 text-center md:text-left">
-            <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-3">3 minutos</p>
-            <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight mb-4">
-              Construye tu propio sistema
-            </h2>
-            <p className="text-muted-foreground leading-relaxed mb-6 max-w-md mx-auto md:mx-0">
-              Responde 4 preguntas sencillas y ELEVA te muestra exactamente qué necesitas para adquirir, activar, retener y escalar — con tu diseño, tu marca y optimizado en AEO + SEO.
-            </p>
-            <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-8">
-              {["Adquirir", "Activar", "Retener", "Escalar"].map((m) => (
-                <span key={m} className="px-3 py-1 rounded-full text-xs font-semibold border border-white/10 text-muted-foreground">
-                  {m}
-                </span>
-              ))}
-            </div>
-            <Link href="/build">
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-sm font-bold transition-colors shadow-lg shadow-violet-600/25"
-              >
-                Empezar ahora — gratis
-                <ChevronRight className="w-4 h-4" />
-              </motion.button>
-            </Link>
-          </div>
-          {/* Right — step preview */}
-          <div className="flex-shrink-0 w-full max-w-xs space-y-2.5">
-            {[
-              { n: "01", q: "¿Cuántos participantes tienes?" },
-              { n: "02", q: "¿Cuál es tu mayor desafío?" },
-              { n: "03", q: "¿Cómo gestionas hoy?" },
-              { n: "04", q: "¿Cuál es tu meta a 12 meses?" },
-            ].map(({ n, q }) => (
-              <div key={n} className="flex items-center gap-3 p-3 rounded-xl bg-white/3 border border-white/6">
-                <span className="text-[10px] font-black text-violet-400 w-6 flex-shrink-0">{n}</span>
-                <span className="text-xs text-muted-foreground">{q}</span>
-                <div className="ml-auto w-4 h-4 rounded-full border border-white/10 flex-shrink-0" />
-              </div>
-            ))}
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-violet-600/15 border border-violet-500/30">
-              <span className="text-[10px] font-black text-violet-400 w-6 flex-shrink-0">✦</span>
-              <span className="text-xs text-violet-300 font-medium">Tu sistema personalizado</span>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </section>
-  )
-}
-
-// ─── For Who Section ──────────────────────────────────────────────────────────
-
-function ForWhoSection() {
-  const profiles = [
-    { icon: <Building2 className="w-5 h-5" />, title: "Fundadores y directores", desc: "Con 50 a 2,000 participantes activos que quieren operar con claridad y escala" },
-    { icon: <Activity className="w-5 h-5" />, title: "Centros con modelo de fases", desc: "Básico → Avanzado → Vía. El modelo que ELEVA entiende por diseño" },
-    { icon: <Users className="w-5 h-5" />, title: "Academias de coaches", desc: "Que certifican a otros entrenadores y necesitan estructura escalable" },
-    { icon: <Globe className="w-5 h-5" />, title: "Centros multi-ciudad", desc: "Con presencia en varias ciudades que hoy operan como islas separadas" },
-  ]
-
-  return (
-    <section className="px-6 py-16 max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-12"
-      >
-        <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-4">Para quién es</p>
-        <h2 className="text-4xl sm:text-5xl font-black text-white">
-          Ya son poderosos en sala.{" "}
-          <span className="gradient-text">ELEVA los hace serlo afuera.</span>
-        </h2>
-      </motion.div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {profiles.map((p, i) => (
-          <motion.div
-            key={p.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className="glass rounded-xl p-5 flex items-start gap-4"
-          >
-            <div className="w-10 h-10 rounded-xl bg-violet-600/20 flex items-center justify-center text-violet-400 flex-shrink-0">
-              {p.icon}
-            </div>
-            <div>
-              <h3 className="font-bold text-white">{p.title}</h3>
-              <p className="text-sm text-muted-foreground mt-1">{p.desc}</p>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-// ─── FAQ Section ──────────────────────────────────────────────────────────────
-
-function FAQSection() {
-  const faqs = [
-    {
-      q: "¿ELEVA reemplaza el enrolamiento boca a boca?",
-      a: "No. El boca a boca es uno de los motores más poderosos que tiene esta industria y ELEVA no lo elimina — lo amplifica. Agrega canales digitales para que el centro no dependa únicamente de eso, y da herramientas a los participantes para que invitar sea más fácil y más natural.",
-    },
-    {
-      q: "¿Es un CRM genérico?",
-      a: "Tiene un módulo de CRM, pero es mucho más. Un CRM genérico no entiende cohortes, fases de transformación, Momentum Score ni el modelo de enrolamiento. ELEVA fue construido desde cero para este modelo específico.",
-    },
-    {
-      q: "¿Funciona para centros pequeños?",
-      a: "Sí. Está diseñado para escalar desde centros con 50 participantes hasta operaciones con miles. Un centro pequeño que retiene mejor y opera más limpio crece más rápido — y el ROI es inmediato.",
-    },
-    {
-      q: "¿Cuánto tiempo toma implementarlo?",
-      a: "El onboarding básico es de 2 semanas. Primera semana: configuración, migración de participantes existentes, capacitación del staff. Segunda semana: primera cohorte activa en la app.",
-    },
-    {
-      q: "¿Los participantes tienen que descargar una app?",
-      a: "La experiencia del participante funciona como Progressive Web App (PWA) — se accede desde el navegador del teléfono y se puede instalar sin pasar por la App Store. También disponible como app nativa según el plan.",
-    },
-    {
-      q: "¿Funciona para centros en varias ciudades?",
-      a: "ELEVA es multi-sede desde el diseño. Una sola cuenta con múltiples ubicaciones, cohortes por ciudad, coaches asignados por sede y reportes consolidados o segmentados.",
-    },
-  ]
-
-  return (
-    <section className="px-6 py-16 max-w-3xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-12"
-      >
-        <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-4">Preguntas frecuentes</p>
-        <h2 className="text-4xl font-black text-white">Lo que siempre preguntan.</h2>
-      </motion.div>
-
-      <div className="space-y-3">
-        {faqs.map((faq) => (
-          <ExpandableSection key={faq.q} title={faq.q} subtitle="">
-            <p className="text-sm text-foreground/80 leading-relaxed">{faq.a}</p>
-          </ExpandableSection>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-// ─── Final CTA ────────────────────────────────────────────────────────────────
-
-function FinalCTA() {
-  return (
-    <section id="contacto" className="px-6 py-20 max-w-3xl mx-auto text-center">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="space-y-6"
-      >
-        <h2 className="text-4xl sm:text-5xl font-black text-white">
-          Tu centro merece un sistema{" "}
-          <span className="gradient-text">a su altura.</span>
-        </h2>
-        <p className="text-muted-foreground text-lg leading-relaxed">
-          Agenda una sesión estratégica gratuita. En 30 minutos te mostramos cómo ELEVA
-          se adapta a tu modelo, tu metodología y tus objetivos de crecimiento.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/demo">
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-base font-bold transition-colors"
-            >
-              Ver el demo primero
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
-          </Link>
-          <a
-            href="mailto:hola@elevaapp.io"
-            className="flex items-center gap-2 px-8 py-4 glass text-foreground rounded-xl text-base font-medium hover:text-white transition-colors"
-          >
-            Agendar sesión
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-        <p className="text-xs text-muted-foreground">
-          Sin compromiso · Respuesta en menos de 24 horas
-        </p>
-      </motion.div>
-    </section>
-  )
-}
-
-// ─── Footer ───────────────────────────────────────────────────────────────────
-
-function Footer() {
-  return (
-    <footer className="border-t border-border px-6 py-8 text-center">
-      <div className="flex items-center justify-center gap-2 mb-3">
-        <div className="w-6 h-6 rounded bg-violet-600 flex items-center justify-center">
-          <span className="text-white font-black text-xs">E</span>
-        </div>
-        <span className="font-black text-white tracking-tight">ELEVA</span>
-      </div>
-      <p className="text-xs text-muted-foreground">
-        El sistema operativo para centros de transformación · Estudio Oasis · 2025
-      </p>
-    </footer>
   )
 }
 
@@ -1230,16 +397,13 @@ export default function HomePage() {
         <Hero />
         <ProblemSection />
         <NumbersSection />
-        <ContrastSection />
+        <GrowthEngineSection />
+        <InsightsSection />
         <HowItWorksSection />
         <TestimonialsSection />
-        <EcosystemSection />
-        <RolesSection />
+        <PricingTeaser />
         <DemoSection />
-        <BuildSection />
-        <ForWhoSection />
-        <FAQSection />
-        <FinalCTA />
+        <FinalCTASection />
       </main>
       <Footer />
     </>

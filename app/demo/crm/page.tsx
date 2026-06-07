@@ -5,7 +5,7 @@ import {
   Search, Users, CreditCard, AlertTriangle, TrendingUp,
   ChevronDown, CheckCircle2, Clock, XCircle, Star,
   ArrowUpRight, MessageCircle, UserPlus, SlidersHorizontal,
-  Sparkles,
+  Sparkles, Brain, UserCheck, Globe, Tv,
 } from "lucide-react"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
@@ -27,6 +27,39 @@ const ONBOARDING = {
     { emoji: "🔍", text: "Busca cualquier participante por nombre y accede a su expediente completo." },
   ],
   cta: "Explorar el CRM →",
+}
+
+type LeadType = "referido" | "webinar" | "social" | "evento"
+
+interface LeadSource {
+  type: LeadType
+  label: string
+  detail: string
+}
+
+const LEAD_SOURCES: Record<string, LeadSource> = {
+  p1:  { type: "referido", label: "Diego Salinas", detail: "Amigo · lo invitó en Fin de Semana 2" },
+  p10: { type: "webinar",  label: "Webinar gratuito", detail: "\"Finanzas para mujeres\" · marzo 2025" },
+  p11: { type: "social",   label: "Redes sociales",  detail: "Instagram · Anuncio patrocinado" },
+  p12: { type: "evento",   label: "Evento presencial", detail: "Open Day CDMX · feb 2025" },
+  p13: { type: "referido", label: "Carmen Valdés",   detail: "Compañera de trabajo · gen. anterior" },
+  p14: { type: "webinar",  label: "Webinar gratuito", detail: "\"Liderazgo consciente\" · abr 2025" },
+  p15: { type: "social",   label: "Búsqueda orgánica", detail: "Google · \"coaching transformacional CDMX\"" },
+  p16: { type: "referido", label: "Héctor Ramírez",  detail: "Familiar · invitado en Fin de Semana 3" },
+}
+
+const LEAD_ICON: Record<LeadType, React.ElementType> = {
+  referido: UserCheck,
+  webinar:  Tv,
+  social:   Globe,
+  evento:   Star,
+}
+
+const LEAD_COLOR: Record<LeadType, string> = {
+  referido: "text-violet-400",
+  webinar:  "text-cyan-400",
+  social:   "text-blue-400",
+  evento:   "text-yellow-400",
 }
 
 type Filter = "todos" | "riesgo" | "pago_pendiente" | "activos" | "inactivos"
@@ -366,7 +399,7 @@ function ParticipantRow({
         </div>
 
         {/* Actions */}
-        <div className="hidden sm:flex items-center gap-1.5 justify-end" onClick={(e) => e.stopPropagation()}>
+        <div className="hidden sm:flex items-center gap-1 justify-end" onClick={(e) => e.stopPropagation()}>
           <button
             onClick={() => onAction("Mensaje enviado")}
             className={cn(
@@ -382,6 +415,13 @@ function ParticipantRow({
           <a
             href="/demo/expediente"
             className="p-1.5 rounded-lg text-muted-foreground hover:text-violet-400 hover:bg-violet-500/10 transition-colors"
+            title="Insights IA"
+          >
+            <Brain className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="/demo/expediente"
+            className="p-1.5 rounded-lg text-muted-foreground hover:text-white hover:bg-white/5 transition-colors"
             title="Ver expediente"
           >
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -394,8 +434,8 @@ function ParticipantRow({
 
       {/* Expanded row */}
       {expanded && (
-        <div className="px-4 sm:px-5 pb-4 pt-1 bg-white/2 border-t border-white/4">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
+        <div className="px-4 sm:px-5 pb-4 pt-1 bg-white/2 border-t border-white/4 space-y-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div>
               <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Misiones</p>
               <p className="text-sm font-semibold text-white">{p.missionsCompleted}/{p.missionsTotal} completadas</p>
@@ -415,6 +455,24 @@ function ParticipantRow({
               <p className={cn("text-sm font-bold", getMomentumColor(p.momentum))}>{p.momentum}%</p>
             </div>
           </div>
+
+          {/* Lead source */}
+          {(() => {
+            const src = LEAD_SOURCES[p.id]
+            if (!src) return null
+            const Icon = LEAD_ICON[src.type]
+            return (
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/3 border border-white/6">
+                <Icon className={cn("w-3.5 h-3.5 flex-shrink-0", LEAD_COLOR[src.type])} />
+                <div className="min-w-0">
+                  <span className="text-[10px] text-muted-foreground">Cómo llegó · </span>
+                  <span className={cn("text-[10px] font-semibold", LEAD_COLOR[src.type])}>{src.label}</span>
+                  <span className="text-[10px] text-muted-foreground"> · {src.detail}</span>
+                </div>
+              </div>
+            )
+          })()}
+
           <div className="flex gap-2 flex-wrap">
             <button
               onClick={() => onAction("Mensaje enviado")}
@@ -424,9 +482,15 @@ function ParticipantRow({
             </button>
             <a
               href="/demo/expediente"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg glass text-xs font-medium text-violet-400 hover:text-violet-300 hover:bg-violet-500/10 border border-violet-500/20 transition-colors"
+            >
+              <Brain className="w-3 h-3" /> Ver insights IA
+            </a>
+            <a
+              href="/demo/expediente"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-violet-600 hover:bg-violet-700 text-xs font-medium text-white transition-colors"
             >
-              <ArrowUpRight className="w-3 h-3" /> Ver expediente completo
+              <ArrowUpRight className="w-3 h-3" /> Expediente completo
             </a>
           </div>
         </div>
