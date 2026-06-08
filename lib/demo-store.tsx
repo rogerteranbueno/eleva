@@ -3,6 +3,8 @@
 import { createContext, useContext, useReducer, type ReactNode } from "react"
 import type { DemoState } from "@/lib/types"
 
+const ATENCION_INITIAL = 14
+
 const INITIAL_STATE: DemoState = {
   reminderSent: false,
   missionAssigned: false,
@@ -15,6 +17,7 @@ const INITIAL_STATE: DemoState = {
   coachNoteAdded: false,
   seenOnboarding: [],
   selectedCenter: "cdmx",
+  atencionResolved: 0,
 }
 
 type Action =
@@ -28,16 +31,17 @@ type Action =
   | { type: "ADD_COACH_NOTE" }
   | { type: "MARK_ONBOARDING_SEEN"; screenId: string }
   | { type: "SET_CENTER"; centerId: string }
+  | { type: "RESOLVE_ATENCION" }
   | { type: "RESET" }
 
 function reducer(state: DemoState, action: Action): DemoState {
   switch (action.type) {
     case "SEND_REMINDER":
-      return { ...state, reminderSent: true, valeriaMomentum: Math.min(state.valeriaMomentum + 2, 100) }
+      return { ...state, reminderSent: true, valeriaMomentum: Math.min(state.valeriaMomentum + 2, 100), atencionResolved: Math.min(state.atencionResolved + 1, ATENCION_INITIAL) }
     case "ASSIGN_MISSION":
-      return { ...state, missionAssigned: true, valeriaMomentum: Math.min(state.valeriaMomentum + 3, 100) }
+      return { ...state, missionAssigned: true, valeriaMomentum: Math.min(state.valeriaMomentum + 3, 100), atencionResolved: Math.min(state.atencionResolved + 1, ATENCION_INITIAL) }
     case "ESCALATE":
-      return { ...state, escalated: true, valeriaMomentum: Math.min(state.valeriaMomentum + 2, 100) }
+      return { ...state, escalated: true, valeriaMomentum: Math.min(state.valeriaMomentum + 2, 100), atencionResolved: Math.min(state.atencionResolved + 1, ATENCION_INITIAL) }
     case "INVITE_EVENT":
       return { ...state, eventInvited: true, valeriaMomentum: Math.min(state.valeriaMomentum + 2, 100) }
     case "COMPLETE_MISSION":
@@ -52,6 +56,8 @@ function reducer(state: DemoState, action: Action): DemoState {
       return { ...state, seenOnboarding: [...state.seenOnboarding, action.screenId] }
     case "SET_CENTER":
       return { ...state, selectedCenter: action.centerId }
+    case "RESOLVE_ATENCION":
+      return { ...state, atencionResolved: Math.min(state.atencionResolved + 1, ATENCION_INITIAL) }
     case "RESET":
       return INITIAL_STATE
     default:

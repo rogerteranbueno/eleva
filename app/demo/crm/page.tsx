@@ -199,7 +199,7 @@ export default function CRMPage() {
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-white">Directorio de Participantes</h1>
           <p className="text-muted-foreground text-sm mt-0.5">
-            {CRM_PARTICIPANTS.length} registros · actualizado en tiempo real
+            {CRM_PARTICIPANTS.length} participantes (muestra representativa) · 247 en el centro completo
           </p>
         </div>
         <button

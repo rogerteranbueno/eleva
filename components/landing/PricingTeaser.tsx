@@ -16,7 +16,7 @@ export function PricingTeaser() {
     ndaNote: "All clients operate under NDA",
     items: [
       { label: "Base Implementation", value: "from $15,000 USD", note: "2 months active · Expected 2x–3x growth", highlight: false },
-      { label: "Elite Implementation", value: "up to $30,000 USD", note: "6 months · Industry specialists · Potential 5x–10x", highlight: true },
+      { label: "Robust Implementation", value: "from $30,000 USD", note: "6 months · Dedicated team that implements everything · Potential 5x–10x", highlight: true },
       { label: "Monthly maintenance", value: "$699 USD / mo", note: "Fixed price regardless of how many participants you have", highlight: false },
     ],
     cta: "See what each plan includes",
@@ -28,7 +28,7 @@ export function PricingTeaser() {
     ndaNote: "Todos los clientes operan bajo NDA",
     items: [
       { label: "Implementación Base", value: "desde $15,000 USD", note: "2 meses activos · Crecimiento esperado 2x–3x", highlight: false },
-      { label: "Implementación Elite", value: "hasta $30,000 USD", note: "6 meses · Especialistas de la industria · Potencial 5x–10x", highlight: true },
+      { label: "Implementación Robusta", value: "desde $30,000 USD", note: "6 meses · Equipo dedicado que implementa todo · Potencial 5x–10x", highlight: true },
       { label: "Mantenimiento mensual", value: "$699 USD / mes", note: "Precio fijo sin importar cuántos participantes tengas", highlight: false },
     ],
     cta: "Ver qué incluye cada plan",

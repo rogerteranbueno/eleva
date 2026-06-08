@@ -189,4 +189,5 @@ export interface DemoState {
   coachNoteAdded: boolean
   seenOnboarding: string[]
   selectedCenter: string
+  atencionResolved: number
 }

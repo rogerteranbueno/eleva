@@ -31,6 +31,7 @@ import {
   Star,
   GitMerge,
   LayoutDashboard,
+  CalendarCheck,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { DemoProvider, useDemoStore } from "@/lib/demo-store"
@@ -46,22 +47,31 @@ type NavScreen = {
 
 type View = "owner" | "ops" | "participant" | "coach"
 
-const OWNER_SCREENS: NavScreen[] = [
-  { href: "/demo/pulso",        label: "Pulso del Centro",      shortLabel: "Pulso",    icon: Activity },
-  { href: "/demo/atencion",     label: "Necesitan Atención",    shortLabel: "Atención", icon: AlertTriangle, badge: 14 },
-  { href: "/demo/cohortes",     label: "Generaciones",          shortLabel: "Cohortes", icon: GitMerge },
-  { href: "/demo/crm",          label: "Directorio CRM",        shortLabel: "CRM",      icon: Database },
-  { href: "/demo/equipo",       label: "Visibilidad de Equipo", shortLabel: "Equipo",   icon: ShieldCheck },
-  { href: "/demo/finanzas",     label: "Finanzas",              shortLabel: "Finanzas", icon: DollarSign },
-  { href: "/demo/campanas",     label: "Campañas",              shortLabel: "Campañas", icon: Send },
-  { href: "/demo/webinars",     label: "Noches de invitados",   shortLabel: "Webinars", icon: Video },
-  { href: "/demo/inteligencia", label: "Motor de IA",           shortLabel: "IA",       icon: Brain },
-  { href: "/demo/expediente",   label: "Expediente Valeria",    shortLabel: "Exp.",     icon: User },
-]
+const ATENCION_TOTAL = 14
+
+function getOwnerScreens(atencionResolved: number): NavScreen[] {
+  const remaining = Math.max(0, ATENCION_TOTAL - atencionResolved)
+  return [
+    { href: "/demo/pulso",        label: "Pulso del Centro",      shortLabel: "Pulso",    icon: Activity },
+    { href: "/demo/atencion",     label: "Necesitan Atención",    shortLabel: "Atención", icon: AlertTriangle, ...(remaining > 0 ? { badge: remaining } : {}) },
+    { href: "/demo/cohortes",     label: "Generaciones",          shortLabel: "Cohortes", icon: GitMerge },
+    { href: "/demo/crm",          label: "Directorio CRM",        shortLabel: "CRM",      icon: Database },
+    { href: "/demo/equipo",       label: "Visibilidad de Equipo", shortLabel: "Equipo",   icon: ShieldCheck },
+    { href: "/demo/finanzas",     label: "Finanzas",              shortLabel: "Finanzas", icon: DollarSign },
+    { href: "/demo/campanas",     label: "Campañas",              shortLabel: "Campañas", icon: Send },
+    { href: "/demo/webinars",     label: "Noches de invitados",   shortLabel: "Webinars", icon: Video },
+    { href: "/demo/inteligencia", label: "Motor de IA",           shortLabel: "IA",       icon: Brain },
+    { href: "/demo/expediente",   label: "Expediente (demo)",     shortLabel: "Exp.",     icon: User },
+  ]
+}
 
 const OPS_SCREENS: NavScreen[] = [
-  { href: "/demo/ops/registro", label: "Mesa de Registro",   shortLabel: "Registro",  icon: ClipboardList },
-  { href: "/demo/crm",          label: "Agregar Participante", shortLabel: "Agregar", icon: UserPlus },
+  { href: "/demo/ops/dashboard",          label: "Centro de Operaciones", shortLabel: "Centro",       icon: Activity },
+  { href: "/demo/ops/registro",           label: "Mesa de Registro",      shortLabel: "Registro",     icon: ClipboardList },
+  { href: "/demo/ops/enrolamiento",       label: "Pipeline Enrolamiento", shortLabel: "Pipeline",     icon: GitMerge },
+  { href: "/demo/ops/pre-entrenamiento",  label: "Pre-entrenamiento",     shortLabel: "Pre-Train",    icon: Users },
+  { href: "/demo/ops/comunidad",          label: "Hub de Comunidad",      shortLabel: "Comunidad",    icon: Globe },
+  { href: "/demo/crm",                    label: "Directorio CRM",        shortLabel: "CRM",          icon: Database },
 ]
 
 const PARTICIPANT_SCREENS: NavScreen[] = [
@@ -80,7 +90,7 @@ const COACH_SCREENS: NavScreen[] = [
   { href: "/demo/crm", label: "Directorio", shortLabel: "CRM", icon: Database },
 ]
 
-const OWNER_PATHS = OWNER_SCREENS.map((s) => s.href)
+const OWNER_PATHS = getOwnerScreens(0).map((s) => s.href)
 const OPS_PATHS   = OPS_SCREENS.map((s) => s.href)
 const COACH_PATHS = COACH_SCREENS.map((s) => s.href)
 
@@ -135,7 +145,7 @@ function ViewSwitcher({ view, className }: { view: View; className?: string }) {
   const views = [
     { id: "owner" as View,       label: "Dueño",  href: "/demo/pulso",        activeColor: "bg-violet-600" },
     { id: "coach" as View,       label: "Coach",  href: "/demo/coach",        activeColor: "bg-emerald-600" },
-    { id: "ops" as View,         label: "Ops",    href: "/demo/ops/registro", activeColor: "bg-cyan-600" },
+    { id: "ops" as View,         label: "Ops",    href: "/demo/ops/dashboard", activeColor: "bg-cyan-600" },
     { id: "participant" as View, label: "Usuario",href: "/demo/feed",         activeColor: "bg-violet-600" },
   ]
   return (
@@ -162,7 +172,7 @@ function DemoNav() {
   const { dispatch, state } = useDemoStore()
   const view = getViewFromPath(pathname)
   const screens =
-    view === "owner" ? OWNER_SCREENS :
+    view === "owner" ? getOwnerScreens(state.atencionResolved) :
     view === "ops"   ? OPS_SCREENS :
     view === "coach" ? COACH_SCREENS :
     PARTICIPANT_SCREENS
@@ -205,7 +215,7 @@ function DemoNav() {
           <p className="text-[10px] text-muted-foreground mt-2 text-center">Como Valeria Romo</p>
         )}
         {view === "ops" && (
-          <p className="text-[10px] text-muted-foreground mt-2 text-center">Como Karla Ríos · Mesa de Registro</p>
+          <p className="text-[10px] text-muted-foreground mt-2 text-center">Como Karla Ríos · Operaciones</p>
         )}
         {view === "coach" && (
           <p className="text-[10px] text-muted-foreground mt-2 text-center">Como Ana Reyes · Gen. Omega</p>
@@ -243,8 +253,15 @@ function DemoNav() {
         })}
       </nav>
 
-      {/* Reset + back */}
+      {/* Reset + back + CTA */}
       <div className="p-4 border-t border-sidebar-border space-y-0.5">
+        <a
+          href="mailto:hola@elevaapp.io?subject=Quiero%20agendar%20sesión%20estratégica"
+          className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-xs font-semibold text-violet-400 hover:text-violet-300 hover:bg-violet-500/10 transition-colors"
+        >
+          <CalendarCheck className="w-3.5 h-3.5" />
+          Agendar sesión gratis
+        </a>
         <button
           onClick={() => dispatch({ type: "RESET" })}
           className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-xs text-muted-foreground hover:text-foreground hover:bg-sidebar-accent transition-colors"
@@ -267,10 +284,10 @@ function DemoNav() {
 function MobileNav() {
   const pathname = usePathname()
   const router = useRouter()
-  const { dispatch } = useDemoStore()
+  const { dispatch, state } = useDemoStore()
   const view = getViewFromPath(pathname)
   const screens =
-    view === "owner" ? OWNER_SCREENS :
+    view === "owner" ? getOwnerScreens(state.atencionResolved) :
     view === "ops"   ? OPS_SCREENS :
     view === "coach" ? COACH_SCREENS :
     PARTICIPANT_SCREENS
@@ -282,7 +299,7 @@ function MobileNav() {
         {[
           { id: "owner" as View,       label: "Dueño",  href: "/demo/pulso",        active: "text-violet-400 border-b-2 border-violet-600" },
           { id: "coach" as View,       label: "Coach",  href: "/demo/coach",        active: "text-emerald-400 border-b-2 border-emerald-500" },
-          { id: "ops" as View,         label: "Ops",    href: "/demo/ops/registro", active: "text-cyan-400 border-b-2 border-cyan-500" },
+          { id: "ops" as View,         label: "Ops",    href: "/demo/ops/dashboard", active: "text-cyan-400 border-b-2 border-cyan-500" },
           { id: "participant" as View, label: "Usuario",href: "/demo/feed",         active: "text-violet-400 border-b-2 border-violet-600" },
         ].map((v) => (
           <button
@@ -297,20 +314,28 @@ function MobileNav() {
           <RotateCcw className="w-3 h-3" />
         </button>
       </div>
-      {/* Screen tabs */}
-      <div className="flex">
-        {screens.map(({ href, shortLabel, icon: Icon }) => {
+      {/* Screen tabs — scrollable when many items (owner has 10) */}
+      <div className={cn("flex", screens.length > 5 ? "overflow-x-auto scrollbar-none" : "")}>
+        {screens.map(({ href, shortLabel, icon: Icon, badge }) => {
           const active = pathname === href
           return (
             <Link
               key={href}
               href={href}
               className={cn(
-                "flex-1 flex flex-col items-center gap-1 py-2 transition-colors",
+                "flex flex-col items-center gap-1 py-2 transition-colors flex-shrink-0",
+                screens.length > 5 ? "w-[62px]" : "flex-1",
                 active ? "text-violet-400" : "text-muted-foreground"
               )}
             >
-              <Icon className="w-4 h-4" />
+              <div className="relative">
+                <Icon className="w-4 h-4" />
+                {badge && (
+                  <span className="absolute -top-1 -right-1.5 min-w-[14px] h-[14px] rounded-full bg-red-500 text-white text-[9px] font-bold flex items-center justify-center px-0.5 leading-none">
+                    {badge > 9 ? "9+" : badge}
+                  </span>
+                )}
+              </div>
               <span className="text-[9px] font-medium leading-tight text-center whitespace-nowrap">{shortLabel}</span>
             </Link>
           )

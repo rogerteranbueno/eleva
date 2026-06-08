@@ -79,7 +79,7 @@ export function TestimonialsSection() {
           </h2>
 
           {/* NDA disclaimer */}
-          <div className="mt-6 inline-flex items-start gap-3 px-4 py-3 rounded-xl bg-white/4 border border-white/10 max-w-xl">
+          <div className="mt-6 inline-flex items-start gap-3 px-4 py-3 rounded-xl bg-foreground/[0.04] border border-border max-w-xl">
             <span className="text-base mt-0.5 flex-shrink-0">🔒</span>
             <div>
               <p className="text-sm font-semibold text-foreground/90">{c.ndaNote}</p>

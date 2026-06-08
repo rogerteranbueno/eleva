@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import {
-  DollarSign, TrendingUp, TrendingDown, AlertTriangle,
+  DollarSign, TrendingUp, TrendingDown, AlertTriangle, AlertCircle,
   CheckCircle2, MessageCircle, Sparkles, BarChart3, Users,
   ArrowUpRight, History, ArrowDownLeft, ArrowUpRight as ArrowOut,
   Plus, Edit3, Trash2, ClipboardList,
@@ -10,7 +10,7 @@ import {
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { OnboardingModal } from "@/components/demo/OnboardingModal"
-import { FINANCIALS, CENTERS } from "@/data/creania"
+import { FINANCIALS, CENTERS, FINANCIAL_ANOMALIES, type FinancialAnomaly } from "@/data/creania"
 import { cn } from "@/lib/utils"
 import { InfoTooltip } from "@/components/demo/InfoTooltip"
 import { useDemoStore } from "@/lib/demo-store"
@@ -29,7 +29,59 @@ const ONBOARDING = {
   cta: "Ver las finanzas →",
 }
 
-type FinTab = "resumen" | "historial"
+type FinTab = "resumen" | "historial" | "anomalias"
+
+const ANOMALY_CFG: Record<string, { label: string; color: string; bg: string }> = {
+  "pago-sin-comprobante":  { label: "Pago sin comprobante",  color: "text-red-400",    bg: "border-red-500/25 bg-red-500/5" },
+  "activo-sin-pago":       { label: "Activo sin pago",       color: "text-red-400",    bg: "border-red-500/25 bg-red-500/5" },
+  "beca-sin-autorizacion": { label: "Beca no autorizada",    color: "text-orange-400", bg: "border-orange-500/25 bg-orange-500/5" },
+  "comprobante-duplicado": { label: "Comprobante duplicado", color: "text-orange-400", bg: "border-orange-500/25 bg-orange-500/5" },
+  "monto-distinto":        { label: "Monto distinto al plan",color: "text-yellow-400", bg: "border-yellow-500/25 bg-yellow-500/5" },
+  "gasto-sin-comprobante": { label: "Gasto sin comprobante", color: "text-yellow-400", bg: "border-yellow-500/25 bg-yellow-500/5" },
+  "reembolso-pendiente":   { label: "Reembolso pendiente",   color: "text-violet-400", bg: "border-violet-500/25 bg-violet-500/5" },
+  "registro-no-autorizado":{ label: "Registro no autorizado",color: "text-red-400",    bg: "border-red-500/25 bg-red-500/5" },
+}
+
+function AnomalyCard({ a, onResolve }: { a: FinancialAnomaly; onResolve: () => void }) {
+  const cfg = ANOMALY_CFG[a.type] ?? { label: a.type, color: "text-muted-foreground", bg: "border-border bg-foreground/[0.02]" }
+  return (
+    <div className={cn("rounded-xl border p-3.5 space-y-2", cfg.bg)}>
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex items-center gap-2 min-w-0">
+          <AlertCircle className={cn("w-4 h-4 flex-shrink-0", cfg.color)} />
+          <span className={cn("text-[10px] font-bold uppercase tracking-wider", cfg.color)}>{cfg.label}</span>
+        </div>
+        <div className="flex items-center gap-1.5 flex-shrink-0">
+          <span className={cn(
+            "text-[9px] font-bold px-1.5 py-0.5 rounded-full",
+            a.status === "pendiente"    ? "bg-red-500/15 text-red-400 border border-red-500/25" :
+            a.status === "en-revision"  ? "bg-yellow-500/15 text-yellow-400 border border-yellow-500/25" :
+            "bg-green-500/15 text-green-400 border border-green-500/25"
+          )}>
+            {a.status === "pendiente" ? "Pendiente" : a.status === "en-revision" ? "En revisión" : "Resuelta"}
+          </span>
+        </div>
+      </div>
+      <p className="text-xs text-foreground/80 leading-relaxed">{a.description}</p>
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          {a.amount != null && (
+            <span className="text-xs font-bold text-foreground">${a.amount.toLocaleString("es-MX")} MXN</span>
+          )}
+          <span className="text-[10px] text-muted-foreground">{a.detectedAt} · {a.assignedTo}</span>
+        </div>
+        {a.status !== "resuelta" && (
+          <button
+            onClick={onResolve}
+            className="text-[10px] font-semibold text-green-400 hover:text-green-300 transition-colors flex-shrink-0"
+          >
+            Marcar resuelta →
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}
 
 type FinEntry = {
   id: string
@@ -71,6 +123,14 @@ export default function FinanzasPage() {
   const [entries, setEntries] = useState<FinEntry[]>(HISTORIAL)
   const [showAddEntry, setShowAddEntry] = useState(false)
   const [newEntry, setNewEntry] = useState({ type: "ingreso" as "ingreso" | "egreso", description: "", amount: "", category: "" })
+  const [anomalies, setAnomalies] = useState<FinancialAnomaly[]>(FINANCIAL_ANOMALIES)
+
+  const openAnomalies = anomalies.filter((a) => a.status !== "resuelta")
+
+  function resolveAnomaly(id: string) {
+    setAnomalies((prev) => prev.map((a) => a.id === id ? { ...a, status: "resuelta" as const } : a))
+    show("Anomalía marcada como resuelta ✓")
+  }
   const { state } = useDemoStore()
   const center = CENTERS.find((c) => c.id === state.selectedCenter) ?? CENTERS[0]
 
@@ -129,13 +189,18 @@ export default function FinanzasPage() {
       {/* Tabs */}
       <div className="flex gap-1 p-1 glass rounded-xl w-fit">
         {([
-          { id: "resumen", label: "Resumen", icon: BarChart3 },
-          { id: "historial", label: "Historial", icon: History },
-        ] as { id: FinTab; label: string; icon: React.ElementType }[]).map(({ id, label, icon: Icon }) => (
+          { id: "resumen",   label: "Resumen",    icon: BarChart3 },
+          { id: "historial", label: "Historial",  icon: History },
+          { id: "anomalias", label: "Anomalías",  icon: AlertTriangle, badge: openAnomalies.length },
+        ] as { id: FinTab; label: string; icon: React.ElementType; badge?: number }[]).map(({ id, label, icon: Icon, badge }) => (
           <button key={id} onClick={() => setTab(id)}
             className={cn("flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all",
               tab === id ? "bg-violet-600 text-white" : "text-muted-foreground hover:text-white")}>
-            <Icon className="w-3.5 h-3.5" />{label}
+            <Icon className="w-3.5 h-3.5" />
+            {label}
+            {badge != null && badge > 0 && (
+              <span className="text-[9px] font-black bg-red-500 text-white px-1.5 py-0.5 rounded-full">{badge}</span>
+            )}
           </button>
         ))}
       </div>
@@ -515,6 +580,96 @@ export default function FinanzasPage() {
         </div>
       </div>
       </>)}
+
+      {/* ── Anomalías tab ─────────────────────────────────────────── */}
+      {tab === "anomalias" && (
+        <div className="space-y-4">
+          {/* Explanation */}
+          <div className="glass rounded-xl p-4 space-y-2 border border-orange-500/15">
+            <div className="flex items-start gap-2">
+              <AlertTriangle className="w-4 h-4 text-orange-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-bold text-white">Anomalías detectadas automáticamente</p>
+                <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                  ELEVA monitorea cada movimiento financiero y detecta inconsistencias — pagos sin comprobante, participantes activos
+                  sin pago registrado, becas no autorizadas, comprobantes duplicados. Esto no es solo un dashboard: es disciplina financiera.
+                </p>
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-2 pt-1 border-t border-white/5">
+              <div className="text-center">
+                <p className="text-xl font-black text-red-400">{anomalies.filter(a => a.severity === "alta" && a.status !== "resuelta").length}</p>
+                <p className="text-[10px] text-muted-foreground">Severidad alta</p>
+              </div>
+              <div className="text-center">
+                <p className="text-xl font-black text-yellow-400">{anomalies.filter(a => a.severity === "media" && a.status !== "resuelta").length}</p>
+                <p className="text-[10px] text-muted-foreground">Severidad media</p>
+              </div>
+              <div className="text-center">
+                <p className="text-xl font-black text-green-400">{anomalies.filter(a => a.status === "resuelta").length}</p>
+                <p className="text-[10px] text-muted-foreground">Resueltas</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Alta severity */}
+          {anomalies.filter(a => a.severity === "alta").length > 0 && (
+            <div className="space-y-2">
+              <p className="text-[10px] uppercase tracking-widest text-red-400 font-semibold">🔴 Alta prioridad — resolver antes del cierre</p>
+              {anomalies.filter(a => a.severity === "alta").map((a) => (
+                <AnomalyCard key={a.id} a={a} onResolve={() => resolveAnomaly(a.id)} />
+              ))}
+            </div>
+          )}
+
+          {/* Media severity */}
+          {anomalies.filter(a => a.severity === "media").length > 0 && (
+            <div className="space-y-2">
+              <p className="text-[10px] uppercase tracking-widest text-yellow-400 font-semibold">🟡 Prioridad media — esta semana</p>
+              {anomalies.filter(a => a.severity === "media").map((a) => (
+                <AnomalyCard key={a.id} a={a} onResolve={() => resolveAnomaly(a.id)} />
+              ))}
+            </div>
+          )}
+
+          {/* Baja */}
+          {anomalies.filter(a => a.severity === "baja").length > 0 && (
+            <div className="space-y-2">
+              <p className="text-[10px] uppercase tracking-widest text-violet-400 font-semibold">🔵 Bajo impacto — revisar cuando puedas</p>
+              {anomalies.filter(a => a.severity === "baja").map((a) => (
+                <AnomalyCard key={a.id} a={a} onResolve={() => resolveAnomaly(a.id)} />
+              ))}
+            </div>
+          )}
+
+          {openAnomalies.length === 0 && (
+            <div className="text-center py-12 space-y-2">
+              <CheckCircle2 className="w-10 h-10 text-green-400/40 mx-auto" />
+              <p className="text-sm font-semibold text-green-400">Todo en orden</p>
+              <p className="text-xs text-muted-foreground">Sin anomalías activas. El sistema seguirá monitoreando.</p>
+            </div>
+          )}
+
+          {/* SOP note */}
+          <div className="glass rounded-xl p-4 border border-violet-500/15 space-y-2">
+            <p className="text-xs font-bold text-violet-400">¿Cómo evitar anomalías futuras?</p>
+            <div className="space-y-1.5">
+              {[
+                "Cada pago debe tener comprobante adjunto antes de marcar como 'pagado'",
+                "Los descuentos y becas requieren autorización firmada del dueño en el sistema",
+                "El corte de caja debe realizarse al final de cada evento presencial",
+                "Los participantes activos sin pago en 7 días generan alerta automática al coach",
+                "Los reembolsos tienen plazo máximo de 5 días hábiles para aprobación",
+              ].map((rule, i) => (
+                <div key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
+                  <span className="text-violet-400 font-bold flex-shrink-0 mt-0.5">{i + 1}.</span>
+                  <span className="leading-relaxed">{rule}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       <ActionToast message={toast.message} visible={toast.visible} onHide={hide} />
     </div>

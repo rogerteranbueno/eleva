@@ -222,6 +222,11 @@ export default function AtencionPage() {
       if (action === "reminder") dispatch({ type: "SEND_REMINDER" })
       if (action === "mission")  dispatch({ type: "ASSIGN_MISSION" })
       if (action === "event")    dispatch({ type: "INVITE_EVENT" })
+    } else {
+      // Any action on any at-risk participant marks one as resolved
+      if (action === "reminder" || action === "mission") {
+        dispatch({ type: "RESOLVE_ATENCION" })
+      }
     }
     show(msg)
   }
@@ -236,7 +241,7 @@ export default function AtencionPage() {
       <div>
         <h1 className="text-2xl font-bold text-white">Necesitan Atención</h1>
         <p className="text-muted-foreground text-sm mt-0.5">
-          Dos tipos de alerta que el sistema detecta y centraliza en un solo lugar
+          {AT_RISK_PARTICIPANTS.length} participantes detectados por el sistema · actúa directo desde aquí
         </p>
       </div>
 
@@ -252,7 +257,7 @@ export default function AtencionPage() {
           <AlertTriangle className="w-3.5 h-3.5" />
           En riesgo de abandono
           <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-red-500/20 text-red-400 font-bold">
-            {AT_RISK_PARTICIPANTS.length}
+            {Math.max(0, AT_RISK_PARTICIPANTS.length - state.atencionResolved)}
           </span>
         </button>
         <button

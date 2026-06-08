@@ -96,7 +96,7 @@ function Detail({ label, children }: { label: string; children: React.ReactNode 
 
 // ─── Section ──────────────────────────────────────────────────────────────────
 
-export function GrowthEngineSection() {
+export function GrowthEngineSection({ compact = false }: { compact?: boolean }) {
   const { lang } = useLang()
 
   const c = lang === "en" ? {
@@ -116,7 +116,7 @@ export function GrowthEngineSection() {
     without: "Without system",
     with: "With ELEVA follow-up",
     gapLabel: "per enrollment weekend",
-    gapNote: "200 enrolled × 11 extra people × avg Level 1 price",
+    gapNote: "200 enrolled × 11 extra people × avg Level 1 price (~$1,000 USD)",
 
     scoreTitle: "What actually drives graduation",
     scoreSub: "A participant who sees their real-time score works differently. ELEVA makes it visible.",
@@ -156,7 +156,7 @@ export function GrowthEngineSection() {
     without: "Sin sistema",
     with: "Con seguimiento ELEVA",
     gapLabel: "por fin de semana de enrolamiento",
-    gapNote: "200 inscritos × 11 personas extra × precio promedio Nivel 1",
+    gapNote: "200 inscritos × 11 personas extra × precio promedio Nivel 1 (~$1,000 USD)",
 
     scoreTitle: "Lo que mueve el puntaje de graduación",
     scoreSub: "Un participante que ve su puntaje en tiempo real trabaja diferente. ELEVA lo hace visible.",
@@ -227,7 +227,7 @@ export function GrowthEngineSection() {
         </motion.div>
 
         {/* ── Gap visualization ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className={compact ? "block" : "grid grid-cols-1 md:grid-cols-2 gap-6"}>
 
           <motion.div initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
             className="rounded-2xl border border-white/10 bg-white/3 p-6 space-y-6">
@@ -274,60 +274,62 @@ export function GrowthEngineSection() {
             </div>
           </motion.div>
 
-          {/* Score breakdown */}
-          <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="rounded-2xl border border-white/10 bg-white/3 p-6 space-y-5">
-            <div>
-              <p className="text-xs font-black uppercase tracking-widest text-white/40 mb-1">{c.scoreTitle}</p>
-              <p className="text-sm text-white/60 leading-relaxed">{c.scoreSub}</p>
-            </div>
-
-            <div className="space-y-4">
-              <ScoreBar label={c.s1} pct={45} color="text-amber-400" note={c.s1n} weight="40–50%" />
-              <ScoreBar label={c.s2} pct={25} color="text-cyan-400"   note={c.s2n} weight="25%" />
-              <ScoreBar label={c.s3} pct={20} color="text-violet-400" note={c.s3n} weight="20%" />
-              <ScoreBar label={c.s4} pct={15} color="text-emerald-400"note={c.s4n} weight="15%" />
-            </div>
-
-            <div className="rounded-xl bg-amber-500/8 border border-amber-500/20 p-3">
-              <p className="text-[11px] text-amber-400/80 leading-relaxed font-medium">{c.scoreInsight}</p>
-              <Detail label={c.d2label}><span className="text-white/50">{c.d2}</span></Detail>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* ── ELEVA's role ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {[
-            { icon: Trophy,        color: "amber",   title: c.el1, body: c.el1d },
-            { icon: AlertTriangle, color: "violet",  title: c.el2, body: c.el2d },
-            { icon: Zap,           color: "emerald", title: c.el3, body: c.el3d },
-          ].map(({ icon: Icon, color, title, body }, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className={`rounded-2xl border p-5 space-y-3
-                ${color === "amber"   ? "bg-amber-500/6 border-amber-500/20" :
-                  color === "violet"  ? "bg-violet-500/6 border-violet-500/20" :
-                  "bg-emerald-500/6 border-emerald-500/20"}`}
-            >
-              <div className={`w-9 h-9 rounded-xl border flex items-center justify-center
-                ${color === "amber"   ? "bg-amber-500/12 border-amber-500/25" :
-                  color === "violet"  ? "bg-violet-500/12 border-violet-500/25" :
-                  "bg-emerald-500/12 border-emerald-500/25"}`}>
-                <Icon className={`w-4 h-4
-                  ${color === "amber" ? "text-amber-400" :
-                    color === "violet" ? "text-violet-400" :
-                    "text-emerald-400"}`} />
+          {/* Score breakdown — hidden in compact mode */}
+          {!compact && (
+            <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+              className="rounded-2xl border border-white/10 bg-white/3 p-6 space-y-5">
+              <div>
+                <p className="text-xs font-black uppercase tracking-widest text-white/40 mb-1">{c.scoreTitle}</p>
+                <p className="text-sm text-white/60 leading-relaxed">{c.scoreSub}</p>
               </div>
-              <p className="text-sm font-bold text-white leading-snug">{title}</p>
-              <p className="text-xs text-white/55 leading-relaxed">{body}</p>
+              <div className="space-y-4">
+                <ScoreBar label={c.s1} pct={45} color="text-amber-400" note={c.s1n} weight="40–50%" />
+                <ScoreBar label={c.s2} pct={25} color="text-cyan-400"   note={c.s2n} weight="25%" />
+                <ScoreBar label={c.s3} pct={20} color="text-violet-400" note={c.s3n} weight="20%" />
+                <ScoreBar label={c.s4} pct={15} color="text-emerald-400"note={c.s4n} weight="15%" />
+              </div>
+              <div className="rounded-xl bg-amber-500/8 border border-amber-500/20 p-3">
+                <p className="text-[11px] text-amber-400/80 leading-relaxed font-medium">{c.scoreInsight}</p>
+                <Detail label={c.d2label}><span className="text-white/50">{c.d2}</span></Detail>
+              </div>
             </motion.div>
-          ))}
+          )}
         </div>
+
+        {/* ── ELEVA's role — hidden in compact mode ── */}
+        {!compact && (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              { icon: Trophy,        color: "amber",   title: c.el1, body: c.el1d },
+              { icon: AlertTriangle, color: "violet",  title: c.el2, body: c.el2d },
+              { icon: Zap,           color: "emerald", title: c.el3, body: c.el3d },
+            ].map(({ icon: Icon, color, title, body }, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className={`rounded-2xl border p-5 space-y-3
+                  ${color === "amber"   ? "bg-amber-500/6 border-amber-500/20" :
+                    color === "violet"  ? "bg-violet-500/6 border-violet-500/20" :
+                    "bg-emerald-500/6 border-emerald-500/20"}`}
+              >
+                <div className={`w-9 h-9 rounded-xl border flex items-center justify-center
+                  ${color === "amber"   ? "bg-amber-500/12 border-amber-500/25" :
+                    color === "violet"  ? "bg-violet-500/12 border-violet-500/25" :
+                    "bg-emerald-500/12 border-emerald-500/25"}`}>
+                  <Icon className={`w-4 h-4
+                    ${color === "amber" ? "text-amber-400" :
+                      color === "violet" ? "text-violet-400" :
+                      "text-emerald-400"}`} />
+                </div>
+                <p className="text-sm font-bold text-white leading-snug">{title}</p>
+                <p className="text-xs text-white/55 leading-relaxed">{body}</p>
+              </motion.div>
+            ))}
+          </div>
+        )}
 
         {/* ── CTA ── */}
         <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}

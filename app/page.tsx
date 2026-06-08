@@ -24,6 +24,8 @@ import { GrowthEngineSection } from "@/components/landing/GrowthEngineSection"
 import { NumbersSection } from "@/components/landing/NumbersSection"
 import { InsightsSection } from "@/components/landing/InsightsSection"
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection"
+import { TodoIncluidoSection } from "@/components/landing/TodoIncluidoSection"
+import { BuildTeaserSection } from "@/components/landing/BuildTeaserSection"
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection"
 import { PricingTeaser } from "@/components/landing/PricingTeaser"
 import { DemoSection } from "@/components/landing/DemoSection"
@@ -57,8 +59,8 @@ function Nav() {
   const { lang, setLang } = useLang()
 
   const navLinks = lang === "en"
-    ? { features: "Features", pricing: "Pricing", simulate: "Simulate impact", demo: "See demo" }
-    : { features: "Funcionalidades", pricing: "Precios", simulate: "Simular impacto", demo: "Ver demo" }
+    ? { features: "Features", pricing: "Pricing", diagnose: "Free diagnosis", simulate: "Simulate", demo: "See demo" }
+    : { features: "Funcionalidades", pricing: "Precios", diagnose: "Diagnóstico gratis", simulate: "Simular", demo: "Ver demo" }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-xl border-b border-border transition-colors duration-300">
@@ -75,6 +77,9 @@ function Nav() {
           </Link>
           <Link href="/precios" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors hidden sm:block px-3 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5">
             {navLinks.pricing}
+          </Link>
+          <Link href="/build" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors hidden lg:block px-3 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5">
+            {navLinks.diagnose}
           </Link>
           <Link href="/simulador" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors hidden sm:block px-3 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5">
             {navLinks.simulate}
@@ -123,6 +128,9 @@ function Nav() {
               </Link>
               <Link href="/precios" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                 <ChevronRight className="w-4 h-4 text-violet-400" />{navLinks.pricing}
+              </Link>
+              <Link href="/build" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <ChevronRight className="w-4 h-4 text-violet-400" />{navLinks.diagnose}
               </Link>
               <Link href="/simulador" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                 <ChevronRight className="w-4 h-4 text-violet-400" />{navLinks.simulate}
@@ -222,7 +230,7 @@ function Hero() {
   const { lang } = useLang()
 
   const c = lang === "en" ? {
-    badge: "The operating system for transformation centers",
+    badge: "Software + implementation team for transformation centers",
     h1a: "Your center can grow",
     h1b: "2.4x",
     h1c: "in 12 months.",
@@ -231,7 +239,7 @@ function Hero() {
     cta1: "See the live demo",
     cta2: "Simulate my impact",
     stats: [
-      { value: "+140%", label: "average growth" },
+      { value: "+140%", label: "avg growth · 2.4x" },
       { value: "68%", label: "phase-to-phase conversion" },
       { value: "40+", label: "centers in Latin America" },
     ],
@@ -239,7 +247,7 @@ function Hero() {
     social2: "Trusted by directors and coaches",
     scroll: "How do they do it?",
   } : {
-    badge: "El sistema operativo para centros de transformación",
+    badge: "Software + equipo de implementación para centros de transformación",
     h1a: "Tu centro puede crecer",
     h1b: "2.4 veces",
     h1c: "en 12 meses.",
@@ -248,7 +256,7 @@ function Hero() {
     cta1: "Ver el demo en vivo",
     cta2: "Simular mi impacto",
     stats: [
-      { value: "+140%", label: "crecimiento promedio" },
+      { value: "+140%", label: "crecimiento prom. · 2.4x" },
       { value: "68%", label: "conversión fase a fase" },
       { value: "40+", label: "centros en Latinoamérica" },
     ],
@@ -386,9 +394,11 @@ export default function HomePage() {
         <ForWhoSection />
         <ProblemSection />
         <NumbersSection />
-        <GrowthEngineSection />
+        <GrowthEngineSection compact />
         <InsightsSection />
         <HowItWorksSection />
+        <TodoIncluidoSection />
+        <BuildTeaserSection />
         <TestimonialsSection />
         <PricingTeaser />
         <DemoSection />

@@ -261,27 +261,69 @@ export const MARIANA: Participant = {
 }
 
 export const AT_RISK_PARTICIPANTS = [
+  // ── Alta prioridad — riesgo crítico ───────────────────────────────────────
   { ...VALERIA },
   {
-    id: "p4", name: "Roberto Campos", avatar: "RC", momentum: 31, inactiveDays: 8,
-    cohorte: "Generación Norte", riskLevel: "high" as const, coachId: "c2",
-    pendingMissions: 2, phase: "Expansión" as const,
+    id: "p4",  name: "Roberto Campos",  avatar: "RC", momentum: 31, inactiveDays: 8,
+    cohorte: "Generación Norte",    riskLevel: "high"   as const, coachId: "c2",
+    pendingMissions: 2, phase: "Expansión"   as const,
   },
   {
-    id: "p5", name: "Lucía Fernández", avatar: "LF", momentum: 38, inactiveDays: 6,
-    cohorte: "Generación Omega", riskLevel: "high" as const, coachId: "c1",
+    id: "p22", name: "Paola Serrano",   avatar: "PS", momentum: 29, inactiveDays: 9,
+    cohorte: "Generación Norte",    riskLevel: "high"   as const, coachId: "c2",
+    pendingMissions: 3, phase: "Expansión"   as const,
+  },
+  {
+    id: "p25", name: "Ernesto Vargas",  avatar: "EV", momentum: 37, inactiveDays: 7,
+    cohorte: "Generación Norte",    riskLevel: "high"   as const, coachId: "c2",
+    pendingMissions: 2, phase: "Expansión"   as const,
+  },
+  {
+    id: "p34", name: "Carlos Peñafiel", avatar: "CP", momentum: 35, inactiveDays: 7,
+    cohorte: "Generación Vía 12",   riskLevel: "high"   as const, coachId: "c3",
+    pendingMissions: 2, phase: "Vía Creania" as const,
+  },
+  {
+    id: "p5",  name: "Lucía Fernández", avatar: "LF", momentum: 38, inactiveDays: 6,
+    cohorte: "Generación Omega",    riskLevel: "high"   as const, coachId: "c1",
+    pendingMissions: 1, phase: "Vía Creania" as const,
+  },
+  // ── Moderado — intervención recomendada ───────────────────────────────────
+  {
+    id: "p41", name: "Mónica Estrella", avatar: "ME", momentum: 43, inactiveDays: 6,
+    cohorte: "Generación Vía 12",   riskLevel: "medium" as const, coachId: "c3",
     pendingMissions: 1, phase: "Vía Creania" as const,
   },
   {
-    id: "p6", name: "Andrés Mora", avatar: "AM", momentum: 42, inactiveDays: 4,
-    cohorte: "Generación Norte", riskLevel: "medium" as const, coachId: "c2",
-    pendingMissions: 1, phase: "Expansión" as const,
+    id: "p16", name: "Omar Castillo",   avatar: "OC", momentum: 44, inactiveDays: 5,
+    cohorte: "Generación Omega",    riskLevel: "medium" as const, coachId: "c1",
+    pendingMissions: 1, phase: "Vía Creania" as const,
+  },
+  {
+    id: "p7",  name: "Gabriela Cruz",   avatar: "GC", momentum: 45, inactiveDays: 3,
+    cohorte: "Generación Vía 12",   riskLevel: "medium" as const, coachId: "c3",
+    pendingMissions: 0, phase: "Despertar"   as const,
+  },
+  {
+    id: "p6",  name: "Andrés Mora",     avatar: "AM", momentum: 42, inactiveDays: 4,
+    cohorte: "Generación Norte",    riskLevel: "medium" as const, coachId: "c2",
+    pendingMissions: 1, phase: "Expansión"   as const,
   },
   { ...MARIANA },
   {
-    id: "p7", name: "Gabriela Cruz", avatar: "GC", momentum: 45, inactiveDays: 3,
-    cohorte: "Generación Vía 12", riskLevel: "medium" as const, coachId: "c3",
-    pendingMissions: 0, phase: "Despertar" as const,
+    id: "p18", name: "Javier Montes",   avatar: "JM", momentum: 49, inactiveDays: 4,
+    cohorte: "Generación Omega",    riskLevel: "medium" as const, coachId: "c1",
+    pendingMissions: 2, phase: "Vía Creania" as const,
+  },
+  {
+    id: "p38", name: "Pablo Guerrero",  avatar: "PG", momentum: 52, inactiveDays: 4,
+    cohorte: "Generación Vía 12",   riskLevel: "medium" as const, coachId: "c3",
+    pendingMissions: 1, phase: "Despertar"   as const,
+  },
+  {
+    id: "p14", name: "Fernando Ríos",   avatar: "FR", momentum: 55, inactiveDays: 3,
+    cohorte: "Generación Omega",    riskLevel: "medium" as const, coachId: "c1",
+    pendingMissions: 1, phase: "Vía Creania" as const,
   },
 ]
 
@@ -649,17 +691,17 @@ export const TODAY_EVENT = {
 }
 
 export const EVENT_CHECKIN_LIST = [
-  { id: "p1",  name: "Valeria Romo",     avatar: "VR", phone: "+52 55 1234 5678", confirmed: true,  checkedIn: false, paymentStatus: "pending" as const },
-  { id: "p10", name: "Carmen Valdés",    avatar: "CV", phone: "+52 55 2345 6789", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const },
-  { id: "p11", name: "Héctor Ramírez",   avatar: "HR", phone: "+52 55 3456 7890", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const },
-  { id: "p12", name: "Lucía Fernández",  avatar: "LF", phone: "+52 55 4567 8901", confirmed: false, checkedIn: false, paymentStatus: "paid" as const },
-  { id: "p13", name: "Priya Nair",       avatar: "PN", phone: "+52 55 5678 9012", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const },
-  { id: "p14", name: "Fernando Ríos",    avatar: "FR", phone: "+52 55 6789 0123", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const },
-  { id: "p15", name: "Isabel Gutiérrez", avatar: "IG", phone: "+52 55 7890 1234", confirmed: false, checkedIn: false, paymentStatus: "paid" as const },
-  { id: "p16", name: "Omar Castillo",    avatar: "OC", phone: "+52 55 8901 2345", confirmed: true,  checkedIn: false, paymentStatus: "overdue" as const },
-  { id: "p17", name: "Daniela Espinosa", avatar: "DE", phone: "+52 55 9012 3456", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const },
-  { id: "p18", name: "Javier Montes",    avatar: "JM", phone: "+52 55 0123 4567", confirmed: false, checkedIn: false, paymentStatus: "paid" as const },
-  { id: "p19", name: "Claudia Méndez",   avatar: "CM", phone: "+52 55 1234 0001", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const },
+  { id: "p1",  name: "Valeria Romo",     avatar: "VR", phone: "+52 55 1234 5678", confirmed: true,  checkedIn: false, paymentStatus: "pending" as const,  referredBy: "Diego Salinas",    missingInfo: ["email"] },
+  { id: "p10", name: "Carmen Valdés",    avatar: "CV", phone: "+52 55 2345 6789", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const,     referredBy: "Valeria Romo",     missingInfo: [] },
+  { id: "p11", name: "Héctor Ramírez",   avatar: "HR", phone: "+52 55 3456 7890", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const,     referredBy: null,               missingInfo: [] },
+  { id: "p12", name: "Lucía Fernández",  avatar: "LF", phone: "+52 55 4567 8901", confirmed: false, checkedIn: false, paymentStatus: "paid" as const,     referredBy: "Omar Castillo",    missingInfo: ["foto", "fecha de nacimiento"] },
+  { id: "p13", name: "Priya Nair",       avatar: "PN", phone: "+52 55 5678 9012", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const,     referredBy: null,               missingInfo: [] },
+  { id: "p14", name: "Fernando Ríos",    avatar: "FR", phone: "+52 55 6789 0123", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const,     referredBy: "Carmen Valdés",    missingInfo: [] },
+  { id: "p15", name: "Isabel Gutiérrez", avatar: "IG", phone: "+52 55 7890 1234", confirmed: false, checkedIn: false, paymentStatus: "paid" as const,     referredBy: null,               missingInfo: ["objetivo inicial"] },
+  { id: "p16", name: "Omar Castillo",    avatar: "OC", phone: "+52 55 8901 2345", confirmed: true,  checkedIn: false, paymentStatus: "overdue" as const,   referredBy: "Héctor Ramírez",   missingInfo: [] },
+  { id: "p17", name: "Daniela Espinosa", avatar: "DE", phone: "+52 55 9012 3456", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const,     referredBy: null,               missingInfo: [] },
+  { id: "p18", name: "Javier Montes",    avatar: "JM", phone: "+52 55 0123 4567", confirmed: false, checkedIn: false, paymentStatus: "paid" as const,     referredBy: "Daniela Espinosa", missingInfo: ["email", "teléfono de emergencia"] },
+  { id: "p19", name: "Claudia Méndez",   avatar: "CM", phone: "+52 55 1234 0001", confirmed: true,  checkedIn: false, paymentStatus: "paid" as const,     referredBy: null,               missingInfo: [] },
 ]
 
 // ─── Cohort funnel data ───────────────────────────────────────────────────────
@@ -893,8 +935,586 @@ export const LEVEL_PARTICIPANTS: Record<string, Record<string, Array<{
   },
 }
 
+// ─── Enrollment Pipeline ─────────────────────────────────────────────────────
+// Tracks who is inviting whom across program levels.
+// Three key transitions in the cycle:
+//   VIA participants  →  invite externals to  →  La Posibilidad (Despertar)
+//   Despertar grads   →  invited to enroll in →  La Imposibilidad (Expansión)
+//   Expansión grads   →  invited to enroll in →  VIA (Vía Creania)
+
+export type EnrollmentStatus =
+  | "comprometido"   // participant committed to invite/enroll someone
+  | "confirmado"     // invited person confirmed they will come
+  | "pagado"         // payment received — fully enrolled
+  | "perdido"        // fell through — no longer pursuing
+
+export type ProgramLevel = "Despertar" | "Expansión" | "Vía Creania"
+
+export interface EnrollmentCommitment {
+  id: string
+  // Who is doing the inviting
+  fromId: string
+  fromName: string
+  fromAvatar: string
+  fromLevel: ProgramLevel          // level the inviter is currently in
+  fromCohorte: string
+  becaUsed: boolean                // if they're using a scholarship/beca
+  // Who they're inviting
+  inviteeName: string
+  inviteePhone: string
+  inviteeRelation: string          // "amiga del trabajo" / "hermano" / "cliente", etc.
+  // Where they're going
+  toLevel: ProgramLevel            // level the invitee will enter
+  toTrainingDate: string           // next available event date
+  // Status tracking
+  status: EnrollmentStatus
+  committedDate: string
+  lastContactDate: string | null
+  notes: string | null
+}
+
+// Becas = scholarships earned by VIA participants for playing big with their promises
+export interface BecaRecord {
+  ownerId: string
+  ownerName: string
+  ownerAvatar: string
+  ownerCohorte: string
+  becasEarned: number
+  becasUsed: number
+  becasAvailable: number
+  earnedAt: string                 // which promise review they earned them in
+}
+
+// ── VIA → La Posibilidad (Despertar) commitments ───────────────────────────
+
+export const PIPELINE_VIA_TO_POSIBILIDAD: EnrollmentCommitment[] = [
+  {
+    id: "env1",
+    fromId: "p2", fromName: "Diego Salinas", fromAvatar: "DS",
+    fromLevel: "Vía Creania", fromCohorte: "Generación Vía 12", becaUsed: true,
+    inviteeName: "Rodrigo Espinosa",  inviteePhone: "+52 55 1234 5678",
+    inviteeRelation: "socio de negocios",
+    toLevel: "Despertar", toTrainingDate: "13 jun 2025",
+    status: "confirmado", committedDate: "28 may 2025", lastContactDate: "3 jun 2025",
+    notes: "Confirmó por WhatsApp. Pendiente pago del 50%.",
+  },
+  {
+    id: "env2",
+    fromId: "p32", fromName: "Natalia Vega", fromAvatar: "NV",
+    fromLevel: "Vía Creania", fromCohorte: "Generación Vía 12", becaUsed: false,
+    inviteeName: "Carolina Restrepo", inviteePhone: "+52 55 8800 1122",
+    inviteeRelation: "amiga de la universidad",
+    toLevel: "Despertar", toTrainingDate: "13 jun 2025",
+    status: "comprometido", committedDate: "1 jun 2025", lastContactDate: "1 jun 2025",
+    notes: "Le interesó mucho. Está revisando fechas con su esposo.",
+  },
+  {
+    id: "env3",
+    fromId: "p36", fromName: "Rodrigo Sánchez", fromAvatar: "RS",
+    fromLevel: "Vía Creania", fromCohorte: "Generación Vía 12", becaUsed: true,
+    inviteeName: "Luis Torres",       inviteePhone: "+52 55 2345 6789",
+    inviteeRelation: "primo",
+    toLevel: "Despertar", toTrainingDate: "13 jun 2025",
+    status: "pagado", committedDate: "27 may 2025", lastContactDate: "2 jun 2025",
+    notes: "Pagó completo. Listo para el Despertar.",
+  },
+  {
+    id: "env4",
+    fromId: "p10", fromName: "Carmen Valdés", fromAvatar: "CV",
+    fromLevel: "Vía Creania", fromCohorte: "Generación Omega", becaUsed: false,
+    inviteeName: "Ana Paula Vidal",   inviteePhone: "+52 55 8765 4321",
+    inviteeRelation: "compañera de trabajo",
+    toLevel: "Despertar", toTrainingDate: "13 jun 2025",
+    status: "comprometido", committedDate: "29 may 2025", lastContactDate: "29 may 2025",
+    notes: null,
+  },
+  {
+    id: "env5",
+    fromId: "n6", fromName: "Marco Fuentes", fromAvatar: "MF",
+    fromLevel: "Vía Creania", fromCohorte: "Generación Norte", becaUsed: true,
+    inviteeName: "Paola Mendez",      inviteePhone: "+52 55 3456 7890",
+    inviteeRelation: "cliente",
+    toLevel: "Despertar", toTrainingDate: "13 jun 2025",
+    status: "comprometido", committedDate: "30 may 2025", lastContactDate: "30 may 2025",
+    notes: "Ha llamado 2 veces sin respuesta.",
+  },
+  {
+    id: "env6",
+    fromId: "p19", fromName: "Claudia Méndez", fromAvatar: "CM",
+    fromLevel: "Vía Creania", fromCohorte: "Generación Omega", becaUsed: false,
+    inviteeName: "Jorge Ríos",        inviteePhone: "+52 55 5544 3322",
+    inviteeRelation: "pareja",
+    toLevel: "Despertar", toTrainingDate: "13 jun 2025",
+    status: "perdido", committedDate: "22 may 2025", lastContactDate: "28 may 2025",
+    notes: "No quiso continuar. No se pudo enrolar.",
+  },
+  {
+    id: "env7",
+    fromId: "n4", fromName: "Priya Nair", fromAvatar: "PN",
+    fromLevel: "Vía Creania", fromCohorte: "Generación Omega", becaUsed: false,
+    inviteeName: "Daniela Castro",    inviteePhone: "+52 55 7890 1234",
+    inviteeRelation: "amiga",
+    toLevel: "Despertar", toTrainingDate: "13 jun 2025",
+    status: "pagado", committedDate: "3 jun 2025", lastContactDate: "3 jun 2025",
+    notes: "Pagó completo.",
+  },
+]
+
+// ── La Posibilidad → La Imposibilidad (Expansión) commitments ──────────────
+
+export const PIPELINE_POSIBILIDAD_TO_IMPOSIBILIDAD: EnrollmentCommitment[] = [
+  {
+    id: "en2a",
+    fromId: "x10", fromName: "Sofía Aguilar", fromAvatar: "SA",
+    fromLevel: "Despertar", fromCohorte: "Generación Omega Alumni", becaUsed: false,
+    inviteeName: "Sofía Aguilar",     inviteePhone: "+52 55 6611 7722",
+    inviteeRelation: "ella misma",
+    toLevel: "Expansión", toTrainingDate: "20 jun 2025",
+    status: "confirmado", committedDate: "2 jun 2025", lastContactDate: "2 jun 2025",
+    notes: "Vivió el Despertar en feb y quiere continuar. Coach la contactó.",
+  },
+  {
+    id: "en2b",
+    fromId: "x11", fromName: "Miguel Soto", fromAvatar: "MS",
+    fromLevel: "Despertar", fromCohorte: "Generación Omega Alumni", becaUsed: false,
+    inviteeName: "Miguel Soto",       inviteePhone: "+52 55 9988 7766",
+    inviteeRelation: "él mismo",
+    toLevel: "Expansión", toTrainingDate: "20 jun 2025",
+    status: "comprometido", committedDate: "4 jun 2025", lastContactDate: "4 jun 2025",
+    notes: "Regresó de viaje. Tiene intención pero no ha confirmado fecha.",
+  },
+  {
+    id: "en2c",
+    fromId: "pt1", fromName: "Rodrigo Espinosa", fromAvatar: "RE",
+    fromLevel: "Despertar", fromCohorte: "Generación Próxima", becaUsed: false,
+    inviteeName: "Rodrigo Espinosa",  inviteePhone: "+52 55 1234 5678",
+    inviteeRelation: "él mismo",
+    toLevel: "Expansión", toTrainingDate: "20 jun 2025",
+    status: "comprometido", committedDate: "—", lastContactDate: null,
+    notes: "Aún no vivió el Despertar (13 jun). Se marca como prospecto para Expansión.",
+  },
+]
+
+// ── La Imposibilidad → VIA (Vía Creania) commitments ──────────────────────
+
+export const PIPELINE_IMPOSIBILIDAD_TO_VIA: EnrollmentCommitment[] = [
+  {
+    id: "en3a",
+    fromId: "p3", fromName: "Mariana Ortiz", fromAvatar: "MO",
+    fromLevel: "Expansión", fromCohorte: "Generación Norte", becaUsed: false,
+    inviteeName: "Mariana Ortiz",     inviteePhone: "+52 55 3344 5566",
+    inviteeRelation: "ella misma",
+    toLevel: "Vía Creania", toTrainingDate: "1 jul 2025",
+    status: "comprometido", committedDate: "5 jun 2025", lastContactDate: "5 jun 2025",
+    notes: "Terminó Expansión y quiere continuar. Pendiente firma de inscripción.",
+  },
+  {
+    id: "en3b",
+    fromId: "p6", fromName: "Andrés Mora", fromAvatar: "AM",
+    fromLevel: "Expansión", fromCohorte: "Generación Norte", becaUsed: false,
+    inviteeName: "Andrés Mora",       inviteePhone: "+52 55 7788 9900",
+    inviteeRelation: "él mismo",
+    toLevel: "Vía Creania", toTrainingDate: "1 jul 2025",
+    status: "perdido", committedDate: "20 may 2025", lastContactDate: "1 jun 2025",
+    notes: "No quiso continuar. Dice que fue suficiente con la Imposibilidad.",
+  },
+  {
+    id: "en3c",
+    fromId: "y3", fromName: "Carla Duarte", fromAvatar: "CD",
+    fromLevel: "Expansión", fromCohorte: "Generación Norte Alumni", becaUsed: false,
+    inviteeName: "Carla Duarte",      inviteePhone: "+52 55 1122 3344",
+    inviteeRelation: "ella misma",
+    toLevel: "Vía Creania", toTrainingDate: "1 jul 2025",
+    status: "confirmado", committedDate: "3 jun 2025", lastContactDate: "3 jun 2025",
+    notes: "Regresó de viaje al extranjero. Lista para inscribirse.",
+  },
+]
+
+// ── Becas disponibles ──────────────────────────────────────────────────────
+
+export const BECAS_TRACKING: BecaRecord[] = [
+  { ownerId: "p2",  ownerName: "Diego Salinas",   ownerAvatar: "DS", ownerCohorte: "Vía 12",  becasEarned: 3, becasUsed: 2, becasAvailable: 1, earnedAt: "Revisión 2 de promesas" },
+  { ownerId: "p36", ownerName: "Rodrigo Sánchez",  ownerAvatar: "RS", ownerCohorte: "Vía 12",  becasEarned: 2, becasUsed: 2, becasAvailable: 0, earnedAt: "Revisión 1 y 2" },
+  { ownerId: "n6",  ownerName: "Marco Fuentes",    ownerAvatar: "MF", ownerCohorte: "Norte",   becasEarned: 3, becasUsed: 3, becasAvailable: 0, earnedAt: "Revisión 3 de promesas" },
+  { ownerId: "n4",  ownerName: "Priya Nair",       ownerAvatar: "PN", ownerCohorte: "Omega",   becasEarned: 2, becasUsed: 1, becasAvailable: 1, earnedAt: "Revisión 2 de promesas" },
+  { ownerId: "p19", ownerName: "Claudia Méndez",   ownerAvatar: "CM", ownerCohorte: "Omega",   becasEarned: 2, becasUsed: 0, becasAvailable: 2, earnedAt: "Revisión 3 de promesas" },
+  { ownerId: "p32", ownerName: "Natalia Vega",     ownerAvatar: "NV", ownerCohorte: "Vía 12",  becasEarned: 1, becasUsed: 0, becasAvailable: 1, earnedAt: "Revisión 2 de promesas" },
+]
+
 export const STAFF_ACCOUNTS = [
   { id: "s1", name: "Karla Ríos",    avatar: "KR", role: "Mesa de Registro", email: "karla@creania.mx" },
   { id: "s2", name: "Daniel Mora",   avatar: "DM", role: "Mesa de Registro", email: "daniel@creania.mx" },
   { id: "s3", name: "Paola Juárez",  avatar: "PJ", role: "Operaciones",      email: "paola@creania.mx" },
+]
+
+// ─── Ops Console — comprehensive participant type ──────────────────────────────
+
+export type OpsAttendanceStatus = "checkedin" | "confirmado" | "pendiente" | "no-show" | "walk-in" | "no-aplica"
+export type OpsPaymentStatus    = "pagado" | "parcial" | "pendiente" | "vencido"
+export type OpsNextTrainStatus  = "inscrito" | "confirmado" | "sin-confirmar" | "duda" | "cancelado" | "reagendado" | null
+export type OpsOverallStatus    = "activo" | "inscrito-siguiente" | "incidencia" | "seguimiento" | "vip" | "cancelado"
+
+export interface OpsIncident {
+  id: string
+  type: string
+  description: string
+  date: string
+  severity: "alta" | "media" | "baja"
+  status: "abierta" | "resuelta"
+  assignedTo: string
+}
+
+export interface OpsParticipant {
+  id: string
+  name: string
+  avatar: string
+  phone: string
+  email: string
+
+  // Program level
+  levelCode: "despertar" | "expansion" | "via" | "alumni" | "lead"
+  levelLabel: string        // "La Posibilidad · Completada", "VIA Mes 3 de 5", etc
+  cohorte: string
+  coach: string
+
+  // Today's check-in
+  todayStatus: OpsAttendanceStatus
+  arrivalTime: string | null
+
+  // Next training
+  nextTraining: string | null
+  nextTrainingDate: string | null
+  nextTrainingStatus: OpsNextTrainStatus
+
+  // Payment
+  paymentStatus: OpsPaymentStatus
+  amountTotal: number
+  amountPaid: number
+  concept: string
+  daysOverdue: number | null   // null = not overdue; positive = days past due
+  hasComprobante: boolean
+  hasBeca: boolean
+  becaAmount: number | null
+
+  // Referral / enrollment
+  referredBy: string | null
+  enrolledCount: number        // people this participant enrolled
+  becasAvailable: number
+
+  // Overall
+  overallStatus: OpsOverallStatus
+  responsable: string          // staff member handling follow-up
+
+  // Issues
+  incidents: OpsIncident[]
+  missingInfo: string[]
+  notes: string | null
+  coachNote: string | null
+
+  // Course history
+  courseHistory: Array<{ course: string; date: string; status: "completado" | "en-proceso" | "cancelado" }>
+}
+
+export const OPS_PARTICIPANTS: OpsParticipant[] = [
+  // ── Generación Omega (Vía Creania Mes 3) ─────────────────────────────────
+  {
+    id: "p1", name: "Valeria Romo", avatar: "VR",
+    phone: "+52 55 1234 5678", email: "valeria.romo@gmail.com",
+    levelCode: "via", levelLabel: "VIA Mes 3 de 5", cohorte: "Generación Omega", coach: "Ana Reyes",
+    todayStatus: "no-show", arrivalTime: null,
+    nextTraining: "Fin de semana 4 · VIA", nextTrainingDate: "5 jul 2025", nextTrainingStatus: "sin-confirmar",
+    paymentStatus: "vencido", amountTotal: 4200, amountPaid: 0, concept: "VIA Mes 4", daysOverdue: 3,
+    hasComprobante: false, hasBeca: false, becaAmount: null,
+    referredBy: "Diego Salinas", enrolledCount: 1, becasAvailable: 0,
+    overallStatus: "incidencia", responsable: "Karla Ríos",
+    incidents: [
+      { id: "i1", type: "Pago vencido", description: "Mes 4 vencido hace 3 días. Sin comprobante ni respuesta.", date: "2 jun 2025", severity: "alta", status: "abierta", assignedTo: "Karla Ríos" },
+      { id: "i2", type: "Participante sensible", description: "Coach reporta posible crisis personal. Requiere contacto cuidadoso.", date: "28 may 2025", severity: "alta", status: "abierta", assignedTo: "Ana Reyes" },
+    ],
+    missingInfo: ["email", "contacto de emergencia"],
+    notes: "Ha respondido 1 de 3 mensajes. Llamar directamente.", coachNote: "Valeria está pasando por algo difícil. No presionar con el pago hoy.",
+    courseHistory: [
+      { course: "La Posibilidad (Despertar)", date: "15 feb 2025", status: "completado" },
+      { course: "La Imposibilidad (Expansión)", date: "1 mar 2025", status: "completado" },
+      { course: "VIA Creania", date: "15 mar 2025", status: "en-proceso" },
+    ],
+  },
+  {
+    id: "p10", name: "Carmen Valdés", avatar: "CV",
+    phone: "+52 55 2345 6789", email: "carmen.valdes@outlook.com",
+    levelCode: "via", levelLabel: "VIA Mes 3 de 5", cohorte: "Generación Omega", coach: "Ana Reyes",
+    todayStatus: "checkedin", arrivalTime: "7:02 pm",
+    nextTraining: "Fin de semana 4 · VIA", nextTrainingDate: "5 jul 2025", nextTrainingStatus: "confirmado",
+    paymentStatus: "pagado", amountTotal: 4200, amountPaid: 4200, concept: "VIA Mes 3", daysOverdue: null,
+    hasComprobante: true, hasBeca: false, becaAmount: null,
+    referredBy: "Valeria Romo", enrolledCount: 1, becasAvailable: 0,
+    overallStatus: "activo", responsable: "Daniel Mora",
+    incidents: [],
+    missingInfo: [], notes: null, coachNote: "Destacada. Buen candidata a Sabio en siguiente ciclo.",
+    courseHistory: [
+      { course: "La Posibilidad (Despertar)", date: "15 feb 2025", status: "completado" },
+      { course: "La Imposibilidad (Expansión)", date: "1 mar 2025", status: "completado" },
+      { course: "VIA Creania", date: "15 mar 2025", status: "en-proceso" },
+    ],
+  },
+  {
+    id: "p11", name: "Héctor Ramírez", avatar: "HR",
+    phone: "+52 55 3456 7890", email: "hector.ramirez@gmail.com",
+    levelCode: "via", levelLabel: "VIA Mes 3 de 5", cohorte: "Generación Omega", coach: "Ana Reyes",
+    todayStatus: "checkedin", arrivalTime: "7:15 pm",
+    nextTraining: "Fin de semana 4 · VIA", nextTrainingDate: "5 jul 2025", nextTrainingStatus: "sin-confirmar",
+    paymentStatus: "parcial", amountTotal: 4200, amountPaid: 2100, concept: "VIA Mes 3", daysOverdue: null,
+    hasComprobante: true, hasBeca: false, becaAmount: null,
+    referredBy: null, enrolledCount: 0, becasAvailable: 0,
+    overallStatus: "seguimiento", responsable: "Karla Ríos",
+    incidents: [
+      { id: "i3", type: "Comprobante dudoso", description: "Comprobante de $4,200 parece ser el mismo del mes anterior (mismo folio). Revisar con banco.", date: "1 jun 2025", severity: "alta", status: "abierta", assignedTo: "Karla Ríos" },
+    ],
+    missingInfo: [], notes: "Pago parcial de $2,100. Prometió el resto esta semana.", coachNote: null,
+    courseHistory: [
+      { course: "La Posibilidad (Despertar)", date: "15 feb 2025", status: "completado" },
+      { course: "La Imposibilidad (Expansión)", date: "1 mar 2025", status: "completado" },
+      { course: "VIA Creania", date: "15 mar 2025", status: "en-proceso" },
+    ],
+  },
+  {
+    id: "p16", name: "Omar Castillo", avatar: "OC",
+    phone: "+52 55 8901 2345", email: "omar.castillo@empresa.com",
+    levelCode: "via", levelLabel: "VIA Mes 3 de 5", cohorte: "Generación Omega", coach: "Ana Reyes",
+    todayStatus: "pendiente", arrivalTime: null,
+    nextTraining: "Fin de semana 4 · VIA", nextTrainingDate: "5 jul 2025", nextTrainingStatus: "duda",
+    paymentStatus: "vencido", amountTotal: 4200, amountPaid: 0, concept: "VIA Mes 3", daysOverdue: 5,
+    hasComprobante: false, hasBeca: true, becaAmount: 1000,
+    referredBy: "Héctor Ramírez", enrolledCount: 0, becasAvailable: 0,
+    overallStatus: "incidencia", responsable: "Karla Ríos",
+    incidents: [
+      { id: "i4", type: "Beca no autorizada", description: "Beca de $1,000 aplicada en inscripción VIA sin firma del dueño.", date: "14 mar 2025", severity: "media", status: "abierta", assignedTo: "Carlos Mendoza" },
+    ],
+    missingInfo: ["foto"], notes: "Dice que tiene dificultades económicas. Hablar con Carlos (dueño) antes de tomar acción.", coachNote: "Hay un tema personal detrás del pago. Requiere sensibilidad.",
+    courseHistory: [
+      { course: "La Posibilidad (Despertar)", date: "15 feb 2025", status: "completado" },
+      { course: "La Imposibilidad (Expansión)", date: "1 mar 2025", status: "completado" },
+      { course: "VIA Creania", date: "15 mar 2025", status: "en-proceso" },
+    ],
+  },
+  {
+    id: "p19", name: "Claudia Méndez", avatar: "CM",
+    phone: "+52 55 1234 0001", email: "claudia.mendez@gmail.com",
+    levelCode: "via", levelLabel: "VIA Mes 3 de 5", cohorte: "Generación Omega", coach: "Ana Reyes",
+    todayStatus: "checkedin", arrivalTime: "6:55 pm",
+    nextTraining: "Fin de semana 4 · VIA", nextTrainingDate: "5 jul 2025", nextTrainingStatus: "inscrito",
+    paymentStatus: "pagado", amountTotal: 4200, amountPaid: 4200, concept: "VIA Mes 3", daysOverdue: null,
+    hasComprobante: true, hasBeca: false, becaAmount: null,
+    referredBy: null, enrolledCount: 0, becasAvailable: 2,
+    overallStatus: "vip", responsable: "Daniel Mora",
+    incidents: [],
+    missingInfo: [], notes: "Top performer — 12/12 misiones. Tiene 2 becas disponibles.", coachNote: "Ideal para presentarla como caso de éxito.",
+    courseHistory: [
+      { course: "La Posibilidad (Despertar)", date: "15 feb 2025", status: "completado" },
+      { course: "La Imposibilidad (Expansión)", date: "1 mar 2025", status: "completado" },
+      { course: "VIA Creania", date: "15 mar 2025", status: "en-proceso" },
+    ],
+  },
+  // ── Generación Norte (Expansión completada) ──────────────────────────────
+  {
+    id: "p3", name: "Mariana Ortiz", avatar: "MO",
+    phone: "+52 55 5566 7788", email: "mariana.ortiz@hotmail.com",
+    levelCode: "expansion", levelLabel: "La Imposibilidad · Completada", cohorte: "Generación Norte", coach: "Marco Fuentes",
+    todayStatus: "no-aplica", arrivalTime: null,
+    nextTraining: "VIA Creania (Mes 1)", nextTrainingDate: "1 jul 2025", nextTrainingStatus: "sin-confirmar",
+    paymentStatus: "pendiente", amountTotal: 18000, amountPaid: 8900, concept: "Inscripción VIA", daysOverdue: null,
+    hasComprobante: true, hasBeca: false, becaAmount: null,
+    referredBy: null, enrolledCount: 0, becasAvailable: 0,
+    overallStatus: "seguimiento", responsable: "Daniel Mora",
+    incidents: [],
+    missingInfo: [], notes: "Terminó Expansión, aún decide si entra a VIA. Coach la está acompañando.", coachNote: "Tiene miedo al compromiso económico. Ofrecer plan de pagos.",
+    courseHistory: [
+      { course: "La Posibilidad (Despertar)", date: "6 dic 2024", status: "completado" },
+      { course: "La Imposibilidad (Expansión)", date: "10 ene 2025", status: "completado" },
+    ],
+  },
+  {
+    id: "p22", name: "Paola Serrano", avatar: "PS",
+    phone: "+52 55 3344 5566", email: "paola.serrano@gmail.com",
+    levelCode: "expansion", levelLabel: "La Imposibilidad · Completada", cohorte: "Generación Norte", coach: "Marco Fuentes",
+    todayStatus: "no-aplica", arrivalTime: null,
+    nextTraining: "VIA Creania (Mes 1)", nextTrainingDate: "1 jul 2025", nextTrainingStatus: "duda",
+    paymentStatus: "vencido", amountTotal: 8900, amountPaid: 0, concept: "Mensualidad Expansión", daysOverdue: 7,
+    hasComprobante: false, hasBeca: false, becaAmount: null,
+    referredBy: null, enrolledCount: 0, becasAvailable: 0,
+    overallStatus: "incidencia", responsable: "Karla Ríos",
+    incidents: [
+      { id: "i5", type: "Pago vencido 7 días", description: "Mensualidad Expansión vencida hace 7 días. 3 mensajes sin respuesta.", date: "29 may 2025", severity: "alta", status: "abierta", assignedTo: "Karla Ríos" },
+    ],
+    missingInfo: [], notes: "Último contacto: 28 may. No responde WA ni llamadas.", coachNote: "Marco habló con ella. Dice que quiere continuar pero tiene un problema de dinero temporal.",
+    courseHistory: [
+      { course: "La Posibilidad (Despertar)", date: "6 dic 2024", status: "completado" },
+      { course: "La Imposibilidad (Expansión)", date: "10 ene 2025", status: "en-proceso" },
+    ],
+  },
+  // ── Generación Vía 12 ─────────────────────────────────────────────────────
+  {
+    id: "p2", name: "Diego Salinas", avatar: "DS",
+    phone: "+52 55 9988 1122", email: "diego.salinas@empresa.mx",
+    levelCode: "via", levelLabel: "VIA Mes 1 de 5", cohorte: "Generación Vía 12", coach: "Daniela Torres",
+    todayStatus: "no-aplica", arrivalTime: null,
+    nextTraining: "Fin de semana 2 · VIA", nextTrainingDate: "28 jun 2025", nextTrainingStatus: "confirmado",
+    paymentStatus: "pagado", amountTotal: 4200, amountPaid: 4200, concept: "VIA Mes 1", daysOverdue: null,
+    hasComprobante: true, hasBeca: false, becaAmount: null,
+    referredBy: null, enrolledCount: 5, becasAvailable: 1,
+    overallStatus: "vip", responsable: "Daniel Mora",
+    incidents: [],
+    missingInfo: [], notes: "Embajador top. Enroló a 5 personas para el Despertar del 13 jun.", coachNote: "Candidato a Coach Assistant el próximo ciclo.",
+    courseHistory: [
+      { course: "La Posibilidad (Despertar)", date: "17 ene 2025", status: "completado" },
+      { course: "La Imposibilidad (Expansión)", date: "7 feb 2025", status: "completado" },
+      { course: "VIA Creania", date: "1 mar 2025", status: "en-proceso" },
+    ],
+  },
+  {
+    id: "p34", name: "Carlos Peñafiel", avatar: "CP",
+    phone: "+52 55 6677 8899", email: "carlos.p@gmail.com",
+    levelCode: "via", levelLabel: "VIA Mes 1 de 5", cohorte: "Generación Vía 12", coach: "Daniela Torres",
+    todayStatus: "no-aplica", arrivalTime: null,
+    nextTraining: "Fin de semana 2 · VIA", nextTrainingDate: "28 jun 2025", nextTrainingStatus: "sin-confirmar",
+    paymentStatus: "pendiente", amountTotal: 4200, amountPaid: 0, concept: "VIA Mes 1", daysOverdue: null,
+    hasComprobante: false, hasBeca: false, becaAmount: null,
+    referredBy: null, enrolledCount: 0, becasAvailable: 0,
+    overallStatus: "incidencia", responsable: "Karla Ríos",
+    incidents: [
+      { id: "i6", type: "Participante activo sin pago", description: "7 días activo en plataforma, ha completado 3 misiones, pero no hay registro de pago de Mes 1.", date: "5 jun 2025", severity: "alta", status: "abierta", assignedTo: "Karla Ríos" },
+    ],
+    missingInfo: ["comprobante de pago"],
+    notes: "Está usando la plataforma activamente pero el pago no está registrado.", coachNote: null,
+    courseHistory: [
+      { course: "La Posibilidad (Despertar)", date: "17 ene 2025", status: "completado" },
+      { course: "La Imposibilidad (Expansión)", date: "7 feb 2025", status: "completado" },
+      { course: "VIA Creania", date: "1 mar 2025", status: "en-proceso" },
+    ],
+  },
+  // ── Próximo Despertar — pre-inscritos ────────────────────────────────────
+  {
+    id: "pt1", name: "Rodrigo Espinosa", avatar: "RE",
+    phone: "+52 55 1234 5678", email: "rodrigo.espinosa@gmail.com",
+    levelCode: "lead", levelLabel: "Próximo · La Posibilidad", cohorte: "Próxima Gen (13 jun)", coach: "—",
+    todayStatus: "no-aplica", arrivalTime: null,
+    nextTraining: "La Posibilidad · Despertar", nextTrainingDate: "13 jun 2025", nextTrainingStatus: "confirmado",
+    paymentStatus: "parcial", amountTotal: 6500, amountPaid: 3250, concept: "Despertar 13 jun", daysOverdue: null,
+    hasComprobante: true, hasBeca: false, becaAmount: null,
+    referredBy: "Diego Salinas", enrolledCount: 0, becasAvailable: 0,
+    overallStatus: "inscrito-siguiente", responsable: "Daniel Mora",
+    incidents: [],
+    missingInfo: ["foto", "firma de términos"],
+    notes: "Anticipo del 50% recibido. Saldo de $3,250 pendiente antes del 13 jun.", coachNote: null,
+    courseHistory: [],
+  },
+  {
+    id: "pt2", name: "Ana Paula Vidal", avatar: "AV",
+    phone: "+52 55 8765 4321", email: "anapaula@gmail.com",
+    levelCode: "lead", levelLabel: "Próximo · La Posibilidad", cohorte: "Próxima Gen (13 jun)", coach: "—",
+    todayStatus: "no-aplica", arrivalTime: null,
+    nextTraining: "La Posibilidad · Despertar", nextTrainingDate: "13 jun 2025", nextTrainingStatus: "sin-confirmar",
+    paymentStatus: "pendiente", amountTotal: 6500, amountPaid: 0, concept: "Despertar 13 jun", daysOverdue: null,
+    hasComprobante: false, hasBeca: false, becaAmount: null,
+    referredBy: "Carmen Valdés", enrolledCount: 0, becasAvailable: 0,
+    overallStatus: "seguimiento", responsable: "Karla Ríos",
+    incidents: [],
+    missingInfo: ["pago", "foto", "firma de términos"],
+    notes: "Comprometida verbalmente pero sin pago. Carmen (quien la trajo) le está dando seguimiento.", coachNote: null,
+    courseHistory: [],
+  },
+  {
+    id: "pt3", name: "Luis Torres", avatar: "LT",
+    phone: "+52 55 2345 6789", email: "luis.torres@empresa.com",
+    levelCode: "lead", levelLabel: "Próximo · La Posibilidad", cohorte: "Próxima Gen (13 jun)", coach: "—",
+    todayStatus: "no-aplica", arrivalTime: null,
+    nextTraining: "La Posibilidad · Despertar", nextTrainingDate: "13 jun 2025", nextTrainingStatus: "confirmado",
+    paymentStatus: "pagado", amountTotal: 6500, amountPaid: 6500, concept: "Despertar 13 jun", daysOverdue: null,
+    hasComprobante: true, hasBeca: false, becaAmount: null,
+    referredBy: "Diego Salinas", enrolledCount: 0, becasAvailable: 0,
+    overallStatus: "inscrito-siguiente", responsable: "Daniel Mora",
+    incidents: [],
+    missingInfo: [],
+    notes: "Listo. Pago completo. Esperar confirmación logística del evento.", coachNote: null,
+    courseHistory: [],
+  },
+  {
+    id: "pt4", name: "Paola Mendez", avatar: "PM",
+    phone: "+52 55 3456 7890", email: "paola.mendez@gmail.com",
+    levelCode: "lead", levelLabel: "Próximo · La Posibilidad", cohorte: "Próxima Gen (13 jun)", coach: "—",
+    todayStatus: "no-aplica", arrivalTime: null,
+    nextTraining: "La Posibilidad · Despertar", nextTrainingDate: "13 jun 2025", nextTrainingStatus: "sin-confirmar",
+    paymentStatus: "pendiente", amountTotal: 6500, amountPaid: 0, concept: "Despertar 13 jun", daysOverdue: null,
+    hasComprobante: false, hasBeca: true, becaAmount: 2000,
+    referredBy: "Marco Fuentes", enrolledCount: 0, becasAvailable: 0,
+    overallStatus: "seguimiento", responsable: "Karla Ríos",
+    incidents: [
+      { id: "i7", type: "Sin respuesta", description: "2 llamadas y 1 WhatsApp sin respuesta en 6 días. Beca aplicada pendiente de confirmar.", date: "30 may 2025", severity: "media", status: "abierta", assignedTo: "Karla Ríos" },
+    ],
+    missingInfo: ["pago", "confirmar asistencia"],
+    notes: "Tiene beca de $2,000 de Marco. Sin respuesta desde hace 6 días.", coachNote: null,
+    courseHistory: [],
+  },
+]
+
+// ─── Financial anomalies — for owner dashboard ────────────────────────────────
+
+export type AnomalyType =
+  | "pago-sin-comprobante"
+  | "activo-sin-pago"
+  | "beca-sin-autorizacion"
+  | "monto-distinto"
+  | "gasto-sin-comprobante"
+  | "comprobante-duplicado"
+  | "reembolso-pendiente"
+  | "registro-no-autorizado"
+
+export interface FinancialAnomaly {
+  id: string
+  type: AnomalyType
+  severity: "alta" | "media" | "baja"
+  description: string
+  participant: string | null
+  amount: number | null
+  detectedAt: string
+  status: "pendiente" | "en-revision" | "resuelta"
+  assignedTo: string
+}
+
+export const FINANCIAL_ANOMALIES: FinancialAnomaly[] = [
+  {
+    id: "fa1", type: "activo-sin-pago", severity: "alta",
+    description: "Carlos Peñafiel está activo en plataforma hace 7 días (3 misiones completadas) sin pago registrado del Mes 1.",
+    participant: "Carlos Peñafiel", amount: 4200, detectedAt: "5 jun 2025", status: "pendiente", assignedTo: "Karla Ríos",
+  },
+  {
+    id: "fa2", type: "pago-sin-comprobante", severity: "alta",
+    description: "Valeria Romo — $4,200 registrado el 1 mar sin comprobante adjunto. El sistema lo marcó como pagado sin validación.",
+    participant: "Valeria Romo", amount: 4200, detectedAt: "1 mar 2025", status: "en-revision", assignedTo: "Karla Ríos",
+  },
+  {
+    id: "fa3", type: "beca-sin-autorizacion", severity: "alta",
+    description: "Descuento de $1,000 aplicado a Omar Castillo en inscripción VIA. No hay registro de autorización del dueño en el sistema.",
+    participant: "Omar Castillo", amount: 1000, detectedAt: "14 mar 2025", status: "pendiente", assignedTo: "Carlos Mendoza",
+  },
+  {
+    id: "fa4", type: "comprobante-duplicado", severity: "alta",
+    description: "Héctor Ramírez — comprobante enviado el 1 jun coincide en folio y monto con el del mes anterior. Posible reutilización.",
+    participant: "Héctor Ramírez", amount: 4200, detectedAt: "1 jun 2025", status: "en-revision", assignedTo: "Karla Ríos",
+  },
+  {
+    id: "fa5", type: "gasto-sin-comprobante", severity: "media",
+    description: "Gastos de salón del evento 5 jun — $8,500 registrados por staff sin factura adjunta. Límite de aprobación sin factura es $2,000.",
+    participant: null, amount: 8500, detectedAt: "5 jun 2025", status: "pendiente", assignedTo: "Paola Juárez",
+  },
+  {
+    id: "fa6", type: "monto-distinto", severity: "media",
+    description: "Pago de Rodrigo Espinosa del 28 may registrado como $3,250 pero el plan es $6,500 completo o $0 (pago total o nada). Anticipo no estaba pactado.",
+    participant: "Rodrigo Espinosa", amount: 3250, detectedAt: "28 may 2025", status: "pendiente", assignedTo: "Daniel Mora",
+  },
+  {
+    id: "fa7", type: "reembolso-pendiente", severity: "baja",
+    description: "Óscar Medina solicitó reembolso parcial de $3,200 el 15 abr por no continuar en VIA. Aprobación del dueño pendiente hace 20 días.",
+    participant: "Óscar Medina", amount: 3200, detectedAt: "15 abr 2025", status: "en-revision", assignedTo: "Carlos Mendoza",
+  },
 ]

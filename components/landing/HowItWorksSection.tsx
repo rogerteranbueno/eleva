@@ -341,7 +341,7 @@ export function HowItWorksSection() {
                 ))}
               </div>
 
-              <div className="inline-flex items-center gap-3 px-4 py-3 rounded-xl border border-white/10 bg-white/3">
+              <div className="inline-flex items-center gap-3 px-4 py-3 rounded-xl border border-border bg-foreground/[0.03]">
                 <p className={cn("text-3xl font-black", colors.stat)}>{stage.stat.value}</p>
                 <p className="text-sm text-muted-foreground leading-snug max-w-[180px]">{stage.stat.label}</p>
               </div>
@@ -371,7 +371,7 @@ export function HowItWorksSection() {
                 {stage.moduleLabel}
               </p>
               {stage.features.map(({ icon, text }) => (
-                <div key={text} className="flex items-start gap-3 p-3 rounded-xl bg-white/3 border border-white/5 hover:border-white/10 transition-colors">
+                <div key={text} className="flex items-start gap-3 p-3 rounded-xl bg-foreground/[0.03] border border-border hover:border-foreground/10 transition-colors">
                   <span className="text-lg flex-shrink-0 leading-none">{icon}</span>
                   <p className="text-sm text-foreground/80 leading-relaxed">{text}</p>
                 </div>
@@ -384,7 +384,7 @@ export function HowItWorksSection() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-12 glass rounded-2xl px-6 py-5 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4"
+          className="mt-12 glass rounded-2xl px-6 py-5 border border-border flex flex-col sm:flex-row items-center justify-between gap-4"
         >
           <div className="text-center sm:text-left space-y-1">
             <p className="text-foreground font-bold text-base">{c.footer}</p>

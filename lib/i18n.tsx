@@ -23,7 +23,10 @@ export function LangProvider({ children }: { children: ReactNode }) {
 
   const setLang = (l: Lang) => {
     setLangState(l)
-    try { localStorage.setItem("eleva-lang", l) } catch {}
+    try {
+      localStorage.setItem("eleva-lang", l)
+      document.documentElement.lang = l
+    } catch {}
   }
 
   return <Ctx.Provider value={{ lang, setLang }}>{children}</Ctx.Provider>

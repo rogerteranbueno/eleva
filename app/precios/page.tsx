@@ -81,45 +81,49 @@ const PACKAGES = [
     currency: "USD",
     badge: null,
     highlight: false,
-    description: "Para centros que quieren dejar el caos operativo atrás y tener un sistema profesional funcionando en 60 días.",
-    followUp: "Seguimiento incluido por email y WhatsApp durante 3 meses post-lanzamiento.",
+    description: "Implementamos el sistema, capacitamos a tu equipo y te acompañamos los primeros 2 meses activos. Incluye las herramientas fundamentales para que tu equipo opere de forma profesional desde el primer día.",
+    followUp: "3 meses de soporte remoto post-lanzamiento incluido (email + WhatsApp). Los costos de email, SMS y hosting se cobran por separado según uso.",
     features: [
-      { text: "Diagnóstico completo del centro (~40 hrs)", on: true },
-      { text: "Diseño e implementación del sistema (~50 hrs)", on: true },
-      { text: "Migración de datos existentes (participantes, cohortes, historial)", on: true },
-      { text: "Capacitación del equipo: staff, coaches y director", on: true },
-      { text: "Automatizaciones de WhatsApp y email activas desde día 1", on: true },
-      { text: "Lanzamiento guiado con coaches y participantes (~20 hrs)", on: true },
-      { text: "3 meses de acompañamiento post-lanzamiento (email + WhatsApp)", on: true },
-      { text: "Módulo de IA avanzado: análisis predictivo y detección de anomalías", on: false },
-      { text: "App móvil nativa con branding del centro (iOS + Android)", on: false },
-      { text: "Estrategia de comunicación y posicionamiento de marca", on: false },
+      { text: "Registro de participantes y creación de expediente completo", on: true },
+      { text: "Dashboard operativo con las métricas disponibles del centro", on: true },
+      { text: "Módulo de reportes y exportación de datos", on: true },
+      { text: "Control de usuarios y accesos por rol", on: true },
+      { text: "Historial de actividades del centro", on: true },
+      { text: "Portal del participante: cada persona lleva seguimiento de su proceso", on: true },
+      { text: "Notificaciones automatizadas (WhatsApp y email)", on: true },
+      { text: "CRM integrado para leads y participantes", on: true },
+      { text: "Módulo de newsletter (costos de Twilio, email y hosting se cobran aparte)", on: true },
+      { text: "Capacitación para webinars y cursos presenciales", on: true },
+      { text: "Módulo de coaches: brief contextual antes de cada sesión de entrenamiento", on: false },
+      { text: "IA que analiza tus números y genera planes de acción", on: false },
+      { text: "Insights mensuales de más de 20 centros en 5 continentes", on: false },
     ],
     cta: "Agendar diagnóstico gratuito",
     ctaStyle: "bg-muted hover:bg-muted/80 border border-border text-foreground",
     accentColor: "text-foreground",
   },
   {
-    name: "Implementación Elite",
-    price: "hasta $30,000",
+    name: "Implementación Robusta",
+    price: "desde $30,000",
     currency: "USD",
-    badge: "Transformación completa",
+    badge: "Equipo dedicado incluido",
     highlight: true,
-    description: "Para centros que no solo quieren operar mejor, sino posicionarse como referentes profesionales del desarrollo humano en su mercado.",
-    followUp: "Acompañamiento estratégico durante 6 meses post-lanzamiento.",
+    description: "Todo lo de Base, más un equipo dedicado que lo implementa todo, se asegura de que funcione y se queda contigo 6 meses. No es solo software — es una transformación operativa completa con personas detrás de cada proceso.",
+    followUp: "6 meses de acompañamiento estratégico con sesiones mensuales. Gestionamos speakers, eventos y problemas operativos hasta que el sistema corra solo.",
     features: [
       { text: "Todo lo de Implementación Base", on: true },
-      { text: "Módulo de IA avanzado: planes automáticos, predicción de abandono, anomalías financieras", on: true },
-      { text: "App móvil nativa con branding del centro (iOS + Android)", on: true },
-      { text: "20 hrs adicionales de consultoría estratégica con el equipo ELEVA", on: true },
-      { text: "Estrategia de comunicación para redes sociales: identidad, tono, calendario", on: true },
-      { text: "Estrategia para medios tradicionales: PR, alianzas, eventos y posicionamiento público", on: true },
-      { text: "Posicionamiento: de 'centro de transformación' a 'centro profesional de potencial humano'", on: true },
-      { text: "6 meses de acompañamiento post-lanzamiento con sesiones estratégicas mensuales", on: true },
+      { text: "Módulo de coaches: cada coach recibe un brief completo y contexto del participante antes de cada sesión", on: true },
+      { text: "CRM avanzado: conjeturas automáticas, detección de riesgo de abandono, patrones de comportamiento y planes de acción basados en tus datos", on: true },
+      { text: "Insights mensuales de más de 20 centros en Sydney, Johannesburgo, Londres, Madrid, Barcelona, Málaga, Florencia, París, Nueva York, Boston, Atlanta, San Francisco, San Diego, Los Ángeles, Tijuana, Ciudad de México, Monterrey, Guadalajara, Cancún, Mérida, Guatemala, El Salvador, Panamá, Colombia, Chile, Perú, Uruguay, Ecuador, Argentina, Brasil, Portugal, Viena y más", on: true },
+      { text: "Gestión completa de eventos: selección de speakers, armado del calendario, coordinación — nosotros nos encargamos de todo", on: true },
+      { text: "Equipo dedicado que implementa, configura y garantiza que todo funcione", on: true },
+      { text: "Estrategia de redes sociales: identidad, tono, calendario de contenidos", on: true },
+      { text: "Posicionamiento y medios tradicionales: PR, alianzas, eventos", on: true },
+      { text: "6 meses de sesiones estratégicas hasta que el sistema corra solo", on: true },
     ],
     cta: "Agendar sesión estratégica",
     ctaStyle: "bg-violet-600 hover:bg-violet-500 text-white",
-    accentColor: "text-violet-300",
+    accentColor: "text-violet-400",
   },
 ]
 
@@ -131,15 +135,14 @@ const MAINTENANCE = [
   "1 sesión mensual de revisión de KPIs (30 min)",
   "Alertas proactivas: anomalías, riesgos y oportunidades",
   "Acceso a nuevas integraciones y mejoras de IA",
-  "Actualizaciones de la app móvil (plan Elite)",
 ]
 
 const FAQS = [
   { q: "¿ELEVA reemplaza el enrolamiento boca a boca?", a: "No. El boca a boca es uno de los motores más poderosos que tiene esta industria y ELEVA no lo elimina: lo amplifica. Agrega canales digitales para que el centro no dependa únicamente de eso, y da herramientas a los participantes para que invitar sea más fácil y más natural." },
   { q: "¿Es un CRM genérico?", a: "Tiene un módulo de CRM, pero es mucho más. Un CRM genérico no entiende cohortes, fases de transformación, Momentum Score ni el modelo de enrolamiento. ELEVA fue construido desde cero para este modelo específico." },
-  { q: "¿Funciona para centros pequeños?", a: "Sí. Está diseñado para escalar desde centros con 50 participantes hasta operaciones con miles. Un centro pequeño que retiene mejor y opera más limpio crece más rápido, y el ROI es inmediato." },
-  { q: "¿Cuánto tiempo toma implementarlo?", a: "El onboarding básico es de 2 semanas. Primera semana: configuración, migración de participantes existentes, capacitación del staff. Segunda semana: primera cohorte activa en la app." },
-  { q: "¿Los participantes tienen que descargar una app?", a: "La experiencia del participante funciona como Progressive Web App (PWA): se accede desde el navegador del teléfono y se puede instalar sin pasar por la App Store. También disponible como app nativa según el plan." },
+  { q: "¿Funciona para centros pequeños?", a: "Sí. Está diseñado para escalar desde centros con 50 participantes hasta operaciones con miles. Un centro pequeño que retiene mejor y opera más limpio crece más rápido. En promedio, con base en resultados de clientes existentes, la inversión se recupera en menos de 90 días." },
+  { q: "¿Cuánto tiempo toma implementarlo?", a: "Depende del plan. En la Implementación Base, el sistema está operando en aproximadamente 60 días — los primeros 30 son de configuración, migración y capacitación; los siguientes 30 son de arranque acompañado. En la Robusta, el proceso es de 6 meses completos con el equipo involucrado." },
+  { q: "¿Los participantes tienen que descargar una app?", a: "No. La experiencia del participante funciona como Progressive Web App (PWA): se accede desde el navegador del teléfono y se puede instalar en la pantalla de inicio sin pasar por ninguna tienda. No requiere descarga ni actualizaciones manuales." },
   { q: "¿Funciona para centros en varias ciudades?", a: "ELEVA es multi-sede desde el diseño. Una sola cuenta con múltiples ubicaciones, cohortes por ciudad, coaches asignados por sede y reportes consolidados o segmentados." },
   { q: "¿El precio cambia si crecemos mucho?", a: "No. El mantenimiento mensual es fijo por centro sin importar cuántos participantes o cohortes tengas activos. Un centro con 500 participantes paga lo mismo que uno con 50." },
 ]
@@ -159,11 +162,11 @@ export default function PreciosPage() {
               Inversión
             </span>
             <h1 className="text-5xl sm:text-6xl font-black text-foreground leading-[1.05] mb-4">
-              Un sistema que se paga<br />
-              <span className="gradient-text">solo en el primer mes.</span>
+              Una inversión que los centros<br />
+              <span className="gradient-text">recuperan en menos de 90 días.</span>
             </h1>
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              Retener 10 participantes más, enrolar una generación mejor preparada y reducir la morosidad un 20% cubre la inversión. Lo que queda es pura utilidad.
+              En promedio, los centros que operan el sistema con disciplina lo recuperan a través de mejor retención, menor morosidad y cohortes más preparadas. Todos los resultados son aproximados y con base en clientes existentes.
             </p>
             <Link href="/simulador">
               <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
@@ -195,7 +198,7 @@ export default function PreciosPage() {
                     <span className={cn("text-3xl font-black", pkg.accentColor)}>{pkg.price}</span>
                     <span className="text-sm text-muted-foreground">{pkg.currency}</span>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1">Precio sujeto a características finales y acuerdos de seguimiento</p>
+                  <p className="text-xs text-muted-foreground mt-1">Precio final definido en la llamada de diagnóstico gratuito</p>
                 </div>
                 <p className="text-sm text-foreground/80 leading-relaxed mb-5">{pkg.description}</p>
                 <ul className="space-y-2.5 flex-1 mb-5">
@@ -240,7 +243,7 @@ export default function PreciosPage() {
                 </div>
               ))}
             </div>
-            <p className="text-xs text-muted-foreground mt-5 pt-4 border-t border-white/8">
+            <p className="text-xs text-muted-foreground mt-5 pt-4 border-t border-border">
               El precio de mantenimiento no aumenta con el número de participantes ni cohortes activas. Un centro con 500 participantes paga lo mismo que uno con 50.
             </p>
           </motion.div>

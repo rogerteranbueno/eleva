@@ -12,20 +12,20 @@ export function DemoSection() {
     eyebrow: "Interactive demo",
     h2a: "Watch it running in ",
     h2b: "Creania.",
-    sub: "A fully interactive demo with real data from a fictional center. Navigate as the owner, act on at-risk participants, then enter as a participant to see the system from the inside.",
+    sub: "See how it detects 14 at-risk participants and lets you act in one click. Then switch to the participant view and live the journey from the inside. Fictional data, real experience.",
     cta: "Enter the demo",
     badge1: "No registration required",
     badge2: "Fictional data · feels real",
-    badge3: "2 minutes to understand everything",
+    badge3: "Switch between owner / coach / participant",
   } : {
     eyebrow: "Demo interactivo",
     h2a: "Míralo funcionando en ",
     h2b: "Creania.",
-    sub: "Un demo completamente interactivo con datos reales de un centro ficticio. Navega como el dueño, actúa sobre participantes en riesgo, y luego entra como participante para ver el sistema desde adentro.",
+    sub: "Observa cómo detecta los 14 participantes en riesgo y actúa sobre ellos en un clic. Luego cambia a la vista del participante y vive el journey desde adentro. Datos ficticios, experiencia real.",
     cta: "Entrar al demo",
     badge1: "Sin registro requerido",
     badge2: "Datos ficticios · se siente real",
-    badge3: "2 minutos para entender todo",
+    badge3: "Cambia entre dueño / coach / participante",
   }
 
   return (

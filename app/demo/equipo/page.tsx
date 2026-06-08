@@ -327,10 +327,14 @@ export default function EquipoPage() {
       {totalMissed > 0 && (
         <div className="flex items-start gap-3 p-4 rounded-xl bg-red-500/8 border border-red-500/20">
           <Sparkles className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
-          <p className="text-xs text-red-300 leading-relaxed">
-            <span className="font-semibold text-white">ELEVA detectó {totalMissed} sesión{totalMissed !== 1 ? "es" : ""} no realizada{totalMissed !== 1 ? "s" : ""} este mes.</span>{" "}
-            Ana Reyes tiene el momentum más alto de contacto pendiente. Considera agendar una revisión de cuenta esta semana.
-          </p>
+          <div>
+            <p className="text-xs text-white font-semibold mb-0.5">
+              ELEVA detectó {totalMissed} sesión{totalMissed !== 1 ? "es" : ""} no realizada{totalMissed !== 1 ? "s" : ""} este mes
+            </p>
+            <p className="text-xs text-red-300 leading-relaxed">
+              Ana Reyes lleva 9 días sin contactar a su generación. Generación Omega tiene 6 participantes en riesgo y el momentum del grupo bajó 2 puntos esta semana. Si no hay contacto esta semana, proyección indica que 2–3 más entrarán en riesgo crítico.
+            </p>
+          </div>
         </div>
       )}
 

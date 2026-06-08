@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import Link from "next/link"
 import { AnimatePresence } from "framer-motion"
-import { AlertTriangle, Users, Calendar, Activity, ArrowRight, Zap, Lightbulb } from "lucide-react"
+import { AlertTriangle, Users, Calendar, Activity, ArrowRight, Zap, Lightbulb, DollarSign, TrendingUp } from "lucide-react"
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
 import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { InsightCard } from "@/components/demo/InsightCard"
@@ -69,7 +69,7 @@ const INSIGHTS: InsightDef[] = [
     icon: "📉",
     severity: "medium",
     title: "Gen. Norte: momentum cayó de 65% a 58%",
-    description: "Bajó 7 pts en 2 semanas. Coach Marco sin contacto grupal hace 12 días.",
+    description: "Bajó 7 pts en 2 semanas. Marco reprogramó una sesión grupal — 3 participantes en riesgo alto.",
     actionLabel: "Activar cohorte",
     composer: {
       title: "Activar Generación Norte (67 participantes)",
@@ -140,12 +140,27 @@ const ACTIVITY_ICONS: Record<string, string> = {
   event: "📅",
 }
 
+const DAY_NAMES = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"]
+const MONTH_NAMES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"]
+
 export default function PulsoPage() {
   const [activeInsight, setActiveInsight] = useState<InsightDef | null>(null)
   const [activePlan, setActivePlan] = useState<string | null>(null)
   const { toast, show, hide } = useActionToast()
   const { state } = useDemoStore()
   const center = CENTERS.find((c) => c.id === state.selectedCenter) ?? CENTERS[0]
+
+  const dateLabel = useMemo(() => {
+    const d = new Date()
+    return `${DAY_NAMES[d.getDay()]}, ${d.getDate()} de ${MONTH_NAMES[d.getMonth()]}`
+  }, [])
+
+  const dateShort = useMemo(() => {
+    const d = new Date()
+    return `${DAY_NAMES[d.getDay()].slice(0, 3)} ${d.getDate()} ${MONTH_NAMES[d.getMonth()].slice(0, 3)}`
+  }, [])
+
+  const collectedPct = Math.round((center.collected / center.monthlyRevenue) * 100)
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-6">
@@ -169,14 +184,51 @@ export default function PulsoPage() {
       <div className="flex items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-white">Pulso del Centro</h1>
-          <p className="text-muted-foreground text-sm mt-0.5 hidden sm:block">{center.fullName} · lunes, 2 de junio</p>
-          <p className="text-muted-foreground text-xs mt-0.5 sm:hidden">{center.name} · lun 2 jun</p>
+          <p className="text-muted-foreground text-sm mt-0.5 hidden sm:block">{center.fullName} · {dateLabel}</p>
+          <p className="text-muted-foreground text-xs mt-0.5 sm:hidden">{center.name} · {dateShort}</p>
         </div>
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 flex-shrink-0 whitespace-nowrap">
           <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
           <span className="text-xs font-medium text-green-400">Sistema activo</span>
         </div>
       </div>
+
+      {/* Financial snapshot */}
+      <Link href="/demo/finanzas">
+        <div className="glass rounded-xl p-4 hover:bg-white/3 transition-colors cursor-pointer group">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">Ingreso del mes</span>
+            </div>
+            <div className="flex items-center gap-1 text-[10px] text-emerald-400 font-semibold">
+              <TrendingUp className="w-3 h-3" />
+              +{center.monthlyGrowth}% vs mes anterior
+            </div>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div>
+              <p className="text-xl font-black text-white">${(center.monthlyRevenue / 1000).toFixed(0)}k</p>
+              <p className="text-[10px] text-muted-foreground">Revenue total</p>
+            </div>
+            <div>
+              <p className="text-xl font-black text-emerald-400">${(center.collected / 1000).toFixed(0)}k</p>
+              <p className="text-[10px] text-muted-foreground">Cobrado ({collectedPct}%)</p>
+            </div>
+            <div>
+              <p className="text-xl font-black text-yellow-400">${(center.pending / 1000).toFixed(0)}k</p>
+              <p className="text-[10px] text-muted-foreground">Pendiente de cobro</p>
+            </div>
+            <div>
+              <p className="text-xl font-black text-violet-400">{center.netMargin}%</p>
+              <p className="text-[10px] text-muted-foreground">Margen neto</p>
+            </div>
+          </div>
+          <div className="mt-3 h-1 rounded-full bg-white/6 overflow-hidden">
+            <div className="h-full rounded-full bg-emerald-500 transition-all" style={{ width: `${collectedPct}%` }} />
+          </div>
+        </div>
+      </Link>
 
       {/* Alert banner */}
       <Link href="/demo/atencion">

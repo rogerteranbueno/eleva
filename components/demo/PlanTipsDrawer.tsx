@@ -222,11 +222,11 @@ export function PlanTrigger({ onClick, className }: PlanTriggerProps) {
     <button
       onClick={onClick as React.MouseEventHandler<HTMLButtonElement>}
       className={cn(
-        "flex items-center gap-1 text-[10px] font-semibold text-muted-foreground hover:text-violet-400 transition-colors group",
+        "flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 border border-amber-500/30 text-amber-400 hover:bg-amber-500/25 hover:text-amber-300 hover:border-amber-500/50 transition-all",
         className
       )}
     >
-      <Zap className="w-3 h-3 group-hover:text-violet-400 transition-colors" />
+      <Zap className="w-3 h-3" />
       Generar plan
     </button>
   )

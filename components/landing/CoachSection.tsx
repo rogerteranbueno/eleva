@@ -15,7 +15,7 @@ const coaches = [
     badgeEn: "Specialist",
     rating: 4.9,
     sessions: 312,
-    price: 950,
+    price: 65,
     avatar: "LM",
     color: "from-violet-600 to-violet-800",
     tags: ["Presupuesto", "Inversiones", "Deuda"],
@@ -29,7 +29,7 @@ const coaches = [
     badgeEn: "Certified",
     rating: 4.8,
     sessions: 204,
-    price: 750,
+    price: 50,
     avatar: "CR",
     color: "from-emerald-600 to-emerald-800",
     tags: ["Plan alimenticio", "Hábitos", "Energía"],
@@ -43,7 +43,7 @@ const coaches = [
     badgeEn: "Specialist",
     rating: 5.0,
     sessions: 189,
-    price: 1100,
+    price: 75,
     avatar: "SH",
     color: "from-pink-600 to-pink-800",
     tags: ["Ansiedad", "Relaciones", "Autoestima"],
@@ -57,7 +57,7 @@ const coaches = [
     badgeEn: "Mentor",
     rating: 4.7,
     sessions: 276,
-    price: 1300,
+    price: 90,
     avatar: "MT",
     color: "from-amber-600 to-amber-800",
     tags: ["Ventas", "Escalabilidad", "Liderazgo"],
@@ -80,7 +80,7 @@ export function CoachSection() {
     coachCTASub: "Join the ELEVA network and get clients from verified centers without investing in marketing. You charge directly — we just connect.",
     coachCTABtn: "Apply now",
     sessionsLabel: "sessions",
-    currency: "MXN/hr",
+    currency: "USD/hr",
   } : {
     eyebrow: "Red de profesionales",
     h2: "Ya tienes los profesionales.\nSolo faltaba la plataforma.",
@@ -93,7 +93,7 @@ export function CoachSection() {
     coachCTASub: "Únete a la red de ELEVA y consigue clientes de centros verificados sin invertir en marketing. Tú cobras directo, nosotros solo conectamos.",
     coachCTABtn: "Aplicar ahora",
     sessionsLabel: "sesiones",
-    currency: "MXN/hr",
+    currency: "USD/hr",
   }
 
   return (
