@@ -75,6 +75,9 @@ function Nav() {
           <Link href="/metodo" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors hidden sm:block px-3 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5">
             {lang === "en" ? "Method" : "Método"}
           </Link>
+          <Link href="/numeros" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors hidden sm:block px-3 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5">
+            {lang === "en" ? "Numbers" : "Números"}
+          </Link>
           <Link href="/funcionalidades" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors hidden sm:block px-3 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5">
             {navLinks.features}
           </Link>
@@ -128,6 +131,9 @@ function Nav() {
             <div className="px-6 py-4 space-y-1 bg-background/95">
               <Link href="/metodo" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                 <ChevronRight className="w-4 h-4 text-violet-400" />{lang === "en" ? "Method" : "Método"}
+              </Link>
+              <Link href="/numeros" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <ChevronRight className="w-4 h-4 text-violet-400" />{lang === "en" ? "Numbers" : "Números"}
               </Link>
               <Link href="/funcionalidades" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                 <ChevronRight className="w-4 h-4 text-violet-400" />{navLinks.features}
