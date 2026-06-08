@@ -36,6 +36,7 @@ import {
 import { cn } from "@/lib/utils"
 import { DemoProvider, useDemoStore } from "@/lib/demo-store"
 import { CENTERS } from "@/data/creania"
+import { AIAssistant } from "@/components/demo/AIAssistant"
 
 type NavScreen = {
   href: string
@@ -252,6 +253,13 @@ function DemoNav() {
           )
         })}
       </nav>
+
+      {/* AI Assistant — visible for owner, coach, ops only */}
+      {view !== "participant" && (
+        <div className="px-3 pb-2">
+          <AIAssistant role={view as "owner" | "coach" | "ops"} />
+        </div>
+      )}
 
       {/* Reset + back + CTA */}
       <div className="p-4 border-t border-sidebar-border space-y-0.5">
