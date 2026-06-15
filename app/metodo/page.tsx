@@ -730,7 +730,67 @@ export default function MetodoPage() {
         </div>
       </section>
 
-      {/* ── SECCIÓN 7: LOS 11 MÓDULOS ── */}
+      {/* ── SECCIÓN 7: CAC / LTV ── */}
+      <section className="py-24 px-6 border-t border-white/[0.06]">
+        <div className="max-w-4xl mx-auto">
+          <Section>
+            <div className="text-center mb-14">
+              <p className="text-[11px] uppercase tracking-[0.2em] text-white/30 font-semibold mb-4">La ecuación del negocio</p>
+              <h2 className="text-4xl sm:text-5xl font-black leading-tight mb-6">
+                Dos números que definen
+                <br />
+                <span className="text-white/30">si tu centro crece o sobrevive.</span>
+              </h2>
+            </div>
+          </Section>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-14">
+            <Section>
+              <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 text-white/50 text-xs font-black uppercase tracking-wider mb-5">CAC</div>
+                <p className="text-4xl font-black text-white mb-3">Costo de adquisición</p>
+                <p className="text-white/45 leading-relaxed text-sm">
+                  Todo lo que gastas para que alguien nuevo entre al centro: el evento de enrolamiento, el tiempo del equipo, los materiales, el seguimiento. Dividido entre cuántas personas se inscribieron. Ese es tu CAC.
+                </p>
+              </div>
+            </Section>
+            <Section>
+              <div className="rounded-3xl border border-violet-500/20 bg-violet-600/[0.05] p-8">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-600/20 border border-violet-500/30 text-violet-300 text-xs font-black uppercase tracking-wider mb-5">LTV</div>
+                <p className="text-4xl font-black text-white mb-3">Valor de vida del cliente</p>
+                <p className="text-white/45 leading-relaxed text-sm">
+                  Todo lo que genera una persona durante su relación con tu centro: mensualidades, siguiente nivel, coaching personal, referidos que trae. Cuanto más tiempo se queda y más avanza, mayor es su LTV.
+                </p>
+              </div>
+            </Section>
+          </div>
+
+          <Section>
+            <div className="rounded-3xl border border-white/8 bg-white/[0.02] p-10 text-center">
+              <p className="text-xl sm:text-2xl font-black text-white leading-snug mb-6 max-w-2xl mx-auto">
+                La razón por la que siempre necesitas más enrolamiento es una sola: el CAC es alto y el LTV es bajo.
+              </p>
+              <p className="text-white/45 leading-relaxed max-w-xl mx-auto mb-8 text-sm">
+                Si una persona te cuesta $6,000 conseguir y se va en tres meses pagando $4,200 — el negocio no cierra. Pero si esa misma persona se queda 18 meses, sube al siguiente nivel y refiere a dos personas más que entran casi gratis — la ecuación entera cambia.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-sm">
+                <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-red-500/10 border border-red-500/20">
+                  <span className="text-red-400 font-black">Sin sistema</span>
+                  <span className="text-white/30">→</span>
+                  <span className="text-white/50">LTV bajo · CAC siempre alto</span>
+                </div>
+                <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-violet-600/15 border border-violet-500/25">
+                  <span className="text-violet-300 font-black">Con ELEVA</span>
+                  <span className="text-white/30">→</span>
+                  <span className="text-white/70">LTV sube · CAC cae solo</span>
+                </div>
+              </div>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      {/* ── SECCIÓN 8: LOS 11 MÓDULOS ── */}
       <section className="py-24 px-6 border-t border-white/[0.06]">
         <div className="max-w-5xl mx-auto">
           <Section>
