@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from "react"
 import {
   ArrowRight,
   CheckCircle2,
-  AlertTriangle,
   Brain,
   Activity,
   Users,
@@ -19,6 +18,15 @@ import {
   Target,
   Globe,
   Layers,
+  X,
+  DollarSign,
+  ClipboardList,
+  GitMerge,
+  Database,
+  ShieldCheck,
+  Send,
+  Video,
+  LayoutDashboard,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -146,7 +154,185 @@ function MockupAtencion() {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
+// ─── Module data ─────────────────────────────────────────────────────────────
+
+const MODULOS = [
+  {
+    num: "01",
+    icon: ClipboardList,
+    nombre: "Mesa de Registro",
+    tagline: "El día del evento, sin caos.",
+    descripcion: "Check-in en tiempo real, registro de pagos, confirmaciones para el siguiente entrenamiento e incidencias — todo en una sola pantalla. Sin papeles, sin hojas de Excel, sin información perdida.",
+    bullets: ["Check-in por nombre, QR o búsqueda rápida", "Registro de pago y comprobante en el momento", "Confirmación automática para el siguiente nivel", "Incidencias documentadas con foto y seguimiento", "Reporte en tiempo real para el dueño", "Historial completo por participante"],
+    color: "violet",
+  },
+  {
+    num: "02",
+    icon: DollarSign,
+    nombre: "Finanzas",
+    tagline: "Cada peso con origen, responsable y estado.",
+    descripcion: "MRR, P&L, caja, becas, comprobantes y anomalías detectadas automáticamente. No necesitas perseguir a nadie para saber qué pasó con el dinero del centro.",
+    bullets: ["Dashboard MRR por generación y mes", "P&L con costos de equipo y margen neto", "Detección automática de anomalías", "Gestión de becas con autorización y seguimiento", "Conciliación de caja post-evento", "Historial auditable de cada transacción"],
+    color: "green",
+  },
+  {
+    num: "03",
+    icon: Database,
+    nombre: "CRM Vivo",
+    tagline: "El expediente completo de cada persona.",
+    descripcion: "Historial desde el primer contacto hasta hoy: cursos, pagos, referidos, notas del coach, incidencias y estado de seguimiento. Nada se pierde aunque cambie el coach o la administración.",
+    bullets: ["Timeline de toda la relación con el participante", "Notas del coach enlazadas a cada sesión", "Registro de referidos y origen del contacto", "Estado de pagos e historial financiero", "Incidencias y resoluciones documentadas", "Exportable para análisis externos"],
+    color: "blue",
+  },
+  {
+    num: "04",
+    icon: GitMerge,
+    nombre: "Generaciones",
+    tagline: "Cada cohorte como una unidad viva.",
+    descripcion: "Fase actual, asistencia, momentum, conversión al siguiente nivel y rentabilidad por generación. Ves de un vistazo cuál generación necesita atención y cuál está en su mejor momento.",
+    bullets: ["Fase actual y progreso de cada cohorte", "Momentum score en tiempo real", "Tasa de asistencia y participación", "Conversión fase a fase por generación", "Rentabilidad individual y grupal", "Alertas automáticas de generaciones en riesgo"],
+    color: "violet",
+  },
+  {
+    num: "05",
+    icon: ShieldCheck,
+    nombre: "Visibilidad de Equipo",
+    tagline: "El dueño sabe quién está haciendo qué.",
+    descripcion: "Actividad de cada coach, tareas asignadas, contactos del día y participantes bajo su cargo. Visibilidad sin microgestión — sabes el estado de tu equipo sin necesitar una junta para preguntarlo.",
+    bullets: ["Panel de actividad por coach en tiempo real", "Tareas asignadas y estado de cumplimiento", "Participantes asignados y su momentum", "Contactos del día y respuesta pendiente", "Historial de notas y sesiones por coach", "Comparativo de desempeño del equipo"],
+    color: "orange",
+  },
+  {
+    num: "06",
+    icon: GitMerge,
+    nombre: "Pipeline Enrolamiento",
+    tagline: "La conversión visible de principio a fin.",
+    descripcion: "Cada invitado, cada compromiso, cada confirmación — rastreado. El pipeline convierte el enrolamiento de una actividad de intuición a un proceso medible con etapas, responsables y fechas.",
+    bullets: ["Etapas: invitado → comprometido → confirmado → inscrito", "Responsable y fecha de compromiso por lead", "Becas como parte del pipeline, no aparte", "Seguimiento automático a los 24, 48 y 72 horas", "Conversión por coach y por generación", "Reporte de enrolamiento para el dueño"],
+    color: "blue",
+  },
+  {
+    num: "07",
+    icon: Send,
+    nombre: "Campañas",
+    tagline: "Comunicación que llega en el momento correcto.",
+    descripcion: "Correos, WhatsApp y notificaciones enviados automáticamente según el estado del participante. Sin depender de que alguien recuerde enviar el mensaje del lunes.",
+    bullets: ["Secuencias automáticas por etapa del participante", "Templates de correo y WhatsApp editables", "Segmentación por generación, fase y comportamiento", "Recordatorios de pago sin intervención humana", "Campañas de reactivación para inactivos", "Métricas de apertura y respuesta"],
+    color: "green",
+  },
+  {
+    num: "08",
+    icon: LayoutDashboard,
+    nombre: "Dashboard del Dueño",
+    tagline: "El pulso del centro en 30 segundos.",
+    descripcion: "Todo lo que importa en una pantalla: participantes activos, ingresos del mes, generaciones en curso, alertas de atención y momentum general. Entra, revisa, decide — sin buscar en cinco lugares distintos.",
+    bullets: ["KPIs principales al abrir la app", "Alertas priorizadas por urgencia", "Momentum por generación en tiempo real", "Ingresos cobrados vs pendientes del mes", "Próximos eventos y confirmaciones", "Acceso rápido a cualquier módulo"],
+    color: "violet",
+  },
+  {
+    num: "09",
+    icon: Users,
+    nombre: "Pre-Entrenamiento",
+    tagline: "15 días que cambian el resultado del básico.",
+    descripcion: "Secuencia automática de contenido para los participantes inscritos antes de su primer entrenamiento. Videos de coaches, recursos de reflexión, comunicaciones por WhatsApp y correo. Llegan listos.",
+    bullets: ["Secuencia de 15 días totalmente automatizada", "Videos introductorios de cada coach", "Recursos de reflexión y preparación mental", "Comunicaciones por WhatsApp y correo", "Tracking de recursos abiertos y vistos", "Activación antes de pisar el salón"],
+    color: "orange",
+  },
+  {
+    num: "10",
+    icon: Globe,
+    nombre: "Hub de Comunidad",
+    tagline: "El centro que no termina cuando termina el entrenamiento.",
+    descripcion: "Módulos de coaching personal, especialistas, webinars y grupos de práctica para mantener activos a participantes y graduados. La comunidad como motor de retención y crecimiento.",
+    bullets: ["Booking de sesiones de coaching personal", "Red de especialistas por área de vida", "Calendario de webinars y eventos virtuales", "Grupos de práctica por fase y generación", "Contenido exclusivo para graduados", "Identificación automática de champions"],
+    color: "green",
+  },
+  {
+    num: "11",
+    icon: BarChart3,
+    nombre: "Simulador de Crecimiento",
+    tagline: "Proyecta el futuro antes de tomarlo.",
+    descripcion: "Modela el impacto de cada decisión: subir la cuota, abrir una nueva generación, cambiar el número de coaches, agregar un nuevo programa. Ve el efecto en ingresos y retención antes de ejecutar.",
+    bullets: ["Proyección de MRR a 6 y 12 meses", "Simulador de ROI por módulo", "Modela nuevas generaciones y cuotas", "Impacto de cambios en el equipo", "Benchmarks del sector integrados", "Exportable para presentar a socios o inversionistas"],
+    color: "blue",
+  },
+]
+
+const COLOR_MAP: Record<string, { pill: string; border: string; bg: string; text: string; bullet: string }> = {
+  violet: { pill: "bg-violet-600/15 border-violet-500/25 text-violet-300", border: "border-violet-500/20", bg: "bg-violet-600/[0.06]", text: "text-violet-400", bullet: "bg-violet-500/20 text-violet-400" },
+  blue:   { pill: "bg-blue-600/15 border-blue-500/25 text-blue-300",       border: "border-blue-500/20",   bg: "bg-blue-600/[0.06]",   text: "text-blue-400",   bullet: "bg-blue-500/20 text-blue-400"   },
+  green:  { pill: "bg-emerald-600/15 border-emerald-500/25 text-emerald-300", border: "border-emerald-500/20", bg: "bg-emerald-600/[0.06]", text: "text-emerald-400", bullet: "bg-emerald-500/20 text-emerald-400" },
+  orange: { pill: "bg-orange-500/15 border-orange-500/25 text-orange-300", border: "border-orange-500/20", bg: "bg-orange-500/[0.06]",  text: "text-orange-400", bullet: "bg-orange-500/20 text-orange-400" },
+}
+
+type Modulo = typeof MODULOS[number]
+
+// ─── Module modal ─────────────────────────────────────────────────────────────
+
+function ModuleModal({ mod, onClose }: { mod: Modulo; onClose: () => void }) {
+  const c = COLOR_MAP[mod.color]
+  const Icon = mod.icon
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose() }
+    document.addEventListener("keydown", handler)
+    return () => document.removeEventListener("keydown", handler)
+  }, [onClose])
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        className={cn("relative w-full max-w-lg rounded-3xl border p-8 bg-[#0d0d18] shadow-2xl shadow-black/80", c.border)}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/[0.06] hover:bg-white/[0.12] flex items-center justify-center transition-colors"
+        >
+          <X className="w-4 h-4 text-white/50" />
+        </button>
+
+        <div className={cn("inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-bold uppercase tracking-wider mb-5", c.pill)}>
+          <span className="font-black">{mod.num}</span>
+          {mod.nombre}
+        </div>
+
+        <div className={cn("w-12 h-12 rounded-2xl border flex items-center justify-center mb-5", c.bg, c.border)}>
+          <Icon className={cn("w-6 h-6", c.text)} />
+        </div>
+
+        <h3 className="text-2xl font-black text-white mb-2">{mod.nombre}</h3>
+        <p className={cn("text-sm font-semibold mb-4", c.text)}>{mod.tagline}</p>
+        <p className="text-sm text-white/50 leading-relaxed mb-6">{mod.descripcion}</p>
+
+        <div className="grid grid-cols-1 gap-2">
+          {mod.bullets.map((b) => (
+            <div key={b} className="flex items-start gap-2.5">
+              <div className={cn("w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5", c.bullet)}>
+                <CheckCircle2 className="w-3 h-3" />
+              </div>
+              <span className="text-sm text-white/60">{b}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 pt-6 border-t border-white/8">
+          <Link
+            href="/demo"
+            onClick={onClose}
+            className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-bold text-sm transition-colors"
+          >
+            Ver este módulo en el demo <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function MetodoPage() {
+  const [selectedModule, setSelectedModule] = useState<Modulo | null>(null)
   return (
     <div className="min-h-screen bg-[#07070f] text-white">
 
@@ -544,6 +730,137 @@ export default function MetodoPage() {
         </div>
       </section>
 
+      {/* ── SECCIÓN 7: LOS 11 MÓDULOS ── */}
+      <section className="py-24 px-6 border-t border-white/[0.06]">
+        <div className="max-w-5xl mx-auto">
+          <Section>
+            <div className="text-center mb-14">
+              <p className="text-[11px] uppercase tracking-[0.2em] text-white/30 font-semibold mb-4">El ecosistema completo</p>
+              <h2 className="text-4xl sm:text-5xl font-black leading-tight mb-6">
+                Todo lo que puede llegar
+                <br />
+                <span className="text-white/30">a ser tu centro con el sistema.</span>
+              </h2>
+              <p className="text-base text-white/40 max-w-2xl mx-auto">
+                AARR se opera a través de 11 módulos. Cada uno resuelve una pieza del sistema. Juntos, hacen que el centro funcione solo.
+              </p>
+            </div>
+          </Section>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {MODULOS.map((mod) => {
+              const c = COLOR_MAP[mod.color]
+              const Icon = mod.icon
+              return (
+                <Section key={mod.num}>
+                  <button
+                    onClick={() => setSelectedModule(mod)}
+                    className={cn(
+                      "w-full text-left rounded-2xl border p-5 transition-all hover:scale-[1.02] active:scale-[0.98] group",
+                      c.border, c.bg,
+                      "hover:border-opacity-50"
+                    )}
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={cn("w-9 h-9 rounded-xl border flex items-center justify-center", c.bg, c.border)}>
+                        <Icon className={cn("w-4 h-4", c.text)} />
+                      </div>
+                      <span className={cn("text-[10px] font-black opacity-40 group-hover:opacity-70 transition-opacity", c.text)}>{mod.num}</span>
+                    </div>
+                    <p className="text-sm font-black text-white mb-1 leading-tight">{mod.nombre}</p>
+                    <p className="text-[11px] text-white/35 leading-snug">{mod.tagline}</p>
+                    <div className={cn("mt-3 text-[10px] font-semibold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity", c.text)}>
+                      Ver detalle <ChevronRight className="w-3 h-3" />
+                    </div>
+                  </button>
+                </Section>
+              )
+            })}
+          </div>
+
+          <Section>
+            <p className="text-center text-sm text-white/25 mt-10">
+              Haz clic en cualquier módulo para ver qué incluye.
+            </p>
+          </Section>
+        </div>
+      </section>
+
+      {/* ── SECCIÓN 8: SIN ELEVA / CON ELEVA ── */}
+      <section className="py-24 px-6 border-t border-white/[0.06]">
+        <div className="max-w-4xl mx-auto">
+          <Section>
+            <div className="text-center mb-14">
+              <p className="text-[11px] uppercase tracking-[0.2em] text-white/30 font-semibold mb-4">En pocas palabras</p>
+              <h2 className="text-4xl sm:text-5xl font-black leading-tight">
+                La diferencia,
+                <span className="text-white/30"> en lo cotidiano.</span>
+              </h2>
+            </div>
+          </Section>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Sin ELEVA */}
+            <Section>
+              <div className="rounded-3xl border border-white/8 bg-white/[0.02] p-8 h-full">
+                <div className="flex items-center gap-3 mb-7">
+                  <div className="w-8 h-8 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center">
+                    <span className="text-white/30 text-lg font-black leading-none">×</span>
+                  </div>
+                  <span className="text-base font-black text-white/40">Sin ELEVA</span>
+                </div>
+                <div className="space-y-4">
+                  {[
+                    "Llegas el lunes y no sabes cuánto se cobró el fin de semana.",
+                    "El coach entra a sesión sin saber nada del participante que tiene enfrente.",
+                    "Alguien no ha pagado hace tres semanas y te enteraste hoy.",
+                    "¿Cuántos van al siguiente nivel? Depende de quién pregunta.",
+                    "La información del centro vive en WhatsApp, Excel y la memoria de alguien.",
+                    "Cuando se va un coach, se va también el historial de sus participantes.",
+                  ].map((t) => (
+                    <div key={t} className="flex items-start gap-3">
+                      <div className="w-5 h-5 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span className="text-red-400 text-[10px] font-black">×</span>
+                      </div>
+                      <p className="text-sm text-white/35 leading-snug">{t}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Section>
+
+            {/* Con ELEVA */}
+            <Section>
+              <div className="rounded-3xl border border-violet-500/20 bg-violet-600/[0.05] p-8 h-full">
+                <div className="flex items-center gap-3 mb-7">
+                  <div className="w-8 h-8 rounded-full bg-violet-600/20 border border-violet-500/30 flex items-center justify-center">
+                    <CheckCircle2 className="w-4 h-4 text-violet-400" />
+                  </div>
+                  <span className="text-base font-black text-violet-300">Con ELEVA</span>
+                </div>
+                <div className="space-y-4">
+                  {[
+                    "El lunes abres la app y en 30 segundos sabes exactamente cómo quedó el fin de semana.",
+                    "El coach llega a cada sesión con el historial, las notas y las señales del participante.",
+                    "El día 3 después del vencimiento ya llegó el recordatorio automático.",
+                    "La conversión al siguiente nivel es un número en tiempo real, no una estimación.",
+                    "Toda la información del centro vive en un solo lugar, accesible para quien deba verla.",
+                    "El centro no depende de ninguna persona en particular para seguir funcionando.",
+                  ].map((t) => (
+                    <div key={t} className="flex items-start gap-3">
+                      <div className="w-5 h-5 rounded-full bg-violet-500/20 border border-violet-500/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <CheckCircle2 className="w-3 h-3 text-violet-400" />
+                      </div>
+                      <p className="text-sm text-white/70 leading-snug">{t}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Section>
+          </div>
+        </div>
+      </section>
+
       {/* ── CTA FINAL ── */}
       <section className="py-32 px-6 border-t border-white/[0.06]">
         <div className="max-w-3xl mx-auto text-center">
@@ -604,6 +921,11 @@ export default function MetodoPage() {
           <p className="text-xs text-white/15">© 2025 ELEVA</p>
         </div>
       </footer>
+
+      {/* Modal de módulo */}
+      {selectedModule && (
+        <ModuleModal mod={selectedModule} onClose={() => setSelectedModule(null)} />
+      )}
 
     </div>
   )
