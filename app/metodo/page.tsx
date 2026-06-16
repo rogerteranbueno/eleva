@@ -419,7 +419,7 @@ export default function MetodoPage() {
                 icon: Brain,
                 titulo: "Sin inteligencia para coaches",
                 descripcion: "El coach llega a cada sesión sin saber cómo llegó emocionalmente el participante, qué prometió la semana pasada ni qué patrones tiene.",
-                consecuencia: "El 88% de las sesiones de coaching suceden sin ningún brief previo. El impacto se reduce a la mitad.",
+                consecuencia: "El 88% de los entrenamientos de transformación suceden sin ningún brief previo. El impacto se reduce a la mitad.",
                 colorText: "text-orange-400",
                 colorBorder: "border-orange-500/15",
                 colorBg: "bg-orange-500/[0.04]",
@@ -470,7 +470,7 @@ export default function MetodoPage() {
                 <span className="text-white/30">un centro en un sistema que crece solo.</span>
               </h2>
               <p className="text-base text-white/40 max-w-2xl mx-auto">
-                Cada fase tiene mecánicas concretas, métricas claras y herramientas en ELEVA. No es teoría — es operación.
+                Cada fase tiene mecánicas concretas, métricas claras y herramientas en ELEVA. No es teoría. Es operación.
               </p>
             </div>
           </Section>
@@ -509,7 +509,7 @@ export default function MetodoPage() {
                   La mayoría de los centros espera que el evento haga todo el trabajo. Pero la experiencia que alguien tiene en su primer entrenamiento depende en gran medida de cómo llegó.
                 </p>
                 <p className="text-white/50 leading-relaxed mb-8">
-                  ELEVA activa un protocolo de nutrición automática los 15 días antes del básico: videos de los coaches que van a conocer, recursos que calientan la mente para lo que viene, comunicaciones por WhatsApp y correo. No se adelanta el contenido profundo — se prepara a la persona para recibirlo.
+                  ELEVA activa un protocolo de nutrición automática los 15 días antes del básico: videos de los coaches que van a conocer, recursos que calientan la mente para lo que viene, comunicaciones por WhatsApp y correo. No se adelanta el contenido profundo. Se prepara a la persona para recibirlo.
                 </p>
               </Section>
               <Section>
@@ -519,13 +519,16 @@ export default function MetodoPage() {
                     <p className="text-xs text-white/40 leading-snug">más conversión básico→avanzado con nutrición previa</p>
                   </div>
                   <div className="rounded-2xl bg-violet-600/10 border border-violet-500/15 p-5">
-                    <p className="text-3xl font-black text-violet-300 mb-1">−34d</p>
-                    <p className="text-xs text-white/40 leading-snug">promedio menos para confirmar el siguiente nivel</p>
+                    <p className="text-3xl font-black text-violet-300 mb-1">+3×</p>
+                    <p className="text-xs text-white/40 leading-snug">más personas que dijeron sí el domingo pero no pagaron ese día, se inscriben con seguimiento estructurado en los primeros 5 días</p>
                   </div>
                 </div>
-                <p className="text-sm text-white/35 italic leading-relaxed border-l-2 border-violet-500/30 pl-4">
-                  &ldquo;El objetivo no es llenar el básico. Es que quien llegue llegue listo para transformarse — y pague el siguiente nivel porque quiere, no porque lo convencieron.&rdquo;
-                </p>
+                <div className="rounded-2xl border border-violet-500/25 bg-violet-600/[0.07] p-7">
+                  <span className="text-4xl text-violet-400/40 font-black leading-none block mb-3">"</span>
+                  <p className="text-base font-semibold text-white/75 leading-relaxed">
+                    El objetivo no es llenar el básico. Es que quien llegue llegue listo para transformarse, y pague el siguiente nivel porque quiere, no porque lo convencieron.
+                  </p>
+                </div>
               </Section>
             </div>
             <Section>
@@ -552,7 +555,7 @@ export default function MetodoPage() {
                   Entre entrenamiento y entrenamiento, el sistema no para.
                 </h2>
                 <p className="text-white/50 leading-relaxed mb-5">
-                  La transformación no ocurre en el entrenamiento. Ocurre en los días entre uno y otro. Y ahí es exactamente donde la mayoría de los centros desaparece.
+                  El entrenamiento es donde inicia la transformación. Pero lo que pasa entre un fin de semana y el siguiente determina si eso se sostiene o si se pierde. Y ahí es exactamente donde la mayoría de los centros desaparece.
                 </p>
                 <p className="text-white/50 leading-relaxed mb-8">
                   ELEVA trackea touchpoints concretos por participante. Cada señal se procesa y genera un dashboard que dice a quién atender hoy, con qué urgencia y con qué tipo de conversación.
@@ -586,9 +589,12 @@ export default function MetodoPage() {
                     <p className="text-xs text-white/40 leading-snug">NPS cuando el coach tiene contexto antes de cada sesión</p>
                   </div>
                 </div>
-                <p className="text-sm text-white/35 italic leading-relaxed border-l-2 border-blue-500/30 pl-4">
-                  &ldquo;No necesitas intuir quién está en riesgo. El sistema ya lo sabe. Solo necesitas actuar.&rdquo;
-                </p>
+                <div className="rounded-2xl border border-blue-500/25 bg-blue-600/[0.07] p-7">
+                  <span className="text-4xl text-blue-400/40 font-black leading-none block mb-3">"</span>
+                  <p className="text-base font-semibold text-white/75 leading-relaxed">
+                    No necesitas intuir quién está en riesgo. El sistema ya lo sabe. Solo necesitas actuar.
+                  </p>
+                </div>
               </Section>
             </div>
           </div>
@@ -616,7 +622,7 @@ export default function MetodoPage() {
           </Section>
           <Section>
             <p className="text-center text-white/50 max-w-2xl mx-auto mb-12 leading-relaxed">
-              ELEVA activa módulos de comunidad que mantienen conectados a activos y graduados. El sistema identifica a los champions automáticamente — las personas con mayor momentum, NPS y referidos — para saber a quién involucrar en los próximos programas.
+              ELEVA activa módulos de comunidad que mantienen conectados a activos y graduados. El sistema identifica a los champions automáticamente: las personas con mayor momentum, NPS y referidos, para saber a quién involucrar en los próximos programas.
             </p>
           </Section>
           <div className="grid md:grid-cols-3 gap-6 mb-14">
@@ -659,9 +665,12 @@ export default function MetodoPage() {
                 <p className="text-xs text-white/40 leading-snug">de champions identificados se convierten en co-facilitadores de nuevos programas</p>
               </div>
             </div>
-            <p className="text-center text-sm text-white/35 italic max-w-lg mx-auto border-l-2 border-emerald-500/30 pl-4">
-              &ldquo;Un centro que retiene bien no necesita crecer a base de presión de enrolamiento. Crece a base de comunidad.&rdquo;
-            </p>
+            <div className="rounded-2xl border border-emerald-500/25 bg-emerald-600/[0.07] p-7 max-w-lg mx-auto">
+              <span className="text-4xl text-emerald-400/40 font-black leading-none block mb-3">"</span>
+              <p className="text-base font-semibold text-white/75 leading-relaxed">
+                Un centro que retiene bien no necesita crecer a base de presión de enrolamiento. Crece a base de comunidad.
+              </p>
+            </div>
           </Section>
         </div>
       </section>
@@ -723,9 +732,12 @@ export default function MetodoPage() {
                 <p className="text-xs text-white/40 leading-snug">promedio para recuperar la inversión en el sistema</p>
               </div>
             </div>
-            <p className="text-center text-sm text-white/35 italic max-w-xl mx-auto border-l-2 border-orange-500/30 pl-4">
-              &ldquo;Este es el futuro de la transformación: centros que dependen menos de la inspiración del momento y más de sistemas que funcionan todos los días, con o sin el dueño presente.&rdquo;
-            </p>
+            <div className="rounded-2xl border border-orange-500/25 bg-orange-500/[0.07] p-7 max-w-xl mx-auto">
+              <span className="text-4xl text-orange-400/40 font-black leading-none block mb-3">"</span>
+              <p className="text-base font-semibold text-white/75 leading-relaxed">
+                Este es el futuro de la transformación: centros que dependen menos de la inspiración del momento y más de sistemas que funcionan todos los días, con o sin el dueño presente.
+              </p>
+            </div>
           </Section>
         </div>
       </section>
@@ -771,7 +783,7 @@ export default function MetodoPage() {
                 La razón por la que siempre necesitas más enrolamiento es una sola: el CAC es alto y el LTV es bajo.
               </p>
               <p className="text-white/45 leading-relaxed max-w-xl mx-auto mb-8 text-sm">
-                Si una persona te cuesta $6,000 conseguir y se va en tres meses pagando $4,200 — el negocio no cierra. Pero si esa misma persona se queda 18 meses, sube al siguiente nivel y refiere a dos personas más que entran casi gratis — la ecuación entera cambia.
+                Si una persona te cuesta $6,000 conseguir y se va en tres meses pagando $4,200, el negocio no cierra. Pero si esa misma persona se queda 18 meses, sube al siguiente nivel y refiere a dos personas más que entran casi gratis, la ecuación entera cambia.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-sm">
                 <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-red-500/10 border border-red-500/20">
