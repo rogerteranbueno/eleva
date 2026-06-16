@@ -12,7 +12,7 @@ import { MomentumGauge } from "@/components/demo/MomentumGauge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { useDemoStore } from "@/lib/demo-store"
-import { VALERIA, COACHES, SPECIALISTS, VALERIA_JOURNEY } from "@/data/creania"
+import { VALERIA, COACHES, SPECIALISTS, VALERIA_JOURNEY } from "@/data/level"
 import { cn, getMomentumColor } from "@/lib/utils"
 
 const ONBOARDING = {
@@ -148,7 +148,7 @@ const REFERRER = {
   name: "Diego Salinas",
   avatar: "DS",
   cohorte: "Generación Omega",
-  phase: "Vía Creania · Mes 3",
+  phase: "PL · Mes 3",
   momentum: 81,
   totalReferrals: 3,
 }
@@ -374,13 +374,13 @@ function TabJourney({ momentum }: { momentum: number }) {
         { label: "Fecha de Expansión", value: VALERIA_JOURNEY.expansion.date },
         { label: "Contenido consumido", value: `${VALERIA_JOURNEY.expansion.contentPct}%` },
         { label: "Misiones completadas", value: `${VALERIA_JOURNEY.expansion.missionsCompleted} de 8` },
-        { label: "Momentum al entrar a Vía Creania", value: `${VALERIA_JOURNEY.expansion.momentumAtEntry}%` },
+        { label: "Momentum al entrar a PL", value: `${VALERIA_JOURNEY.expansion.momentumAtEntry}%` },
       ],
     },
     {
       id: "retener",
       icon: Heart,
-      label: "Retener · Vía Creania",
+      label: "Retener · PL",
       color: "pink",
       status: "active" as const,
       title: "Mes 3 de 5 — activa",
@@ -397,7 +397,7 @@ function TabJourney({ momentum }: { momentum: number }) {
       label: "Escalar",
       color: "violet",
       status: "locked" as const,
-      title: "Disponible al completar Vía Creania",
+      title: "Disponible al completar PL",
       items: [
         { label: "Mentoría de pares", value: "—" },
         { label: "Referidos generados", value: "—" },
@@ -489,7 +489,7 @@ function TabJourney({ momentum }: { momentum: number }) {
                 {isActive && (
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between text-[11px]">
-                      <span className="text-muted-foreground">Progreso en Vía Creania</span>
+                      <span className="text-muted-foreground">Progreso en PL</span>
                       <span className="text-pink-400 font-semibold">Mes 3/5</span>
                     </div>
                     <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
@@ -501,7 +501,7 @@ function TabJourney({ momentum }: { momentum: number }) {
                 {isLocked && (
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Lock className="w-3 h-3" />
-                    Se desbloquea al completar Vía Creania
+                    Se desbloquea al completar PL
                   </div>
                 )}
               </div>
@@ -520,7 +520,7 @@ function TabResumen({ momentum }: { momentum: number }) {
       <StatBox label="Mejor racha" value="22 días" sub="Alcanzada hace 3 semanas" />
       <StatBox label="Misiones completadas" value="3 / 12" sub="3 pendientes este mes" alert />
       <StatBox label="Momentum" value={`${momentum}%`} sub="Cayó 47 puntos en 2 semanas" alert />
-      <StatBox label="Fase actual" value="Mes 3" sub="Vía Creania — 2 meses restantes" />
+      <StatBox label="Fase actual" value="Mes 3" sub="PL — 2 meses restantes" />
       <StatBox label="Pagos" value="Al corriente" sub="Mes 4 vence en 29 días" />
     </div>
   )
@@ -583,7 +583,7 @@ function TabObjetivos({ specialist }: { specialist: { name: string; specialty: s
           />
         </div>
         <p className="text-xs text-muted-foreground">
-          Objetivo declarado en semana 1 de Vía Creania. Sin avance registrado en los últimos 11 días.
+          Objetivo declarado en semana 1 de PL. Sin avance registrado en los últimos 11 días.
         </p>
       </div>
       <div className="glass-violet rounded-xl p-5">
@@ -723,7 +723,7 @@ function StatBox({ label, value, sub, alert }: { label: string; value: string; s
 
 const COMMS_LOG = [
   { id: "c1", canal: "whatsapp" as const, fecha: "04 jun 2026 · 10:15", contenido: "Hola Valeria 👋 Soy Ana, tu coach. ¿Cómo vas esta semana con tu objetivo? Aquí para ti.", estado: "respondido" as const, respuesta: "Hola Ana, gracias. Ha sido difícil pero voy a retomar. 🙏" },
-  { id: "c2", canal: "email" as const,    fecha: "01 jun 2026 · 09:00", contenido: "Recap de la semana 12 de Vía Creania — tus avances y lo que viene.", estado: "abierto" as const },
+  { id: "c2", canal: "email" as const,    fecha: "01 jun 2026 · 09:00", contenido: "Recap de la semana 12 de PL — tus avances y lo que viene.", estado: "abierto" as const },
   { id: "c3", canal: "app" as const,      fecha: "28 may 2026 · 08:00", contenido: "Nueva misión disponible: Registro de hábitos semana 3. Tienes hasta el viernes.", estado: "enviado" as const },
   { id: "c4", canal: "whatsapp" as const, fecha: "25 may 2026 · 18:30", contenido: "Recordatorio: sesión grupal Gen. Omega mañana domingo 10am. ¡Te esperamos! 🌟", estado: "leido" as const },
   { id: "c5", canal: "email" as const,    fecha: "20 may 2026 · 09:00", contenido: "Recap semana 10 — Valeria, esta semana fue increíble para tu generación. Lee aquí.", estado: "abierto" as const },

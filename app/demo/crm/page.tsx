@@ -11,7 +11,7 @@ import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { RegistrationDrawer } from "@/components/demo/RegistrationDrawer"
-import { CRM_PARTICIPANTS, COHORTES } from "@/data/creania"
+import { CRM_PARTICIPANTS, COHORTES } from "@/data/level"
 import type { CRMParticipant, PaymentStatus, RiskLevel } from "@/lib/types"
 import { cn } from "@/lib/utils"
 

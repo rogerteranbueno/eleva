@@ -11,7 +11,7 @@ import { MomentumGauge } from "@/components/demo/MomentumGauge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { useDemoStore } from "@/lib/demo-store"
-import { FEED_POSTS, SPECIALISTS, COACHES } from "@/data/creania"
+import { FEED_POSTS, SPECIALISTS, COACHES } from "@/data/level"
 import { cn } from "@/lib/utils"
 
 const ONBOARDING = {
@@ -158,7 +158,7 @@ export default function FeedPage() {
             </div>
             <div>
               <p className="text-xs font-bold text-violet-300">Tu compromiso de impacto</p>
-              <p className="text-[10px] text-muted-foreground">Vía Creania · Fin de semana 2 de 3</p>
+              <p className="text-[10px] text-muted-foreground">PL · Fin de semana 2 de 3</p>
             </div>
           </div>
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-violet-500/20 border border-violet-500/30 text-violet-300 font-semibold">

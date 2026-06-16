@@ -81,7 +81,7 @@ const CAMPAIGNS: Campaign[] = [
     status: "activa",
     audience: "Gen. Omega · Nuevos",
     audienceCount: 12,
-    preview: "¡Bienvenido a Creania, {nombre}! 🎉 Tu coach Ana Reyes y toda tu generación Omega están listos para acompañarte...",
+    preview: "¡Bienvenido a LEVEL, {nombre}! 🎉 Tu coach Ana Reyes y toda tu generación Omega están listos para acompañarte...",
   },
   {
     id: "c5",
@@ -92,7 +92,7 @@ const CAMPAIGNS: Campaign[] = [
     audienceCount: 214,
     sentAt: "Hace 32 días",
     stats: { enviadas: 214, abiertas: 141, clicks: 62 },
-    preview: "Este mes en Creania: 3 nuevas misiones completadas, récord de momentum y la historia de Diego...",
+    preview: "Este mes en LEVEL: 3 nuevas misiones completadas, récord de momentum y la historia de Diego...",
   },
   {
     id: "c6",
@@ -135,7 +135,7 @@ function NewCampaignDrawer({ onClose }: { onClose: () => void }) {
   const [sending, setSending] = useState(false)
 
   const audiences = [
-    { id: "omega", label: "Gen. Omega", count: 89, sub: "Vía Creania · mes 3" },
+    { id: "omega", label: "Gen. Omega", count: 89, sub: "PL · mes 3" },
     { id: "norte", label: "Gen. Norte", count: 67, sub: "Expansión · semana 2" },
     { id: "via12", label: "Gen. Vía 12", count: 58, sub: "Completada · egresados" },
     { id: "todos", label: "Toda la comunidad", count: 214, sub: "Activos + egresados" },

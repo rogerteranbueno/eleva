@@ -11,7 +11,7 @@ export function DemoSection() {
   const c = lang === "en" ? {
     eyebrow: "Interactive demo",
     h2a: "Watch it running in ",
-    h2b: "Creania.",
+    h2b: "LEVEL.",
     sub: "See how it detects 14 at-risk participants and lets you act in one click. Then switch to the participant view and live the journey from the inside. Fictional data, real experience.",
     cta: "Enter the demo",
     badge1: "No registration required",
@@ -20,7 +20,7 @@ export function DemoSection() {
   } : {
     eyebrow: "Demo interactivo",
     h2a: "Míralo funcionando en ",
-    h2b: "Creania.",
+    h2b: "LEVEL.",
     sub: "Observa cómo detecta los 14 participantes en riesgo y actúa sobre ellos en un clic. Luego cambia a la vista del participante y vive el journey desde adentro. Datos ficticios, experiencia real.",
     cta: "Entrar al demo",
     badge1: "Sin registro requerido",

@@ -20,7 +20,7 @@ const ONBOARDING = {
   ],
   cta: "Explorar la Tribu →",
 }
-import { FEED_POSTS, LEADERBOARD, COHORTES } from "@/data/creania"
+import { FEED_POSTS, LEADERBOARD, COHORTES } from "@/data/level"
 import { cn } from "@/lib/utils"
 
 export default function TribuPage() {

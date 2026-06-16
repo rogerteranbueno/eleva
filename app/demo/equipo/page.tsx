@@ -9,7 +9,7 @@ import {
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { OnboardingModal } from "@/components/demo/OnboardingModal"
-import { COACH_METRICS, COHORTES } from "@/data/creania"
+import { COACH_METRICS, COHORTES } from "@/data/level"
 import type { CoachMetrics } from "@/lib/types"
 import { cn } from "@/lib/utils"
 

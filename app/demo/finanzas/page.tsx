@@ -10,7 +10,7 @@ import {
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { OnboardingModal } from "@/components/demo/OnboardingModal"
-import { FINANCIALS, CENTERS, FINANCIAL_ANOMALIES, type FinancialAnomaly } from "@/data/creania"
+import { FINANCIALS, CENTERS, FINANCIAL_ANOMALIES, type FinancialAnomaly } from "@/data/level"
 import { cn } from "@/lib/utils"
 import { InfoTooltip } from "@/components/demo/InfoTooltip"
 import { useDemoStore } from "@/lib/demo-store"
@@ -95,13 +95,13 @@ type FinEntry = {
 }
 
 const HISTORIAL: FinEntry[] = [
-  { id: "h1",  type: "ingreso", category: "Mensualidad",   description: "Pago Vía Creania — Valeria Romo",       amount: 4200,  date: "04 jun 2025 · 09:12",  registeredBy: "Karla Ríos (Ops)" },
-  { id: "h2",  type: "ingreso", category: "Mensualidad",   description: "Pago Vía Creania — Diego Salinas",      amount: 4200,  date: "04 jun 2025 · 08:45",  registeredBy: "Sistema automático" },
+  { id: "h1",  type: "ingreso", category: "Mensualidad",   description: "Pago PL — Valeria Romo",       amount: 4200,  date: "04 jun 2025 · 09:12",  registeredBy: "Karla Ríos (Ops)" },
+  { id: "h2",  type: "ingreso", category: "Mensualidad",   description: "Pago PL — Diego Salinas",      amount: 4200,  date: "04 jun 2025 · 08:45",  registeredBy: "Sistema automático" },
   { id: "h3",  type: "egreso",  category: "Coach",         description: "Honorarios Ana Reyes — Junio",            amount: 18000, date: "03 jun 2025 · 14:00",  registeredBy: "Ricardo Vargas (Dueño)" },
   { id: "h4",  type: "egreso",  category: "Coach",         description: "Honorarios Marco Díaz — Junio",           amount: 18000, date: "03 jun 2025 · 13:58",  registeredBy: "Ricardo Vargas (Dueño)" },
   { id: "h5",  type: "egreso",  category: "Plataforma",    description: "Suscripción ELEVA — Junio 2025",        amount: 8500,  date: "01 jun 2025 · 00:00",  registeredBy: "Sistema automático" },
   { id: "h6",  type: "ingreso", category: "Inscripción",   description: "Despertar — 6 nuevos participantes",      amount: 41400, date: "31 may 2025 · 18:20",  registeredBy: "Karla Ríos (Ops)", note: "Generación Norte — sesión mayo" },
-  { id: "h7",  type: "ingreso", category: "Mensualidad",   description: "Cobro masivo Vía Creania — 38 pagos",   amount: 159600,date: "01 may 2025 · 09:00",  registeredBy: "Sistema automático", note: "38 de 42 cobraron en fecha" },
+  { id: "h7",  type: "ingreso", category: "Mensualidad",   description: "Cobro masivo PL — 38 pagos",   amount: 159600,date: "01 may 2025 · 09:00",  registeredBy: "Sistema automático", note: "38 de 42 cobraron en fecha" },
   { id: "h8",  type: "egreso",  category: "Operativo",     description: "Renta sala Despertar — mayo",             amount: 12000, date: "28 may 2025 · 11:00",  registeredBy: "Karla Ríos (Ops)" },
   { id: "h9",  type: "egreso",  category: "Marketing",     description: "Pauta redes sociales — mayo",             amount: 4500,  date: "25 may 2025 · 10:00",  registeredBy: "Ricardo Vargas (Dueño)" },
   { id: "h10", type: "ingreso", category: "Membresía",     description: "Membresía Expansión — 3 nuevos",          amount: 3600,  date: "20 may 2025 · 16:30",  registeredBy: "Karla Ríos (Ops)" },
@@ -403,7 +403,7 @@ export default function FinanzasPage() {
           <div>
             <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Ingresos</p>
             <div className="space-y-1.5">
-              <PLRow label="Mensualidades Vía Creania" value={center.mrr} color="text-green-400" />
+              <PLRow label="Mensualidades PL" value={center.mrr} color="text-green-400" />
               <PLRow label="Inscripciones (Despertar + Expansión)" value={monthlyRevenue - center.mrr} color="text-green-400" />
               <PLRow label="Total ingresos cobrados" value={collected} color="text-green-400" bold />
             </div>

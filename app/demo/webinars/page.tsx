@@ -79,7 +79,7 @@ const WEBINARS: Webinar[] = [
     id: "w3",
     title: "Mentoría grupal — Cierra tus compromisos del mes",
     guest: "Ana Reyes",
-    guestRole: "Coach Gen. Omega · Creania",
+    guestRole: "Coach Gen. Omega · LEVEL",
     guestCountry: "🇲🇽 México",
     date: "Jue 19 jun",
     time: "8:00 PM",

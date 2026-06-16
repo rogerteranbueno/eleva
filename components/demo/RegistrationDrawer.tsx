@@ -6,7 +6,7 @@ import {
   MessageCircle, CheckCircle2, UserPlus, Sparkles,
 } from "lucide-react"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
-import { REGISTRATION_COHORTES } from "@/data/creania"
+import { REGISTRATION_COHORTES } from "@/data/level"
 import { cn } from "@/lib/utils"
 
 const LEAD_SOURCES = [
@@ -257,14 +257,14 @@ export function RegistrationDrawer({ onClose, onSuccess }: RegistrationDrawerPro
                     <MessageCircle className="w-3 h-3 text-white" />
                   </div>
                   <div>
-                    <p className="text-[11px] font-semibold text-green-300">ELEVA · Creania</p>
+                    <p className="text-[11px] font-semibold text-green-300">ELEVA · LEVEL</p>
                     <p className="text-[9px] text-green-400/60">Mensaje automático</p>
                   </div>
                 </div>
                 <div className="p-3">
                   <div className="bg-[#1a3a1a] rounded-xl rounded-tl-sm px-3 py-2.5 max-w-[90%] space-y-1">
                     <p className="text-xs text-green-100 leading-relaxed">
-                      ¡Hola {form.name.split(" ")[0] || "Ana"}! 🎉 Bienvenida a <span className="font-semibold">Creania Transformación</span>.
+                      ¡Hola {form.name.split(" ")[0] || "Ana"}! 🎉 Bienvenida a <span className="font-semibold">LEVEL Transformación</span>.
                     </p>
                     <p className="text-xs text-green-100 leading-relaxed">
                       Tu perfil ya está listo en <span className="text-[#25D366]">{cohorte.name}</span> con {cohorte.coach} como tu coach.

@@ -11,7 +11,7 @@ import { CampaignComposer, type ComposerInsight } from "@/components/demo/Campai
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { PlanGenerator } from "@/components/demo/PlanGenerator"
 import { PlanTipsDrawer, PlanTrigger, PLAN_CONFIGS } from "@/components/demo/PlanTipsDrawer"
-import { COHORTES, RECENT_ACTIVITY, CENTERS } from "@/data/creania"
+import { COHORTES, RECENT_ACTIVITY, CENTERS } from "@/data/level"
 import { getMomentumColor } from "@/lib/utils"
 import { cn } from "@/lib/utils"
 import { InfoTooltip } from "@/components/demo/InfoTooltip"
@@ -54,12 +54,12 @@ const INSIGHTS: InsightDef[] = [
       recipients: { count: 14, label: "Participantes sin actividad +7 días" },
       defaultChannel: "whatsapp",
       messages: {
-        whatsapp: "Hola {nombre} 🌟 Soy Carlos de Creania. Te he visto un poco desconectado estos días y quería saber cómo estás. Tu proceso nos importa — ¿hay algo en lo que pueda apoyarte? Aquí estoy para ti.",
-        emailSubject: "Carlos de Creania quería saber cómo estás 💙",
-        emailBody: "Hola {nombre},\n\nNos has faltado en Creania.\n\nSé que la vida tiene altibajos y eso está completamente bien. Lo que importa es que no estás solo en este proceso — el equipo y yo estamos aquí.\n\n¿Qué está pasando? ¿Cómo puedo apoyarte esta semana?\n\nCon cariño,\nCarlos Mendoza\nCreania Transformación",
-        sms: "Hola {nombre}, Carlos de Creania aquí. ¿Todo bien? Te echamos de menos. Escríbeme cuando puedas — aquí estoy. 🌟",
+        whatsapp: "Hola {nombre} 🌟 Soy Carlos de LEVEL. Te he visto un poco desconectado estos días y quería saber cómo estás. Tu proceso nos importa — ¿hay algo en lo que pueda apoyarte? Aquí estoy para ti.",
+        emailSubject: "Carlos de LEVEL quería saber cómo estás 💙",
+        emailBody: "Hola {nombre},\n\nNos has faltado en LEVEL.\n\nSé que la vida tiene altibajos y eso está completamente bien. Lo que importa es que no estás solo en este proceso — el equipo y yo estamos aquí.\n\n¿Qué está pasando? ¿Cómo puedo apoyarte esta semana?\n\nCon cariño,\nCarlos Mendoza\nLEVEL Transformación",
+        sms: "Hola {nombre}, Carlos de LEVEL aquí. ¿Todo bien? Te echamos de menos. Escríbeme cuando puedas — aquí estoy. 🌟",
         campaignSubject: "Tu proceso nos importa, {nombre}",
-        campaignBody: "Hola {nombre},\n\nNotamos que has estado desconectado y queremos saber cómo estás. En Creania nadie se queda atrás. Responde este mensaje y hablamos.",
+        campaignBody: "Hola {nombre},\n\nNotamos que has estado desconectado y queremos saber cómo estás. En LEVEL nadie se queda atrás. Responde este mensaje y hablamos.",
         segment: "14 participantes — sin actividad 7+ días, momentum <40%",
       },
     },
@@ -78,8 +78,8 @@ const INSIGHTS: InsightDef[] = [
       messages: {
         whatsapp: "Generación Norte 💪 Esta semana nos volvemos a conectar. Marco tiene algo especial preparado para ustedes. Más info en el grupo.",
         emailSubject: "Generación Norte — algo importante esta semana",
-        emailBody: "Hola {nombre},\n\nGeneración Norte está lista para el siguiente nivel.\n\nMarco tiene preparada una sesión especial para reactivar el grupo. No te la pierdas.\n\n¿Estás adentro?\n\nCreania Transformación",
-        sms: "Gen. Norte: sesión especial con Marco esta semana. Confirma asistencia respondiendo SÍ. Creania 🔥",
+        emailBody: "Hola {nombre},\n\nGeneración Norte está lista para el siguiente nivel.\n\nMarco tiene preparada una sesión especial para reactivar el grupo. No te la pierdas.\n\n¿Estás adentro?\n\nLEVEL Transformación",
+        sms: "Gen. Norte: sesión especial con Marco esta semana. Confirma asistencia respondiendo SÍ. LEVEL 🔥",
         campaignSubject: "Gen. Norte — no dejes que el momentum caiga",
         campaignBody: "Hola {nombre},\n\nLa Generación Norte tiene una energía increíble y queremos que se mantenga. Esta semana hay una activación grupal. Más detalles muy pronto.",
         segment: "67 participantes — Generación Norte, momentum <65%",
@@ -91,17 +91,17 @@ const INSIGHTS: InsightDef[] = [
     icon: "💳",
     severity: "info",
     title: "Pago pendiente: Valeria Romo — $4,200",
-    description: "Vía Creania Mes 4 — vencido hace 3 días. Único atraso en todo su historial.",
+    description: "PL Mes 4 — vencido hace 3 días. Único atraso en todo su historial.",
     actionLabel: "Enviar recordatorio",
     composer: {
       title: "Recordatorio de pago — Valeria Romo",
-      recipients: { count: 1, label: "Valeria Romo · Vía Creania Mes 4" },
+      recipients: { count: 1, label: "Valeria Romo · PL Mes 4" },
       defaultChannel: "email",
       messages: {
-        whatsapp: "Hola Valeria 😊 Pasando a recordarte que el pago de Mes 4 de Vía Creania está pendiente. ¿Puedo ayudarte a coordinarlo? Cualquier cosa, aquí estoy.",
-        emailSubject: "Recordatorio: Pago Mes 4 — Vía Creania",
-        emailBody: "Hola Valeria,\n\nTe escribimos para recordarte que el pago correspondiente al Mes 4 de Vía Creania ($4,200 MXN) está pendiente.\n\nSabemos que a veces se pasan estas cosas — no hay problema. Puedes realizarlo por transferencia a la cuenta de siempre o escribirnos si necesitas coordinar.\n\nGracias por confiar en Creania,\nEl equipo",
-        sms: "Hola Valeria, recordatorio del pago Mes 4 de Vía Creania ($4,200). Escríbenos si necesitas ayuda. Creania.",
+        whatsapp: "Hola Valeria 😊 Pasando a recordarte que el pago de Mes 4 de PL está pendiente. ¿Puedo ayudarte a coordinarlo? Cualquier cosa, aquí estoy.",
+        emailSubject: "Recordatorio: Pago Mes 4 — PL",
+        emailBody: "Hola Valeria,\n\nTe escribimos para recordarte que el pago correspondiente al Mes 4 de PL ($4,200 MXN) está pendiente.\n\nSabemos que a veces se pasan estas cosas — no hay problema. Puedes realizarlo por transferencia a la cuenta de siempre o escribirnos si necesitas coordinar.\n\nGracias por confiar en LEVEL,\nEl equipo",
+        sms: "Hola Valeria, recordatorio del pago Mes 4 de PL ($4,200). Escríbenos si necesitas ayuda. LEVEL.",
         campaignSubject: "Recordatorio: Pago Mes 4 pendiente",
         campaignBody: "Hola Valeria, tienes un pago pendiente del Mes 4. Coordínalo cuando puedas.",
         segment: "1 participante — Valeria Romo, pago pendiente",
@@ -122,8 +122,8 @@ const INSIGHTS: InsightDef[] = [
       messages: {
         whatsapp: "Hola {nombre} 👋 Recordatorio: sesión en vivo de Generación Omega este JUEVES a las 7pm. ¡No te la pierdas! Responde '✅' para confirmar tu lugar.",
         emailSubject: "Te esperamos el jueves — Sesión Gen. Omega 7pm",
-        emailBody: "Hola {nombre},\n\n¡Este JUEVES es la sesión en vivo de Generación Omega!\n\n📅 Jueves, 5 de junio\n⏰ 7:00 PM (hora CDMX)\n📍 Zoom — link en el grupo\n\nEsta sesión es especial — Ana tiene algo importante que compartir con el grupo.\n\n¿Confirmamos tu lugar?\n\nEquipo Creania",
-        sms: "Hola {nombre}! Sesión Gen. Omega JUEVES 7pm. Confirma respondiendo SÍ. ¡Te esperamos! Creania",
+        emailBody: "Hola {nombre},\n\n¡Este JUEVES es la sesión en vivo de Generación Omega!\n\n📅 Jueves, 5 de junio\n⏰ 7:00 PM (hora CDMX)\n📍 Zoom — link en el grupo\n\nEsta sesión es especial — Ana tiene algo importante que compartir con el grupo.\n\n¿Confirmamos tu lugar?\n\nEquipo LEVEL",
+        sms: "Hola {nombre}! Sesión Gen. Omega JUEVES 7pm. Confirma respondiendo SÍ. ¡Te esperamos! LEVEL",
         campaignSubject: "Tu lugar en la sesión del jueves — confirma ahora",
         campaignBody: "Hola {nombre}, este jueves a las 7pm es tu sesión en vivo. Confirma asistencia para reservar tu lugar. Ana tiene algo importante para ti.",
         segment: "59 participantes Gen. Omega — sin confirmar asistencia",

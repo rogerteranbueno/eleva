@@ -997,7 +997,7 @@ export default function MetodoPage() {
               <span className="text-white/30">Ahora dale el sistema.</span>
             </h2>
             <p className="text-base text-white/40 mb-12 max-w-xl mx-auto leading-relaxed">
-              ELEVA ya está corriendo en Creania Transformación. Puedes ver cada fase de AARR operando con datos reales — sin registro, sin demo call, sin pitch.
+              ELEVA ya está corriendo en LEVEL Transformación. Puedes ver cada fase de AARR operando con datos reales — sin registro, sin demo call, sin pitch.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
               <Link

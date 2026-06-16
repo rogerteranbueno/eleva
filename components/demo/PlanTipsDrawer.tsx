@@ -108,9 +108,9 @@ export const PLAN_CONFIGS: Record<string, PlanConfig> = {
     metric: "Generación Omega",
     value: "74% momentum",
     status: "good",
-    statusLabel: "Saludable — Vía Creania Mes 3 de 5",
+    statusLabel: "Saludable — PL Mes 3 de 5",
     tips: [
-      { emoji: "🎯", title: "Aprovecha el momentum para el siguiente ciclo", desc: "Con 74% en mes 3, es el mejor momento para presentar qué sigue después de Vía Creania. Planta la semilla ahora, cosecha en 2 meses.", priority: "esta-semana" },
+      { emoji: "🎯", title: "Aprovecha el momentum para el siguiente ciclo", desc: "Con 74% en mes 3, es el mejor momento para presentar qué sigue después de PL. Planta la semilla ahora, cosecha en 2 meses.", priority: "esta-semana" },
       { emoji: "🌟", title: "Identifica los 5 de mayor momentum como mentores", desc: "Los participantes destacados de Omega pueden apoyar a los de Norte. El peer-mentoring sube momentum en ambos grupos.", priority: "esta-semana" },
       { emoji: "📸", title: "Documenta los logros del Mes 3", desc: "Pide a Ana que recolecte 3-5 historias de transformación del mes. Son tu mejor material de captación para la siguiente generación.", priority: "este-mes" },
     ],

@@ -35,7 +35,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { DemoProvider, useDemoStore } from "@/lib/demo-store"
-import { CENTERS } from "@/data/creania"
+import { CENTERS } from "@/data/level"
 import { AIAssistant } from "@/components/demo/AIAssistant"
 
 type NavScreen = {

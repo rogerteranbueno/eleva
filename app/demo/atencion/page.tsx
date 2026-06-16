@@ -7,7 +7,7 @@ import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { useDemoStore } from "@/lib/demo-store"
-import { AT_RISK_PARTICIPANTS, PRE_TRAINING_PENDING } from "@/data/creania"
+import { AT_RISK_PARTICIPANTS, PRE_TRAINING_PENDING } from "@/data/level"
 import { getMomentumColor, cn } from "@/lib/utils"
 
 const ONBOARDING = {

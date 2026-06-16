@@ -66,7 +66,7 @@ export function ShareProgressCard({ name, momentum, streak, phase, onClose }: Sh
                 <div className="w-4 h-4 rounded bg-violet-600 flex items-center justify-center">
                   <span className="text-white font-black text-[9px]">E</span>
                 </div>
-                <span className="text-[10px] font-bold text-muted-foreground">ELEVA · Creania</span>
+                <span className="text-[10px] font-bold text-muted-foreground">ELEVA · LEVEL</span>
               </div>
               <span className="text-[10px] text-muted-foreground">{phase}</span>
             </div>
@@ -110,7 +110,7 @@ export function ShareProgressCard({ name, momentum, streak, phase, onClose }: Sh
               </div>
 
               <p className="text-[10px] text-muted-foreground text-center pt-0.5">
-                Estoy transformando mi vida en Creania · creania.eleva.app
+                Estoy transformando mi vida en LEVEL · creania.eleva.app
               </p>
             </div>
           </div>

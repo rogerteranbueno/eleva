@@ -19,7 +19,7 @@ import {
   COHORTES,
   AT_RISK_PARTICIPANTS,
   FINANCIALS,
-} from "@/data/creania"
+} from "@/data/level"
 import { cn } from "@/lib/utils"
 
 // ─── Message templates ────────────────────────────────────────────────────────
@@ -41,7 +41,7 @@ const TEMPLATES = [
     id: "welcome",
     label: "Bienvenida al centro",
     icon: "🎉",
-    text: "¡Bienvenido/a a Creania, [nombre]! Estamos muy contentos de tenerte. Tu coach [coach] se pondrá en contacto contigo en las próximas horas.",
+    text: "¡Bienvenido/a a LEVEL, [nombre]! Estamos muy contentos de tenerte. Tu coach [coach] se pondrá en contacto contigo en las próximas horas.",
   },
   {
     id: "absence",

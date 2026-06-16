@@ -526,7 +526,7 @@ function PageCTA() {
           <span className="gradient-text">en tu centro?</span>
         </h2>
         <p className="text-muted-foreground text-base leading-relaxed">
-          El demo interactivo muestra cada funcionalidad con datos del centro demo Creania. Sin registro, sin compromiso.
+          El demo interactivo muestra cada funcionalidad con datos del centro demo LEVEL. Sin registro, sin compromiso.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link href="/demo">

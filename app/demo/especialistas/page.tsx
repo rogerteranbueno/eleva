@@ -68,7 +68,7 @@ const SPECIALISTS = [
     available: true,
     nextSlot: "Mañana · 10:00 am",
     recomendado: true,
-    coachNote: "Ana Reyes recomienda: complementa muy bien el trabajo de Vía Creania.",
+    coachNote: "Ana Reyes recomienda: complementa muy bien el trabajo de PL.",
   },
   {
     id: "s3",
@@ -281,7 +281,7 @@ export default function EspecialistasPage() {
       <div>
         <h1 className="text-2xl font-black text-white">Red de Expertos</h1>
         <p className="text-muted-foreground text-sm mt-1">
-          Especialistas seleccionados para acompañarte en tus objetivos de Vía Creania.
+          Especialistas seleccionados para acompañarte en tus objetivos de PL.
         </p>
       </div>
 

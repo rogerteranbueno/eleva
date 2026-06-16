@@ -65,7 +65,7 @@ const TASKS: Task[] = [
     label: "BAJA",
     icon: CreditCard,
     title: "Seguimiento pago pendiente — Valeria Romo",
-    detail: "Contactar amablemente. Mes 4 de Vía Creania vencido hace 3 días. Único atraso en historial.",
+    detail: "Contactar amablemente. Mes 4 de PL vencido hace 3 días. Único atraso en historial.",
     metric: "$4,200 MXN · vencido hace 3 días",
     defaultAssignee: "carlos",
   },
@@ -175,7 +175,7 @@ export function PlanGenerator() {
               <p className="text-sm font-bold text-white">Convertir en Plan</p>
               <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-violet-500/15 text-violet-400 border border-violet-500/20 font-semibold">IA</span>
             </div>
-            <p className="text-[11px] text-muted-foreground">Analicé 6 señales de Creania — {TASKS.length} acciones prioritarias esta semana</p>
+            <p className="text-[11px] text-muted-foreground">Analicé 6 señales de LEVEL — {TASKS.length} acciones prioritarias esta semana</p>
           </div>
         </div>
         {completedCount > 0 && (

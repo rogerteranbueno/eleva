@@ -23,7 +23,7 @@ import {
   Cell,
 } from "recharts"
 import { getMomentumColor, cn } from "@/lib/utils"
-import { CRM_PARTICIPANTS, COACH_METRICS, FINANCIALS, MOMENTUM_HISTORY } from "@/data/creania"
+import { CRM_PARTICIPANTS, COACH_METRICS, FINANCIALS, MOMENTUM_HISTORY } from "@/data/level"
 
 // ─── AI Query definitions ───────────────────────────────────────────────────
 
@@ -142,7 +142,7 @@ const AI_RESPONSES: Record<QueryId, AIResponse> = {
       "Margen neto 72.6% ($213,100) — referencia del sector en metodologías de 5 meses: 58-65%",
       "3 pagos vencidos concentran el 90% de la mora: Paola ($8,900), Omar ($4,200), Valeria ($4,200)",
       "Próxima inscripción nueva generación estimada en $94,800 adicionales en julio",
-      "Si Gen. Norte convierte al 85% en Vía Creania: +$258,720 MXN en el siguiente ciclo",
+      "Si Gen. Norte convierte al 85% en PL: +$258,720 MXN en el siguiente ciclo",
     ],
     actions: [
       "Enviar recordatorio de pago a Paola Serrano hoy — mayor monto vencido",
@@ -171,13 +171,13 @@ const AI_RESPONSES: Record<QueryId, AIResponse> = {
   cohortes: {
     headline: "Generación Norte en caída estructural — intervención colectiva esta semana",
     alert: { level: "red", text: "🔴 Norte bajó 7 pts en 14 días — patrón pre-abandono colectivo" },
-    summary: "El momentum de Generación Norte lleva 14 días cayendo sin recuperación. La combinación de coach con bajo contacto grupal (12 días) + 3 participantes con inactividad +7 días + fase completada (Expansión) crea el patrón típico de abandono colectivo post-curso. Históricamente, generaciones en este patrón tienen 40% de no-conversión a Vía Creania.",
+    summary: "El momentum de Generación Norte lleva 14 días cayendo sin recuperación. La combinación de coach con bajo contacto grupal (12 días) + 3 participantes con inactividad +7 días + fase completada (Expansión) crea el patrón típico de abandono colectivo post-curso. Históricamente, generaciones en este patrón tienen 40% de no-conversión a PL.",
     chart: "cohort",
     insights: [
       "Norte: 58% momentum · -7 pts en 14 días · Marco Fuentes sin contacto grupal hace 12 días",
       "Omega: estable en 74% pero con 6 participantes en riesgo individual — presión interna",
       "Vía 12: liderando con 81% · Daniela Torres contactó hoy · solo 2 en riesgo",
-      "Riesgo de no-conversión de Norte a Vía Creania: estimado 35-40% sin intervención",
+      "Riesgo de no-conversión de Norte a PL: estimado 35-40% sin intervención",
       "Revenue en riesgo si Norte no convierte: $258,720 MXN del siguiente ciclo",
     ],
     actions: [
@@ -446,7 +446,7 @@ export default function InteligenciaPage() {
         </div>
         <div>
           <h1 className="text-xl font-bold text-white">Inteligencia Artificial</h1>
-          <p className="text-xs text-muted-foreground">Análisis en tiempo real · Creania CDMX</p>
+          <p className="text-xs text-muted-foreground">Análisis en tiempo real · LEVEL CDMX</p>
         </div>
         <div className="ml-auto flex items-center gap-1.5 text-xs text-green-400 font-medium">
           <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />

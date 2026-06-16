@@ -9,7 +9,7 @@ import {
 } from "lucide-react"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { cn, getMomentumColor } from "@/lib/utils"
-import { COHORT_FUNNELS, LEVEL_PARTICIPANTS } from "@/data/creania"
+import { COHORT_FUNNELS, LEVEL_PARTICIPANTS } from "@/data/level"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

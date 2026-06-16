@@ -1,4 +1,4 @@
-export type Phase = "Despertar" | "Expansión" | "Vía Creania"
+export type Phase = "Básico" | "Avanzado" | "PL"
 
 export interface Center {
   id: string

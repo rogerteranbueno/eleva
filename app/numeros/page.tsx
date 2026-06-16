@@ -660,7 +660,7 @@ export default function NumerosPage() {
                   </span>
                 </h2>
                 <p className="text-white/40 max-w-lg mx-auto">
-                  El demo de ELEVA está corriendo en vivo con datos reales de un centro — Creania Transformación CDMX. Puedes explorar cada módulo sin registro.
+                  El demo de ELEVA está corriendo en vivo con datos reales de un centro — LEVEL Transformación CDMX. Puedes explorar cada módulo sin registro.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
                   <Link href="/demo" className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold text-lg transition-colors shadow-xl shadow-violet-600/30">

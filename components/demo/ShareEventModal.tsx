@@ -43,7 +43,7 @@ export function ShareEventModal({ onClose }: ShareEventModalProps) {
               <div className="w-5 h-5 rounded bg-violet-600 flex items-center justify-center">
                 <span className="text-white font-black text-[10px]">E</span>
               </div>
-              <span className="text-xs font-bold text-violet-300">ELEVA · Creania Transformación</span>
+              <span className="text-xs font-bold text-violet-300">ELEVA · LEVEL Transformación</span>
             </div>
             <div className="p-4 space-y-3">
               <p className="text-base font-bold text-white leading-snug">
@@ -77,7 +77,7 @@ export function ShareEventModal({ onClose }: ShareEventModalProps) {
             <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Mensaje sugerido</p>
             <div className="bg-[#075E54]/20 border border-[#25D366]/20 rounded-xl p-3">
               <p className="text-xs text-green-300 leading-relaxed">
-                Oye, te invito a un evento de Creania que me está cambiando la vida. Es gratis, el jueves a las 7pm. Aquí el link 👇<br />
+                Oye, te invito a un evento de LEVEL que me está cambiando la vida. Es gratis, el jueves a las 7pm. Aquí el link 👇<br />
                 <span className="text-green-400 font-medium">creania.eleva.app/evento/jun05</span>
               </p>
             </div>

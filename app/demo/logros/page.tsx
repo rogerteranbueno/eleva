@@ -47,7 +47,7 @@ interface Badge {
 const BADGES: Badge[] = [
   { id: "b1",  emoji: "🌅", title: "Primer Despertar",       desc: "Completaste el Entrenamiento 1",                earned: true,  pts: 150, category: "programa" },
   { id: "b2",  emoji: "🔥", title: "Expansión completa",     desc: "Completaste el Entrenamiento 2",                earned: true,  pts: 200, category: "programa" },
-  { id: "b3",  emoji: "💜", title: "Vía Creania activa",   desc: "Ingresaste al Programa de Liderazgo",           earned: true,  pts: 250, category: "programa" },
+  { id: "b3",  emoji: "💜", title: "PL activa",   desc: "Ingresaste al Programa de Liderazgo",           earned: true,  pts: 250, category: "programa" },
   { id: "b4",  emoji: "✅", title: "Primera misión",         desc: "Completaste tu primera misión semanal",         earned: true,  pts: 50,  category: "habito" },
   { id: "b5",  emoji: "📅", title: "Asistencia perfecta",    desc: "3 eventos seguidos sin faltar",                 earned: true,  pts: 120, category: "habito" },
   { id: "b6",  emoji: "📖", title: "Lector activo",          desc: "Primer libro del programa completado",          earned: true,  pts: 80,  category: "habito" },

@@ -32,7 +32,7 @@ const ONBOARDING = {
   ],
   cta: "Ver el Momentum →",
 }
-import { MOMENTUM_HISTORY, SPECIALISTS } from "@/data/creania"
+import { MOMENTUM_HISTORY, SPECIALISTS } from "@/data/level"
 import { getMomentumColor, cn } from "@/lib/utils"
 
 const FACTORS = [
@@ -74,7 +74,7 @@ export default function MomentumPage() {
       <OnboardingModal config={ONBOARDING} />
       <div>
         <h1 className="text-2xl font-bold text-white">Mi Momentum</h1>
-        <p className="text-muted-foreground text-sm mt-0.5">Vía Creania · Semana 12</p>
+        <p className="text-muted-foreground text-sm mt-0.5">PL · Semana 12</p>
       </div>
 
       {/* Score hero */}
@@ -252,7 +252,7 @@ export default function MomentumPage() {
           name="Valeria Romo"
           momentum={score}
           streak={0}
-          phase="Vía Creania · Mes 3"
+          phase="PL · Mes 3"
           onClose={() => setShareOpen(false)}
         />
       )}

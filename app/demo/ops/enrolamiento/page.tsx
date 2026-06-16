@@ -27,7 +27,7 @@ import {
   BECAS_TRACKING,
   type EnrollmentCommitment,
   type EnrollmentStatus,
-} from "@/data/creania"
+} from "@/data/level"
 import { cn } from "@/lib/utils"
 
 // ─── Status config ────────────────────────────────────────────────────────────
@@ -423,7 +423,7 @@ export default function EnrolamientoPage() {
             { label: "VIA activos enrolan", color: "bg-violet-500/15 text-violet-400 border-violet-500/30" },
             { label: "→ La Posibilidad (Despertar)", color: "bg-cyan-500/15 text-cyan-400 border-cyan-500/30" },
             { label: "→ La Imposibilidad (Expansión)", color: "bg-yellow-500/15 text-yellow-400 border-yellow-500/30" },
-            { label: "→ VIA (Vía Creania)", color: "bg-pink-500/15 text-pink-400 border-pink-500/30" },
+            { label: "→ VIA (PL)", color: "bg-pink-500/15 text-pink-400 border-pink-500/30" },
             { label: "→ Vuelven a enrolar", color: "bg-green-500/15 text-green-400 border-green-500/30" },
           ].map((item, i) => (
             <span key={i} className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full border", item.color)}>
@@ -495,7 +495,7 @@ export default function EnrolamientoPage() {
         />
         <PipelineColumn
           title="Imposibilidad → VIA"
-          subtitle="Egresados de Expansión siendo invitados a Vía Creania"
+          subtitle="Egresados de Expansión siendo invitados a PL"
           fromLevel="La Imposibilidad"
           toLevel="VIA"
           fromColor="bg-yellow-500/20 text-yellow-400"

@@ -15,7 +15,7 @@ import {
 } from "lucide-react"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
-import { PRE_TRAINING_PENDING, type PreTrainingPending } from "@/data/creania"
+import { PRE_TRAINING_PENDING, type PreTrainingPending } from "@/data/level"
 import { cn } from "@/lib/utils"
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

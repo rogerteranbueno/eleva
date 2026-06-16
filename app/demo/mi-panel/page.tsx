@@ -11,7 +11,7 @@ import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
 import { useDemoStore } from "@/lib/demo-store"
-import { VALERIA, COACHES } from "@/data/creania"
+import { VALERIA, COACHES } from "@/data/level"
 import { cn, getMomentumColor } from "@/lib/utils"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -50,7 +50,7 @@ const PENDING_TASKS = [
   {
     id: "t4",
     type: "pago" as const,
-    title: "Pago Vía Creania — Mes 4",
+    title: "Pago PL — Mes 4",
     description: "$4,200 MXN vencido hace 3 días.",
     urgency: "overdue" as const,
     daysLeft: -3,
@@ -82,7 +82,7 @@ const UPCOMING_EVENTS = [
   },
   {
     id: "e3",
-    title: "Noche de Invitados — Creania",
+    title: "Noche de Invitados — LEVEL",
     description: "Trae a alguien que quieras que viva esto contigo",
     date: "Sábado 21 jun",
     time: "6:00 pm",
@@ -143,10 +143,10 @@ export default function MiPanelPage() {
   const pendingCount = PENDING_TASKS.filter(t => !done[t.id]).length
   const overdueCount = PENDING_TASKS.filter(t => t.urgency === "overdue" && !done[t.id]).length
 
-  // Journey progress (Vía Creania Mes 3 of 5)
+  // Journey progress (PL Mes 3 of 5)
   const JOURNEY_STEPS = [
-    { label: "Despertar", done: true,  icon: Zap,       color: "bg-cyan-500" },
-    { label: "Expansión", done: true,  icon: BookOpen,  color: "bg-yellow-500" },
+    { label: "Básico", done: true,  icon: Zap,       color: "bg-cyan-500" },
+    { label: "Avanzado", done: true,  icon: BookOpen,  color: "bg-yellow-500" },
     { label: "Vía (M1)",  done: true,  icon: Star,      color: "bg-pink-400" },
     { label: "Vía (M2)",  done: true,  icon: Star,      color: "bg-pink-500" },
     { label: "Vía (M3)",  done: false, current: true, icon: Star, color: "bg-pink-600" },
