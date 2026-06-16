@@ -333,8 +333,52 @@ function ModuleModal({ mod, onClose }: { mod: Modulo; onClose: () => void }) {
 
 export default function MetodoPage() {
   const [selectedModule, setSelectedModule] = useState<Modulo | null>(null)
+  const [activePhase, setActivePhase] = useState<string | null>(null)
+  const adquisicionRef = useRef<HTMLElement>(null)
+  const activacionRef  = useRef<HTMLElement>(null)
+  const retencionRef   = useRef<HTMLElement>(null)
+  const revolucionRef  = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const refs = [adquisicionRef, activacionRef, retencionRef, revolucionRef]
+    const obs = new IntersectionObserver(
+      (entries) => { entries.forEach(e => { if (e.isIntersecting) setActivePhase(e.target.id) }) },
+      { threshold: 0.25, rootMargin: "-15% 0px -15% 0px" }
+    )
+    refs.forEach(r => { if (r.current) obs.observe(r.current) })
+    return () => obs.disconnect()
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#07070f] text-white">
+
+      {/* AARR Progress sidebar — desktop only */}
+      <div className={cn(
+        "hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 flex-col gap-4 z-40 transition-opacity duration-500",
+        activePhase ? "opacity-100" : "opacity-0 pointer-events-none"
+      )}>
+        {[
+          { id: "adquisicion", label: "Adquisición", dot: "bg-violet-500" },
+          { id: "activacion",  label: "Activación",  dot: "bg-blue-500"   },
+          { id: "retencion",   label: "Retención",   dot: "bg-emerald-500" },
+          { id: "revolucion",  label: "Revolución",  dot: "bg-orange-500" },
+        ].map(({ id, label, dot }) => (
+          <button
+            key={id}
+            onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })}
+            className="group flex items-center gap-2.5 justify-end"
+          >
+            <span className={cn(
+              "text-[11px] font-semibold transition-all duration-200",
+              activePhase === id ? "text-white/65" : "text-white/0 group-hover:text-white/40"
+            )}>{label}</span>
+            <div className={cn(
+              "rounded-full transition-all duration-300",
+              activePhase === id ? cn(dot, "w-3 h-3") : "bg-white/20 w-2 h-2 group-hover:bg-white/40"
+            )} />
+          </button>
+        ))}
+      </div>
 
       {/* Nav mínimo */}
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-[#07070f]/90 backdrop-blur-md">
@@ -355,8 +399,9 @@ export default function MetodoPage() {
       </header>
 
       {/* ── HERO ── */}
-      <section className="pt-40 pb-28 px-6">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="pt-40 pb-28 px-6 relative overflow-hidden">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-[radial-gradient(ellipse_at_center,rgba(124,58,237,0.13),transparent_70%)] pointer-events-none" />
+        <div className="max-w-4xl mx-auto text-center relative">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-[11px] text-white/50 font-medium mb-10">
             <Zap className="w-3 h-3 text-violet-400" />
             El modelo que separa los centros que crecen de los que sobreviven
@@ -475,15 +520,15 @@ export default function MetodoPage() {
             </div>
           </Section>
           <Section>
-            <div className="flex flex-wrap items-center justify-center gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
               {[
                 { letra: "A", nombre: "Adquisición", from: "from-violet-600", to: "to-violet-700" },
                 { letra: "A", nombre: "Activación",  from: "from-blue-600",   to: "to-indigo-700" },
                 { letra: "R", nombre: "Retención",   from: "from-emerald-600",to: "to-green-700" },
                 { letra: "R", nombre: "Revolución",  from: "from-orange-500", to: "to-amber-600" },
               ].map(({ letra, nombre, from, to }) => (
-                <div key={nombre} className={cn("flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-gradient-to-r", from, to)}>
-                  <span className="text-3xl font-black text-white/90">{letra}</span>
+                <div key={nombre} className={cn("flex items-center justify-center gap-3 px-4 py-3.5 rounded-2xl bg-gradient-to-r", from, to)}>
+                  <span className="text-4xl sm:text-5xl font-black text-white/90">{letra}</span>
                   <span className="text-sm font-bold text-white/80">{nombre}</span>
                 </div>
               ))}
@@ -493,8 +538,9 @@ export default function MetodoPage() {
       </section>
 
       {/* ── SECCIÓN 3: ADQUISICIÓN ── */}
-      <section className="py-24 px-6 border-t border-white/[0.06]">
-        <div className="max-w-5xl mx-auto">
+      <section id="adquisicion" ref={adquisicionRef} className="py-24 px-6 border-t border-white/[0.06] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_15%_50%,rgba(124,58,237,0.09),transparent)] pointer-events-none" />
+        <div className="max-w-5xl mx-auto relative">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <Section>
@@ -515,17 +561,17 @@ export default function MetodoPage() {
               <Section>
                 <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="rounded-2xl bg-violet-600/10 border border-violet-500/15 p-5">
-                    <p className="text-3xl font-black text-violet-300 mb-1">4.2×</p>
+                    <p className="text-4xl sm:text-5xl font-black text-violet-300 mb-1">4.2×</p>
                     <p className="text-xs text-white/40 leading-snug">más conversión básico→avanzado con nutrición previa</p>
                   </div>
                   <div className="rounded-2xl bg-violet-600/10 border border-violet-500/15 p-5">
-                    <p className="text-3xl font-black text-violet-300 mb-1">+3×</p>
+                    <p className="text-4xl sm:text-5xl font-black text-violet-300 mb-1">+3×</p>
                     <p className="text-xs text-white/40 leading-snug">más personas que dijeron sí el domingo pero no pagaron ese día, se inscriben con seguimiento estructurado en los primeros 5 días</p>
                   </div>
                 </div>
-                <div className="rounded-2xl border border-violet-500/25 bg-violet-600/[0.07] p-7">
-                  <span className="text-4xl text-violet-400/40 font-black leading-none block mb-3">"</span>
-                  <p className="text-base font-semibold text-white/75 leading-relaxed">
+                <div className="rounded-2xl border border-violet-500/25 bg-violet-600/[0.07] p-5 sm:p-7">
+                  <span className="text-5xl text-violet-400/35 font-black leading-none block mb-2">“</span>
+                  <p className="text-sm sm:text-base font-semibold text-white/75 leading-relaxed">
                     El objetivo no es llenar el básico. Es que quien llegue llegue listo para transformarse, y pague el siguiente nivel porque quiere, no porque lo convencieron.
                   </p>
                 </div>
@@ -539,8 +585,9 @@ export default function MetodoPage() {
       </section>
 
       {/* ── SECCIÓN 4: ACTIVACIÓN ── */}
-      <section className="py-24 px-6 border-t border-white/[0.06] bg-white/[0.015]">
-        <div className="max-w-5xl mx-auto">
+      <section id="activacion" ref={activacionRef} className="py-24 px-6 border-t border-white/[0.06] bg-white/[0.015] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_85%_50%,rgba(59,130,246,0.08),transparent)] pointer-events-none" />
+        <div className="max-w-5xl mx-auto relative">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <Section className="order-2 lg:order-1">
               <MockupAtencion />
@@ -581,17 +628,17 @@ export default function MetodoPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="rounded-2xl bg-blue-600/10 border border-blue-500/15 p-5">
-                    <p className="text-3xl font-black text-blue-300 mb-1">71%</p>
+                    <p className="text-4xl sm:text-5xl font-black text-blue-300 mb-1">71%</p>
                     <p className="text-xs text-white/40 leading-snug">retención activa vs 43% promedio sin sistema</p>
                   </div>
                   <div className="rounded-2xl bg-blue-600/10 border border-blue-500/15 p-5">
-                    <p className="text-3xl font-black text-blue-300 mb-1">+41pts</p>
+                    <p className="text-4xl sm:text-5xl font-black text-blue-300 mb-1">+41pts</p>
                     <p className="text-xs text-white/40 leading-snug">NPS cuando el coach tiene contexto antes de cada sesión</p>
                   </div>
                 </div>
-                <div className="rounded-2xl border border-blue-500/25 bg-blue-600/[0.07] p-7">
-                  <span className="text-4xl text-blue-400/40 font-black leading-none block mb-3">"</span>
-                  <p className="text-base font-semibold text-white/75 leading-relaxed">
+                <div className="rounded-2xl border border-blue-500/25 bg-blue-600/[0.07] p-5 sm:p-7">
+                  <span className="text-5xl text-blue-400/35 font-black leading-none block mb-2">"</span>
+                  <p className="text-sm sm:text-base font-semibold text-white/75 leading-relaxed">
                     No necesitas intuir quién está en riesgo. El sistema ya lo sabe. Solo necesitas actuar.
                   </p>
                 </div>
@@ -602,8 +649,9 @@ export default function MetodoPage() {
       </section>
 
       {/* ── SECCIÓN 5: RETENCIÓN ── */}
-      <section className="py-24 px-6 border-t border-white/[0.06]">
-        <div className="max-w-5xl mx-auto">
+      <section id="retencion" ref={retencionRef} className="py-24 px-6 border-t border-white/[0.06] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_20%,rgba(16,185,129,0.07),transparent)] pointer-events-none" />
+        <div className="max-w-5xl mx-auto relative">
           <Section>
             <div className="text-center mb-14">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-600/15 border border-emerald-500/25 text-emerald-300 text-xs font-bold uppercase tracking-wider mb-6">
@@ -657,17 +705,17 @@ export default function MetodoPage() {
           <Section>
             <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto mb-10">
               <div className="rounded-2xl bg-emerald-600/10 border border-emerald-500/15 p-5 text-center">
-                <p className="text-3xl font-black text-emerald-300 mb-1">3×</p>
+                <p className="text-4xl sm:text-5xl font-black text-emerald-300 mb-1">3×</p>
                 <p className="text-xs text-white/40 leading-snug">más probabilidad de que un participante referido lleve a alguien al siguiente nivel</p>
               </div>
               <div className="rounded-2xl bg-emerald-600/10 border border-emerald-500/15 p-5 text-center">
-                <p className="text-3xl font-black text-emerald-300 mb-1">88%</p>
+                <p className="text-4xl sm:text-5xl font-black text-emerald-300 mb-1">88%</p>
                 <p className="text-xs text-white/40 leading-snug">de champions identificados se convierten en co-facilitadores de nuevos programas</p>
               </div>
             </div>
-            <div className="rounded-2xl border border-emerald-500/25 bg-emerald-600/[0.07] p-7 max-w-lg mx-auto">
-              <span className="text-4xl text-emerald-400/40 font-black leading-none block mb-3">"</span>
-              <p className="text-base font-semibold text-white/75 leading-relaxed">
+            <div className="rounded-2xl border border-emerald-500/25 bg-emerald-600/[0.07] p-5 sm:p-7 max-w-lg mx-auto">
+              <span className="text-5xl text-emerald-400/35 font-black leading-none block mb-2">"</span>
+              <p className="text-sm sm:text-base font-semibold text-white/75 leading-relaxed">
                 Un centro que retiene bien no necesita crecer a base de presión de enrolamiento. Crece a base de comunidad.
               </p>
             </div>
@@ -676,8 +724,9 @@ export default function MetodoPage() {
       </section>
 
       {/* ── SECCIÓN 6: REVOLUCIÓN ── */}
-      <section className="py-24 px-6 border-t border-white/[0.06] bg-white/[0.015]">
-        <div className="max-w-5xl mx-auto">
+      <section id="revolucion" ref={revolucionRef} className="py-24 px-6 border-t border-white/[0.06] bg-white/[0.015] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_20%,rgba(249,115,22,0.07),transparent)] pointer-events-none" />
+        <div className="max-w-5xl mx-auto relative">
           <Section>
             <div className="text-center mb-14">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/15 border border-orange-500/25 text-orange-300 text-xs font-bold uppercase tracking-wider mb-6">
@@ -709,11 +758,11 @@ export default function MetodoPage() {
               <Section key={antes}>
                 <div className="rounded-2xl border border-white/8 overflow-hidden h-full">
                   <div className="p-5 bg-red-500/[0.04] border-b border-white/5">
-                    <p className="text-[10px] text-red-400/60 uppercase tracking-wider font-semibold mb-2">Antes</p>
+                    <p className="text-xs text-red-400/70 uppercase tracking-wider font-semibold mb-2">Antes</p>
                     <p className="text-sm text-white/40 leading-snug">{antes}</p>
                   </div>
                   <div className="p-5 bg-orange-500/[0.06]">
-                    <p className="text-[10px] text-orange-400/70 uppercase tracking-wider font-semibold mb-2">Con AARR</p>
+                    <p className="text-xs text-orange-400/80 uppercase tracking-wider font-semibold mb-2">Con AARR</p>
                     <p className="text-sm text-white/80 font-medium leading-snug">{despues}</p>
                   </div>
                 </div>
@@ -724,17 +773,17 @@ export default function MetodoPage() {
           <Section>
             <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto mb-10">
               <div className="rounded-2xl bg-orange-500/10 border border-orange-500/15 p-5 text-center">
-                <p className="text-3xl font-black text-orange-300 mb-1">+240%</p>
+                <p className="text-4xl sm:text-5xl font-black text-orange-300 mb-1">+240%</p>
                 <p className="text-xs text-white/40 leading-snug">crecimiento promedio en 12 meses con AARR completo implementado</p>
               </div>
               <div className="rounded-2xl bg-orange-500/10 border border-orange-500/15 p-5 text-center">
-                <p className="text-3xl font-black text-orange-300 mb-1">&lt;90d</p>
+                <p className="text-4xl sm:text-5xl font-black text-orange-300 mb-1">&lt;90d</p>
                 <p className="text-xs text-white/40 leading-snug">promedio para recuperar la inversión en el sistema</p>
               </div>
             </div>
-            <div className="rounded-2xl border border-orange-500/25 bg-orange-500/[0.07] p-7 max-w-xl mx-auto">
-              <span className="text-4xl text-orange-400/40 font-black leading-none block mb-3">"</span>
-              <p className="text-base font-semibold text-white/75 leading-relaxed">
+            <div className="rounded-2xl border border-orange-500/25 bg-orange-500/[0.07] p-5 sm:p-7 max-w-xl mx-auto">
+              <span className="text-5xl text-orange-400/35 font-black leading-none block mb-2">"</span>
+              <p className="text-sm sm:text-base font-semibold text-white/75 leading-relaxed">
                 Este es el futuro de la transformación: centros que dependen menos de la inspiración del momento y más de sistemas que funcionan todos los días, con o sin el dueño presente.
               </p>
             </div>
@@ -778,14 +827,15 @@ export default function MetodoPage() {
           </div>
 
           <Section>
-            <div className="rounded-3xl border border-white/8 bg-white/[0.02] p-10 text-center">
-              <p className="text-xl sm:text-2xl font-black text-white leading-snug mb-6 max-w-2xl mx-auto">
+            <div className="rounded-3xl border border-violet-500/30 bg-violet-600/[0.07] p-10 text-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(124,58,237,0.12),transparent)] pointer-events-none" />
+              <p className="text-2xl sm:text-3xl font-black text-white leading-snug mb-6 max-w-2xl mx-auto relative">
                 La razón por la que siempre necesitas más enrolamiento es una sola: el CAC es alto y el LTV es bajo.
               </p>
-              <p className="text-white/45 leading-relaxed max-w-xl mx-auto mb-8 text-sm">
+              <p className="text-white/50 leading-relaxed max-w-xl mx-auto mb-8 text-sm relative">
                 Si una persona te cuesta $6,000 conseguir y se va en tres meses pagando $4,200, el negocio no cierra. Pero si esa misma persona se queda 18 meses, sube al siguiente nivel y refiere a dos personas más que entran casi gratis, la ecuación entera cambia.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-sm">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-sm relative">
                 <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-red-500/10 border border-red-500/20">
                   <span className="text-red-400 font-black">Sin sistema</span>
                   <span className="text-white/30">→</span>
@@ -819,7 +869,7 @@ export default function MetodoPage() {
             </div>
           </Section>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {MODULOS.map((mod) => {
               const c = COLOR_MAP[mod.color]
               const Icon = mod.icon
