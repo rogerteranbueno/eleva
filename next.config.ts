@@ -40,6 +40,14 @@ const nextConfig: NextConfig = {
               "font-src 'self' data:",
               "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com",
               "frame-ancestors 'none'",
+              // Prevent base-tag injection (rewrites all relative URLs)
+              "base-uri 'self'",
+              // Prevent form submissions to external domains
+              "form-action 'self'",
+              // Block Flash, Java, and other plugins
+              "object-src 'none'",
+              // Force HTTPS for all sub-resources even if requested as HTTP
+              "upgrade-insecure-requests",
             ].join("; "),
           },
         ],
