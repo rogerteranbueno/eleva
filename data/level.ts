@@ -17,7 +17,7 @@ export const CENTER = {
   fullName: "LEVEL Quantum Transformation",
   city: "Medellín",
   founder: "Carlos Londoño",
-  model: "Básico → Avanzado → PL Visión → PL Intimidad → PL Aprecio → PL Paraíso",
+  model: "Básico → Avanzado → PL VIA Visión → PL VIA Intimidad → PL VIA Aprecio → Noche de Confianza → PL Paraíso",
 }
 
 export const CENTERS: Center[] = [
@@ -131,14 +131,14 @@ export const CENTERS: Center[] = [
     activeParticipants: 62,
     atRiskCount: 5,
     averageMomentum: 76,
-    mrr: 112400,
-    coaches: 2,
-    activeCohortes: 3,
+    mrr: 134139,
+    coaches: 3,
+    activeCohortes: 1,
     nextEventDays: 8,
     monthlyGrowth: 18,
-    monthlyRevenue: 138000,
-    collected: 124000,
-    pending: 14000,
+    monthlyRevenue: 134139,
+    collected: 134139,
+    pending: 0,
     netMargin: 74.5,
   },
   {
@@ -174,11 +174,11 @@ export const STATS: CenterStats = {
 
 export const COACHES: Coach[] = [
   { id: "c1", name: "Ana Reyes", avatar: "AR", cohorte: "Generación Omega", lastContactDaysAgo: 9 },
-  { id: "c2", name: "Marco Fuentes", avatar: "MF", cohorte: "Generación Norte", lastContactDaysAgo: 2 },
-  { id: "c3", name: "Daniela Torres", avatar: "DT", cohorte: "Generación PL 12", lastContactDaysAgo: 0 },
-  { id: "c4", name: "Rodrigo Peña", avatar: "RP", cohorte: "General", lastContactDaysAgo: 5 },
-  { id: "c5", name: "Sofía Villanueva", avatar: "SV", cohorte: "General", lastContactDaysAgo: 1 },
-  { id: "c6", name: "Luis Herrera", avatar: "LH", cohorte: "General", lastContactDaysAgo: 3 },
+  { id: "c2", name: "Pedro Infante", avatar: "PI", cohorte: "Generación Norte", lastContactDaysAgo: 2 },
+  { id: "c3", name: "David Giraldo", avatar: "DG", cohorte: "Generación PL 12", lastContactDaysAgo: 0 },
+  { id: "c4", name: "Martha Lucía", avatar: "MLU", cohorte: "General", lastContactDaysAgo: 5 },
+  { id: "c5", name: "Esteban Hinestrosa", avatar: "EH", cohorte: "General", lastContactDaysAgo: 1 },
+  { id: "c6", name: "Monserrat Díaz", avatar: "MD", cohorte: "General", lastContactDaysAgo: 3 },
 ]
 
 export const SPECIALISTS: Specialist[] = [
@@ -211,7 +211,7 @@ export const COHORTES: Cohorte[] = [
     participants: 67,
     momentum: 58,
     status: "attention",
-    coach: "Marco Fuentes",
+    coach: "Pedro Infante",
   },
   {
     id: "via12",
@@ -221,7 +221,7 @@ export const COHORTES: Cohorte[] = [
     participants: 91,
     momentum: 81,
     status: "thriving",
-    coach: "Daniela Torres",
+    coach: "David Giraldo",
   },
 ]
 
@@ -422,7 +422,7 @@ export const FEED_POSTS: FeedPost[] = [
     id: "f0",
     author: "Ana Reyes",
     avatar: "AR",
-    content: "Generación Omega: esta semana el reto es la consistencia, no la intensidad. 15 minutos todos los días valen más que 2 horas una vez. Estoy con ustedes.",
+    content: "Generación Omega · Tribu Kairos: esta semana el reto es la consistencia, no la intensidad. 15 minutos todos los días valen más que 2 horas una vez. Estoy con ustedes. 🔥",
     minutesAgo: 45,
     reactions: 34,
     comments: 8,
@@ -440,8 +440,8 @@ export const FEED_POSTS: FeedPost[] = [
   },
   {
     id: "f2",
-    author: "Carmen Valdés",
-    avatar: "CV",
+    author: "Sara Alzate",
+    avatar: "SA",
     content: "Completé la misión de la semana antes del miércoles por primera vez. Se siente diferente cuando lo haces por ti y no por el check.",
     minutesAgo: 180,
     reactions: 29,
@@ -449,9 +449,9 @@ export const FEED_POSTS: FeedPost[] = [
   },
   {
     id: "f3",
-    author: "Héctor Ramírez",
-    avatar: "HR",
-    content: "Tuve mi primera sesión con Laura (coach financiero) y me voló la cabeza. Recomendado para todos los que tienen objetivos de dinero este mes.",
+    author: "Yampol Correa",
+    avatar: "YC",
+    content: "Tuve mi primera sesión con Esteban (coach VIA Visión) y me voló la cabeza. Recomendado para todos los que tienen futuros imposibles pendientes este mes.",
     minutesAgo: 360,
     reactions: 22,
     comments: 9,
@@ -460,9 +460,9 @@ export const FEED_POSTS: FeedPost[] = [
 
 export const LEADERBOARD: LeaderboardEntry[] = [
   { rank: 1, name: "Diego Salinas", avatar: "DS", streak: 22 },
-  { rank: 2, name: "Carmen Valdés", avatar: "CV", streak: 18 },
-  { rank: 3, name: "Héctor Ramírez", avatar: "HR", streak: 15 },
-  { rank: 4, name: "Priya Nair", avatar: "PN", streak: 12 },
+  { rank: 2, name: "Rachel Lafaurie", avatar: "RL", streak: 18 },
+  { rank: 3, name: "Lorena López", avatar: "LL", streak: 15 },
+  { rank: 4, name: "Mafer Suin", avatar: "MS", streak: 12 },
   { rank: 5, name: "Valeria Romo", avatar: "VR", streak: 0, isCurrentUser: true },
 ]
 
@@ -633,8 +633,8 @@ export const REGISTRATION_COHORTES = [
   {
     id: "norte",
     name: "Generación Norte",
-    coach: "Marco Fuentes",
-    coachAvatar: "MF",
+    coach: "Pedro Infante",
+    coachAvatar: "PI",
     phase: "Avanzado" as const,
     phaseDetail: "Completada",
     participants: 67,
@@ -645,8 +645,8 @@ export const REGISTRATION_COHORTES = [
   {
     id: "via12",
     name: "Generación PL 12",
-    coach: "Daniela Torres",
-    coachAvatar: "DT",
+    coach: "David Giraldo",
+    coachAvatar: "DG",
     phase: "PL VIA Visión" as const,
     phaseDetail: "Mes 1 de 5",
     participants: 91,
@@ -678,7 +678,7 @@ export const CRM_PARTICIPANTS: CRMParticipant[] = [
   { id: "p18", name: "Javier Montes",      avatar: "JM", cohorte: "Generación Omega", cohorteId: "omega", phase: "PL VIA Aprecio", phaseDetail: "Mes 3 de 5", momentum: 49,  lastAccessDays: 4,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "medium", coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 6,  missionsTotal: 12 },
   { id: "p19", name: "Claudia Méndez",     avatar: "CM", cohorte: "Generación Omega", cohorteId: "omega", phase: "PL VIA Aprecio", phaseDetail: "Mes 3 de 5", momentum: 92,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c1", enrollDate: "10 feb 2025", missionsCompleted: 12, missionsTotal: 12, tag: "destacado" },
 
-  // Generación Norte — coach Marco Fuentes (c2)
+  // Generación Norte — coach Pedro Infante (c2)
   { id: "p4",  name: "Roberto Campos",     avatar: "RC", cohorte: "Generación Norte", cohorteId: "norte", phase: "Avanzado",     phaseDetail: "Completada",  momentum: 31,  lastAccessDays: 8,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "high",   coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 2,  missionsTotal: 8 },
   { id: "p6",  name: "Andrés Mora",        avatar: "AM", cohorte: "Generación Norte", cohorteId: "norte", phase: "Avanzado",     phaseDetail: "Completada",  momentum: 42,  lastAccessDays: 4,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "medium", coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 5,  missionsTotal: 8 },
   { id: "p3",  name: "Mariana Ortiz",      avatar: "MO", cohorte: "Generación Norte", cohorteId: "norte", phase: "Avanzado",     phaseDetail: "Completada",  momentum: 51,  lastAccessDays: 2,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "medium", coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 6,  missionsTotal: 8 },
@@ -689,7 +689,7 @@ export const CRM_PARTICIPANTS: CRMParticipant[] = [
   { id: "p24", name: "Rebeca Alonso",      avatar: "RA", cohorte: "Generación Norte", cohorteId: "norte", phase: "Avanzado",     phaseDetail: "Completada",  momentum: 55,  lastAccessDays: 3,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "low",    coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 5,  missionsTotal: 8 },
   { id: "p25", name: "Ernesto Vargas",     avatar: "EV", cohorte: "Generación Norte", cohorteId: "norte", phase: "Avanzado",     phaseDetail: "Completada",  momentum: 37,  lastAccessDays: 7,  paymentStatus: "paid",    paymentAmount: 8900, riskLevel: "high",   coachId: "c2", enrollDate: "5 dic 2024",  missionsCompleted: 2,  missionsTotal: 8 },
 
-  // Generación PL 12 — coach Daniela Torres (c3)
+  // Generación PL 12 — coach David Giraldo (c3)
   { id: "p2",  name: "Diego Salinas",      avatar: "DS", cohorte: "Generación PL 12", cohorteId: "via12", phase: "PL VIA Visión", phaseDetail: "Mes 1 de 5", momentum: 94,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 9,  missionsTotal: 12, tag: "destacado" },
   { id: "p7",  name: "Gabriela Cruz",      avatar: "GC", cohorte: "Generación PL 12", cohorteId: "via12", phase: "Básico",    phaseDetail: "Completado", momentum: 45,  lastAccessDays: 3,  paymentStatus: "paid",    paymentAmount: 6500, riskLevel: "medium", coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 4,  missionsTotal: 8 },
   { id: "p30", name: "Renata Domínguez",   avatar: "RD", cohorte: "Generación PL 12", cohorteId: "via12", phase: "PL VIA Visión", phaseDetail: "Mes 1 de 5", momentum: 82,  lastAccessDays: 0,  paymentStatus: "paid",    paymentAmount: 4200, riskLevel: "low",    coachId: "c3", enrollDate: "15 ene 2025", missionsCompleted: 8,  missionsTotal: 12 },
@@ -725,8 +725,8 @@ export const COACH_METRICS: CoachMetrics[] = [
   },
   {
     id: "c2",
-    name: "Marco Fuentes",
-    avatar: "MF",
+    name: "Pedro Infante",
+    avatar: "PI",
     cohorte: "Generación Norte",
     cohorteId: "norte",
     participantCount: 67,
@@ -741,8 +741,8 @@ export const COACH_METRICS: CoachMetrics[] = [
   },
   {
     id: "c3",
-    name: "Daniela Torres",
-    avatar: "DT",
+    name: "David Giraldo",
+    avatar: "DG",
     cohorte: "Generación PL 12",
     cohorteId: "via12",
     participantCount: 91,
@@ -853,19 +853,19 @@ export const COHORT_FUNNELS: CohortFunnelData[] = [
     avgMomentum: 58,
     levels: [
       { id: "despertar", label: "Básico", sublabel: "Fin de semana de apertura (3 días)",
-        count: 160, retentionPct: 100, coach: "Marco Fuentes", coachAvatar: "MF",
+        count: 160, retentionPct: 100, coach: "Pedro Infante", coachAvatar: "PI",
         startDate: "6 dic 2024", endDate: "8 dic 2024", status: "completed", color: "cyan",
         notes: "Grupo con alta presencia de empresarios. Momentum inicial muy alto (promedio 84%)." },
       { id: "expansion", label: "Avanzado", sublabel: "Preparación profunda (4 días)",
-        count: 134, retentionPct: 84, coach: "Marco Fuentes", coachAvatar: "MF",
+        count: 134, retentionPct: 84, coach: "Pedro Infante", coachAvatar: "PI",
         startDate: "10 ene 2025", endDate: "13 ene 2025", status: "completed", color: "yellow",
         notes: "26 personas pausaron post-Básico por compromisos de fin de año. 8 reagendaron." },
       { id: "via", label: "PL", sublabel: "Inscripción en proceso",
-        count: 67, retentionPct: 50, coach: "Marco Fuentes", coachAvatar: "MF",
+        count: 67, retentionPct: 50, coach: "Pedro Infante", coachAvatar: "PI",
         startDate: "feb 2025", endDate: null, status: "active", color: "pink",
         notes: "67 se inscribieron a PL. 67 restantes en proceso de decisión o pausados." },
       { id: "nivel3", label: "Coordinador", sublabel: "Próximo ciclo",
-        count: 0, retentionPct: 0, coach: "Marco Fuentes", coachAvatar: "MF",
+        count: 0, retentionPct: 0, coach: "Pedro Infante", coachAvatar: "PI",
         startDate: "—", endDate: null, status: "upcoming", color: "violet",
         notes: null },
     ],
@@ -881,19 +881,19 @@ export const COHORT_FUNNELS: CohortFunnelData[] = [
     avgMomentum: 81,
     levels: [
       { id: "despertar", label: "Básico", sublabel: "Fin de semana de apertura (3 días)",
-        count: 220, retentionPct: 100, coach: "Daniela Torres", coachAvatar: "DT",
+        count: 220, retentionPct: 100, coach: "David Giraldo", coachAvatar: "DG",
         startDate: "17 ene 2025", endDate: "19 ene 2025", status: "completed", color: "cyan",
         notes: "La generación más grande hasta ahora. Récord de puntualidad (97% en día 1)." },
       { id: "expansion", label: "Avanzado", sublabel: "Preparación profunda (4 días)",
-        count: 198, retentionPct: 90, coach: "Daniela Torres", coachAvatar: "DT",
+        count: 198, retentionPct: 90, coach: "David Giraldo", coachAvatar: "DG",
         startDate: "7 feb 2025", endDate: "10 feb 2025", status: "completed", color: "yellow",
         notes: "22 no continuaron post-Básico. Tasa de retención más alta en la historia del centro." },
       { id: "via", label: "PL", sublabel: "Mes 1 de 5",
-        count: 91, retentionPct: 46, coach: "Daniela Torres", coachAvatar: "DT",
+        count: 91, retentionPct: 46, coach: "David Giraldo", coachAvatar: "DG",
         startDate: "1 mar 2025", endDate: null, status: "active", color: "pink",
         notes: "107 personas de Avanzado están en proceso de inscripción a Vía. 91 ya comenzaron Mes 1." },
       { id: "nivel3", label: "Coordinador", sublabel: "Próximo ciclo",
-        count: 0, retentionPct: 0, coach: "Daniela Torres", coachAvatar: "DT",
+        count: 0, retentionPct: 0, coach: "David Giraldo", coachAvatar: "DG",
         startDate: "—", endDate: null, status: "upcoming", color: "violet",
         notes: null },
     ],
@@ -1028,7 +1028,7 @@ export type EnrollmentStatus =
   | "pagado"         // payment received — fully enrolled
   | "perdido"        // fell through — no longer pursuing
 
-export type ProgramLevel = "Básico" | "Avanzado" | "PL VIA Visión" | "PL VIA Intimidad" | "PL VIA Aprecio" | "PL Paraíso"
+export type ProgramLevel = "Básico" | "Avanzado" | "PL VIA Visión" | "PL VIA Intimidad" | "PL VIA Aprecio" | "Noche de Confianza" | "PL Paraíso"
 
 export interface EnrollmentCommitment {
   id: string
@@ -1399,7 +1399,7 @@ export const OPS_PARTICIPANTS: OpsParticipant[] = [
   {
     id: "p3", name: "Mariana Ortiz", avatar: "MO",
     phone: "+52 55 5566 7788", email: "mariana.ortiz@hotmail.com",
-    levelCode: "expansion", levelLabel: "La Imposibilidad · Completada", cohorte: "Generación Norte", coach: "Marco Fuentes",
+    levelCode: "expansion", levelLabel: "La Imposibilidad · Completada", cohorte: "Generación Norte", coach: "Pedro Infante",
     todayStatus: "no-aplica", arrivalTime: null,
     nextTraining: "VIA LEVEL (Mes 1)", nextTrainingDate: "1 jul 2025", nextTrainingStatus: "sin-confirmar",
     paymentStatus: "pendiente", amountTotal: 18000, amountPaid: 8900, concept: "Inscripción VIA", daysOverdue: null,
@@ -1416,7 +1416,7 @@ export const OPS_PARTICIPANTS: OpsParticipant[] = [
   {
     id: "p22", name: "Paola Serrano", avatar: "PS",
     phone: "+52 55 3344 5566", email: "paola.serrano@gmail.com",
-    levelCode: "expansion", levelLabel: "La Imposibilidad · Completada", cohorte: "Generación Norte", coach: "Marco Fuentes",
+    levelCode: "expansion", levelLabel: "La Imposibilidad · Completada", cohorte: "Generación Norte", coach: "Pedro Infante",
     todayStatus: "no-aplica", arrivalTime: null,
     nextTraining: "VIA LEVEL (Mes 1)", nextTrainingDate: "1 jul 2025", nextTrainingStatus: "duda",
     paymentStatus: "vencido", amountTotal: 8900, amountPaid: 0, concept: "Mensualidad Avanzado", daysOverdue: 7,
@@ -1436,7 +1436,7 @@ export const OPS_PARTICIPANTS: OpsParticipant[] = [
   {
     id: "p2", name: "Diego Salinas", avatar: "DS",
     phone: "+52 55 9988 1122", email: "diego.salinas@empresa.mx",
-    levelCode: "via", levelLabel: "VIA Mes 1 de 5", cohorte: "Generación PL 12", coach: "Daniela Torres",
+    levelCode: "via", levelLabel: "VIA Mes 1 de 5", cohorte: "Generación PL 12", coach: "David Giraldo",
     todayStatus: "no-aplica", arrivalTime: null,
     nextTraining: "Fin de semana 2 · VIA", nextTrainingDate: "28 jun 2025", nextTrainingStatus: "confirmado",
     paymentStatus: "pagado", amountTotal: 4200, amountPaid: 4200, concept: "VIA Mes 1", daysOverdue: null,
@@ -1454,7 +1454,7 @@ export const OPS_PARTICIPANTS: OpsParticipant[] = [
   {
     id: "p34", name: "Carlos Peñafiel", avatar: "CP",
     phone: "+52 55 6677 8899", email: "carlos.p@gmail.com",
-    levelCode: "via", levelLabel: "VIA Mes 1 de 5", cohorte: "Generación PL 12", coach: "Daniela Torres",
+    levelCode: "via", levelLabel: "VIA Mes 1 de 5", cohorte: "Generación PL 12", coach: "David Giraldo",
     todayStatus: "no-aplica", arrivalTime: null,
     nextTraining: "Fin de semana 2 · VIA", nextTrainingDate: "28 jun 2025", nextTrainingStatus: "sin-confirmar",
     paymentStatus: "pendiente", amountTotal: 4200, amountPaid: 0, concept: "VIA Mes 1", daysOverdue: null,

@@ -1,4 +1,4 @@
-export type Phase = "Básico" | "Avanzado" | "PL VIA Visión" | "PL VIA Intimidad" | "PL VIA Aprecio" | "PL Paraíso"
+export type Phase = "Básico" | "Avanzado" | "PL VIA Visión" | "PL VIA Intimidad" | "PL VIA Aprecio" | "Noche de Confianza" | "PL Paraíso"
 
 export interface Center {
   id: string
