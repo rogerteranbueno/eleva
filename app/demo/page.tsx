@@ -1,4 +1,6 @@
-import { Megaphone, Zap, Heart, TrendingUp, ChevronRight, Building2, Lock } from "lucide-react"
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
+import { Megaphone, Zap, Heart, TrendingUp, ChevronRight, Building2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { DemoAccessForm } from "@/components/demo/DemoAccessForm"
 
@@ -56,7 +58,9 @@ const STAGE_COLORS: Record<string, { icon: string; badge: string; border: string
   violet: { icon: "text-violet-400", badge: "bg-violet-500/15 text-violet-400 border-violet-500/20", border: "hover:border-violet-500/40",  metric: "text-violet-400", bullet: "bg-violet-500" },
 }
 
-export default function DemoGatePage() {
+export default async function DemoGatePage() {
+  const jar = await cookies()
+  if (jar.has("eleva_demo_access")) redirect("/demo/pulso")
   return (
     <div className="min-h-screen flex flex-col">
       {/* Top bar */}
@@ -148,24 +152,18 @@ export default function DemoGatePage() {
         </div>
 
         {/* Access gate */}
-        <div className="max-w-sm mx-auto w-full space-y-4">
+        <div className="max-w-2xl mx-auto w-full space-y-4">
           <div className="text-center space-y-1">
-            <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
-              <Lock className="w-3 h-3" />
-              Acceso protegido
-            </div>
-            <p className="font-bold text-white">Ingresa para explorar el demo completo</p>
+            <p className="font-bold text-white text-lg">Elige tu perfil de acceso</p>
             <p className="text-xs text-muted-foreground">
-              Verás el sistema en vivo con datos reales de LEVEL — sin pitch, sin llamada de ventas.
+              Entra con un clic — los datos son reales, sin pitch, sin llamada.
             </p>
           </div>
 
-          <div className="glass rounded-2xl p-5 border border-white/10">
-            <DemoAccessForm />
-          </div>
+          <DemoAccessForm />
 
           <p className="text-center text-[10px] text-muted-foreground">
-            Sin spam. Solo acceso inmediato al demo.
+            Acceso protegido · Sin spam · Cookie de 7 días
           </p>
         </div>
       </div>
