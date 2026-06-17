@@ -1,11 +1,6 @@
-"use client"
-
-import Link from "next/link"
-import {
-  Megaphone, Zap, Heart, TrendingUp,
-  ChevronRight, Building2,
-} from "lucide-react"
+import { Megaphone, Zap, Heart, TrendingUp, ChevronRight, Building2, Lock } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { DemoAccessForm } from "@/components/demo/DemoAccessForm"
 
 const STAGES = [
   {
@@ -27,8 +22,8 @@ const STAGES = [
     headline: "Convierte el primer sí en compromiso real",
     description: "El primer curso deja una huella. Diagnóstico, asignación de coach y seguimiento desde el día 1 para que nadie se pierda en el inicio.",
     metric: "94%",
-    metricLabel: "activación Gen. Vía 12",
-    bullets: ["Expediente desde el Despertar", "Notas del coach en cada etapa", "Asignación de generación", "Score de activación"],
+    metricLabel: "activación Gen. VIA 12",
+    bullets: ["Expediente desde el Básico", "Notas del coach en cada etapa", "Asignación de generación", "Score de activación"],
   },
   {
     id: "retener",
@@ -44,7 +39,7 @@ const STAGES = [
   {
     id: "escalar",
     icon: TrendingUp,
-    label: "Escalar",
+    label: "Revolución",
     color: "violet",
     headline: "Crece sin perder el control",
     description: "Visibilidad total del equipo, finanzas en tiempo real y CRM completo. El dueño sabe qué pasa en su centro antes de que alguien se lo tenga que decir.",
@@ -55,13 +50,13 @@ const STAGES = [
 ]
 
 const STAGE_COLORS: Record<string, { icon: string; badge: string; border: string; metric: string; bullet: string }> = {
-  cyan:   { icon: "text-cyan-400",   badge: "bg-cyan-500/15 text-cyan-400 border-cyan-500/20",    border: "hover:border-cyan-500/40",    metric: "text-cyan-400",   bullet: "bg-cyan-500" },
-  yellow: { icon: "text-yellow-400", badge: "bg-yellow-500/15 text-yellow-400 border-yellow-500/20", border: "hover:border-yellow-500/40", metric: "text-yellow-400", bullet: "bg-yellow-500" },
-  pink:   { icon: "text-pink-400",   badge: "bg-pink-500/15 text-pink-400 border-pink-500/20",    border: "hover:border-pink-500/40",    metric: "text-pink-400",   bullet: "bg-pink-500" },
-  violet: { icon: "text-violet-400", badge: "bg-violet-500/15 text-violet-400 border-violet-500/20", border: "hover:border-violet-500/40", metric: "text-violet-400", bullet: "bg-violet-500" },
+  cyan:   { icon: "text-cyan-400",   badge: "bg-cyan-500/15 text-cyan-400 border-cyan-500/20",       border: "hover:border-cyan-500/40",    metric: "text-cyan-400",   bullet: "bg-cyan-500" },
+  yellow: { icon: "text-yellow-400", badge: "bg-yellow-500/15 text-yellow-400 border-yellow-500/20", border: "hover:border-yellow-500/40",  metric: "text-yellow-400", bullet: "bg-yellow-500" },
+  pink:   { icon: "text-pink-400",   badge: "bg-pink-500/15 text-pink-400 border-pink-500/20",       border: "hover:border-pink-500/40",    metric: "text-pink-400",   bullet: "bg-pink-500" },
+  violet: { icon: "text-violet-400", badge: "bg-violet-500/15 text-violet-400 border-violet-500/20", border: "hover:border-violet-500/40",  metric: "text-violet-400", bullet: "bg-violet-500" },
 }
 
-export default function DemoIntroPage() {
+export default function DemoGatePage() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Top bar */}
@@ -94,7 +89,7 @@ export default function DemoIntroPage() {
           </p>
         </div>
 
-        {/* Stage arrow */}
+        {/* AARR pill trail */}
         <div className="flex items-center justify-center gap-1 sm:gap-2 overflow-x-auto pb-2">
           {STAGES.map((s, i) => {
             const c = STAGE_COLORS[s.color]
@@ -152,35 +147,25 @@ export default function DemoIntroPage() {
           })}
         </div>
 
-        {/* CTAs */}
-        <div className="space-y-3">
-          <p className="text-center text-sm text-muted-foreground">¿Desde qué perspectiva quieres explorar el demo?</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <Link
-              href="/demo/pulso"
-              className="flex items-center gap-3 px-5 py-4 rounded-2xl bg-violet-600 hover:bg-violet-700 text-white font-semibold transition-colors group"
-            >
-              <Building2 className="w-5 h-5 flex-shrink-0" />
-              <div className="flex-1">
-                <p className="text-sm font-bold">Ver como dueño</p>
-                <p className="text-[11px] text-violet-300">Panel, CRM, finanzas y equipo</p>
-              </div>
-              <ChevronRight className="w-4 h-4 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-            <Link
-              href="/demo/feed"
-              className="flex items-center gap-3 px-5 py-4 rounded-2xl glass border border-white/10 hover:border-white/20 text-white font-semibold transition-colors group"
-            >
-              <Heart className="w-5 h-5 flex-shrink-0 text-pink-400" />
-              <div className="flex-1">
-                <p className="text-sm font-bold">Ver como participante</p>
-                <p className="text-[11px] text-muted-foreground">El journey de Valeria, paso a paso</p>
-              </div>
-              <ChevronRight className="w-4 h-4 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
+        {/* Access gate */}
+        <div className="max-w-sm mx-auto w-full space-y-4">
+          <div className="text-center space-y-1">
+            <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
+              <Lock className="w-3 h-3" />
+              Acceso protegido
+            </div>
+            <p className="font-bold text-white">Ingresa para explorar el demo completo</p>
+            <p className="text-xs text-muted-foreground">
+              Verás el sistema en vivo con datos reales de LEVEL — sin pitch, sin llamada de ventas.
+            </p>
           </div>
-          <p className="text-center text-xs text-muted-foreground">
-            o <Link href="/demo/pulso" className="text-violet-400 hover:text-violet-300 underline">saltar al panel directamente</Link>
+
+          <div className="glass rounded-2xl p-5 border border-white/10">
+            <DemoAccessForm />
+          </div>
+
+          <p className="text-center text-[10px] text-muted-foreground">
+            Sin spam. Solo acceso inmediato al demo.
           </p>
         </div>
       </div>
