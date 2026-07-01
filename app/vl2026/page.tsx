@@ -60,7 +60,7 @@ const STAGE_COLORS: Record<string, { icon: string; badge: string; border: string
 
 export default async function DemoGatePage() {
   const jar = await cookies()
-  if (jar.has("eleva_demo_access")) redirect("/demo/pulso")
+  if (jar.has("eleva_demo_access")) redirect("/vl2026/pulso")
   return (
     <div className="min-h-screen flex flex-col">
       {/* Top bar */}

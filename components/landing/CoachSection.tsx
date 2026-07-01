@@ -178,7 +178,7 @@ export function CoachSection() {
           <p className="text-sm text-muted-foreground mt-0.5">{c.coachCTASub}</p>
         </div>
         <Link
-          href="/demo/pulso"
+          href="/vl2026/pulso"
           className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold transition-colors"
         >
           {c.coachCTABtn} <ArrowRight className="w-4 h-4" />

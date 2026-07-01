@@ -8,10 +8,10 @@ const COOKIE_MAX_AGE = 7 * 24 * 60 * 60
 
 // Perfiles demo — cada uno lleva directo a su vista de rol
 const DEMO_PROFILES: Record<string, { password: string; to: string; role: string }> = {
-  'dueno@level.com': { password: 'Level2026', to: '/demo/pulso',        role: 'dueno' },
-  'coach@level.com': { password: 'Level2026', to: '/demo/coach',         role: 'coach' },
-  'ops@level.com':   { password: 'Level2026', to: '/demo/ops/dashboard', role: 'ops' },
-  'sara@level.com':  { password: 'Level2026', to: '/demo/feed',          role: 'participante' },
+  'dueno@level.com': { password: 'Level2026', to: '/vl2026/pulso',        role: 'dueno' },
+  'coach@level.com': { password: 'Level2026', to: '/vl2026/coach',         role: 'coach' },
+  'ops@level.com':   { password: 'Level2026', to: '/vl2026/ops/dashboard', role: 'ops' },
+  'sara@level.com':  { password: 'Level2026', to: '/vl2026/feed',          role: 'participante' },
 }
 
 async function setDemoCookie(value: string) {
@@ -40,7 +40,7 @@ export async function grantDemoAccess(
   const qaToken = process.env.DEMO_QA_TOKEN
   if (qaToken && code === qaToken) {
     await setDemoCookie('qa_access')
-    redirect('/demo/pulso')
+    redirect('/vl2026/pulso')
   }
 
   // ── 2. Demo profiles: email + password exactos ─────────────────────────────
@@ -68,5 +68,5 @@ export async function grantDemoAccess(
   }
 
   await setDemoCookie(Buffer.from(`${email}:${Date.now()}`).toString('base64'))
-  redirect('/demo/pulso')
+  redirect('/vl2026/pulso')
 }

@@ -42,7 +42,7 @@ const URGENCIES = [
     label: "sin confirmar",
     sublabel: "Pre-entrenamiento",
     color: "violet",
-    href: "/demo/ops/pre-entrenamiento",
+    href: "/vl2026/ops/pre-entrenamiento",
   },
   {
     id: "pay",
@@ -50,7 +50,7 @@ const URGENCIES = [
     label: "pagos vencidos",
     sublabel: "Cobrar esta semana",
     color: "red",
-    href: "/demo/ops/comunidad",
+    href: "/vl2026/ops/comunidad",
   },
   {
     id: "risk",
@@ -58,7 +58,7 @@ const URGENCIES = [
     label: "riesgo crítico",
     sublabel: "Activar hoy",
     color: "yellow",
-    href: "/demo/atencion",
+    href: "/vl2026/atencion",
   },
 ]
 
@@ -242,7 +242,7 @@ export default function OpsDashboardPage() {
           </div>
 
           <Link
-            href="/demo/ops/registro"
+            href="/vl2026/ops/registro"
             className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-green-600 hover:bg-green-700 text-white text-sm font-semibold transition-colors"
           >
             <CheckCircle2 className="w-4 h-4" />
@@ -257,7 +257,7 @@ export default function OpsDashboardPage() {
           <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">
             Contacto con coaches
           </p>
-          <Link href="/demo/ops/comunidad" className="text-[10px] text-violet-400 hover:text-violet-300 flex items-center gap-1">
+          <Link href="/vl2026/ops/comunidad" className="text-[10px] text-violet-400 hover:text-violet-300 flex items-center gap-1">
             Ver comunidad <ChevronRight className="w-3 h-3" />
           </Link>
         </div>

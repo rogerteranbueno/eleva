@@ -47,7 +47,7 @@ export function FinalCTASection() {
             {c.cta1}
             <ArrowRight className="w-5 h-5" />
           </a>
-          <Link href="/demo">
+          <Link href="/vl2026">
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

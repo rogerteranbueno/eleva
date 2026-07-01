@@ -96,7 +96,7 @@ export default function FeedPage() {
       </div>
 
       {/* Mission card */}
-      <Link href="/demo/mision">
+      <Link href="/vl2026/mision">
         <div className="glass rounded-xl p-4 cursor-pointer hover:border-violet-500/30 transition-colors group">
           <div className="flex items-center gap-2 mb-3">
             <div className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />

@@ -394,7 +394,7 @@ function ParticipantList({ cohortId, levelId, onBack }: {
             <div className="flex items-center gap-2 flex-shrink-0">
               {participantStatusIcon(p.status)}
               {p.id === "p1" && p.status === "active" && (
-                <Link href="/demo/expediente">
+                <Link href="/vl2026/expediente">
                   <button className="flex items-center gap-1 text-[10px] px-2 py-1 rounded-lg bg-violet-600/15 text-violet-400 border border-violet-500/20 hover:bg-violet-600/25 transition-colors">
                     <ChevronRight className="w-2.5 h-2.5" />
                     Ver

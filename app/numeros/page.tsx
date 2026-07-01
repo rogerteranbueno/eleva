@@ -196,7 +196,7 @@ function ROICalculator() {
               {roiAnual > 0 ? `${Math.round(roiAnual)}%` : "—"}
             </p>
           </div>
-          <Link href="/demo" className="flex items-center gap-2 px-5 py-3 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold text-sm transition-colors">
+          <Link href="/vl2026" className="flex items-center gap-2 px-5 py-3 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold text-sm transition-colors">
             Ver demo <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -267,7 +267,7 @@ export default function NumerosPage() {
           <div className="flex items-center gap-3">
             <Link href="/metodo" className="text-xs text-white/40 hover:text-white/80 transition-colors hidden sm:block px-3 py-1.5">Método</Link>
             <Link href="/precios" className="text-xs text-white/40 hover:text-white/80 transition-colors hidden sm:block px-3 py-1.5">Precios</Link>
-            <Link href="/demo" className="flex items-center gap-1.5 px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white rounded-lg text-sm font-semibold transition-colors">
+            <Link href="/vl2026" className="flex items-center gap-1.5 px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white rounded-lg text-sm font-semibold transition-colors">
               Ver demo <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -663,7 +663,7 @@ export default function NumerosPage() {
                   El demo de ELEVA está corriendo en vivo con datos reales de un centro — LEVEL Transformación CDMX. Puedes explorar cada módulo sin registro.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-                  <Link href="/demo" className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold text-lg transition-colors shadow-xl shadow-violet-600/30">
+                  <Link href="/vl2026" className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold text-lg transition-colors shadow-xl shadow-violet-600/30">
                     Ver demo operativo <ArrowRight className="w-5 h-5" />
                   </Link>
                   <Link href="/metodo" className="flex items-center gap-2 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 rounded-xl font-bold text-lg transition-colors">
@@ -695,7 +695,7 @@ export default function NumerosPage() {
             <div className="flex items-center gap-4 text-xs text-white/20">
               <Link href="/metodo" className="hover:text-white/50 transition-colors">Método</Link>
               <Link href="/precios" className="hover:text-white/50 transition-colors">Precios</Link>
-              <Link href="/demo" className="hover:text-white/50 transition-colors">Demo</Link>
+              <Link href="/vl2026" className="hover:text-white/50 transition-colors">Demo</Link>
             </div>
             <p className="text-xs text-white/15">Datos de 40+ centros · 2023–2025 · ELEVA</p>
           </div>

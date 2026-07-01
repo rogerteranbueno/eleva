@@ -49,7 +49,7 @@ export function Footer() {
             <div>
               <p className="text-xs font-semibold text-foreground mb-4 uppercase tracking-widest">{c.productLabel}</p>
               <div className="space-y-3">
-                <Link href="/demo" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/vl2026" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
                   {c.links.demo}
                 </Link>
                 <Link href="/build" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">

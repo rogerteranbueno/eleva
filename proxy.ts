@@ -7,8 +7,8 @@ const COOKIE_MAX_AGE = 7 * 24 * 60 * 60 // 7 días
 export function proxy(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl
 
-  // Solo aplica a /demo/* (no a /demo ni a /api/demo-access)
-  if (!pathname.startsWith('/demo/')) return NextResponse.next()
+  // Solo aplica a /vl2026/* (no a /vl2026 ni a /api/*)
+  if (!pathname.startsWith('/vl2026/')) return NextResponse.next()
 
   // QA bypass: ?qa=TOKEN en la URL
   const qaToken = searchParams.get('qa')
@@ -30,11 +30,11 @@ export function proxy(request: NextRequest) {
 
   // Sin acceso → redirige al lobby
   const url = request.nextUrl.clone()
-  url.pathname = '/demo'
+  url.pathname = '/vl2026'
   url.search = ''
   return NextResponse.redirect(url)
 }
 
 export const config = {
-  matcher: ['/demo/:path+'],
+  matcher: ['/vl2026/:path+'],
 }

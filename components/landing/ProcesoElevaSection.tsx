@@ -394,7 +394,7 @@ export function ProcesoElevaSection() {
         className="mt-8 text-center"
       >
         <Link
-          href="/demo/pulso"
+          href="/vl2026/pulso"
           className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-violet-600 hover:bg-violet-500 text-white font-bold text-lg transition-all"
         >
           {c.demoCta} <ArrowRight className="w-5 h-5" />

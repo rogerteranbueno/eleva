@@ -194,7 +194,7 @@ export default function PulsoPage() {
       </div>
 
       {/* Financial snapshot */}
-      <Link href="/demo/finanzas">
+      <Link href="/vl2026/finanzas">
         <div className="glass rounded-xl p-4 hover:bg-white/3 transition-colors cursor-pointer group">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
@@ -231,7 +231,7 @@ export default function PulsoPage() {
       </Link>
 
       {/* Alert banner */}
-      <Link href="/demo/atencion">
+      <Link href="/vl2026/atencion">
         <div className="glass-violet rounded-xl p-4 flex items-center gap-4 hover:bg-violet-600/15 transition-colors cursor-pointer group">
           <div className="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0">
             <AlertTriangle className="w-5 h-5 text-red-400" />
@@ -290,7 +290,7 @@ export default function PulsoPage() {
               />
             }
           />
-          <Link href="/demo/atencion">
+          <Link href="/vl2026/atencion">
             <StatCard
               icon={<AlertTriangle className="w-5 h-5 text-red-400" />}
               value={center.atRiskCount}

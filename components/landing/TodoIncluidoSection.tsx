@@ -474,7 +474,7 @@ export function TodoIncluidoSection() {
           </div>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center gap-3">
-            <Link href="/demo/ops/dashboard">
+            <Link href="/vl2026/ops/dashboard">
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}

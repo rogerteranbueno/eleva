@@ -25,7 +25,7 @@ const PENDING_TASKS = [
     urgency: "overdue" as const,
     daysLeft: -3,
     points: 40,
-    link: "/demo/mision",
+    link: "/vl2026/mision",
   },
   {
     id: "t2",
@@ -35,7 +35,7 @@ const PENDING_TASKS = [
     urgency: "today" as const,
     daysLeft: 0,
     points: 35,
-    link: "/demo/mision",
+    link: "/vl2026/mision",
   },
   {
     id: "t3",
@@ -45,7 +45,7 @@ const PENDING_TASKS = [
     urgency: "urgent" as const,
     daysLeft: 2,
     points: 25,
-    link: "/demo/mision",
+    link: "/vl2026/mision",
   },
   {
     id: "t4",
@@ -55,7 +55,7 @@ const PENDING_TASKS = [
     urgency: "overdue" as const,
     daysLeft: -3,
     points: 0,
-    link: "/demo/mision",
+    link: "/vl2026/mision",
   },
 ]
 
@@ -188,7 +188,7 @@ export default function MiPanelPage() {
             <Flame className="w-4 h-4 text-amber-400 flex-shrink-0" />
             <div>
               <p className="text-sm text-amber-300">Tu momentum está bajo. Completar una misión hoy puede ayudar a recuperar tu racha.</p>
-              <Link href="/demo/mision" className="text-xs text-amber-400 font-semibold mt-0.5 flex items-center gap-1 hover:gap-2 transition-all">
+              <Link href="/vl2026/mision" className="text-xs text-amber-400 font-semibold mt-0.5 flex items-center gap-1 hover:gap-2 transition-all">
                 Ver mis misiones <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
@@ -269,7 +269,7 @@ export default function MiPanelPage() {
               </span>
             )}
           </h2>
-          <Link href="/demo/mision" className="text-xs text-violet-400 hover:text-violet-300 flex items-center gap-1">
+          <Link href="/vl2026/mision" className="text-xs text-violet-400 hover:text-violet-300 flex items-center gap-1">
             Ver misiones <ChevronRight className="w-3 h-3" />
           </Link>
         </div>
@@ -380,7 +380,7 @@ export default function MiPanelPage() {
       <div>
         <div className="flex items-center justify-between mb-3">
           <h2 className="font-bold text-white">Mis logros</h2>
-          <Link href="/demo/logros" className="text-xs text-violet-400 hover:text-violet-300 flex items-center gap-1">
+          <Link href="/vl2026/logros" className="text-xs text-violet-400 hover:text-violet-300 flex items-center gap-1">
             Ver todos <ChevronRight className="w-3 h-3" />
           </Link>
         </div>

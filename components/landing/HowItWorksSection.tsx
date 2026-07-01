@@ -390,7 +390,7 @@ export function HowItWorksSection() {
             <p className="text-foreground font-bold text-base">{c.footer}</p>
             <p className="text-sm text-muted-foreground">{c.footerSub}</p>
           </div>
-          <Link href="/demo" className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold transition-colors whitespace-nowrap">
+          <Link href="/vl2026" className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold transition-colors whitespace-nowrap">
             {c.footerCta} <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>

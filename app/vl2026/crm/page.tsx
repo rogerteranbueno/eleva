@@ -413,14 +413,14 @@ function ParticipantRow({
             <MessageCircle className="w-3.5 h-3.5" />
           </button>
           <a
-            href="/demo/expediente"
+            href="/vl2026/expediente"
             className="p-1.5 rounded-lg text-muted-foreground hover:text-violet-400 hover:bg-violet-500/10 transition-colors"
             title="Insights IA"
           >
             <Brain className="w-3.5 h-3.5" />
           </a>
           <a
-            href="/demo/expediente"
+            href="/vl2026/expediente"
             className="p-1.5 rounded-lg text-muted-foreground hover:text-white hover:bg-white/5 transition-colors"
             title="Ver expediente"
           >
@@ -481,13 +481,13 @@ function ParticipantRow({
               <MessageCircle className="w-3 h-3" /> Enviar mensaje
             </button>
             <a
-              href="/demo/expediente"
+              href="/vl2026/expediente"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg glass text-xs font-medium text-violet-400 hover:text-violet-300 hover:bg-violet-500/10 border border-violet-500/20 transition-colors"
             >
               <Brain className="w-3 h-3" /> Ver insights IA
             </a>
             <a
-              href="/demo/expediente"
+              href="/vl2026/expediente"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-violet-600 hover:bg-violet-700 text-xs font-medium text-white transition-colors"
             >
               <ArrowUpRight className="w-3 h-3" /> Expediente completo

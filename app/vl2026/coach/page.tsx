@@ -334,7 +334,7 @@ export default function CoachPage() {
                       <MessageCircle className="w-3 h-3" /> Mensaje
                     </button>
                     <a
-                      href="/demo/expediente"
+                      href="/vl2026/expediente"
                       className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-violet-600/20 border border-violet-500/30 text-xs text-violet-300 hover:text-violet-200 transition-colors"
                     >
                       <Brain className="w-3 h-3" /> Ver IA

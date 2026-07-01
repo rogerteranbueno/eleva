@@ -237,7 +237,7 @@ export function NumbersSection() {
           <p className="text-sm text-foreground/80 text-center sm:text-left max-w-lg">
             {c.footerText} <span className="text-foreground font-bold">{c.footerBold}</span> {c.footerText2}
           </p>
-          <Link href="/demo/pulso" className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold transition-colors whitespace-nowrap">
+          <Link href="/vl2026/pulso" className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold transition-colors whitespace-nowrap">
             {c.footerCta} <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>

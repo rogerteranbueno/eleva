@@ -355,7 +355,7 @@ export function RegistrationDrawer({ onClose, onSuccess }: RegistrationDrawerPro
                   Cerrar
                 </button>
                 <a
-                  href="/demo/expediente"
+                  href="/vl2026/expediente"
                   className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-sm font-semibold text-white transition-colors"
                 >
                   Ver expediente <TrendingUp className="w-3.5 h-3.5" />

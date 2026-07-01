@@ -98,7 +98,7 @@ export function EcosystemSection() {
             <p className="text-4xl font-black text-green-400 flex-shrink-0">{c.statVal}</p>
             <p className="text-sm text-foreground/80">{c.statDesc}</p>
           </div>
-          <Link href="/demo/especialistas" className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl border border-green-500/40 hover:bg-green-500/10 text-green-300 text-sm font-bold transition-colors whitespace-nowrap">
+          <Link href="/vl2026/especialistas" className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl border border-green-500/40 hover:bg-green-500/10 text-green-300 text-sm font-bold transition-colors whitespace-nowrap">
             {c.cta} <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>

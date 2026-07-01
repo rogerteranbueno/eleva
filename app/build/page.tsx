@@ -295,7 +295,7 @@ export default function BuildPage() {
           <span className="text-white font-bold text-sm tracking-tight">ELEVA</span>
           <span className="text-muted-foreground text-xs">· Sistema personalizado</span>
         </div>
-        <Link href="/demo" className="text-sm text-muted-foreground hover:text-white transition-colors hidden sm:block">
+        <Link href="/vl2026" className="text-sm text-muted-foreground hover:text-white transition-colors hidden sm:block">
           Ver demo →
         </Link>
       </nav>
@@ -418,7 +418,7 @@ export default function BuildPage() {
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row items-center gap-3">
                   <Link
-                    href="/demo"
+                    href="/vl2026"
                     className="flex items-center justify-center gap-2 w-full sm:flex-1 px-6 py-3.5 rounded-xl font-semibold text-sm bg-violet-600 text-white hover:bg-violet-700 transition-all shadow-lg shadow-violet-600/25"
                   >
                     <Zap className="w-4 h-4" />

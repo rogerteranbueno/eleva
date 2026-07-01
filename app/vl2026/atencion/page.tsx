@@ -358,7 +358,7 @@ export default function AtencionPage() {
                           </button>
                         ))}
                         {isValeria && (
-                          <Link href="/demo/expediente" className="col-span-3 sm:col-span-1">
+                          <Link href="/vl2026/expediente" className="col-span-3 sm:col-span-1">
                             <button className="flex items-center justify-center gap-1.5 w-full px-3 py-1.5 rounded-lg text-xs font-medium bg-violet-600 text-white hover:bg-violet-700 transition-colors">
                               <ArrowUpRight className="w-3 h-3" />
                               Ver expediente

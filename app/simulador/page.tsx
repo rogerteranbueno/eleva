@@ -302,7 +302,7 @@ function SimNav() {
           >
             {lang === "es" ? "EN" : "ES"}
           </button>
-          <Link href="/demo">
+          <Link href="/vl2026">
             <button className="flex items-center gap-1.5 px-4 py-1.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-xs font-bold transition-colors">
               {lang === "en" ? "See demo" : "Ver demo"} <ArrowRight className="w-3 h-3" />
             </button>
@@ -552,7 +552,7 @@ export default function SimuladorPage() {
 
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="/demo" className="flex-1">
+                <Link href="/vl2026" className="flex-1">
                   <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                     className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-sm font-bold transition-colors shadow-lg shadow-violet-600/25">
                     Ver cómo ELEVA lo recupera
@@ -753,7 +753,7 @@ export default function SimuladorPage() {
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="/demo" className="flex-1">
+                <Link href="/vl2026" className="flex-1">
                   <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                     className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-sm font-bold transition-colors shadow-lg shadow-violet-600/25">
                     Ver el seguimiento en el demo

@@ -76,7 +76,7 @@ function TopNav() {
           >
             {lang === "es" ? "EN" : "ES"}
           </button>
-          <Link href="/demo">
+          <Link href="/vl2026">
             <button className="flex items-center gap-1.5 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-[13px] font-semibold transition-colors ml-1">
               {t.demo} <ArrowRight className="w-3.5 h-3.5" />
             </button>
@@ -357,7 +357,7 @@ function EcosystemSection() {
             <p className="text-4xl font-black text-green-400 flex-shrink-0">+60%</p>
             <p className="text-sm text-foreground/80">más retención cuando el participante tiene acceso a especialistas conectados a sus objetivos de vida.</p>
           </div>
-          <Link href="/demo/especialistas" className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl border border-green-500/40 hover:bg-green-500/10 text-green-400 text-sm font-bold transition-colors">
+          <Link href="/vl2026/especialistas" className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl border border-green-500/40 hover:bg-green-500/10 text-green-400 text-sm font-bold transition-colors">
             Ver en el demo <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
@@ -529,7 +529,7 @@ function PageCTA() {
           El demo interactivo muestra cada funcionalidad con datos del centro demo LEVEL. Sin registro, sin compromiso.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/demo">
+          <Link href="/vl2026">
             <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}
               className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-base font-bold transition-colors">
               Ver el demo en vivo <ArrowRight className="w-5 h-5" />
@@ -569,7 +569,7 @@ export default function FuncionalidadesPage() {
               no 12 herramientas sin conectar. Un sistema que entiende tu modelo.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link href="/demo">
+              <Link href="/vl2026">
                 <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}
                   className="flex items-center gap-2 px-7 py-3.5 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-sm font-bold transition-colors">
                   Ver demo interactivo <ArrowRight className="w-4 h-4" />
@@ -607,7 +607,7 @@ export default function FuncionalidadesPage() {
             <Link href="/" className="hover:text-foreground transition-colors">Inicio</Link>
             <Link href="/precios" className="hover:text-foreground transition-colors">Precios</Link>
             <Link href="/simulador" className="hover:text-foreground transition-colors">Simulador</Link>
-            <Link href="/demo" className="hover:text-foreground transition-colors">Demo</Link>
+            <Link href="/vl2026" className="hover:text-foreground transition-colors">Demo</Link>
           </div>
         </div>
       </footer>

@@ -44,7 +44,7 @@ export function DemoSection() {
         <p className="text-muted-foreground max-w-xl mx-auto text-lg leading-relaxed">
           {c.sub}
         </p>
-        <Link href="/demo">
+        <Link href="/vl2026">
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}

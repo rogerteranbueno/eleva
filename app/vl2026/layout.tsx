@@ -53,42 +53,42 @@ const ATENCION_TOTAL = 14
 function getOwnerScreens(atencionResolved: number): NavScreen[] {
   const remaining = Math.max(0, ATENCION_TOTAL - atencionResolved)
   return [
-    { href: "/demo/pulso",        label: "Pulso del Centro",      shortLabel: "Pulso",    icon: Activity },
-    { href: "/demo/atencion",     label: "Necesitan Atención",    shortLabel: "Atención", icon: AlertTriangle, ...(remaining > 0 ? { badge: remaining } : {}) },
-    { href: "/demo/cohortes",     label: "Generaciones",          shortLabel: "Cohortes", icon: GitMerge },
-    { href: "/demo/crm",          label: "Directorio CRM",        shortLabel: "CRM",      icon: Database },
-    { href: "/demo/equipo",       label: "Visibilidad de Equipo", shortLabel: "Equipo",   icon: ShieldCheck },
-    { href: "/demo/finanzas",     label: "Finanzas",              shortLabel: "Finanzas", icon: DollarSign },
-    { href: "/demo/campanas",     label: "Campañas",              shortLabel: "Campañas", icon: Send },
-    { href: "/demo/webinars",     label: "Noches de invitados",   shortLabel: "Webinars", icon: Video },
-    { href: "/demo/inteligencia", label: "Motor de IA",           shortLabel: "IA",       icon: Brain },
-    { href: "/demo/expediente",   label: "Expediente (demo)",     shortLabel: "Exp.",     icon: User },
+    { href: "/vl2026/pulso",        label: "Pulso del Centro",      shortLabel: "Pulso",    icon: Activity },
+    { href: "/vl2026/atencion",     label: "Necesitan Atención",    shortLabel: "Atención", icon: AlertTriangle, ...(remaining > 0 ? { badge: remaining } : {}) },
+    { href: "/vl2026/cohortes",     label: "Generaciones",          shortLabel: "Cohortes", icon: GitMerge },
+    { href: "/vl2026/crm",          label: "Directorio CRM",        shortLabel: "CRM",      icon: Database },
+    { href: "/vl2026/equipo",       label: "Visibilidad de Equipo", shortLabel: "Equipo",   icon: ShieldCheck },
+    { href: "/vl2026/finanzas",     label: "Finanzas",              shortLabel: "Finanzas", icon: DollarSign },
+    { href: "/vl2026/campanas",     label: "Campañas",              shortLabel: "Campañas", icon: Send },
+    { href: "/vl2026/webinars",     label: "Noches de invitados",   shortLabel: "Webinars", icon: Video },
+    { href: "/vl2026/inteligencia", label: "Motor de IA",           shortLabel: "IA",       icon: Brain },
+    { href: "/vl2026/expediente",   label: "Expediente (demo)",     shortLabel: "Exp.",     icon: User },
   ]
 }
 
 const OPS_SCREENS: NavScreen[] = [
-  { href: "/demo/ops/dashboard",          label: "Centro de Operaciones", shortLabel: "Centro",       icon: Activity },
-  { href: "/demo/ops/registro",           label: "Mesa de Registro",      shortLabel: "Registro",     icon: ClipboardList },
-  { href: "/demo/ops/enrolamiento",       label: "Pipeline Enrolamiento", shortLabel: "Pipeline",     icon: GitMerge },
-  { href: "/demo/ops/pre-entrenamiento",  label: "Pre-entrenamiento",     shortLabel: "Pre-Train",    icon: Users },
-  { href: "/demo/ops/comunidad",          label: "Hub de Comunidad",      shortLabel: "Comunidad",    icon: Globe },
-  { href: "/demo/crm",                    label: "Directorio CRM",        shortLabel: "CRM",          icon: Database },
+  { href: "/vl2026/ops/dashboard",          label: "Centro de Operaciones", shortLabel: "Centro",       icon: Activity },
+  { href: "/vl2026/ops/registro",           label: "Mesa de Registro",      shortLabel: "Registro",     icon: ClipboardList },
+  { href: "/vl2026/ops/enrolamiento",       label: "Pipeline Enrolamiento", shortLabel: "Pipeline",     icon: GitMerge },
+  { href: "/vl2026/ops/pre-entrenamiento",  label: "Pre-entrenamiento",     shortLabel: "Pre-Train",    icon: Users },
+  { href: "/vl2026/ops/comunidad",          label: "Hub de Comunidad",      shortLabel: "Comunidad",    icon: Globe },
+  { href: "/vl2026/crm",                    label: "Directorio CRM",        shortLabel: "CRM",          icon: Database },
 ]
 
 const PARTICIPANT_SCREENS: NavScreen[] = [
-  { href: "/demo/mi-panel",       label: "Mi Panel",      shortLabel: "Panel",     icon: LayoutDashboard },
-  { href: "/demo/feed",           label: "Mi Feed",       shortLabel: "Feed",      icon: Home },
-  { href: "/demo/mision",         label: "Mi Misión",     shortLabel: "Misión",    icon: Target },
-  { href: "/demo/momentum",       label: "Mi Momentum",   shortLabel: "Momentum",  icon: TrendingUp },
-  { href: "/demo/tribu",          label: "Mi Tribu",      shortLabel: "Tribu",     icon: Users },
-  { href: "/demo/logros",         label: "Mis Logros",    shortLabel: "Logros",    icon: Trophy },
-  { href: "/demo/especialistas",  label: "Expertos",      shortLabel: "Expertos",  icon: Star },
+  { href: "/vl2026/mi-panel",       label: "Mi Panel",      shortLabel: "Panel",     icon: LayoutDashboard },
+  { href: "/vl2026/feed",           label: "Mi Feed",       shortLabel: "Feed",      icon: Home },
+  { href: "/vl2026/mision",         label: "Mi Misión",     shortLabel: "Misión",    icon: Target },
+  { href: "/vl2026/momentum",       label: "Mi Momentum",   shortLabel: "Momentum",  icon: TrendingUp },
+  { href: "/vl2026/tribu",          label: "Mi Tribu",      shortLabel: "Tribu",     icon: Users },
+  { href: "/vl2026/logros",         label: "Mis Logros",    shortLabel: "Logros",    icon: Trophy },
+  { href: "/vl2026/especialistas",  label: "Expertos",      shortLabel: "Expertos",  icon: Star },
 ]
 
 const COACH_SCREENS: NavScreen[] = [
-  { href: "/demo/coach", label: "Panel del Coach", shortLabel: "Panel", icon: GraduationCap },
-  { href: "/demo/expediente", label: "Expediente IA", shortLabel: "IA", icon: Brain },
-  { href: "/demo/crm", label: "Directorio", shortLabel: "CRM", icon: Database },
+  { href: "/vl2026/coach", label: "Panel del Coach", shortLabel: "Panel", icon: GraduationCap },
+  { href: "/vl2026/expediente", label: "Expediente IA", shortLabel: "IA", icon: Brain },
+  { href: "/vl2026/crm", label: "Directorio", shortLabel: "CRM", icon: Database },
 ]
 
 const OWNER_PATHS = getOwnerScreens(0).map((s) => s.href)
@@ -97,9 +97,9 @@ const COACH_PATHS = COACH_SCREENS.map((s) => s.href)
 
 function getViewFromPath(pathname: string): View {
   if (OWNER_PATHS.includes(pathname)) return "owner"
-  if (OPS_PATHS.includes(pathname) || pathname.startsWith("/demo/ops")) return "ops"
-  if (COACH_PATHS.includes(pathname) || pathname.startsWith("/demo/coach")) return "coach"
-  if (pathname === "/demo/mi-panel") return "participant"
+  if (OPS_PATHS.includes(pathname) || pathname.startsWith("/vl2026/ops")) return "ops"
+  if (COACH_PATHS.includes(pathname) || pathname.startsWith("/vl2026/coach")) return "coach"
+  if (pathname === "/vl2026/mi-panel") return "participant"
   return "participant"
 }
 
@@ -144,10 +144,10 @@ function CenterSelector() {
 function ViewSwitcher({ view, className }: { view: View; className?: string }) {
   const router = useRouter()
   const views = [
-    { id: "owner" as View,       label: "Dueño",  href: "/demo/pulso",        activeColor: "bg-violet-600" },
-    { id: "coach" as View,       label: "Coach",  href: "/demo/coach",        activeColor: "bg-emerald-600" },
-    { id: "ops" as View,         label: "Ops",    href: "/demo/ops/dashboard", activeColor: "bg-cyan-600" },
-    { id: "participant" as View, label: "Usuario",href: "/demo/feed",         activeColor: "bg-violet-600" },
+    { id: "owner" as View,       label: "Dueño",  href: "/vl2026/pulso",        activeColor: "bg-violet-600" },
+    { id: "coach" as View,       label: "Coach",  href: "/vl2026/coach",        activeColor: "bg-emerald-600" },
+    { id: "ops" as View,         label: "Ops",    href: "/vl2026/ops/dashboard", activeColor: "bg-cyan-600" },
+    { id: "participant" as View, label: "Usuario",href: "/vl2026/feed",         activeColor: "bg-violet-600" },
   ]
   return (
     <div className={cn("flex rounded-lg overflow-hidden border border-sidebar-border", className)}>
@@ -305,10 +305,10 @@ function MobileNav() {
       {/* View switcher */}
       <div className="flex items-center border-b border-sidebar-border px-1 gap-0">
         {[
-          { id: "owner" as View,       label: "Dueño",  href: "/demo/pulso",        active: "text-violet-400 border-b-2 border-violet-600" },
-          { id: "coach" as View,       label: "Coach",  href: "/demo/coach",        active: "text-emerald-400 border-b-2 border-emerald-500" },
-          { id: "ops" as View,         label: "Ops",    href: "/demo/ops/dashboard", active: "text-cyan-400 border-b-2 border-cyan-500" },
-          { id: "participant" as View, label: "Usuario",href: "/demo/feed",         active: "text-violet-400 border-b-2 border-violet-600" },
+          { id: "owner" as View,       label: "Dueño",  href: "/vl2026/pulso",        active: "text-violet-400 border-b-2 border-violet-600" },
+          { id: "coach" as View,       label: "Coach",  href: "/vl2026/coach",        active: "text-emerald-400 border-b-2 border-emerald-500" },
+          { id: "ops" as View,         label: "Ops",    href: "/vl2026/ops/dashboard", active: "text-cyan-400 border-b-2 border-cyan-500" },
+          { id: "participant" as View, label: "Usuario",href: "/vl2026/feed",         active: "text-violet-400 border-b-2 border-violet-600" },
         ].map((v) => (
           <button
             key={v.id}

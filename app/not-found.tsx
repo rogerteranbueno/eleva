@@ -34,7 +34,7 @@ export default function NotFound() {
           Volver al inicio
         </Link>
         <Link
-          href="/demo"
+          href="/vl2026"
           className="inline-flex items-center gap-2 px-6 py-3 border border-white/10 hover:border-white/20 text-muted-foreground hover:text-foreground rounded-xl text-sm font-semibold transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />

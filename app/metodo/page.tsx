@@ -319,7 +319,7 @@ function ModuleModal({ mod, onClose }: { mod: Modulo; onClose: () => void }) {
 
         <div className="mt-8 pt-6 border-t border-white/8">
           <Link
-            href="/demo"
+            href="/vl2026"
             onClick={onClose}
             className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-bold text-sm transition-colors"
           >
@@ -390,7 +390,7 @@ export default function MetodoPage() {
             <span className="font-black text-white tracking-tight">ELEVA</span>
           </Link>
           <Link
-            href="/demo"
+            href="/vl2026"
             className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold transition-colors"
           >
             Ver demo <ArrowRight className="w-3.5 h-3.5" />
@@ -420,7 +420,7 @@ export default function MetodoPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/demo"
+              href="/vl2026"
               className="flex items-center gap-2 px-8 py-4 rounded-full bg-violet-600 hover:bg-violet-500 text-white font-bold text-base transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               Ver el sistema en acción <ArrowRight className="w-4 h-4" />
@@ -1001,7 +1001,7 @@ export default function MetodoPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
               <Link
-                href="/demo"
+                href="/vl2026"
                 className="flex items-center gap-2 px-8 py-4 rounded-full bg-violet-600 hover:bg-violet-500 text-white font-bold text-base transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 Ver el sistema en vivo <ArrowRight className="w-4 h-4" />
@@ -1037,7 +1037,7 @@ export default function MetodoPage() {
           <div className="flex items-center gap-6 text-xs text-white/25">
             <Link href="/precios"   className="hover:text-white/60 transition-colors">Precios</Link>
             <Link href="/numeros"   className="hover:text-white/60 transition-colors">Números</Link>
-            <Link href="/demo"      className="hover:text-white/60 transition-colors">Demo</Link>
+            <Link href="/vl2026"      className="hover:text-white/60 transition-colors">Demo</Link>
             <Link href="/simulador" className="hover:text-white/60 transition-colors">Simulador</Link>
           </div>
           <p className="text-xs text-white/15">© 2025 ELEVA</p>
