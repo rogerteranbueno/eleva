@@ -5,6 +5,8 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight, ArrowLeft, BookOpen, Users, Star, ChevronDown, CheckCircle2, Zap, Target, Trophy, Brain, Layers } from "lucide-react"
 import { useInView } from "@/lib/use-in-view"
+import { AcredittaBadge, AcredittaTrustBar } from "@/components/AcredittaBadge"
+import { ElevaNetworkSection } from "@/components/landing/ElevaNetworkSection"
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
@@ -234,7 +236,7 @@ export default function AcademiaPage() {
                 <br />
                 <span className="gradient-text">transforman</span>
                 <br />
-                <span className="text-white/30 font-light italic">de verdad.</span>
+                <span className="text-white/55 font-light italic">de verdad.</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
                 La mayoría de los coaches sabe el material. Pocos saben cómo llevarlo a otro ser humano en transformación.
@@ -269,6 +271,9 @@ export default function AcademiaPage() {
                 </div>
               ))}
             </div>
+
+            {/* Acreditta trust */}
+            <AcredittaBadge size="md" />
           </motion.div>
         </div>
       </section>
@@ -449,6 +454,9 @@ export default function AcademiaPage() {
                   ))}
                 </div>
 
+                {/* Acreditta trust */}
+                <AcredittaTrustBar />
+
                 <Link href="/build" className="block">
                   <button className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-violet-600 hover:bg-violet-500 text-white font-black rounded-xl transition-colors group">
                     Solicitar admisión
@@ -500,6 +508,9 @@ export default function AcademiaPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Red ELEVA ── */}
+      <ElevaNetworkSection />
 
       {/* ── FAQ ── */}
       <section className="py-24 px-6 border-t border-white/5" ref={faqRef.ref}>
@@ -568,7 +579,7 @@ export default function AcademiaPage() {
             <h2 className="text-5xl sm:text-6xl font-black text-white leading-[1.05] tracking-tight">
               Tu equipo de coaches<br />
               es tu mayor<br />
-              <span className="text-muted-foreground font-light italic">ventaja competitiva.</span>
+              <span className="text-white/55 font-light italic">ventaja competitiva.</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
               Los centros que escalan sin perder calidad lo hacen porque sus coaches son mejores que los del promedio — y siguen mejorando.

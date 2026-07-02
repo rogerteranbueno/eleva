@@ -50,7 +50,7 @@ export function LegacySection() {
           <h2 className="text-4xl sm:text-5xl font-black text-white leading-[1.1] tracking-tight mb-6">
             La transformación no empezó ayer.
             <br />
-            <span className="text-white/40 font-light italic">Pero tampoco puede seguir operando como hace 50 años.</span>
+            <span className="text-white/60 font-light italic">Pero tampoco puede seguir operando como hace 50 años.</span>
           </h2>
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
@@ -74,7 +74,7 @@ export function LegacySection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.65, ease, delay: 0.15 }}
         >
-          <p className="text-xs font-bold text-white/30 uppercase tracking-widest mb-6">De modelos heredados al estándar ELEVA</p>
+          <p className="text-xs font-bold text-white/50 uppercase tracking-widest mb-6">De modelos heredados al estándar ELEVA</p>
           <div className="grid lg:grid-cols-2 gap-4">
 
             {/* Legacy column */}
@@ -92,7 +92,7 @@ export function LegacySection() {
                   className="flex items-start gap-2.5"
                 >
                   <span className="text-red-500 text-lg leading-none shrink-0 mt-0.5">✗</span>
-                  <p className="text-sm text-white/50 leading-snug">{item}</p>
+                  <p className="text-sm text-white/65 leading-snug">{item}</p>
                 </motion.div>
               ))}
             </div>

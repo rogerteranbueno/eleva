@@ -4,6 +4,8 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowLeft, ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react"
 import { useInView } from "@/lib/use-in-view"
+import { AcredittaBadge, AcredittaTrustBar } from "@/components/AcredittaBadge"
+import { ElevaCertBadge } from "@/components/ElevaCertBadge"
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
@@ -113,7 +115,7 @@ export default function EstandarElevaPage() {
               <br />
               para formar entrenadores
               <br />
-              <span className="text-white/30 font-light italic">y profesionalizar centros.</span>
+              <span className="text-white/55 font-light italic">y profesionalizar centros.</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
               No certificamos por calentar una silla. Certificamos por desempeño observable. Esto es lo que eso significa en la práctica.
@@ -131,6 +133,7 @@ export default function EstandarElevaPage() {
                 </button>
               </Link>
             </div>
+            <AcredittaBadge size="md" />
           </motion.div>
         </div>
       </section>
@@ -191,6 +194,7 @@ export default function EstandarElevaPage() {
             <p className="text-muted-foreground max-w-xl leading-relaxed">
               No certificamos por tiempo. Certificamos cuando las competencias son observables y verificables.
             </p>
+            <AcredittaTrustBar className="mt-4" />
           </motion.div>
 
           <div className="grid sm:grid-cols-2 gap-5">
@@ -204,8 +208,9 @@ export default function EstandarElevaPage() {
                   transition={{ duration: 0.55, ease, delay: i * 0.1 }}
                   className={`rounded-2xl border ${c.border} ${c.bg} p-6 space-y-4`}
                 >
-                  <div className="flex items-center gap-3">
-                    <span className={`text-xs font-black px-2.5 py-1 rounded-full border ${c.badge}`}>{cert.code}</span>
+                  <div className="flex items-center gap-3 justify-between flex-wrap">
+                    <ElevaCertBadge level={cert.code as "ECS" | "ECC" | "ECT" | "ECC+"} size="sm" />
+                    <AcredittaBadge size="sm" />
                   </div>
                   <div>
                     <p className="font-black text-white text-lg leading-tight">{cert.name}</p>
@@ -214,8 +219,8 @@ export default function EstandarElevaPage() {
                   <div className="space-y-2 pt-2 border-t border-white/5">
                     {cert.requirements.map((r) => (
                       <div key={r} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-white/30 mt-0.5 shrink-0" />
-                        <p className="text-xs text-white/50 leading-snug">{r}</p>
+                        <CheckCircle2 className="w-3.5 h-3.5 text-white/50 mt-0.5 shrink-0" />
+                        <p className="text-xs text-white/70 leading-snug">{r}</p>
                       </div>
                     ))}
                   </div>
@@ -235,7 +240,7 @@ export default function EstandarElevaPage() {
             transition={{ duration: 0.6, ease }}
             className="mb-10"
           >
-            <p className="text-xs font-bold text-white/30 uppercase tracking-widest mb-4">Comparación directa</p>
+            <p className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Comparación directa</p>
             <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
               Otros programas vs. ELEVA.
             </h2>
@@ -265,7 +270,7 @@ export default function EstandarElevaPage() {
               >
                 <div className="px-5 py-3.5 border-r border-white/5 flex items-start gap-2">
                   <span className="text-red-500 text-sm shrink-0 mt-0.5">✗</span>
-                  <p className="text-sm text-white/40 leading-snug">{left}</p>
+                  <p className="text-sm text-white/60 leading-snug">{left}</p>
                 </div>
                 <div className="px-5 py-3.5 flex items-start gap-2">
                   <span className="text-violet-400 text-sm shrink-0 mt-0.5">✓</span>
@@ -290,7 +295,7 @@ export default function EstandarElevaPage() {
             <br />
             <span className="text-violet-400">sepan lo que hacen</span>
             <br />
-            <span className="text-white/30 font-light italic">y por qué lo hacen.</span>
+            <span className="text-white/55 font-light italic">y por qué lo hacen.</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
             PACTO instala la academia interna, los protocolos y el sistema operativo para que tu centro pueda formar entrenadores propios con criterio y estándar profesional.
