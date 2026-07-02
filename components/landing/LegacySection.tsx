@@ -2,31 +2,33 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { ArrowRight, Clock, AlertTriangle } from "lucide-react"
+import { ArrowRight, Clock, AlertTriangle, BadgeCheck,
+  Calendar, Copy, Zap, DollarSign, BarChart3, Lock, Star, ClipboardX,
+  TrendingUp, Shield, Compass, BookOpen, RefreshCw, LayoutDashboard } from "lucide-react"
 import { useInView } from "@/lib/use-in-view"
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
 const legacy = [
-  "Certificaciones otorgadas por asistencia, no por desempeño",
-  "Entrenadores formados por imitación, sin competencias evaluadas",
-  "Presión grupal e intensidad emocional sin suficiente contención",
-  "Upsells hacia el siguiente nivel como motor principal",
-  "Sin métricas de impacto posterior al entrenamiento",
-  "Lenguaje cerrado que no dialoga con psicología ni ética clínica",
-  "Dependencia del carisma de un fundador o entrenador estrella",
-  "Staff operando sin protocolos, datos ni estándares formales",
+  { icon: Calendar,      text: "Certificaciones otorgadas por asistencia, no por desempeño" },
+  { icon: Copy,          text: "Entrenadores formados por imitación, sin competencias evaluadas" },
+  { icon: Zap,           text: "Presión grupal e intensidad emocional sin suficiente contención" },
+  { icon: DollarSign,    text: "Upsells hacia el siguiente nivel como motor principal" },
+  { icon: BarChart3,     text: "Sin métricas de impacto posterior al entrenamiento" },
+  { icon: Lock,          text: "Lenguaje cerrado que no dialoga con psicología ni ética clínica" },
+  { icon: Star,          text: "Dependencia del carisma de un fundador o entrenador estrella" },
+  { icon: ClipboardX,    text: "Staff operando sin protocolos, datos ni estándares formales" },
 ]
 
 const eleva = [
-  "Certificación por desempeño observable y práctica supervisada",
-  "Formación progresiva con competencias definidas y evaluables",
-  "Seguridad psicológica, criterios de cuidado y protocolos de crisis",
-  "Rutas de carrera y desarrollo profesional sostenible",
-  "Medición de impacto: retención, avance, NPS, datos reales",
-  "Formación integral: psicología, diseño instruccional, ética y datos",
-  "Competencias replicables que no dependen de una sola persona",
-  "Operación con sistema, métricas, playbooks y estándares definidos",
+  { icon: BadgeCheck,    text: "Certificación por desempeño observable y práctica supervisada" },
+  { icon: TrendingUp,    text: "Formación progresiva con competencias definidas y evaluables" },
+  { icon: Shield,        text: "Seguridad psicológica, criterios de cuidado y protocolos de crisis" },
+  { icon: Compass,       text: "Rutas de carrera y desarrollo profesional sostenible" },
+  { icon: BarChart3,     text: "Medición de impacto: retención, avance, NPS, datos reales" },
+  { icon: BookOpen,      text: "Formación integral: psicología, diseño instruccional, ética y datos" },
+  { icon: RefreshCw,     text: "Competencias replicables que no dependen de una sola persona" },
+  { icon: LayoutDashboard, text: "Operación con sistema, métricas, playbooks y estándares definidos" },
 ]
 
 export function LegacySection() {
@@ -60,11 +62,18 @@ export function LegacySection() {
               También dejaron preguntas importantes — documentadas públicamente — sobre ética, presión grupal, formación de entrenadores, seguridad psicológica y modelos de negocio basados en enrolamiento.
             </p>
           </div>
+
+          {/* CTA as real amber button */}
           <Link href="/historia-transformacion">
-            <button className="mt-6 flex items-center gap-2 text-sm text-amber-400 hover:text-amber-300 font-semibold transition-colors group">
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="mt-8 inline-flex items-center gap-2.5 px-6 py-3 bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 hover:border-amber-400/60 text-amber-300 font-bold rounded-xl transition-all duration-200 group text-sm"
+            >
+              <Clock className="w-4 h-4" />
               Conoce la historia de la industria
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </button>
+            </motion.button>
           </Link>
         </motion.div>
 
@@ -78,7 +87,7 @@ export function LegacySection() {
           <div className="grid lg:grid-cols-2 gap-4">
 
             {/* Legacy column */}
-            <div className="rounded-2xl border border-red-500/15 bg-red-500/3 p-6 space-y-3">
+            <div className="rounded-2xl border border-red-500/15 bg-red-500/3 p-6 space-y-2">
               <div className="flex items-center gap-2 mb-5">
                 <AlertTriangle className="w-4 h-4 text-red-400" />
                 <p className="text-sm font-bold text-red-400 uppercase tracking-wide">Modelo heredado</p>
@@ -88,19 +97,21 @@ export function LegacySection() {
                   key={i}
                   initial={{ opacity: 0, x: -12 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.45, ease, delay: 0.2 + i * 0.04 }}
-                  className="flex items-start gap-2.5"
+                  transition={{ duration: 0.4, ease, delay: 0.2 + i * 0.04 }}
+                  className="flex items-start gap-3 py-2.5 px-3 rounded-xl hover:bg-red-500/5 transition-colors group"
                 >
-                  <span className="text-red-500 text-lg leading-none shrink-0 mt-0.5">✗</span>
-                  <p className="text-sm text-white/65 leading-snug">{item}</p>
+                  <div className="w-7 h-7 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <item.icon className="w-3.5 h-3.5 text-red-400" />
+                  </div>
+                  <p className="text-sm text-white/65 leading-snug">{item.text}</p>
                 </motion.div>
               ))}
             </div>
 
             {/* ELEVA column */}
-            <div className="rounded-2xl border border-violet-500/25 bg-violet-500/4 p-6 space-y-3">
+            <div className="rounded-2xl border border-violet-500/25 bg-violet-500/4 p-6 space-y-2">
               <div className="flex items-center gap-2 mb-5">
-                <span className="w-4 h-4 rounded bg-violet-600 flex items-center justify-center text-white font-black text-[9px]">E</span>
+                <span className="w-5 h-5 rounded bg-violet-600 flex items-center justify-center text-white font-black text-[10px]">E</span>
                 <p className="text-sm font-bold text-violet-400 uppercase tracking-wide">Estándar ELEVA</p>
               </div>
               {eleva.map((item, i) => (
@@ -108,11 +119,13 @@ export function LegacySection() {
                   key={i}
                   initial={{ opacity: 0, x: 12 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.45, ease, delay: 0.2 + i * 0.04 }}
-                  className="flex items-start gap-2.5"
+                  transition={{ duration: 0.4, ease, delay: 0.2 + i * 0.04 }}
+                  className="flex items-start gap-3 py-2.5 px-3 rounded-xl hover:bg-violet-500/5 transition-colors group"
                 >
-                  <span className="text-violet-400 text-lg leading-none shrink-0 mt-0.5">✓</span>
-                  <p className="text-sm text-white/80 leading-snug">{item}</p>
+                  <div className="w-7 h-7 rounded-lg bg-violet-500/10 border border-violet-500/25 flex items-center justify-center shrink-0 mt-0.5">
+                    <item.icon className="w-3.5 h-3.5 text-violet-400" />
+                  </div>
+                  <p className="text-sm text-white/85 leading-snug">{item.text}</p>
                 </motion.div>
               ))}
             </div>

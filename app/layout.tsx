@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { LangProvider } from "@/lib/i18n"
+import { ThemeProvider } from "@/lib/theme"
 import { Analytics } from "@vercel/analytics/next"
 import { StickyCtaBanner } from "@/components/StickyCtaBanner"
 
@@ -54,8 +55,10 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${inter.variable} dark`} suppressHydrationWarning>
       <body className="min-h-screen antialiased bg-background text-foreground">
-        <LangProvider>{children}</LangProvider>
-        <StickyCtaBanner />
+        <ThemeProvider>
+          <LangProvider>{children}</LangProvider>
+          <StickyCtaBanner />
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

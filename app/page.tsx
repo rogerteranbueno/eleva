@@ -1,10 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight, ChevronRight, Menu, X, Sun, Moon } from "lucide-react"
 import { useLang } from "@/lib/i18n"
+import { useTheme } from "@/lib/theme"
 
 import { HeroSection } from "@/components/landing/HeroSection"
 import { ProblemaSection } from "@/components/landing/ProblemaSection"
@@ -20,30 +21,12 @@ import { CierreSection } from "@/components/landing/CierreSection"
 import { Footer } from "@/components/landing/Footer"
 import { HistoryHint } from "@/components/landing/HistoryHint"
 
-// ─── Theme hook ───────────────────────────────────────────────────────────────
-
-function useTheme() {
-  const [light, setLight] = useState(false)
-  useEffect(() => {
-    const saved = localStorage.getItem("eleva-theme")
-    if (saved === "light") { setLight(true); document.documentElement.classList.add("light") }
-  }, [])
-  const toggle = () => {
-    setLight((prev) => {
-      const next = !prev
-      document.documentElement.classList.toggle("light", next)
-      localStorage.setItem("eleva-theme", next ? "light" : "dark")
-      return next
-    })
-  }
-  return { light, toggle }
-}
-
 // ─── Nav ──────────────────────────────────────────────────────────────────────
 
 function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const { light, toggle } = useTheme()
+  const { theme, toggle } = useTheme()
+  const light = theme === "light"
   const { lang, setLang } = useLang()
 
   const links = [
