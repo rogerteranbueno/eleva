@@ -133,10 +133,10 @@ export function DivisionesSection() {
 
                 <div className="space-y-3">
                   <h3 className="font-black text-white text-xl leading-tight">{d.headline}</h3>
-                  <p className="text-white/65 text-sm leading-relaxed max-w-md">{d.body}</p>
+                  <p className="text-white/80 text-base leading-relaxed max-w-md">{d.body}</p>
                   <ul className="grid grid-cols-2 gap-y-2 gap-x-4 mt-4">
                     {d.bullets.map((b) => (
-                      <li key={b} className="flex items-center gap-2 text-xs text-white/70">
+                      <li key={b} className="flex items-center gap-2 text-sm text-white/80">
                         <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotMap[d.accent]}`} />
                         {b}
                       </li>
@@ -183,10 +183,10 @@ export function DivisionesSection() {
                 </div>
                 <div className="space-y-2">
                   <h3 className="font-black text-white text-base leading-tight">{d.headline}</h3>
-                  <p className="text-white/60 text-xs leading-relaxed">{d.body}</p>
+                  <p className="text-white/75 text-sm leading-relaxed">{d.body}</p>
                   <ul className="space-y-1.5 mt-3">
                     {d.bullets.map((b) => (
-                      <li key={b} className="flex items-center gap-2 text-xs text-white/65">
+                      <li key={b} className="flex items-center gap-2 text-sm text-white/75">
                         <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotMap[d.accent]}`} />
                         {b}
                       </li>
@@ -224,10 +224,10 @@ export function DivisionesSection() {
                 </div>
                 <div className="space-y-2">
                   <h3 className="font-black text-white text-base leading-tight">{d.headline}</h3>
-                  <p className="text-white/60 text-xs leading-relaxed">{d.body}</p>
+                  <p className="text-white/75 text-sm leading-relaxed">{d.body}</p>
                   <ul className="space-y-1.5 mt-3">
                     {d.bullets.map((b) => (
-                      <li key={b} className="flex items-center gap-2 text-xs text-white/65">
+                      <li key={b} className="flex items-center gap-2 text-sm text-white/75">
                         <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotMap[d.accent]}`} />
                         {b}
                       </li>

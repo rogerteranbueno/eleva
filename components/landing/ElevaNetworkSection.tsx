@@ -108,7 +108,7 @@ export function ElevaNetworkSection() {
                 </div>
                 <div className="space-y-2">
                   <p className="font-black text-white text-base leading-tight">{b.title}</p>
-                  <p className="text-sm text-white/60 leading-relaxed">{b.body}</p>
+                  <p className="text-base text-white/75 leading-relaxed">{b.body}</p>
                 </div>
               </motion.div>
             )
@@ -130,7 +130,7 @@ export function ElevaNetworkSection() {
           ].map((s) => (
             <div key={s.label} className="text-center space-y-1">
               <p className="text-2xl sm:text-3xl font-black text-white">{s.val}</p>
-              <p className="text-xs text-white/45 leading-snug">{s.label}</p>
+              <p className="text-sm text-white/65 leading-snug">{s.label}</p>
             </div>
           ))}
         </motion.div>

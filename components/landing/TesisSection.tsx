@@ -95,7 +95,7 @@ export function TesisSection() {
                 </div>
                 <div>
                   <p className="font-black text-white text-lg leading-snug mb-2">{p.headline}</p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{p.body}</p>
+                  <p className="text-base text-muted-foreground leading-relaxed">{p.body}</p>
                 </div>
               </motion.div>
             )

@@ -52,9 +52,9 @@ export function LegacySection() {
             <br />
             <span className="text-white/60 font-light italic">Pero tampoco puede seguir operando como hace 50 años.</span>
           </h2>
-          <div className="space-y-4 text-muted-foreground leading-relaxed">
+          <div className="space-y-4 text-lg leading-relaxed text-white/75">
             <p>
-              Durante décadas, la industria de la transformación personal fue influida por modelos como <strong className="text-white/70">est</strong>, <strong className="text-white/70">Lifespring</strong>, <strong className="text-white/70">Landmark</strong> y otros entrenamientos de alto impacto. Muchos abrieron conversaciones poderosas sobre responsabilidad, lenguaje y posibilidad. Su influencia llegó hasta América Latina y sigue presente en muchos programas actuales.
+              Durante décadas, la industria de la transformación personal fue influida por modelos como <strong className="text-white">est</strong>, <strong className="text-white">Lifespring</strong>, <strong className="text-white">Landmark</strong> y otros entrenamientos de alto impacto. Muchos abrieron conversaciones poderosas sobre responsabilidad, lenguaje y posibilidad. Su influencia llegó hasta América Latina y sigue presente en muchos programas actuales.
             </p>
             <p>
               También dejaron preguntas importantes — documentadas públicamente — sobre ética, presión grupal, formación de entrenadores, seguridad psicológica y modelos de negocio basados en enrolamiento.
