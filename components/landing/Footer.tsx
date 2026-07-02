@@ -49,6 +49,9 @@ export function Footer() {
                 <Link href="#precios" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
                   {lang === "en" ? "Pricing" : "Precios"}
                 </Link>
+                <Link href="/recursos" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {lang === "en" ? "Manifesto" : "Manifiesto"}
+                </Link>
               </div>
             </div>
             <div>
