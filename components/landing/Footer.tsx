@@ -6,34 +6,20 @@ import { useLang } from "@/lib/i18n"
 export function Footer() {
   const { lang } = useLang()
 
-  const c = lang === "en" ? {
-    tagline: "The operating system for personal transformation centers. Acquire, activate, retain and scale — in one panel.",
-    productLabel: "Product",
-    contactLabel: "Contact",
-    links: {
-      demo: "Interactive demo",
-      build: "Build your system",
-      schedule: "Schedule a session",
-    },
-    copyright: "© 2025 ELEVA · Estudio Oasis",
-    region: "For personal transformation centers · Mexico · LATAM",
-  } : {
-    tagline: "El sistema operativo para centros de transformación personal. Adquirir, activar, retener y escalar, en un panel.",
-    productLabel: "Producto",
-    contactLabel: "Contacto",
-    links: {
-      demo: "Demo interactivo",
-      build: "Construye tu sistema",
-      schedule: "Agendar sesión",
-    },
-    copyright: "© 2025 ELEVA · Estudio Oasis",
-    region: "Para centros de transformación personal · México · LATAM",
-  }
+  const tagline = lang === "en"
+    ? "The institutional firm for transformation centers in LATAM. Formation, systems and growth."
+    : "La firma institucional para centros de transformación en LATAM. Formación, sistema y crecimiento."
+
+  const copyright = "© 2026 ELEVA · Estudio Oasis"
+  const region = lang === "en"
+    ? "For transformation centers · Mexico · LATAM"
+    : "Para centros de transformación · México · LATAM"
 
   return (
     <footer className="border-t border-border px-6 py-12">
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row items-start justify-between gap-10 mb-10">
+          {/* Brand */}
           <div className="max-w-xs">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-7 h-7 rounded-lg bg-violet-600 flex items-center justify-center">
@@ -41,38 +27,52 @@ export function Footer() {
               </div>
               <span className="font-black text-foreground text-base tracking-tight">ELEVA</span>
             </div>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              {c.tagline}
-            </p>
+            <p className="text-xs text-muted-foreground leading-relaxed">{tagline}</p>
           </div>
-          <div className="flex gap-12 sm:gap-16">
+
+          {/* Links */}
+          <div className="flex gap-12 sm:gap-16 flex-wrap">
             <div>
-              <p className="text-xs font-semibold text-foreground mb-4 uppercase tracking-widest">{c.productLabel}</p>
+              <p className="text-xs font-semibold text-foreground mb-4 uppercase tracking-widest">
+                {lang === "en" ? "Services" : "Servicios"}
+              </p>
               <div className="space-y-3">
-                <Link href="/vl2026" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  {c.links.demo}
+                <Link href="#programas" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {lang === "en" ? "PACTO Implementation" : "Implementación PACTO"}
                 </Link>
-                <Link href="/build" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  {c.links.build}
+                <Link href="/academia" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {lang === "en" ? "ELEVA Academy" : "ELEVA Academy"}
+                </Link>
+                <Link href="/metodo" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {lang === "en" ? "Method & OS" : "Método y OS"}
+                </Link>
+                <Link href="#precios" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {lang === "en" ? "Pricing" : "Precios"}
                 </Link>
               </div>
             </div>
             <div>
-              <p className="text-xs font-semibold text-foreground mb-4 uppercase tracking-widest">{c.contactLabel}</p>
+              <p className="text-xs font-semibold text-foreground mb-4 uppercase tracking-widest">
+                {lang === "en" ? "Start" : "Iniciar"}
+              </p>
               <div className="space-y-3">
+                <Link href="/build" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {lang === "en" ? "Book free diagnosis" : "Diagnóstico gratuito"}
+                </Link>
+                <Link href="/build" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {lang === "en" ? "Apply to PACTO" : "Aplicar a PACTO"}
+                </Link>
                 <a href="mailto:hola@elevaapp.io" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
                   hola@elevaapp.io
-                </a>
-                <a href="#contacto" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  {c.links.schedule}
                 </a>
               </div>
             </div>
           </div>
         </div>
+
         <div className="border-t border-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-muted-foreground">{c.copyright}</p>
-          <p className="text-xs text-muted-foreground">{c.region}</p>
+          <p className="text-xs text-muted-foreground">{copyright}</p>
+          <p className="text-xs text-muted-foreground">{region}</p>
         </div>
       </div>
     </footer>
