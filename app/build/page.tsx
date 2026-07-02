@@ -1,278 +1,242 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import {
-  ArrowLeft, ArrowRight, Check, Zap, Users, TrendingUp, Globe,
-  Search, Megaphone, Heart, BarChart3, Sparkles, Star, Building2, ChevronRight
+  ArrowLeft, ArrowRight, Check, Calendar, Users, TrendingUp,
+  GraduationCap, LayoutDashboard, ShieldCheck, Building2,
+  MessageCircle, BarChart3, Globe, Sparkles, Loader2,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// ── Types ──────────────────────────────────────────────────────────────────────
+// ─── Types ────────────────────────────────────────────────────────────────────
 
-interface Option {
-  id: string
-  icon: React.ComponentType<{ className?: string }>
-  label: string
-  description: string
+type Answers = {
+  centro: string
+  ciudad: string
+  anos: string
+  generaciones: string
+  participantes: string
+  entrenadores: string
+  sistema: string
+  retos: string[]
+  sedes: string
+  inversion: string
+  nombre: string
+  email: string
 }
 
-interface Step {
-  id: string
-  question: string
-  subtitle: string
-  options: Option[]
+const EMPTY: Answers = {
+  centro: "", ciudad: "", anos: "", generaciones: "", participantes: "",
+  entrenadores: "", sistema: "", retos: [], sedes: "", inversion: "",
+  nombre: "", email: "",
 }
 
-// ── Questions ──────────────────────────────────────────────────────────────────
+// ─── Step data ────────────────────────────────────────────────────────────────
 
-const STEPS: Step[] = [
-  {
-    id: "size",
-    question: "¿Cuántos participantes activos tiene tu centro hoy?",
-    subtitle: "Esto nos ayuda a calibrar el sistema exacto que necesitas.",
-    options: [
-      { id: "micro", icon: Users, label: "Menos de 50", description: "Estás arrancando o validando el modelo" },
-      { id: "small", icon: Users, label: "50 a 150", description: "Operación consolidada, lista para crecer" },
-      { id: "mid", icon: Building2, label: "151 a 400", description: "Centro establecido con múltiples cohortes" },
-      { id: "large", icon: Building2, label: "400 o más", description: "Operación compleja que necesita escala" },
-    ],
-  },
-  {
-    id: "challenge",
-    question: "¿Cuál es tu mayor desafío hoy?",
-    subtitle: "Sé honesto — de aquí sale la prioridad de tu sistema.",
-    options: [
-      { id: "acquire", icon: Megaphone, label: "Conseguir más participantes", description: "El pipeline de nuevos inscritos es inestable o lento" },
-      { id: "activate", icon: Zap, label: "Activar a los que ya tengo", description: "Se inscriben pero no completan el proceso" },
-      { id: "retain", icon: Heart, label: "Que no abandonen a la mitad", description: "La retención y el seguimiento se pierden" },
-      { id: "scale", icon: TrendingUp, label: "Crecer sin perder calidad", description: "La operación ya no escala con las personas actuales" },
-    ],
-  },
-  {
-    id: "current",
-    question: "¿Cómo gestionas tu centro hoy?",
-    subtitle: "Sin juicios — queremos entender tu punto de partida.",
-    options: [
-      { id: "whatsapp", icon: () => <span className="text-xl">📱</span>, label: "WhatsApp + Excel", description: "El combo clásico que funciona hasta cierto punto" },
-      { id: "crm", icon: BarChart3, label: "Algún CRM genérico", description: "Salesforce, HubSpot u otro que no fue hecho para centros" },
-      { id: "nothing", icon: () => <span className="text-xl">🧩</span>, label: "Sin sistema claro", description: "Todo en la cabeza del equipo" },
-      { id: "mix", icon: () => <span className="text-xl">🔀</span>, label: "Mix de varias herramientas", description: "Muchas apps, poca integración" },
-    ],
-  },
-  {
-    id: "goal",
-    question: "¿Qué meta tienes a 12 meses?",
-    subtitle: "Tu meta define qué módulos activamos primero.",
-    options: [
-      { id: "double", icon: TrendingUp, label: "Doblar mis participantes", description: "Crecer de forma agresiva y controlada" },
-      { id: "retention", icon: Heart, label: "Retención al 85% o más", description: "Que todos los que empiezan, terminen" },
-      { id: "newlocation", icon: Building2, label: "Abrir una nueva sede o cohorte", description: "Replicar el modelo sin reinventarlo" },
-      { id: "online", icon: Globe, label: "Lanzar modalidad online / híbrida", description: "Llegar más lejos sin límite de espacio" },
-    ],
-  },
+const ANOS = [
+  { id: "<1",  label: "Menos de 1 año",  sub: "Estamos arrancando" },
+  { id: "1-3", label: "1 a 3 años",      sub: "Primeras generaciones consolidadas" },
+  { id: "3-7", label: "3 a 7 años",      sub: "Centro establecido" },
+  { id: "7+",  label: "7 años o más",    sub: "Operación madura con historia" },
 ]
 
-// ── Module definitions ─────────────────────────────────────────────────────────
-
-interface Module {
-  id: string
-  icon: string
-  color: string
-  borderColor: string
-  textColor: string
-  bgColor: string
-  title: string
-  tagline: string
-  features: string[]
-  highlight: string[]   // challenge IDs that make this module "primary"
-  goalHighlight: string[] // goal IDs that reinforce this module
-}
-
-const MODULES: Module[] = [
-  {
-    id: "acquire",
-    icon: "🎯",
-    color: "violet",
-    borderColor: "border-violet-500/40",
-    textColor: "text-violet-400",
-    bgColor: "bg-violet-500/10",
-    title: "Adquirir",
-    tagline: "Tu centro visible, tu pipeline lleno",
-    features: [
-      "Sitio web personalizado optimizado en AEO + SEO",
-      "Landing pages por cohorte o evento",
-      "Formulario de inscripción inteligente",
-      "Seguimiento automático de leads",
-      "Integración con WhatsApp y redes",
-    ],
-    highlight: ["acquire"],
-    goalHighlight: ["double", "online"],
-  },
-  {
-    id: "activate",
-    icon: "⚡",
-    color: "cyan",
-    borderColor: "border-cyan-500/40",
-    textColor: "text-cyan-400",
-    bgColor: "bg-cyan-500/10",
-    title: "Activar",
-    tagline: "De inscrito a participante comprometido",
-    features: [
-      "Onboarding automatizado paso a paso",
-      "Misiones semanales con seguimiento",
-      "Notificaciones por WhatsApp / SMS / Email",
-      "Panel del participante con su progreso",
-      "Racha de consistencia y momentum",
-    ],
-    highlight: ["activate"],
-    goalHighlight: ["retention", "double"],
-  },
-  {
-    id: "retain",
-    icon: "💎",
-    color: "green",
-    borderColor: "border-green-500/40",
-    textColor: "text-green-400",
-    bgColor: "bg-green-500/10",
-    title: "Retener",
-    tagline: "Cero abandonos invisibles",
-    features: [
-      "Alertas tempranas de participantes en riesgo",
-      "Expediente individual con historial completo",
-      "Escalado a coach con un toque",
-      "Seguimiento de pagos y renovaciones",
-      "Dashboard de momentum del centro",
-    ],
-    highlight: ["retain"],
-    goalHighlight: ["retention", "newlocation"],
-  },
-  {
-    id: "scale",
-    icon: "🚀",
-    color: "yellow",
-    borderColor: "border-yellow-500/40",
-    textColor: "text-yellow-400",
-    bgColor: "bg-yellow-500/10",
-    title: "Escalar",
-    tagline: "Crecer sin caos operativo",
-    features: [
-      "Multi-cohorte y multi-sede desde un solo panel",
-      "Roles diferenciados: dueño, coach, participante",
-      "Ecosistema de especialistas integrado",
-      "Reportes automáticos por cohorte",
-      "API para integraciones avanzadas",
-    ],
-    highlight: ["scale"],
-    goalHighlight: ["double", "newlocation", "online"],
-  },
+const GENERACIONES = [
+  { id: "1-2", label: "1 a 2 por año" },
+  { id: "3-4", label: "3 a 4 por año" },
+  { id: "5-6", label: "5 a 6 por año" },
+  { id: "7+",  label: "7 o más por año" },
 ]
 
-// ── Helpers ────────────────────────────────────────────────────────────────────
+const PARTICIPANTES = [
+  { id: "<30",   label: "Menos de 30" },
+  { id: "30-80", label: "30 a 80" },
+  { id: "80-150",label: "80 a 150" },
+  { id: "150+",  label: "150 o más" },
+]
 
-function getPrimary(challenge: string, goal: string): string[] {
-  const primary = new Set<string>()
-  MODULES.forEach((m) => {
-    if (m.highlight.includes(challenge)) primary.add(m.id)
-    if (m.goalHighlight.includes(goal)) primary.add(m.id)
-  })
-  return [...primary]
+const ENTRENADORES = [
+  { id: "propios",   label: "Tenemos entrenadores propios formados",   sub: "Formados dentro del centro" },
+  { id: "externos",  label: "Dependemos de entrenadores externos",      sub: "Freelancers o consultores" },
+  { id: "mixto",     label: "Mezcla de propios y externos",             sub: "Combinación de ambos" },
+  { id: "ninguno",   label: "Sin equipo de entrenadores definido",      sub: "El dueño es el entrenador principal" },
+]
+
+const SISTEMAS = [
+  { id: "whatsapp", label: "WhatsApp + Excel",        sub: "El combo más común en la industria" },
+  { id: "crm",      label: "CRM genérico",            sub: "HubSpot, Salesforce u otro no especializado" },
+  { id: "nada",     label: "Sin sistema claro",        sub: "Todo en la memoria del equipo" },
+  { id: "mix",      label: "Mix de herramientas",     sub: "Varias apps poco integradas" },
+]
+
+const RETOS = [
+  { id: "entrenadores",  icon: GraduationCap, label: "Formar entrenadores internos",    color: "violet" },
+  { id: "staff",         icon: Users,         label: "Estructurar staff y roles",        color: "blue" },
+  { id: "seguimiento",   icon: MessageCircle, label: "Seguimiento post-entrenamiento",   color: "emerald" },
+  { id: "pl",            icon: ShieldCheck,   label: "Continuidad post-PL",              color: "amber" },
+  { id: "datos",         icon: BarChart3,     label: "Datos y dashboards",               color: "blue" },
+  { id: "sedes",         icon: Building2,     label: "Expansión a nuevas sedes",         color: "emerald" },
+  { id: "revenue",       icon: TrendingUp,    label: "Revenue y nuevas fuentes de ingreso", color: "violet" },
+  { id: "comunidad",     icon: Globe,         label: "Comunidad y retención activa",     color: "amber" },
+]
+
+const RETO_COLOR: Record<string, string> = {
+  violet:  "border-violet-500/40 bg-violet-500/10 text-violet-300",
+  blue:    "border-blue-500/40 bg-blue-500/10 text-blue-300",
+  emerald: "border-emerald-500/40 bg-emerald-500/10 text-emerald-300",
+  amber:   "border-amber-500/40 bg-amber-500/10 text-amber-300",
 }
 
-function getSizeLabel(size: string): string {
-  return { micro: "menos de 50 participantes", small: "50–150 participantes", mid: "151–400 participantes", large: "400+ participantes" }[size] ?? ""
+const SEDES = [
+  { id: "si",         label: "Sí, es una prioridad" },
+  { id: "evaluando",  label: "Lo estamos evaluando" },
+  { id: "no",         label: "Por ahora no" },
+]
+
+const INVERSION = [
+  { id: "<5k",    label: "Menos de USD $5,000" },
+  { id: "5-15k",  label: "USD $5,000 – $15,000" },
+  { id: "15-30k", label: "USD $15,000 – $30,000" },
+  { id: "30k+",   label: "USD $30,000 o más" },
+]
+
+const TOTAL_STEPS = 5
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function isStepValid(step: number, a: Answers): boolean {
+  if (step === 0) return a.centro.trim().length > 1 && a.ciudad.trim().length > 1 && !!a.anos
+  if (step === 1) return !!a.generaciones && !!a.participantes
+  if (step === 2) return !!a.entrenadores && !!a.sistema
+  if (step === 3) return a.retos.length > 0
+  if (step === 4) return !!a.sedes && !!a.inversion && a.nombre.trim().length > 1 && a.email.includes("@")
+  return false
 }
 
-function getChallengeLabel(c: string): string {
-  return { acquire: "adquirir más participantes", activate: "activar inscritos", retain: "mejorar retención", scale: "escalar operación" }[c] ?? ""
-}
+// ─── Small UI pieces ──────────────────────────────────────────────────────────
 
-function getGoalLabel(g: string): string {
-  return { double: "doblar participantes", retention: "retención al 85%+", newlocation: "nueva sede o cohorte", online: "modalidad online/híbrida" }[g] ?? ""
-}
-
-// ── Sub-components ─────────────────────────────────────────────────────────────
-
-function OptionCard({ option, selected, onSelect }: { option: Option; selected: boolean; onSelect: () => void }) {
-  const Icon = option.icon
+function PillCard({ id, label, sub, selected, onSelect }: {
+  id: string; label: string; sub?: string; selected: boolean; onSelect: () => void
+}) {
   return (
     <button
       onClick={onSelect}
       className={cn(
-        "relative text-left rounded-2xl p-5 border transition-all group",
+        "relative text-left rounded-xl p-4 border transition-all",
         selected
-          ? "border-violet-500/60 bg-violet-500/10 shadow-lg shadow-violet-500/10"
-          : "border-white/8 bg-white/3 hover:border-white/20 hover:bg-white/5"
+          ? "border-violet-500/55 bg-violet-500/10"
+          : "border-white/8 bg-white/3 hover:border-white/18 hover:bg-white/5"
       )}
     >
       {selected && (
-        <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-violet-600 flex items-center justify-center">
-          <Check className="w-3 h-3 text-white" />
+        <div className="absolute top-3 right-3 w-4.5 h-4.5 rounded-full bg-violet-600 flex items-center justify-center">
+          <Check className="w-2.5 h-2.5 text-white" />
         </div>
       )}
-      <div className="mb-3">
-        <Icon className={cn("w-6 h-6", selected ? "text-violet-400" : "text-muted-foreground group-hover:text-foreground")} />
-      </div>
-      <p className={cn("font-semibold text-sm mb-1", selected ? "text-white" : "text-foreground")}>{option.label}</p>
-      <p className="text-xs text-muted-foreground leading-relaxed">{option.description}</p>
+      <p className={cn("font-bold text-sm", selected ? "text-white" : "text-foreground")}>{label}</p>
+      {sub && <p className="text-xs text-muted-foreground mt-0.5 leading-snug">{sub}</p>}
     </button>
   )
 }
 
-function ModuleCard({ module, isPrimary }: { module: Module; isPrimary: boolean }) {
+function TextInput({ label, placeholder, value, onChange, type = "text" }: {
+  label: string; placeholder: string; value: string;
+  onChange: (v: string) => void; type?: string
+}) {
   return (
-    <div className={cn(
-      "rounded-2xl p-5 border transition-all",
-      isPrimary
-        ? `${module.bgColor} ${module.borderColor} shadow-lg`
-        : "bg-white/3 border-white/8"
-    )}>
-      {isPrimary && (
-        <div className="flex items-center gap-1.5 mb-3">
-          <Star className={cn("w-3 h-3", module.textColor)} />
-          <span className={cn("text-[10px] font-bold uppercase tracking-widest", module.textColor)}>Prioritario para ti</span>
-        </div>
-      )}
-      <div className="flex items-center gap-3 mb-3">
-        <span className="text-2xl">{module.icon}</span>
-        <div>
-          <p className={cn("font-bold text-lg", isPrimary ? "text-white" : "text-foreground")}>
-            Módulo {module.title}
-          </p>
-          <p className="text-xs text-muted-foreground">{module.tagline}</p>
-        </div>
-      </div>
-      <ul className="space-y-1.5">
-        {module.features.map((f) => (
-          <li key={f} className="flex items-start gap-2">
-            <Check className={cn("w-3.5 h-3.5 flex-shrink-0 mt-0.5", isPrimary ? module.textColor : "text-muted-foreground")} />
-            <span className={cn("text-xs leading-relaxed", isPrimary ? "text-white/80" : "text-muted-foreground")}>{f}</span>
-          </li>
-        ))}
-      </ul>
+    <div className="space-y-1.5">
+      <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{label}</label>
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="w-full bg-white/4 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-muted-foreground/50 focus:outline-none focus:border-violet-500/50 focus:bg-white/6 transition-all"
+      />
     </div>
   )
 }
 
-// ── Main component ─────────────────────────────────────────────────────────────
+// ─── Success screen ───────────────────────────────────────────────────────────
+
+function SuccessScreen({ nombre, centro }: { nombre: string; centro: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="text-center space-y-7 py-8"
+    >
+      <div className="w-16 h-16 rounded-2xl bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center mx-auto">
+        <Check className="w-8 h-8 text-emerald-400" />
+      </div>
+      <div className="space-y-3">
+        <p className="text-xs font-bold text-emerald-400 uppercase tracking-widest">Solicitud recibida</p>
+        <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">
+          Gracias, {nombre.split(" ")[0]}.
+        </h2>
+        <p className="text-muted-foreground text-base leading-relaxed max-w-md mx-auto">
+          El equipo de ELEVA revisará la información de <span className="text-white font-semibold">{centro}</span> y se pondrá en contacto en las próximas 48 horas.
+        </p>
+      </div>
+
+      <div className="glass rounded-2xl border border-white/8 p-6 text-left space-y-4 max-w-md mx-auto">
+        <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Qué pasa ahora</p>
+        {[
+          "Revisamos tu perfil y los retos que señalaste.",
+          "Si hay fit, agendamos una sesión de diagnóstico inicial sin costo.",
+          "Te presentamos el roadmap y el alcance de la implementación.",
+        ].map((s, i) => (
+          <div key={s} className="flex items-start gap-3">
+            <div className="w-5 h-5 rounded-full bg-violet-500/15 border border-violet-500/25 flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px] font-black text-violet-400">
+              {i + 1}
+            </div>
+            <p className="text-sm text-foreground/80 leading-snug">{s}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <Link href="/pacto">
+          <button className="flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl transition-colors text-sm">
+            Conocer PACTO <ArrowRight className="w-4 h-4" />
+          </button>
+        </Link>
+        <Link href="/">
+          <button className="flex items-center gap-2 px-6 py-3 glass border border-white/10 hover:border-white/20 text-white font-bold rounded-xl transition-all text-sm">
+            Volver al inicio
+          </button>
+        </Link>
+      </div>
+    </motion.div>
+  )
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function BuildPage() {
   const [step, setStep] = useState(0)
-  const [answers, setAnswers] = useState<Record<string, string>>({})
+  const [answers, setAnswers] = useState<Answers>(EMPTY)
   const [direction, setDirection] = useState(1)
+  const [submitted, setSubmitted] = useState(false)
+  const [isPending, startTransition] = useTransition()
 
-  const isResult = step === STEPS.length
-  const currentStep = STEPS[step]
-  const selected = currentStep ? answers[currentStep.id] : null
-  const primaryModules = isResult ? getPrimary(answers.challenge ?? "", answers.goal ?? "") : []
+  const valid = isStepValid(step, answers)
 
-  function choose(stepId: string, optionId: string) {
-    setAnswers((prev) => ({ ...prev, [stepId]: optionId }))
+  function set<K extends keyof Answers>(key: K, val: Answers[K]) {
+    setAnswers((prev) => ({ ...prev, [key]: val }))
+  }
+
+  function toggleReto(id: string) {
+    setAnswers((prev) => ({
+      ...prev,
+      retos: prev.retos.includes(id) ? prev.retos.filter((r) => r !== id) : [...prev.retos, id],
+    }))
   }
 
   function next() {
-    if (!selected && !isResult) return
+    if (!valid) return
     setDirection(1)
     setStep((s) => s + 1)
   }
@@ -283,165 +247,287 @@ export default function BuildPage() {
     setStep((s) => s - 1)
   }
 
+  function submit() {
+    if (!valid) return
+    startTransition(async () => {
+      try {
+        const webhook = process.env.NEXT_PUBLIC_DEMO_LEAD_WEBHOOK
+        if (webhook) {
+          await fetch(webhook, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...answers, source: "diagnostico_360", ts: new Date().toISOString() }),
+          })
+        }
+      } catch (_) {}
+      setSubmitted(true)
+    })
+  }
+
+  const STEPS_CONFIG = [
+    { label: "Tu centro" },
+    { label: "Operación" },
+    { label: "Equipo" },
+    { label: "Retos" },
+    { label: "Inversión" },
+  ]
+
   return (
     <div className="min-h-screen bg-[#05050a] text-foreground flex flex-col">
+
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-4 border-b border-white/5">
         <Link href="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-white transition-colors">
-          <ArrowLeft className="w-4 h-4" />
-          Volver
+          <ArrowLeft className="w-4 h-4" /> Inicio
         </Link>
-        <div className="flex items-center gap-1.5">
-          <span className="text-white font-bold text-sm tracking-tight">ELEVA</span>
-          <span className="text-muted-foreground text-xs">· Sistema personalizado</span>
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded-md bg-violet-600 flex items-center justify-center">
+            <span className="text-white font-black text-[10px]">E</span>
+          </div>
+          <span className="text-white font-black text-sm tracking-tight">ELEVA</span>
+          <span className="text-white/20 text-xs">·</span>
+          <span className="text-muted-foreground text-xs">Diagnóstico 360</span>
         </div>
-        <Link href="/vl2026" className="text-sm text-muted-foreground hover:text-white transition-colors hidden sm:block">
-          Ver demo →
+        <Link href="/pacto" className="text-sm text-muted-foreground hover:text-white transition-colors hidden sm:block">
+          Conocer PACTO →
         </Link>
       </nav>
 
       <div className="flex-1 flex flex-col items-center justify-center px-4 py-12">
-        <div className="w-full max-w-2xl">
-          {/* Progress */}
-          {!isResult && (
-            <div className="flex items-center gap-2 mb-10">
-              {STEPS.map((s, i) => (
-                <div
-                  key={s.id}
-                  className={cn(
+        <div className="w-full max-w-xl">
+
+          {submitted ? (
+            <SuccessScreen nombre={answers.nombre} centro={answers.centro} />
+          ) : (
+            <>
+              {/* Progress bar */}
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-xs text-violet-400 font-bold uppercase tracking-widest">
+                  Paso {step + 1} de {TOTAL_STEPS}
+                </span>
+                <span className="text-xs text-muted-foreground">{STEPS_CONFIG[step].label}</span>
+              </div>
+              <div className="flex gap-1.5 mb-10">
+                {STEPS_CONFIG.map((_, i) => (
+                  <div key={i} className={cn(
                     "h-1 rounded-full flex-1 transition-all duration-500",
-                    i < step ? "bg-violet-600" : i === step ? "bg-violet-400" : "bg-white/10"
+                    i < step ? "bg-violet-600" : i === step ? "bg-violet-400" : "bg-white/8"
+                  )} />
+                ))}
+              </div>
+
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={step}
+                  custom={direction}
+                  initial={{ opacity: 0, x: direction * 36 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: direction * -36 }}
+                  transition={{ duration: 0.25, ease: "easeInOut" }}
+                >
+
+                  {/* ── Paso 1: Tu centro ── */}
+                  {step === 0 && (
+                    <div className="space-y-6">
+                      <div>
+                        <h1 className="text-2xl sm:text-3xl font-black text-white mb-1.5 leading-tight">
+                          Cuéntanos sobre tu centro.
+                        </h1>
+                        <p className="text-muted-foreground text-sm">Comenzamos por lo básico para personalizar el diagnóstico.</p>
+                      </div>
+                      <TextInput label="Nombre del centro" placeholder="Ej. Centro VIA Monterrey" value={answers.centro} onChange={(v) => set("centro", v)} />
+                      <TextInput label="País / Ciudad" placeholder="Ej. México — Guadalajara" value={answers.ciudad} onChange={(v) => set("ciudad", v)} />
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">¿Cuántos años llevan operando?</label>
+                        <div className="grid grid-cols-2 gap-2.5">
+                          {ANOS.map((a) => (
+                            <PillCard key={a.id} id={a.id} label={a.label} sub={a.sub}
+                              selected={answers.anos === a.id} onSelect={() => set("anos", a.id)} />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   )}
-                />
-              ))}
-            </div>
-          )}
 
-          <AnimatePresence mode="wait" custom={direction}>
-            {!isResult ? (
-              <motion.div
-                key={step}
-                custom={direction}
-                initial={{ opacity: 0, x: direction * 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: direction * -40 }}
-                transition={{ duration: 0.28, ease: "easeInOut" }}
-              >
-                {/* Question */}
-                <div className="mb-2">
-                  <span className="text-xs text-violet-400 font-semibold uppercase tracking-widest">
-                    Pregunta {step + 1} de {STEPS.length}
-                  </span>
-                </div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight">
-                  {currentStep.question}
-                </h1>
-                <p className="text-muted-foreground text-sm mb-8">{currentStep.subtitle}</p>
+                  {/* ── Paso 2: Operación ── */}
+                  {step === 1 && (
+                    <div className="space-y-6">
+                      <div>
+                        <h1 className="text-2xl sm:text-3xl font-black text-white mb-1.5 leading-tight">
+                          Tu operación actual.
+                        </h1>
+                        <p className="text-muted-foreground text-sm">Esto define la escala de implementación que tu centro necesita.</p>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Generaciones de entrenamiento por año</label>
+                        <div className="grid grid-cols-2 gap-2.5">
+                          {GENERACIONES.map((g) => (
+                            <PillCard key={g.id} id={g.id} label={g.label}
+                              selected={answers.generaciones === g.id} onSelect={() => set("generaciones", g.id)} />
+                          ))}
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Participantes por generación (promedio)</label>
+                        <div className="grid grid-cols-2 gap-2.5">
+                          {PARTICIPANTES.map((p) => (
+                            <PillCard key={p.id} id={p.id} label={p.label}
+                              selected={answers.participantes === p.id} onSelect={() => set("participantes", p.id)} />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
-                {/* Options grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-                  {currentStep.options.map((opt) => (
-                    <OptionCard
-                      key={opt.id}
-                      option={opt}
-                      selected={answers[currentStep.id] === opt.id}
-                      onSelect={() => choose(currentStep.id, opt.id)}
-                    />
-                  ))}
-                </div>
+                  {/* ── Paso 3: Equipo ── */}
+                  {step === 2 && (
+                    <div className="space-y-6">
+                      <div>
+                        <h1 className="text-2xl sm:text-3xl font-black text-white mb-1.5 leading-tight">
+                          Tu equipo y sistema.
+                        </h1>
+                        <p className="text-muted-foreground text-sm">Sin juicios — queremos entender tu punto de partida real.</p>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Situación de entrenadores</label>
+                        <div className="grid grid-cols-1 gap-2.5">
+                          {ENTRENADORES.map((e) => (
+                            <PillCard key={e.id} id={e.id} label={e.label} sub={e.sub}
+                              selected={answers.entrenadores === e.id} onSelect={() => set("entrenadores", e.id)} />
+                          ))}
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">¿Cómo gestionan el centro hoy?</label>
+                        <div className="grid grid-cols-2 gap-2.5">
+                          {SISTEMAS.map((s) => (
+                            <PillCard key={s.id} id={s.id} label={s.label} sub={s.sub}
+                              selected={answers.sistema === s.id} onSelect={() => set("sistema", s.id)} />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
-                {/* Nav buttons */}
-                <div className="flex items-center justify-between">
-                  <button
-                    onClick={back}
-                    disabled={step === 0}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                    Anterior
-                  </button>
+                  {/* ── Paso 4: Retos ── */}
+                  {step === 3 && (
+                    <div className="space-y-6">
+                      <div>
+                        <h1 className="text-2xl sm:text-3xl font-black text-white mb-1.5 leading-tight">
+                          ¿Cuáles son tus principales retos?
+                        </h1>
+                        <p className="text-muted-foreground text-sm">Elige todos los que apliquen — de aquí salen las prioridades del diagnóstico.</p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2.5">
+                        {RETOS.map((r) => {
+                          const Icon = r.icon
+                          const selected = answers.retos.includes(r.id)
+                          const colorCls = RETO_COLOR[r.color]
+                          return (
+                            <button
+                              key={r.id}
+                              onClick={() => toggleReto(r.id)}
+                              className={cn(
+                                "relative text-left rounded-xl p-4 border transition-all flex flex-col gap-2.5",
+                                selected ? colorCls : "border-white/8 bg-white/3 hover:border-white/18 hover:bg-white/5"
+                              )}
+                            >
+                              {selected && (
+                                <div className="absolute top-2.5 right-2.5 w-4 h-4 rounded-full bg-white/15 flex items-center justify-center">
+                                  <Check className="w-2.5 h-2.5 text-white" />
+                                </div>
+                              )}
+                              <Icon className={cn("w-4 h-4", selected ? "opacity-90" : "text-muted-foreground")} />
+                              <p className={cn("text-xs font-bold leading-snug", selected ? "" : "text-foreground")}>{r.label}</p>
+                            </button>
+                          )
+                        })}
+                      </div>
+                      {answers.retos.length > 0 && (
+                        <p className="text-xs text-muted-foreground text-center">
+                          {answers.retos.length} reto{answers.retos.length > 1 ? "s" : ""} seleccionado{answers.retos.length > 1 ? "s" : ""}
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  {/* ── Paso 5: Inversión y contacto ── */}
+                  {step === 4 && (
+                    <div className="space-y-6">
+                      <div>
+                        <h1 className="text-2xl sm:text-3xl font-black text-white mb-1.5 leading-tight">
+                          Últimos detalles.
+                        </h1>
+                        <p className="text-muted-foreground text-sm">Para que el equipo de ELEVA pueda preparar tu diagnóstico correctamente.</p>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">¿Planean abrir nuevas sedes en los próximos 12 meses?</label>
+                        <div className="grid grid-cols-3 gap-2.5">
+                          {SEDES.map((s) => (
+                            <PillCard key={s.id} id={s.id} label={s.label}
+                              selected={answers.sedes === s.id} onSelect={() => set("sedes", s.id)} />
+                          ))}
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Rango de inversión disponible</label>
+                        <div className="grid grid-cols-2 gap-2.5">
+                          {INVERSION.map((inv) => (
+                            <PillCard key={inv.id} id={inv.id} label={inv.label}
+                              selected={answers.inversion === inv.id} onSelect={() => set("inversion", inv.id)} />
+                          ))}
+                        </div>
+                      </div>
+                      <div className="border-t border-white/6 pt-5 space-y-4">
+                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Tu contacto</p>
+                        <TextInput label="Nombre completo" placeholder="Tu nombre" value={answers.nombre} onChange={(v) => set("nombre", v)} />
+                        <TextInput label="Correo electrónico" placeholder="tuemail@centro.com" value={answers.email} onChange={(v) => set("email", v)} type="email" />
+                      </div>
+                    </div>
+                  )}
+
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Nav buttons */}
+              <div className="flex items-center justify-between mt-8">
+                <button
+                  onClick={back}
+                  disabled={step === 0}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
+                >
+                  <ArrowLeft className="w-4 h-4" /> Anterior
+                </button>
+
+                {step < TOTAL_STEPS - 1 ? (
                   <button
                     onClick={next}
-                    disabled={!selected}
-                    className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold bg-violet-600 text-white hover:bg-violet-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed shadow-lg shadow-violet-600/25"
+                    disabled={!valid}
+                    className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold bg-violet-600 text-white hover:bg-violet-500 transition-all disabled:opacity-30 disabled:cursor-not-allowed shadow-lg shadow-violet-600/20"
                   >
-                    {step === STEPS.length - 1 ? "Ver mi sistema" : "Siguiente"}
-                    <ArrowRight className="w-4 h-4" />
+                    Siguiente <ArrowRight className="w-4 h-4" />
                   </button>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="result"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              >
-                {/* Result header */}
-                <div className="text-center mb-10">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-600/15 border border-violet-500/30 text-violet-400 text-xs font-semibold mb-4">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    Tu sistema está listo
-                  </div>
-                  <h1 className="text-3xl sm:text-4xl font-black text-white mb-3 leading-tight">
-                    Tu sistema ELEVA
-                  </h1>
-                  <p className="text-muted-foreground text-sm max-w-lg mx-auto leading-relaxed">
-                    Para un centro con <span className="text-white font-medium">{getSizeLabel(answers.size)}</span>, enfocado en{" "}
-                    <span className="text-white font-medium">{getChallengeLabel(answers.challenge)}</span> y con meta de{" "}
-                    <span className="text-white font-medium">{getGoalLabel(answers.goal)}</span>.
-                  </p>
-                </div>
-
-                {/* Modules grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                  {MODULES.map((m) => (
-                    <ModuleCard key={m.id} module={m} isPrimary={primaryModules.includes(m.id)} />
-                  ))}
-                </div>
-
-                {/* AEO/SEO callout */}
-                <div className="rounded-2xl border border-violet-500/20 bg-violet-500/5 p-5 mb-8 flex items-start gap-4">
-                  <div className="w-9 h-9 rounded-xl bg-violet-600/20 flex items-center justify-center flex-shrink-0">
-                    <Search className="w-4.5 h-4.5 text-violet-400" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white mb-1 flex items-center gap-2">
-                      Diseño personalizado · AEO + SEO incluido
-                    </p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      Tu sistema ELEVA incluye un sitio web diseñado específicamente para tu centro, optimizado para aparecer primero en búsquedas locales y en respuestas de IA (Answer Engine Optimization). No un template — una presencia digital construida para convertir.
-                    </p>
-                  </div>
-                </div>
-
-                {/* CTAs */}
-                <div className="flex flex-col sm:flex-row items-center gap-3">
-                  <Link
-                    href="/vl2026"
-                    className="flex items-center justify-center gap-2 w-full sm:flex-1 px-6 py-3.5 rounded-xl font-semibold text-sm bg-violet-600 text-white hover:bg-violet-700 transition-all shadow-lg shadow-violet-600/25"
+                ) : (
+                  <button
+                    onClick={submit}
+                    disabled={!valid || isPending}
+                    className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold bg-violet-600 text-white hover:bg-violet-500 transition-all disabled:opacity-30 disabled:cursor-not-allowed shadow-lg shadow-violet-600/20"
                   >
-                    <Zap className="w-4 h-4" />
-                    Ver el demo en vivo
-                  </Link>
-                  <a
-                    href="mailto:hola@elevaapp.io?subject=Quiero%20activar%20mi%20sistema%20ELEVA"
-                    className="flex items-center justify-center gap-2 w-full sm:flex-1 px-6 py-3.5 rounded-xl font-semibold text-sm border border-white/10 text-foreground hover:border-white/25 hover:text-white transition-all"
-                  >
-                    Activar mi sistema
-                    <ChevronRight className="w-4 h-4" />
-                  </a>
-                </div>
+                    {isPending ? (
+                      <><Loader2 className="w-4 h-4 animate-spin" /> Enviando...</>
+                    ) : (
+                      <><Calendar className="w-4 h-4" /> Solicitar diagnóstico</>
+                    )}
+                  </button>
+                )}
+              </div>
 
-                <button
-                  onClick={() => { setStep(0); setAnswers({}) }}
-                  className="mt-4 w-full text-center text-xs text-muted-foreground hover:text-white transition-colors py-2"
-                >
-                  Empezar de nuevo
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              {/* Trust footnote */}
+              <p className="text-center text-[11px] text-muted-foreground/60 mt-5">
+                Información confidencial · ELEVA no comparte datos con terceros · Revisamos cada solicitud individualmente
+              </p>
+            </>
+          )}
         </div>
       </div>
     </div>
