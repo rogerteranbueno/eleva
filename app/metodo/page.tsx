@@ -358,7 +358,7 @@ export default function MetodoPage() {
         activePhase ? "opacity-100" : "opacity-0 pointer-events-none"
       )}>
         {[
-          { id: "adquisicion", label: "Adquisición", dot: "bg-violet-500" },
+          { id: "adquisicion", label: "Atracción",   dot: "bg-violet-500" },
           { id: "activacion",  label: "Activación",  dot: "bg-blue-500"   },
           { id: "retencion",   label: "Retención",   dot: "bg-emerald-500" },
           { id: "revolucion",  label: "Revolución",  dot: "bg-orange-500" },
@@ -383,17 +383,24 @@ export default function MetodoPage() {
       {/* Nav mínimo */}
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-[#07070f]/90 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-violet-600 flex items-center justify-center">
-              <span className="text-white font-black text-xs">E</span>
+          <div className="flex items-center gap-4">
+            <Link href="/" className="flex items-center gap-1.5 text-white/40 hover:text-white/70 transition-colors text-sm">
+              ← Inicio
+            </Link>
+            <div className="hidden sm:flex items-center gap-2">
+              <div className="w-6 h-6 rounded-md bg-violet-600 flex items-center justify-center">
+                <span className="text-white font-black text-[10px]">E</span>
+              </div>
+              <span className="font-black text-white text-sm tracking-tight">ELEVA</span>
+              <span className="text-white/20">/</span>
+              <span className="text-blue-400 font-black text-sm">OS</span>
             </div>
-            <span className="font-black text-white tracking-tight">ELEVA</span>
-          </Link>
+          </div>
           <Link
-            href="/vl2026"
+            href="/build"
             className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold transition-colors"
           >
-            Ver demo <ArrowRight className="w-3.5 h-3.5" />
+            Diagnóstico <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </header>
@@ -402,21 +409,19 @@ export default function MetodoPage() {
       <section className="pt-40 pb-28 px-6 relative overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-[radial-gradient(ellipse_at_center,rgba(124,58,237,0.13),transparent_70%)] pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-[11px] text-white/50 font-medium mb-10">
-            <Zap className="w-3 h-3 text-violet-400" />
-            El modelo que separa los centros que crecen de los que sobreviven
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/25 bg-blue-500/8 text-[11px] text-blue-300 font-bold mb-10 uppercase tracking-wider">
+            <LayoutDashboard className="w-3 h-3" />
+            Sistema Operativo del Centro · ELEVA OS
           </div>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight mb-6">
-            Los centros que crecen
+            El sistema que sostiene
             <br />
-            <span className="text-white">tienen un sistema.</span>
+            <span className="text-white">la transformación</span>
             <br />
-            <span className="text-white/25">Los que no, tienen caos.</span>
+            <span className="text-white/25">después de la sala.</span>
           </h1>
           <p className="text-lg text-white/45 max-w-xl mx-auto mb-12 leading-relaxed">
-            AARR: Adquisición, Activación, Retención, Revolución.
-            <br />
-            Así se construye un centro que escala.
+            Dashboard, seguimiento, cohortes, comunidad, especialistas y datos — todo en un solo lugar. Para que el centro funcione cuando el dueño no está mirando.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
@@ -426,10 +431,10 @@ export default function MetodoPage() {
               Ver el sistema en acción <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              href="/simulador"
+              href="/build"
               className="flex items-center gap-2 px-8 py-4 rounded-full border border-white/15 hover:border-white/30 text-white/60 hover:text-white font-medium text-base transition-colors"
             >
-              Simular mi impacto
+              Agendar diagnóstico
             </Link>
           </div>
         </div>
