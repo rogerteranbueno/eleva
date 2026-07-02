@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 const DEMO_COOKIE = 'eleva_demo_access'
 const COOKIE_MAX_AGE = 7 * 24 * 60 * 60
 
-// Perfiles demo — cada uno lleva directo a su vista de rol
+// Perfiles demo, cada uno lleva directo a su vista de rol
 const DEMO_PROFILES: Record<string, { password: string; to: string; role: string }> = {
   'dueno@level.com': { password: 'Level2026', to: '/vl2026/pulso',        role: 'dueno' },
   'coach@level.com': { password: 'Level2026', to: '/vl2026/coach',         role: 'coach' },

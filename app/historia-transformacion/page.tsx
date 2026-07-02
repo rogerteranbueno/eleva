@@ -19,7 +19,7 @@ const timeline = [
     year: "1971",
     title: "Werner Erhard funda est",
     body: 'Werner Erhard, nacido John Paul Rosenberg, lanza Erhard Seminars Training (est) en San Francisco. El formato: entrenamientos intensivos de fin de semana, grupos de 250+ personas, reglas estrictas, lenguaje propio y un enfoque en "responsabilidad total". Est entrena a cientos de miles de personas y se convierte en uno de los programas más influyentes del movimiento. En 1985, est es reemplazado por The Forum, que más tarde derivó en lo que hoy se conoce como Landmark Worldwide.',
-    ref: "Fuente: Wikipedia — Werner Erhard",
+    ref: "Fuente: Wikipedia, Werner Erhard",
     refUrl: "https://en.wikipedia.org/wiki/Werner_Erhard",
     type: "figure",
     accent: "blue",
@@ -28,7 +28,7 @@ const timeline = [
     year: "1974",
     title: "John Hanley funda Lifespring",
     body: "John Hanley lanza Lifespring en California, con un formato similar a est: entrenamientos Basic, Advanced y Leadership Program. La organización llega a operar en múltiples países y afirma haber entrenado a cientos de miles de personas. También enfrenta controversias públicas documentadas: investigaciones periodísticas, demandas civiles y reportes de participantes sobre presión psicológica, dinámicas de grupo intensas y consecuencias no deseadas en algunos participantes. Lifespring dejó de operar en los años 90.",
-    ref: "Fuente: Wikipedia — Lifespring",
+    ref: "Fuente: Wikipedia, Lifespring",
     refUrl: "https://en.wikipedia.org/wiki/Lifespring",
     type: "figure",
     accent: "amber",
@@ -42,7 +42,7 @@ const timeline = [
   {
     year: "1990s–2000s",
     title: "La expansión hacia América Latina",
-    body: "Los modelos inspirados en est, Lifespring y sus derivados llegan a México, Argentina, Colombia, Chile y otros países. Surgen decenas de empresas y organizaciones que adaptan — con mayor o menor fidelidad y mayor o menor ética — los formatos intensivos de grupo grande. Algunos centros construyen comunidades genuinamente valiosas. Otros replican sólo la forma: la presión, el lenguaje, los diplomas. En todos los casos, la formación de los entrenadores rara vez está estandarizada.",
+    body: "Los modelos inspirados en est, Lifespring y sus derivados llegan a México, Argentina, Colombia, Chile y otros países. Surgen decenas de empresas y organizaciones que adaptan, con mayor o menor fidelidad y mayor o menor ética, los formatos intensivos de grupo grande. Algunos centros construyen comunidades genuinamente valiosas. Otros replican sólo la forma: la presión, el lenguaje, los diplomas. En todos los casos, la formación de los entrenadores rara vez está estandarizada.",
     type: "context",
   },
   {

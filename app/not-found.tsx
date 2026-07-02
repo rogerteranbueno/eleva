@@ -21,7 +21,7 @@ export default function NotFound() {
       </h1>
       <p className="text-muted-foreground max-w-sm text-base leading-relaxed mb-8">
         Puede que el enlace esté roto o que la página haya sido movida. Pero tu centro no tiene
-        que estarlo — vuelve al inicio.
+        que estarlo, vuelve al inicio.
       </p>
 
       {/* CTAs */}

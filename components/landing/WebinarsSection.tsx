@@ -82,7 +82,7 @@ export function WebinarsSection() {
     eyebrow: "Webinars",
     h2a: "Free to attract.",
     h2b: "Exclusive to retain.",
-    sub: "Public webinars fill the lead funnel at zero ad spend. Members-only webinars create reasons to stay — and to pay the monthly membership.",
+    sub: "Public webinars fill the lead funnel at zero ad spend. Members-only webinars create reasons to stay, and to pay the monthly membership.",
     publicLabel: "Public",
     membersLabel: "Members only",
     spotsLabel: "spots available",
@@ -90,7 +90,7 @@ export function WebinarsSection() {
     watchBtn: "Watch recording",
     registerBtn: "Register",
     features: [
-      { title: "Public webinars", desc: "Turn strangers into qualified leads with high-value content — no paid advertising.", color: "border-emerald-500/20" },
+      { title: "Public webinars", desc: "Turn strangers into qualified leads with high-value content, no paid advertising.", color: "border-emerald-500/20" },
       { title: "Members webinars", desc: "Exclusive content that justifies the monthly membership and deepens participant commitment.", color: "border-violet-500/20" },
       { title: "Recordings always available", desc: "Everything stays in the participant's library so they can revisit topics when they need them.", color: "border-cyan-500/20" },
     ],

@@ -200,7 +200,7 @@ function DemoNav() {
         </div>
       </div>
 
-      {/* Center selector — only in owner view */}
+      {/* Center selector, only in owner view */}
       {view === "owner" && (
         <div className="p-4 border-b border-sidebar-border">
           <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2 font-medium">Centro</p>
@@ -254,7 +254,7 @@ function DemoNav() {
         })}
       </nav>
 
-      {/* AI Assistant — visible for owner, coach, ops only */}
+      {/* AI Assistant, visible for owner, coach, ops only */}
       {view !== "participant" && (
         <div className="px-3 pb-2">
           <AIAssistant role={view as "owner" | "coach" | "ops"} />
@@ -322,7 +322,7 @@ function MobileNav() {
           <RotateCcw className="w-3 h-3" />
         </button>
       </div>
-      {/* Screen tabs — scrollable when many items (owner has 10) */}
+      {/* Screen tabs, scrollable when many items (owner has 10) */}
       <div className={cn("flex", screens.length > 5 ? "overflow-x-auto scrollbar-none" : "")}>
         {screens.map(({ href, shortLabel, icon: Icon, badge }) => {
           const active = pathname === href

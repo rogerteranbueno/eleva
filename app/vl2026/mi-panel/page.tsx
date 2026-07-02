@@ -40,7 +40,7 @@ const PENDING_TASKS = [
   {
     id: "t3",
     type: "coaching" as const,
-    title: "Llamada de coaching — semana 12",
+    title: "Llamada de coaching, semana 12",
     description: "30 min con Ana Reyes para revisar tu avance en el objetivo financiero.",
     urgency: "urgent" as const,
     daysLeft: 2,
@@ -50,7 +50,7 @@ const PENDING_TASKS = [
   {
     id: "t4",
     type: "pago" as const,
-    title: "Pago PL — Mes 4",
+    title: "Pago PL, Mes 4",
     description: "$4,200 MXN vencido hace 3 días.",
     urgency: "overdue" as const,
     daysLeft: -3,
@@ -62,7 +62,7 @@ const PENDING_TASKS = [
 const UPCOMING_EVENTS = [
   {
     id: "e1",
-    title: "Sesión en vivo — Generación Omega",
+    title: "Sesión en vivo, Generación Omega",
     description: "Con tu coach Ana Reyes y todo el grupo",
     date: "Jueves 13 jun",
     time: "7:00 pm",
@@ -82,7 +82,7 @@ const UPCOMING_EVENTS = [
   },
   {
     id: "e3",
-    title: "Noche de Invitados — LEVEL",
+    title: "Noche de Invitados, LEVEL",
     description: "Trae a alguien que quieras que viva esto contigo",
     date: "Sábado 21 jun",
     time: "6:00 pm",
@@ -159,7 +159,7 @@ export default function MiPanelPage() {
   return (
     <div className="p-6 max-w-3xl mx-auto space-y-6">
 
-      {/* ── Header — personal greeting ── */}
+      {/* ── Header, personal greeting ── */}
       <div className="glass rounded-2xl p-5">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">

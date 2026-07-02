@@ -22,7 +22,7 @@ const ONBOARDING = {
   title: "Expediente del participante",
   description: "Todo lo que necesitas saber sobre Valeria en una sola pantalla. Sin Excel, sin buscar en WhatsApp, sin llamar al coach.",
   tips: [
-    { emoji: "📑", text: "Navega los tabs: Resumen, Actividad, Objetivos, Pagos y Notas — todo en un lugar." },
+    { emoji: "📑", text: "Navega los tabs: Resumen, Actividad, Objetivos, Pagos y Notas, todo en un lugar." },
     { emoji: "📉", text: "La tab 'Actividad' muestra exactamente cuándo se rompió la racha de Valeria." },
     { emoji: "🚨", text: "En 'Notas' puedes escribir un mensaje y escalar al coach con un solo botón." },
   ],
@@ -61,7 +61,7 @@ export default function ExpedientePage() {
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-6">
       <OnboardingModal config={ONBOARDING} />
-      {/* Profile header — stacks on mobile, row on md+ */}
+      {/* Profile header, stacks on mobile, row on md+ */}
       <div className="glass rounded-2xl p-5">
         {/* Top row: avatar + name + gauge */}
         <div className="flex items-start justify-between gap-3">
@@ -99,7 +99,7 @@ export default function ExpedientePage() {
         </div>
       </div>
 
-      {/* Tabs — scrollable on mobile */}
+      {/* Tabs, scrollable on mobile */}
       <div className="flex gap-1 p-1 glass rounded-xl overflow-x-auto scrollbar-none">
         {TABS.map(({ id, label, icon }) => (
           <button
@@ -161,9 +161,9 @@ const AI_QUESTIONS = [
 ]
 
 const AI_AVOID = [
-  "No menciones los 11 días de inactividad como un número — genera defensividad.",
+  "No menciones los 11 días de inactividad como un número, genera defensividad.",
   "Evita comparar su progreso con el de otros en la generación.",
-  "No empezar la llamada con '¿cómo vas con tus metas?' — es lo que espera y cierra.",
+  "No empezar la llamada con '¿cómo vas con tus metas?', es lo que espera y cierra.",
 ]
 
 const AI_FOCUS = [
@@ -223,7 +223,7 @@ function TabIA({
         </div>
         <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-cyan-500/5 border border-cyan-500/15 text-xs text-cyan-300">
           <Sparkles className="w-3 h-3 flex-shrink-0" />
-          Diego tiene momentum alto — puede ser un aliado para motivar a Valeria si hay resistencia al contacto directo del coach.
+          Diego tiene momentum alto, puede ser un aliado para motivar a Valeria si hay resistencia al contacto directo del coach.
         </div>
       </div>
 
@@ -383,7 +383,7 @@ function TabJourney({ momentum }: { momentum: number }) {
       label: "Retener · PL",
       color: "pink",
       status: "active" as const,
-      title: "Mes 3 de 5 — activa",
+      title: "Mes 3 de 5, activa",
       items: [
         { label: "Objetivo principal", value: VALERIA.objective.title },
         { label: "Avance del objetivo", value: `${VALERIA.objective.progress}%` },
@@ -399,9 +399,9 @@ function TabJourney({ momentum }: { momentum: number }) {
       status: "locked" as const,
       title: "Disponible al completar PL",
       items: [
-        { label: "Mentoría de pares", value: "—" },
-        { label: "Referidos generados", value: "—" },
-        { label: "Rol en comunidad", value: "—" },
+        { label: "Mentoría de pares", value: "-" },
+        { label: "Referidos generados", value: "-" },
+        { label: "Rol en comunidad", value: "-" },
       ],
     },
   ]
@@ -471,7 +471,7 @@ function TabJourney({ momentum }: { momentum: number }) {
                       <p className="text-[10px] text-muted-foreground">{item.label}</p>
                       <p className={cn(
                         "text-xs font-semibold mt-0.5",
-                        item.value === "—" ? "text-muted-foreground" : "text-white"
+                        item.value === "-" ? "text-muted-foreground" : "text-white"
                       )}>{item.value}</p>
                     </div>
                   ))}
@@ -520,7 +520,7 @@ function TabResumen({ momentum }: { momentum: number }) {
       <StatBox label="Mejor racha" value="22 días" sub="Alcanzada hace 3 semanas" />
       <StatBox label="Misiones completadas" value="3 / 12" sub="3 pendientes este mes" alert />
       <StatBox label="Momentum" value={`${momentum}%`} sub="Cayó 47 puntos en 2 semanas" alert />
-      <StatBox label="Fase actual" value="Mes 3" sub="PL — 2 meses restantes" />
+      <StatBox label="Fase actual" value="Mes 3" sub="PL, 2 meses restantes" />
       <StatBox label="Pagos" value="Al corriente" sub="Mes 4 vence en 29 días" />
     </div>
   )
@@ -531,7 +531,7 @@ function TabActividad() {
   return (
     <div className="glass rounded-xl p-5 space-y-4">
       <h3 className="font-semibold text-white">Últimos 30 días de actividad</h3>
-      <p className="text-xs text-muted-foreground">El hueco de los últimos 11 días es visible — sin check-ins, sin misiones.</p>
+      <p className="text-xs text-muted-foreground">El hueco de los últimos 11 días es visible, sin check-ins, sin misiones.</p>
       <div className="flex flex-wrap gap-1.5">
         {days.map((d, i) => (
           <div
@@ -544,7 +544,7 @@ function TabActividad() {
                 ? "bg-red-500/20 text-red-400 border border-red-500/20"
                 : "bg-white/5 text-muted-foreground border border-white/5"
             )}
-            title={`Día ${d.daysAgo} — ${d.active ? "Activo" : "Inactivo"}`}
+            title={`Día ${d.daysAgo}, ${d.active ? "Activo" : "Inactivo"}`}
           >
             {d.daysAgo}
           </div>
@@ -723,11 +723,11 @@ function StatBox({ label, value, sub, alert }: { label: string; value: string; s
 
 const COMMS_LOG = [
   { id: "c1", canal: "whatsapp" as const, fecha: "04 jun 2026 · 10:15", contenido: "Hola Valeria 👋 Soy Ana, tu coach. ¿Cómo vas esta semana con tu objetivo? Aquí para ti.", estado: "respondido" as const, respuesta: "Hola Ana, gracias. Ha sido difícil pero voy a retomar. 🙏" },
-  { id: "c2", canal: "email" as const,    fecha: "01 jun 2026 · 09:00", contenido: "Recap de la semana 12 de PL — tus avances y lo que viene.", estado: "abierto" as const },
+  { id: "c2", canal: "email" as const,    fecha: "01 jun 2026 · 09:00", contenido: "Recap de la semana 12 de PL, tus avances y lo que viene.", estado: "abierto" as const },
   { id: "c3", canal: "app" as const,      fecha: "28 may 2026 · 08:00", contenido: "Nueva misión disponible: Registro de hábitos semana 3. Tienes hasta el viernes.", estado: "enviado" as const },
   { id: "c4", canal: "whatsapp" as const, fecha: "25 may 2026 · 18:30", contenido: "Recordatorio: sesión grupal Gen. Omega mañana domingo 10am. ¡Te esperamos! 🌟", estado: "leido" as const },
-  { id: "c5", canal: "email" as const,    fecha: "20 may 2026 · 09:00", contenido: "Recap semana 10 — Valeria, esta semana fue increíble para tu generación. Lee aquí.", estado: "abierto" as const },
-  { id: "c6", canal: "sms" as const,      fecha: "15 may 2026 · 11:00", contenido: "Hola Valeria, recordatorio pago Mes 4 ($4,200) — vence el 1 de junio. Escríbenos.", estado: "enviado" as const },
+  { id: "c5", canal: "email" as const,    fecha: "20 may 2026 · 09:00", contenido: "Recap semana 10, Valeria, esta semana fue increíble para tu generación. Lee aquí.", estado: "abierto" as const },
+  { id: "c6", canal: "sms" as const,      fecha: "15 may 2026 · 11:00", contenido: "Hola Valeria, recordatorio pago Mes 4 ($4,200), vence el 1 de junio. Escríbenos.", estado: "enviado" as const },
   { id: "c7", canal: "app" as const,      fecha: "10 may 2026 · 08:00", contenido: "¡Felicidades! Completaste la misión de la semana 8. Tu racha llega a 15 días 🔥", estado: "leido" as const },
 ]
 
@@ -787,7 +787,7 @@ function TabComunicacion({
         <Clock className="w-4 h-4 text-yellow-400 flex-shrink-0" />
         <div className="flex-1">
           <p className="text-xs font-semibold text-yellow-300">Próximo seguimiento sugerido</p>
-          <p className="text-[11px] text-muted-foreground">Viernes 7 de junio — llamada de 15 min con Ana Reyes</p>
+          <p className="text-[11px] text-muted-foreground">Viernes 7 de junio, llamada de 15 min con Ana Reyes</p>
         </div>
         <button
           onClick={() => { setComposing(true); setCanal("whatsapp") }}

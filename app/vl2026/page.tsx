@@ -33,7 +33,7 @@ const STAGES = [
     label: "Retener",
     color: "pink",
     headline: "Mantén el momentum mes tras mes",
-    description: "Misiones semanales, momentum score, comunidad por generación y alertas automáticas cuando alguien está perdiendo el ritmo — antes de que abandone.",
+    description: "Misiones semanales, momentum score, comunidad por generación y alertas automáticas cuando alguien está perdiendo el ritmo, antes de que abandone.",
     metric: "3x",
     metricLabel: "más retención",
     bullets: ["Momentum Score en tiempo real", "Alertas antes del abandono", "Tribu y leaderboard", "Eventos y webinars"],
@@ -73,7 +73,7 @@ export default async function DemoGatePage() {
         </div>
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <Building2 className="w-3.5 h-3.5" />
-          Demo — LEVEL Transformación
+          Demo, LEVEL Transformación
         </div>
       </div>
 
@@ -89,7 +89,7 @@ export default async function DemoGatePage() {
             <span className="text-violet-400">Luego el software.</span>
           </h1>
           <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed text-sm sm:text-base">
-            ELEVA no es una herramienta más — es la infraestructura que hace operable tu metodología de transformación en las 4 etapas del ciclo de vida de un participante.
+            ELEVA no es una herramienta más, es la infraestructura que hace operable tu metodología de transformación en las 4 etapas del ciclo de vida de un participante.
           </p>
         </div>
 
@@ -156,7 +156,7 @@ export default async function DemoGatePage() {
           <div className="text-center space-y-1">
             <p className="font-bold text-white text-lg">Elige tu perfil de acceso</p>
             <p className="text-xs text-muted-foreground">
-              Entra con un clic — los datos son reales, sin pitch, sin llamada.
+              Entra con un clic, los datos son reales, sin pitch, sin llamada.
             </p>
           </div>
 

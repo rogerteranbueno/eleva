@@ -76,7 +76,7 @@ export function ProblemSection() {
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative text-center py-8 px-6 rounded-2xl border border-white/8 bg-white/2"
+        className="relative text-center py-8 px-6 rounded-2xl border border-foreground/8 bg-foreground/2"
       >
         <p className="text-2xl sm:text-3xl font-black text-foreground leading-snug">
           {c.closing}

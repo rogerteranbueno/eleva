@@ -281,7 +281,7 @@ export function RegistrationDrawer({ onClose, onSuccess }: RegistrationDrawerPro
               {/* Objective */}
               <div>
                 <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
-                  Objetivo inicial <span className="text-muted-foreground/60">(opcional — se puede completar después)</span>
+                  Objetivo inicial <span className="text-muted-foreground/60">(opcional, se puede completar después)</span>
                 </label>
                 <input
                   value={objective}

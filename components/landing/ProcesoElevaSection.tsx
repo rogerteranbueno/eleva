@@ -15,7 +15,7 @@ const PHASES_ES = [
     color: "violet" as const,
     accent: "border-violet-500/40 bg-violet-600/5",
     tag: "text-violet-400",
-    pillActive: "bg-violet-600 text-white",
+    pillActive: "bg-violet-600 text-foreground",
     pillInactive: "text-violet-400 border border-violet-500/30",
     summary: "Antes de escribir una sola línea de configuración, entendemos tu centro a fondo: tu metodología, tus generaciones, cómo cobras, cómo sigues, qué sabes y qué no sabes de tu operación.",
     groups: [
@@ -59,7 +59,7 @@ const PHASES_ES = [
     color: "cyan" as const,
     accent: "border-cyan-500/40 bg-cyan-600/5",
     tag: "text-cyan-400",
-    pillActive: "bg-cyan-600 text-white",
+    pillActive: "bg-cyan-600 text-foreground",
     pillInactive: "text-cyan-400 border border-cyan-500/30",
     summary: "El sistema ya está configurado. Ahora tu equipo lo usa en tiempo real mientras nosotros estamos al lado. No se capacita en vacío: se capacita operando.",
     groups: [
@@ -103,7 +103,7 @@ const PHASES_ES = [
     color: "emerald" as const,
     accent: "border-emerald-500/40 bg-emerald-600/5",
     tag: "text-emerald-400",
-    pillActive: "bg-emerald-600 text-white",
+    pillActive: "bg-emerald-600 text-foreground",
     pillInactive: "text-emerald-400 border border-emerald-500/30",
     summary: "El sistema ya corre solo. El equipo ya lo usa con confianza. Es momento de abrir las puertas: coaches y participantes entran al sistema de forma oficial.",
     groups: [
@@ -149,7 +149,7 @@ const PHASES_EN = [
     color: "violet" as const,
     accent: "border-violet-500/40 bg-violet-600/5",
     tag: "text-violet-400",
-    pillActive: "bg-violet-600 text-white",
+    pillActive: "bg-violet-600 text-foreground",
     pillInactive: "text-violet-400 border border-violet-500/30",
     summary: "Before writing a single line of configuration, we understand your center in depth: your methodology, your generations, how you charge, how you follow up, what you know and don't know about your operation.",
     groups: [
@@ -193,9 +193,9 @@ const PHASES_EN = [
     color: "cyan" as const,
     accent: "border-cyan-500/40 bg-cyan-600/5",
     tag: "text-cyan-400",
-    pillActive: "bg-cyan-600 text-white",
+    pillActive: "bg-cyan-600 text-foreground",
     pillInactive: "text-cyan-400 border border-cyan-500/30",
-    summary: "The system is configured. Now your team uses it in real time while we're right beside them. Training doesn't happen in a vacuum — it happens while operating.",
+    summary: "The system is configured. Now your team uses it in real time while we're right beside them. Training doesn't happen in a vacuum, it happens while operating.",
     groups: [
       {
         title: "Team training",
@@ -237,7 +237,7 @@ const PHASES_EN = [
     color: "emerald" as const,
     accent: "border-emerald-500/40 bg-emerald-600/5",
     tag: "text-emerald-400",
-    pillActive: "bg-emerald-600 text-white",
+    pillActive: "bg-emerald-600 text-foreground",
     pillInactive: "text-emerald-400 border border-emerald-500/30",
     summary: "The system runs on its own. The team uses it with confidence. It's time to open the doors: coaches and participants enter the system officially.",
     groups: [
@@ -380,9 +380,9 @@ export function ProcesoElevaSection() {
       {/* Timeline strip */}
       <div className="mt-8 flex items-center gap-0 overflow-hidden rounded-xl">
         {c.timeline.map((t, i) => (
-          <div key={t.label} className={cn("flex-1 p-3 text-center", t.color, i < 3 && "border-r border-white/20")}>
-            <p className="text-[10px] font-bold text-white">{t.label}</p>
-            <p className="text-[9px] text-white/70 mt-0.5 leading-tight hidden sm:block">{t.desc}</p>
+          <div key={t.label} className={cn("flex-1 p-3 text-center", t.color, i < 3 && "border-r border-foreground/20")}>
+            <p className="text-[10px] font-bold text-foreground">{t.label}</p>
+            <p className="text-[9px] text-foreground/70 mt-0.5 leading-tight hidden sm:block">{t.desc}</p>
           </div>
         ))}
       </div>
@@ -395,7 +395,7 @@ export function ProcesoElevaSection() {
       >
         <Link
           href="/vl2026/pulso"
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-violet-600 hover:bg-violet-500 text-white font-bold text-lg transition-all"
+          className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-violet-600 hover:bg-violet-500 text-foreground font-bold text-lg transition-all"
         >
           {c.demoCta} <ArrowRight className="w-5 h-5" />
         </Link>

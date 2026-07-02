@@ -3,12 +3,12 @@ import type { Metadata } from "next"
 const BASE_URL = "https://elevaapp-drab.vercel.app"
 
 export const metadata: Metadata = {
-  title: "Para tu equipo — ELEVA para directores, coaches, staff y operadores",
+  title: "Para tu equipo, ELEVA para directores, coaches, staff y operadores",
   description:
     "Descubre cómo ELEVA transforma el rol de cada persona en tu centro: directores, entrenadores, coordinadores y staff de admisiones.",
   metadataBase: new URL(BASE_URL),
   openGraph: {
-    title: "ELEVA — Para cada rol en tu centro de transformación",
+    title: "ELEVA, Para cada rol en tu centro de transformación",
     description:
       "Directores, coaches, operadores y staff: ELEVA tiene una propuesta concreta para cada persona que construye el centro.",
     type: "website",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ELEVA para tu equipo — directores, coaches, staff",
+    title: "ELEVA para tu equipo, directores, coaches, staff",
     description: "Una propuesta concreta para cada rol en el centro de transformación.",
     images: [`${BASE_URL}/og.png`],
   },

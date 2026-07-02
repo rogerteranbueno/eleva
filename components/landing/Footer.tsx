@@ -23,7 +23,7 @@ export function Footer() {
           <div className="max-w-xs">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-7 h-7 rounded-lg bg-violet-600 flex items-center justify-center">
-                <span className="text-white font-black text-xs">E</span>
+                <span className="text-foreground font-black text-xs">E</span>
               </div>
               <span className="font-black text-foreground text-base tracking-tight">ELEVA</span>
             </div>

@@ -11,7 +11,7 @@ const MARCOS = [
     short: "CMM",
     accent: "violet",
     description:
-      "5 niveles que determinan en qué etapa de madurez se encuentra un centro — desde operación reactiva hasta institución escalable. La base de todo diagnóstico ELEVA.",
+      "5 niveles que determinan en qué etapa de madurez se encuentra un centro, desde operación reactiva hasta institución escalable. La base de todo diagnóstico ELEVA.",
     levels: ["Reactivo", "Estabilizado", "Sistematizado", "Escalable", "Institucional"],
   },
   {
@@ -29,7 +29,7 @@ const MARCOS = [
     short: "PCS",
     accent: "emerald",
     description:
-      "El modelo de seguimiento que mantiene a los participantes avanzando de básico a avanzado a PL — y de ahí a la comunidad activa. Medible en cada transición.",
+      "El modelo de seguimiento que mantiene a los participantes avanzando de básico a avanzado a PL, y de ahí a la comunidad activa. Medible en cada transición.",
     levels: ["Básico", "Avanzado", "PL", "Graduado", "Champion"],
   },
   {
@@ -78,7 +78,7 @@ export function MarcosSection() {
           <p className="text-xs font-bold text-violet-400 uppercase tracking-widest">
             Marcos de referencia propietarios
           </p>
-          <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
+          <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight">
             No opiniones.<br />
             <span className="text-muted-foreground font-light">Estándares con nombre propio.</span>
           </h2>
@@ -96,19 +96,19 @@ export function MarcosSection() {
                 key={m.name}
                 custom={i + 1}
                 variants={fadeUp}
-                className={`glass rounded-2xl border border-white/6 transition-colors p-6 ${a.card}`}
+                className={`glass rounded-2xl border border-foreground/6 transition-colors p-6 ${a.card}`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-start gap-5">
                   {/* Left */}
                   <div className="flex items-start gap-3 sm:w-72 flex-shrink-0">
-                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/5`}>
+                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-foreground/5`}>
                       <Icon className={`w-4.5 h-4.5 ${a.badge.split(" ")[1]}`} />
                     </div>
                     <div>
                       <span className={`text-[10px] px-2 py-0.5 rounded-full border font-bold uppercase tracking-wider ${a.badge}`}>
                         {m.short}
                       </span>
-                      <p className="font-black text-white text-sm leading-snug mt-1.5">{m.name}</p>
+                      <p className="font-black text-foreground text-sm leading-snug mt-1.5">{m.name}</p>
                     </div>
                   </div>
 

@@ -41,7 +41,7 @@ export function StickyCtaBanner() {
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           className="fixed bottom-5 inset-x-4 z-50 flex items-center justify-between gap-3 max-w-lg mx-auto px-4 py-3 rounded-2xl bg-violet-600 shadow-2xl shadow-violet-900/60"
         >
-          <p className="text-sm font-bold text-white leading-tight">
+          <p className="text-sm font-bold text-foreground leading-tight">
             ¿Tu centro listo para escalar?{" "}
             <span className="text-violet-200 font-medium hidden sm:inline">
               Agenda un diagnóstico gratuito.
@@ -56,7 +56,7 @@ export function StickyCtaBanner() {
             </Link>
             <button
               onClick={() => setDismissed(true)}
-              className="p-1.5 text-violet-200 hover:text-white transition-colors"
+              className="p-1.5 text-violet-200 hover:text-foreground transition-colors"
               aria-label="Cerrar"
             >
               <X className="w-4 h-4" />

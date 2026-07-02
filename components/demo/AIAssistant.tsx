@@ -14,13 +14,13 @@ const CHARLAS: { tema: string; tag: string; contenido: string }[] = [
 
 **DATO INTERESANTE:** Estudios de neurociencia del comportamiento muestran que la motivación intrínseca dura en promedio 11 días antes de que el sistema límbico empiece a buscar el camino de menor resistencia. 11 días. Eso es menos de dos semanas.
 
-**¿QUIÉN HA VISTO ESTO?** Alguien que en enero se inscribió al gym, pagó tres meses por adelantado, fue dos semanas... y luego no volvió en todo el año. Esa persona puede ser cualquiera de nosotros. Y no es falta de carácter — es biología.
+**¿QUIÉN HA VISTO ESTO?** Alguien que en enero se inscribió al gym, pagó tres meses por adelantado, fue dos semanas... y luego no volvió en todo el año. Esa persona puede ser cualquiera de nosotros. Y no es falta de carácter, es biología.
 
-**LOS SERES HUMANOS TENDEMOS A** confundir motivación con compromiso. La motivación es emocional, fluctúa, depende de cómo te sientes hoy. El compromiso es una decisión que tomaste cuando estabas en tu mejor versión — y que aplicas aunque hoy no te sientas en tu mejor versión.
+**LOS SERES HUMANOS TENDEMOS A** confundir motivación con compromiso. La motivación es emocional, fluctúa, depende de cómo te sientes hoy. El compromiso es una decisión que tomaste cuando estabas en tu mejor versión, y que aplicas aunque hoy no te sientas en tu mejor versión.
 
 **POR ESO, para lograr una transformación real,** no podemos depender de sentir ganas. Tenemos que construir una promesa que sea más grande que nuestro estado de ánimo. Una promesa que tenga nombre, fecha y testigos.
 
-**NOS CONVIENE RECORDAR ESTE PRINCIPIO:** La motivación te trae al punto de partida. El compromiso es lo que determina hasta dónde llegas. No esperes sentirte listo — decide serlo.`,
+**NOS CONVIENE RECORDAR ESTE PRINCIPIO:** La motivación te trae al punto de partida. El compromiso es lo que determina hasta dónde llegas. No esperes sentirte listo, decide serlo.`,
   },
   {
     tema: "La identidad como base del cambio",
@@ -31,9 +31,9 @@ const CHARLAS: { tema: string; tag: string; contenido: string }[] = [
 
 **¿QUIÉN HA VISTO ESTO?** Alguien que deja de fumar por un mes... y en el primer momento de estrés vuelve, porque en el fondo seguía creyendo que era fumador en pausa, no alguien que ya no fuma. La historia que nos contamos sobre quiénes somos determina lo que hacemos.
 
-**LOS SERES HUMANOS TENDEMOS A** creer que somos el resultado de nuestras circunstancias. Pero la neuroplasticidad nos dice algo diferente: el cerebro se reorganiza alrededor de lo que repetimos — no de lo que queremos, sino de lo que hacemos y de lo que creemos sobre nosotros mismos.
+**LOS SERES HUMANOS TENDEMOS A** creer que somos el resultado de nuestras circunstancias. Pero la neuroplasticidad nos dice algo diferente: el cerebro se reorganiza alrededor de lo que repetimos, no de lo que queremos, sino de lo que hacemos y de lo que creemos sobre nosotros mismos.
 
-**POR ESO, para lograr un cambio que dure,** primero tienes que decidir quién eres. No quién quieres ser — quién eres, hoy, en este momento. Y desde ahí actuar en consecuencia.
+**POR ESO, para lograr un cambio que dure,** primero tienes que decidir quién eres. No quién quieres ser, quién eres, hoy, en este momento. Y desde ahí actuar en consecuencia.
 
 **NOS CONVIENE RECORDAR ESTE PRINCIPIO:** El cambio de afuera hacia adentro es temporal. El cambio de adentro hacia afuera es permanente. Primero la identidad, luego las acciones, luego los resultados.`,
   },
@@ -42,11 +42,11 @@ const CHARLAS: { tema: string; tag: string; contenido: string }[] = [
     tag: "mindset",
     contenido: `**HOOK:** ¿Y si lo que más te cuesta es exactamente lo que más necesitas?
 
-**DATO INTERESANTE:** La zona de aprendizaje óptimo — lo que los psicólogos llaman la "zona de desarrollo próximo" de Vygotsky — existe exactamente en el límite de la incomodidad. Ni tan fácil que se vuelva aburrido, ni tan difícil que paralice. El crecimiento vive en ese filo.
+**DATO INTERESANTE:** La zona de aprendizaje óptimo, lo que los psicólogos llaman la "zona de desarrollo próximo" de Vygotsky, existe exactamente en el límite de la incomodidad. Ni tan fácil que se vuelva aburrido, ni tan difícil que paralice. El crecimiento vive en ese filo.
 
-**¿QUIÉN HA VISTO ESTO?** Alguien que evita dar una presentación porque le da miedo. Alguien que no aplica para ese trabajo porque "seguro no califico". Alguien que no tiene la conversación difícil con esa persona porque "no es buen momento". La incomodidad siempre tiene una salida fácil — y esa salida tiene un costo.
+**¿QUIÉN HA VISTO ESTO?** Alguien que evita dar una presentación porque le da miedo. Alguien que no aplica para ese trabajo porque "seguro no califico". Alguien que no tiene la conversación difícil con esa persona porque "no es buen momento". La incomodidad siempre tiene una salida fácil, y esa salida tiene un costo.
 
-**LOS SERES HUMANOS TENDEMOS A** interpretar la incomodidad como una señal de peligro. El sistema nervioso no distingue entre el miedo al tigre y el miedo al escenario — activa la misma respuesta. Pero la diferencia es que el tigre te puede matar. El escenario no.
+**LOS SERES HUMANOS TENDEMOS A** interpretar la incomodidad como una señal de peligro. El sistema nervioso no distingue entre el miedo al tigre y el miedo al escenario, activa la misma respuesta. Pero la diferencia es que el tigre te puede matar. El escenario no.
 
 **POR ESO, para lograr expandir lo que eres capaz de hacer,** tienes que redefinir tu relación con la incomodidad. No como amenaza, sino como señal de que estás en territorio nuevo. Donde estás incómodo, estás creciendo.
 
@@ -57,7 +57,7 @@ const CHARLAS: { tema: string; tag: string; contenido: string }[] = [
     tag: "disciplina",
     contenido: `**HOOK:** ¿Qué están haciendo las personas que logran lo que tú quieres lograr, cuando nadie los está mirando?
 
-**DATO INTERESANTE:** Un estudio de la University College London encontró que formar un nuevo hábito toma en promedio 66 días — no 21, como dice el mito. Y más importante: el progreso no es lineal. Hay periodos de plateau donde parece que nada está pasando... y de repente hay un salto.
+**DATO INTERESANTE:** Un estudio de la University College London encontró que formar un nuevo hábito toma en promedio 66 días, no 21, como dice el mito. Y más importante: el progreso no es lineal. Hay periodos de plateau donde parece que nada está pasando... y de repente hay un salto.
 
 **¿QUIÉN HA VISTO ESTO?** Un atleta que entrena en la oscuridad del gimnasio a las 5am, sin público, sin aplausos, sin nadie que lo vea. Un emprendedor que trabaja en su proyecto a las 10pm después de que se durmieron sus hijos. Un escritor que escribe 500 palabras cada día aunque ese día nadie las lea. El mundo ve el resultado, pero no ve el trabajo invisible.
 
@@ -72,7 +72,7 @@ const CHARLAS: { tema: string; tag: string; contenido: string }[] = [
     tag: "crecimiento",
     contenido: `**HOOK:** Todo el mundo quiere llegar al siguiente nivel. Muy pocos están dispuestos a pagar lo que cuesta.
 
-**DATO INTERESANTE:** En psicología positiva existe el concepto de "pérdida de identidad de transición" — cuando subimos de nivel en cualquier área de vida, primero tenemos que soltar quiénes éramos antes de poder convertirnos en quiénes vamos a ser. Y ese soltarse duele. Es un duelo real.
+**DATO INTERESANTE:** En psicología positiva existe el concepto de "pérdida de identidad de transición", cuando subimos de nivel en cualquier área de vida, primero tenemos que soltar quiénes éramos antes de poder convertirnos en quiénes vamos a ser. Y ese soltarse duele. Es un duelo real.
 
 **¿QUIÉN HA VISTO ESTO?** Un profesional que recibe un ascenso y de repente siente que "no merece" el nuevo puesto. Un emprendedor que lleva años queriendo escalar su negocio pero inconscientemente sabotea cada oportunidad. Una persona que dice querer relaciones profundas pero sigue eligiendo vínculos superficiales. El siguiente nivel tiene un precio emocional que pocas personas calculan.
 
@@ -80,14 +80,14 @@ const CHARLAS: { tema: string; tag: string; contenido: string }[] = [
 
 **POR ESO, para lograr llegar al siguiente nivel,** primero tienes que preguntarte: ¿Qué estoy dispuesto a soltar? ¿Qué creencia, qué hábito, qué relación, qué versión de mí mismo ya no tiene cabida en el lugar al que quiero llegar?
 
-**NOS CONVIENE RECORDAR ESTE PRINCIPIO:** El siguiente nivel no es una recompensa por quién eres hoy. Es el resultado de convertirte en alguien distinto. Y esa transformación tiene un precio. La pregunta no es si puedes pagarlo — es si estás dispuesto.`,
+**NOS CONVIENE RECORDAR ESTE PRINCIPIO:** El siguiente nivel no es una recompensa por quién eres hoy. Es el resultado de convertirte en alguien distinto. Y esa transformación tiene un precio. La pregunta no es si puedes pagarlo, es si estás dispuesto.`,
   },
   {
     tema: "La tribu como espejo",
     tag: "comunidad",
     contenido: `**HOOK:** Las personas con quienes pasas el tiempo no solo te influencian. Te definen.
 
-**DATO INTERESANTE:** El sociólogo Nicholas Christakis documentó en su investigación de Harvard que los comportamientos — incluyendo el éxito económico, los hábitos de salud y el bienestar emocional — se contagian hasta tres grados de separación. No solo te afecta tu círculo cercano. Te afecta el círculo del círculo del círculo.
+**DATO INTERESANTE:** El sociólogo Nicholas Christakis documentó en su investigación de Harvard que los comportamientos, incluyendo el éxito económico, los hábitos de salud y el bienestar emocional, se contagian hasta tres grados de separación. No solo te afecta tu círculo cercano. Te afecta el círculo del círculo del círculo.
 
 **¿QUIÉN HA VISTO ESTO?** Una persona que regresa de un retiro o entrenamiento transformacional completamente encendida... y en dos semanas está exactamente igual que antes, porque regresó al mismo entorno con las mismas personas y los mismos patrones. El entorno ganó.
 
@@ -95,7 +95,7 @@ const CHARLAS: { tema: string; tag: string; contenido: string }[] = [
 
 **POR ESO, para lograr una transformación que perdure,** necesitas una comunidad que la sostenga. No puedes ser la única persona en tu entorno que está creciendo. Necesitas personas que ya viven lo que tú quieres vivir, que te normalicen el estándar al que aspiras.
 
-**NOS CONVIENE RECORDAR ESTE PRINCIPIO:** Eres el promedio de las personas con quienes te rodeas. Elige con quién compartes tu tiempo como si de eso dependiera tu destino — porque de eso depende.`,
+**NOS CONVIENE RECORDAR ESTE PRINCIPIO:** Eres el promedio de las personas con quienes te rodeas. Elige con quién compartes tu tiempo como si de eso dependiera tu destino, porque de eso depende.`,
   },
   {
     tema: "El problema del 'después'",
@@ -108,7 +108,7 @@ const CHARLAS: { tema: string; tag: string; contenido: string }[] = [
 
 **LOS SERES HUMANOS TENDEMOS A** sobrevalorar el costo de empezar hoy y subvalorar el costo de no empezar. No calculamos el precio del tiempo perdido, de las oportunidades que no regresarán, de la persona en que no nos convertimos mientras esperábamos el momento perfecto.
 
-**POR ESO, para lograr algo que realmente importa,** la pregunta no es "¿cuándo es el mejor momento?" La pregunta es "si no es ahora, ¿cuándo?" Y si la respuesta honesta es "nunca" — al menos sé honesto contigo mismo sobre esa elección.
+**POR ESO, para lograr algo que realmente importa,** la pregunta no es "¿cuándo es el mejor momento?" La pregunta es "si no es ahora, ¿cuándo?" Y si la respuesta honesta es "nunca", al menos sé honesto contigo mismo sobre esa elección.
 
 **NOS CONVIENE RECORDAR ESTE PRINCIPIO:** El momento perfecto no existe. El único momento que existe es este. Empieza con lo que tienes, donde estás, con quien eres hoy. La acción imperfecta siempre gana a la inacción perfecta.`,
   },
@@ -117,13 +117,13 @@ const CHARLAS: { tema: string; tag: string; contenido: string }[] = [
     tag: "liderazgo",
     contenido: `**HOOK:** ¿Conoces a alguien extraordinariamente talentoso... que no ha logrado nada extraordinario?
 
-**DATO INTERESANTE:** Angela Duckworth, en su investigación sobre "grit" en West Point, descubrió que el predictor número uno del éxito a largo plazo no era el talento, ni la inteligencia, ni los recursos — era la capacidad de perseverar en pos de un objetivo de largo plazo. Le llama "grit": pasión + perseverancia. Y el origen del grit es una visión que te importa lo suficiente.
+**DATO INTERESANTE:** Angela Duckworth, en su investigación sobre "grit" en West Point, descubrió que el predictor número uno del éxito a largo plazo no era el talento, ni la inteligencia, ni los recursos, era la capacidad de perseverar en pos de un objetivo de largo plazo. Le llama "grit": pasión + perseverancia. Y el origen del grit es una visión que te importa lo suficiente.
 
-**¿QUIÉN HA VISTO ESTO?** El estudiante más brillante de la clase que 10 años después está atascado. El deportista más talentoso del equipo que nunca llegó a profesional. La persona con todos los recursos que sigue esperando el momento correcto. El talento sin dirección es como un motor sin volante — mucho ruido, pocos kilómetros.
+**¿QUIÉN HA VISTO ESTO?** El estudiante más brillante de la clase que 10 años después está atascado. El deportista más talentoso del equipo que nunca llegó a profesional. La persona con todos los recursos que sigue esperando el momento correcto. El talento sin dirección es como un motor sin volante, mucho ruido, pocos kilómetros.
 
 **LOS SERES HUMANOS TENDEMOS A** creer que el talento es el recurso más valioso. Pero el talento sin visión se dispersa. La visión sin talento se entrena. Una persona con visión clara y disciplina promedio casi siempre llega más lejos que una persona con talento extraordinario y visión difusa.
 
-**POR ESO, para lograr lo que realmente quieres,** primero tienes que poder verlo con tanta claridad que cuando cierres los ojos lo sientas real. No como deseo — como destino. La visión no es un sueño. Es una dirección.
+**POR ESO, para lograr lo que realmente quieres,** primero tienes que poder verlo con tanta claridad que cuando cierres los ojos lo sientas real. No como deseo, como destino. La visión no es un sueño. Es una dirección.
 
 **NOS CONVIENE RECORDAR ESTE PRINCIPIO:** El talento es el punto de partida. La visión es el destino. Sin destino, el talento más brillante solo da vueltas en círculos.`,
   },
@@ -134,7 +134,7 @@ const CHARLAS: { tema: string; tag: string; contenido: string }[] = [
 
 **DATO INTERESANTE:** El neurocientífico Norman Doidge documentó en "El Cerebro que se Cambia a Sí Mismo" que el cerebro adulto tiene una capacidad de reorganización y aprendizaje que durante décadas se creyó imposible. Pacientes que perdieron funciones motrices después de un accidente cerebrovascular las recuperaron. Personas con traumas profundos los reescribieron. El cerebro no tiene fecha de vencimiento.
 
-**¿QUIÉN HA VISTO ESTO?** La persona que a los 40 años decidió estudiar lo que siempre quiso. La que a los 50 empezó el negocio que había postergado. La que después de un divorcio, una quiebra, una pérdida — encontró algo nuevo que no habría encontrado si las cosas hubieran salido como planeaba.
+**¿QUIÉN HA VISTO ESTO?** La persona que a los 40 años decidió estudiar lo que siempre quiso. La que a los 50 empezó el negocio que había postergado. La que después de un divorcio, una quiebra, una pérdida, encontró algo nuevo que no habría encontrado si las cosas hubieran salido como planeaba.
 
 **LOS SERES HUMANOS TENDEMOS A** escribir capítulos de nuestra historia con tinta permanente cuando en realidad siempre es lápiz. Decidimos demasiado rápido que "eso ya no es para mí", que "ya pasó mi momento", que "con lo que cargo, eso no es posible". Pero la historia humana está llena de comienzos tardíos que resultaron ser los mejores comienzos.
 
@@ -148,71 +148,71 @@ const CONSEJOS: { keywords: string[]; role: string[]; respuesta: string }[] = [
   {
     keywords: ["participante", "quiere cancelar", "quiere salir", "bajas", "abandono", "salirse"],
     role: ["owner", "coach", "ops"],
-    respuesta: `**Cuando un participante quiere cancelar — protocolo de retención**
+    respuesta: `**Cuando un participante quiere cancelar, protocolo de retención**
 
 Antes de aceptar la cancelación, hay que entender que el 70% de las intenciones de cancelación son en realidad una solicitud de ser visto.
 
-**Paso 1 — No reacciones, escucha.** La primera respuesta no es ofrecer descuentos ni argumentar. Es preguntar: "¿Qué está pasando?" con genuina curiosidad. El participante necesita sentir que alguien lo escucha antes de que se tome cualquier decisión.
+**Paso 1, No reacciones, escucha.** La primera respuesta no es ofrecer descuentos ni argumentar. Es preguntar: "¿Qué está pasando?" con genuina curiosidad. El participante necesita sentir que alguien lo escucha antes de que se tome cualquier decisión.
 
-**Paso 2 — Identifica el tipo de cancelación:**
+**Paso 2, Identifica el tipo de cancelación:**
 - *Logística* (dinero, tiempo, distancia) → tiene solución técnica: plan de pago, reagendamiento, formato alterno
 - *Emocional* (se siente estancado, invisible, sin avance) → necesita una conversación de reencuadre con su coach
 - *Relacional* (algo pasó con alguien del grupo) → necesita intervención del líder del clan o el Capitán
-- *De identidad* (siente que "esto no es para mí") → es el más delicado — necesita trabajar con el coach la historia que se está contando
+- *De identidad* (siente que "esto no es para mí") → es el más delicado, necesita trabajar con el coach la historia que se está contando
 
-**Paso 3 — Involucra al coach.** El coach debe tener una conversación personal, no por WhatsApp, dentro de las siguientes 24 horas. Sin proceso, sin scripting — solo presencia genuina.
+**Paso 3, Involucra al coach.** El coach debe tener una conversación personal, no por WhatsApp, dentro de las siguientes 24 horas. Sin proceso, sin scripting, solo presencia genuina.
 
-**Paso 4 — Ofrece una salida con dignidad.** Si después de la conversación decide cancelar, que sea con un cierre limpio. Un participante que se va bien tratado puede volver — o puede referir a alguien más.
+**Paso 4, Ofrece una salida con dignidad.** Si después de la conversación decide cancelar, que sea con un cierre limpio. Un participante que se va bien tratado puede volver, o puede referir a alguien más.
 
 **Insight clave:** El momento en que alguien quiere cancelar es, paradójicamente, uno de los momentos con más potencial de transformación. La incomodidad que siente es exactamente la que produce el cambio. Pero requiere acompañamiento, no argumentos.`,
   },
   {
     keywords: ["enrolamiento", "enrolar", "conversión", "invitar", "pipeline", "leads"],
     role: ["owner", "ops", "coach"],
-    respuesta: `**Maximizar conversión en semana de enrolamiento — estrategia completa**
+    respuesta: `**Maximizar conversión en semana de enrolamiento, estrategia completa**
 
 El enrolamiento no empieza la semana del evento. Empieza 3 semanas antes.
 
 **Semana -3: Preparación del terreno**
-Cada participante activo de VIA debe tener claro a quién está invitando y por qué. No una lista de contactos — una persona específica con un motivo específico. "Pienso en ti porque..." es el inicio de toda conversación de enrolamiento efectiva.
+Cada participante activo de VIA debe tener claro a quién está invitando y por qué. No una lista de contactos, una persona específica con un motivo específico. "Pienso en ti porque..." es el inicio de toda conversación de enrolamiento efectiva.
 
 **Semana -2: Activación del compromiso**
 El Capitán del Tribu convoca una sesión de Impacto Visión. Cada miembro del clan identifica a su invitado, escribe su nombre, lo visualiza en el programa y hace el compromiso público ante su clan. Los compromisos públicos tienen 3x más tasa de cumplimiento que los privados.
 
 **Semana -1: El contacto**
-La conversación de enrolamiento no es una venta — es una invitación desde el propio crecimiento. "Esto cambió algo en mí, y pienso que podría cambiar algo en ti." La autenticidad es el mejor argumento. Si el participante de VIA intenta "vender" el programa en lugar de compartir su experiencia, la conversación se siente forzada.
+La conversación de enrolamiento no es una venta, es una invitación desde el propio crecimiento. "Esto cambió algo en mí, y pienso que podría cambiar algo en ti." La autenticidad es el mejor argumento. Si el participante de VIA intenta "vender" el programa en lugar de compartir su experiencia, la conversación se siente forzada.
 
 **Día del evento: La acogida**
 El invitado llega nervioso. Quien lo invitó debe ser quien lo recibe, lo presenta con la tribu, lo cuida durante el día. El primer día de Despertar decide el 80% de las inscripciones al siguiente nivel.
 
 **Post-evento: El seguimiento**
-En las siguientes 48 horas, el participante de VIA hace un seguimiento con su invitado. No para presionar — para acompañar el proceso emocional que el evento activó. La decisión de inscribirse generalmente se toma en ese window de 48-72 horas.
+En las siguientes 48 horas, el participante de VIA hace un seguimiento con su invitado. No para presionar, para acompañar el proceso emocional que el evento activó. La decisión de inscribirse generalmente se toma en ese window de 48-72 horas.
 
-**Métrica clave a trackear en ELEVA:** Compromisos formales de enrolamiento vs. confirmaciones vs. inscripciones. Si ves una brecha grande entre compromisos y confirmaciones, el problema está en el seguimiento — no en la metodología.`,
+**Métrica clave a trackear en ELEVA:** Compromisos formales de enrolamiento vs. confirmaciones vs. inscripciones. Si ves una brecha grande entre compromisos y confirmaciones, el problema está en el seguimiento, no en la metodología.`,
   },
   {
     keywords: ["momentum", "bajo", "grupo decaído", "energía baja", "participantes desmotivados", "generación estancada"],
     role: ["owner", "coach"],
-    respuesta: `**Cuando el momentum de una generación está bajo — diagnóstico y reactivación**
+    respuesta: `**Cuando el momentum de una generación está bajo, diagnóstico y reactivación**
 
 Antes de actuar, diagnostica. Un momentum bajo puede tener tres orígenes muy diferentes:
 
-**Origen 1 — Logístico**
+**Origen 1, Logístico**
 Faltan sesiones, hay ausencias acumuladas, el calendario tiene huecos largos. Solución: reagendar, comprimir, crear un evento de re-activación que genere urgencia y comunidad.
 
-**Origen 2 — Relacional**
-Hay tensión no resuelta en la tribu — un conflicto entre miembros, un Capitán que perdió autoridad moral, un clan que se fragmentó. Esto es invisible en los números pero se siente en la sala. Solución: una conversación de limpieza facilitada por el coach, trabajando el perdón y el compromiso renovado.
+**Origen 2, Relacional**
+Hay tensión no resuelta en la tribu, un conflicto entre miembros, un Capitán que perdió autoridad moral, un clan que se fragmentó. Esto es invisible en los números pero se siente en la sala. Solución: una conversación de limpieza facilitada por el coach, trabajando el perdón y el compromiso renovado.
 
-**Origen 3 — De significado**
-La generación perdió contacto con el "por qué" del proceso. Entraron con una visión de transformación y en algún momento se volvió rutina. Solución: una sesión de re-conexión con el propósito original — regresar a las promesas del inicio, releer los compromisos, celebrar el camino recorrido.
+**Origen 3, De significado**
+La generación perdió contacto con el "por qué" del proceso. Entraron con una visión de transformación y en algún momento se volvió rutina. Solución: una sesión de re-conexión con el propósito original, regresar a las promesas del inicio, releer los compromisos, celebrar el camino recorrido.
 
 **Táctica de reactivación probada:**
 Una "Noche de reconocimiento" donde cada participante reconoce públicamente el crecimiento de otro. El reconocimiento externo activa el sistema de recompensa del cerebro y reconstruye el sentido de pertenencia grupal en una sola sesión.
 
 **Lo que NO hacer:**
-No forzar energía artificial con dinámicas de "hype" — el entusiasmo forzado se percibe inmediatamente y genera el efecto contrario. El momentum auténtico nace del significado, no de la adrenalina.
+No forzar energía artificial con dinámicas de "hype", el entusiasmo forzado se percibe inmediatamente y genera el efecto contrario. El momentum auténtico nace del significado, no de la adrenalina.
 
-**Señal de alerta en ELEVA:** Si el Momentum Score baja más de 15 puntos en dos semanas consecutivas, es señal de que hay algo que resolver — no solo en los números sino en la dinámica humana del grupo.`,
+**Señal de alerta en ELEVA:** Si el Momentum Score baja más de 15 puntos en dos semanas consecutivas, es señal de que hay algo que resolver, no solo en los números sino en la dinámica humana del grupo.`,
   },
   {
     keywords: ["brief", "coach", "preparar sesión", "contexto coach", "antes de sesión"],
@@ -224,24 +224,24 @@ El brief de coach no es un resumen administrativo. Es la diferencia entre llegar
 **Los 5 elementos de un brief efectivo:**
 
 **1. Estado actual documentado**
-No solo "está bien" o "está batallando". Qué specific está pasando en su vida hoy — trabajo, relaciones, salud, finanzas. El contexto hace que las preguntas del coach sean 10x más poderosas.
+No solo "está bien" o "está batallando". Qué specific está pasando en su vida hoy, trabajo, relaciones, salud, finanzas. El contexto hace que las preguntas del coach sean 10x más poderosas.
 
 **2. La última conversación**
-¿Qué se comprometió en la sesión anterior? ¿Lo cumplió? Si no, ¿qué pasó? El coaching sin continuidad no es coaching — es una serie de charlas desconectadas.
+¿Qué se comprometió en la sesión anterior? ¿Lo cumplió? Si no, ¿qué pasó? El coaching sin continuidad no es coaching, es una serie de charlas desconectadas.
 
 **3. El estado de sus promesas**
-¿En qué fase está? ¿Cuándo es su próxima revisión de promesas? ¿Hay alguna promesa que esté en riesgo? Las promesas son el mapa del proceso de transformación — el coach debe saber dónde está el participante en ese mapa.
+¿En qué fase está? ¿Cuándo es su próxima revisión de promesas? ¿Hay alguna promesa que esté en riesgo? Las promesas son el mapa del proceso de transformación, el coach debe saber dónde está el participante en ese mapa.
 
 **4. La temperatura emocional**
 ¿Cómo llegó a la última sesión? ¿Abierto, cerrado, con miedo, con energía? Esta información cambia completamente el tipo de pregunta que conviene hacer al inicio.
 
 **5. La pregunta que el coach quiere explorar**
-Antes de llegar, el coach formula una pregunta que quiere explorar con el participante — una que empuje sin romper, que invite sin forzar.
+Antes de llegar, el coach formula una pregunta que quiere explorar con el participante, una que empuje sin romper, que invite sin forzar.
 
 **Práctica recomendada:**
-El coach dedica 5-7 minutos antes de cada sesión a revisar el expediente del participante en ELEVA. No para seguir un guión — sino para llegar con contexto y presencia real.
+El coach dedica 5-7 minutos antes de cada sesión a revisar el expediente del participante en ELEVA. No para seguir un guión, sino para llegar con contexto y presencia real.
 
-**Insight:** El participante siente inmediatamente si el coach llegó preparado o no. Esa percepción —"mi coach me conoce, le importo"— es uno de los factores más poderosos de retención en programas de transformación.`,
+**Insight:** El participante siente inmediatamente si el coach llegó preparado o no. Esa percepción -"mi coach me conoce, le importo"- es uno de los factores más poderosos de retención en programas de transformación.`,
   },
   {
     keywords: ["morosidad", "cobrar", "pago pendiente", "cobranza", "no ha pagado", "deuda"],
@@ -255,13 +255,13 @@ El problema rara vez es que "no quieren pagar". El problema casi siempre es que 
 
 **El protocolo de los 3 momentos:**
 
-**Momento 1 — Día 3 después del vencimiento (recordatorio suave)**
+**Momento 1, Día 3 después del vencimiento (recordatorio suave)**
 Mensaje breve, sin tono de cobro: "Hola [Nombre], vi que tienes un saldo pendiente de [monto]. ¿Todo bien por tu lado?" El tono de preocupación genuina funciona mejor que el tono de cobro.
 
-**Momento 2 — Día 7 (conversación directa)**
+**Momento 2, Día 7 (conversación directa)**
 Llamada o mensaje más directo: "Necesito que resolvamos el tema del pago esta semana. ¿Puedes hacer la transferencia hoy o mañana?" Claro, sin agresión, sin dar más plazo sin un compromiso concreto.
 
-**Momento 3 — Día 14 (conversación de fondo)**
+**Momento 3, Día 14 (conversación de fondo)**
 Aquí ya hay que entender qué está pasando. A veces la morosidad es un síntoma de que el participante está considerando salirse. Una conversación honesta en este punto puede resolver tanto el pago como la retención.
 
 **Qué NO hacer:**
@@ -269,7 +269,7 @@ Aquí ya hay que entender qué está pasando. A veces la morosidad es un síntom
 - Dar plazos indefinidos sin acuerdo concreto
 - Permitir que el participante llegue a sesiones mientras la deuda crece sin conversación
 
-**ELEVA te da:** alertas automáticas en días 3, 7 y 14, historial de conversaciones y registro de compromisos de pago — para que el proceso sea consistente sin que dependa de que alguien recuerde.`,
+**ELEVA te da:** alertas automáticas en días 3, 7 y 14, historial de conversaciones y registro de compromisos de pago, para que el proceso sea consistente sin que dependa de que alguien recuerde.`,
   },
   {
     keywords: ["revisión de promesas", "promesas", "sabio", "beca", "revisión formal"],
@@ -279,19 +279,19 @@ Aquí ya hay que entender qué está pasando. A veces la morosidad es un síntom
 La Revisión de Promesas no es una evaluación. Es un ritual de rendición de cuentas que activa los mecanismos más profundos del compromiso humano.
 
 **Preparación (72 horas antes):**
-El participante escribe en su expediente el estado de cada promesa — no para presentar una versión bonita, sino para confrontarse con honestidad. El coach la revisa y prepara 3-5 preguntas específicas basadas en lo que documenta.
+El participante escribe en su expediente el estado de cada promesa, no para presentar una versión bonita, sino para confrontarse con honestidad. El coach la revisa y prepara 3-5 preguntas específicas basadas en lo que documenta.
 
 **La apertura (15 min):**
 No empieces con las promesas. Empieza con la persona. "¿Cómo llegaste hoy?" La respuesta a esa pregunta le dice al coach en qué estado emocional está el participante antes de entrar al proceso.
 
 **El recorrido por las promesas (45-60 min):**
-Para cada promesa, el participante comparte: qué comprometió, qué cumplió, qué no cumplió y por qué. El coach no juzga — hace preguntas que profundizan la reflexión. "¿Qué crees que te detuvo?" "¿Qué dice eso de ti?"
+Para cada promesa, el participante comparte: qué comprometió, qué cumplió, qué no cumplió y por qué. El coach no juzga, hace preguntas que profundizan la reflexión. "¿Qué crees que te detuvo?" "¿Qué dice eso de ti?"
 
 **El reconocimiento del camino:**
-Antes de cerrar, el coach nombra explícitamente el crecimiento que observa. No el progreso en las promesas — el crecimiento en la persona. "Lo que veo en ti hoy que no estaba hace 6 meses es..."
+Antes de cerrar, el coach nombra explícitamente el crecimiento que observa. No el progreso en las promesas, el crecimiento en la persona. "Lo que veo en ti hoy que no estaba hace 6 meses es..."
 
 **La beca como reconocimiento:**
-Si el participante demuestra compromiso y crecimiento genuino, la beca no se otorga como descuento comercial — se otorga como reconocimiento de que este proceso ha valido la pena y vale la pena continuar. Eso cambia completamente cómo la recibe.
+Si el participante demuestra compromiso y crecimiento genuino, la beca no se otorga como descuento comercial, se otorga como reconocimiento de que este proceso ha valido la pena y vale la pena continuar. Eso cambia completamente cómo la recibe.
 
 **Lo que hace a una revisión memorable:**
 La honestidad del participante y la presencia total del coach. Una revisión donde el participante se escuchó a sí mismo por primera vez en meses vale más que mil charlas motivacionales.`,
@@ -309,7 +309,7 @@ Los primeros 90 minutos de Despertar definen el tono de todo el proceso. Lo que 
 Confirmar asistencia de todos los invitados 48 horas antes. Tener los gafetes listos, el espacio preparado con 30 minutos de anticipación, el equipo asignado a recepción con nombres memorizados. El participante que llega y alguien lo llama por su nombre en la puerta ya sintió algo diferente.
 
 *El equipo:*
-Briefing completo del equipo la noche anterior: quién llega, cuál es su contexto, quién los invitó, qué expectativas traen. El equipo no son decoración — son la primera experiencia de comunidad que el nuevo participante va a tener.
+Briefing completo del equipo la noche anterior: quién llega, cuál es su contexto, quién los invitó, qué expectativas traen. El equipo no son decoración, son la primera experiencia de comunidad que el nuevo participante va a tener.
 
 **Durante el evento:**
 
@@ -320,10 +320,10 @@ Briefing completo del equipo la noche anterior: quién llega, cuál es su contex
 *La visión del proceso:* Que quede claro desde el inicio qué van a vivir, qué se espera de ellos y qué pueden esperar del programa. La claridad en el contrato inicial previene el 60% de los problemas de compromiso que aparecen después.
 
 **Después del primer día:**
-El coach o el Capitán envía un mensaje personal a cada nuevo participante antes de que acabe el día. No un mensaje grupal — uno personal. "Vi algo en ti hoy que quiero que sepas..."
+El coach o el Capitán envía un mensaje personal a cada nuevo participante antes de que acabe el día. No un mensaje grupal, uno personal. "Vi algo en ti hoy que quiero que sepas..."
 
 **La métrica que importa:**
-Si el 80%+ de los participantes del primer día regresan al segundo — lo hiciste bien.`,
+Si el 80%+ de los participantes del primer día regresan al segundo, lo hiciste bien.`,
   },
   {
     keywords: ["retención", "retener participantes", "que se queden", "perder participantes"],
@@ -332,20 +332,20 @@ Si el 80%+ de los participantes del primer día regresan al segundo — lo hicis
 
 La retención no se decide en el momento en que alguien quiere irse. Se construye o se destruye en los momentos ordinarios del proceso.
 
-**Pilar 1 — El sentido de pertenencia**
-El participante que tiene amigos reales dentro del programa no se va. La tribu y los clanes no son decoración del método — son el mecanismo de retención más poderoso que existe. Un participante que formó vínculos reales tiene un costo emocional altísimo de salirse.
+**Pilar 1, El sentido de pertenencia**
+El participante que tiene amigos reales dentro del programa no se va. La tribu y los clanes no son decoración del método, son el mecanismo de retención más poderoso que existe. Un participante que formó vínculos reales tiene un costo emocional altísimo de salirse.
 
-*Palanca de acción:* Facilitar encuentros fuera del programa — cenas de clan, llamadas entre sabios y participantes, grupos de seguimiento. El tiempo entre sesiones es donde se pierde o se consolida el vínculo.
+*Palanca de acción:* Facilitar encuentros fuera del programa, cenas de clan, llamadas entre sabios y participantes, grupos de seguimiento. El tiempo entre sesiones es donde se pierde o se consolida el vínculo.
 
-**Pilar 2 — El progreso visible**
+**Pilar 2, El progreso visible**
 Las personas se quedan en procesos donde sienten que están avanzando. Si alguien no puede responder "¿en qué soy diferente hoy que hace 3 meses?", está en riesgo de salirse.
 
 *Palanca de acción:* Las revisiones de promesas periódicas son el mecanismo de visibilización del avance. El coach debe hacer explícito el crecimiento que el participante no puede ver por sí mismo. "Hace 4 meses no podías decir lo que acabas de decir."
 
-**Pilar 3 — La relación con el coach**
-El participante que siente que su coach lo conoce realmente — no como "un participante del grupo" sino como persona — tiene 3x más probabilidad de completar el proceso.
+**Pilar 3, La relación con el coach**
+El participante que siente que su coach lo conoce realmente, no como "un participante del grupo" sino como persona, tiene 3x más probabilidad de completar el proceso.
 
-*Palanca de acción:* Una llamada personal de 15 minutos al mes fuera del programa. No para revisar promesas ni para cobrar — solo para saber cómo está. Este gesto simple tiene el mayor ROI de retención de cualquier táctica.
+*Palanca de acción:* Una llamada personal de 15 minutos al mes fuera del programa. No para revisar promesas ni para cobrar, solo para saber cómo está. Este gesto simple tiene el mayor ROI de retención de cualquier táctica.
 
 **La pregunta que el dueño debe hacerse:**
 ¿Cuántos de mis participantes, si les preguntaras hoy, dirían que esta comunidad es una parte importante de su vida? Esa respuesta es tu verdadero índice de retención.`,
@@ -470,7 +470,7 @@ export function AIAssistant({ role }: { role: "owner" | "coach" | "ops" }) {
       )
       const response = match
         ? match.respuesta
-        : `**Sobre tu pregunta**\n\nEsta es un área importante para cualquier centro de transformación. Te recomiendo considerar tres ángulos:\n\n**El ángulo humano:** Antes de cualquier decisión operativa, identifica qué está sintiendo o necesitando la persona o el grupo involucrado. Los problemas de centro son casi siempre problemas humanos con síntomas operativos.\n\n**El ángulo sistémico:** ¿Es esto un evento aislado o hay un patrón? Si es patrón, la solución no está en el caso individual sino en el proceso que lo genera.\n\n**El ángulo de datos:** ELEVA tiene la información que necesitas para tomar esta decisión con claridad — revisa el historial del participante, el momentum de la generación o el estado financiero del período. Los datos eliminan la ambigüedad.\n\nPara una consulta más específica, cuéntame más contexto: ¿es un tema de una persona, del grupo, del equipo o del negocio?`
+        : `**Sobre tu pregunta**\n\nEsta es un área importante para cualquier centro de transformación. Te recomiendo considerar tres ángulos:\n\n**El ángulo humano:** Antes de cualquier decisión operativa, identifica qué está sintiendo o necesitando la persona o el grupo involucrado. Los problemas de centro son casi siempre problemas humanos con síntomas operativos.\n\n**El ángulo sistémico:** ¿Es esto un evento aislado o hay un patrón? Si es patrón, la solución no está en el caso individual sino en el proceso que lo genera.\n\n**El ángulo de datos:** ELEVA tiene la información que necesitas para tomar esta decisión con claridad, revisa el historial del participante, el momentum de la generación o el estado financiero del período. Los datos eliminan la ambigüedad.\n\nPara una consulta más específica, cuéntame más contexto: ¿es un tema de una persona, del grupo, del equipo o del negocio?`
       setMessages((prev) => [...prev, { role: "ai", content: response }])
       setIsTyping(false)
     }, 800)

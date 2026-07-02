@@ -33,7 +33,7 @@ export function CierreSection() {
             <p className="text-xs font-bold text-violet-400 uppercase tracking-widest">
               La siguiente generación
             </p>
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.05] tracking-tight">
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tight">
               La siguiente generación<br />
               de centros no se construye<br />
               <span className="text-muted-foreground font-light italic">sólo en la sala.</span>
@@ -61,14 +61,14 @@ export function CierreSection() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
           >
             <Link href="/build">
-              <button className="flex items-center gap-2.5 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-black rounded-xl transition-colors text-base group">
+              <button className="flex items-center gap-2.5 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-foreground font-black rounded-xl transition-colors text-base group">
                 <Calendar className="w-4.5 h-4.5" />
                 Agendar diagnóstico gratuito
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </button>
             </Link>
             <Link href="/build">
-              <button className="flex items-center gap-2.5 px-8 py-4 glass border border-white/10 hover:border-white/20 text-white font-bold rounded-xl transition-colors text-base">
+              <button className="flex items-center gap-2.5 px-8 py-4 glass border border-foreground/10 hover:border-foreground/20 text-foreground font-bold rounded-xl transition-colors text-base">
                 Aplicar a PACTO
               </button>
             </Link>

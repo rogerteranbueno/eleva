@@ -132,7 +132,7 @@ function calcEnrollment(nivel3: number, inviteAvg: number, price1: number) {
   const revenueEleva    = showUpEleva    * price1
   const revenueDelta    = revenueEleva   - revenueBaseline
 
-  // Graduation score — enrollment carries 40-50% of total
+  // Graduation score, enrollment carries 40-50% of total
   // A participant needs ~5 enrollments to graduate comfortably
   const avgEnrolled     = Math.round(inviteAvg * 0.84)   // of their invites who show up
   const needsMore       = avgEnrolled < 4                 // below comfortable threshold
@@ -161,7 +161,7 @@ function calc(participants: number, leads: number, price: number) {
 
   // ── RETENER ──────────────────────────────────────────────────────────────
   // ELEVA's activation system (early missions, community onboarding, first-week
-  // events) raises baseline engagement — so the at-risk pool starts smaller.
+  // events) raises baseline engagement, so the at-risk pool starts smaller.
   // Still, ~14% show decline signals monthly. Without intervention: 78% leave.
   // With full system (alert + coach message + automatic re-engagement): ~18%.
   const atRisk       = Math.round(participants * 0.14)
@@ -616,10 +616,10 @@ export default function SimuladorPage() {
                     Entre la inscripción y el entrenamiento pasan 15 días. En ese tiempo la gente duda, se ocupa o simplemente olvida. Sin recordatorios activos ni seguimiento del equipo de operaciones, la tasa promedio de asistencia es ~84% en centros sin sistema de confirmación.
                   </Assumption>
                   <Assumption label="¿Por qué 95% con ELEVA?">
-                    ELEVA envía recordatorios automáticos a los 15, 7, 3 y 1 días antes. Los no-confirmados generan alertas al equipo de operaciones. El resultado observado en centros con seguimiento activo es 93–97% de presencia — usamos 95% como referencia conservadora.
+                    ELEVA envía recordatorios automáticos a los 15, 7, 3 y 1 días antes. Los no-confirmados generan alertas al equipo de operaciones. El resultado observado en centros con seguimiento activo es 93–97% de presencia, usamos 95% como referencia conservadora.
                   </Assumption>
                   <Assumption label="¿Qué es el riesgo de graduación?">
-                    Para graduarse del Nivel 3, el enrolamiento vale +40% del puntaje. Un participante que invitó a 4 personas y 3 llegaron está en zona segura. Uno que solo logró 1 o 2 necesita apoyo activo — ELEVA los identifica y activa al coach para intervenir antes del último fin de semana.
+                    Para graduarse del Nivel 3, el enrolamiento vale +40% del puntaje. Un participante que invitó a 4 personas y 3 llegaron está en zona segura. Uno que solo logró 1 o 2 necesita apoyo activo, ELEVA los identifica y activa al coach para intervenir antes del último fin de semana.
                   </Assumption>
                 </div>
               </motion.div>

@@ -42,7 +42,7 @@ export function BuildSection() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative overflow-hidden rounded-3xl border border-white/8 bg-gradient-to-br from-white/3 to-violet-600/5 p-10"
+        className="relative overflow-hidden rounded-3xl border border-foreground/8 bg-gradient-to-br from-white/3 to-violet-600/5 p-10"
       >
         <div className="absolute -right-20 -top-20 w-72 h-72 rounded-full bg-violet-600/10 blur-3xl pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12">
@@ -56,7 +56,7 @@ export function BuildSection() {
             </p>
             <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-8">
               {c.modules.map((m) => (
-                <span key={m} className="px-3 py-1 rounded-full text-xs font-semibold border border-white/10 text-muted-foreground">
+                <span key={m} className="px-3 py-1 rounded-full text-xs font-semibold border border-foreground/10 text-muted-foreground">
                   {m}
                 </span>
               ))}
@@ -65,7 +65,7 @@ export function BuildSection() {
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-sm font-bold transition-colors shadow-lg shadow-violet-600/25"
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-violet-600 hover:bg-violet-700 text-foreground rounded-xl text-sm font-bold transition-colors shadow-lg shadow-violet-600/25"
               >
                 {c.cta}
                 <ChevronRight className="w-4 h-4" />
@@ -74,10 +74,10 @@ export function BuildSection() {
           </div>
           <div className="flex-shrink-0 w-full max-w-xs space-y-2.5">
             {c.questions.map(({ n, q }) => (
-              <div key={n} className="flex items-center gap-3 p-3 rounded-xl bg-white/3 border border-white/6">
+              <div key={n} className="flex items-center gap-3 p-3 rounded-xl bg-foreground/3 border border-foreground/6">
                 <span className="text-[10px] font-black text-violet-400 w-6 flex-shrink-0">{n}</span>
                 <span className="text-xs text-muted-foreground">{q}</span>
-                <div className="ml-auto w-4 h-4 rounded-full border border-white/10 flex-shrink-0" />
+                <div className="ml-auto w-4 h-4 rounded-full border border-foreground/10 flex-shrink-0" />
               </div>
             ))}
             <div className="flex items-center gap-3 p-3 rounded-xl bg-violet-600/15 border border-violet-500/30">

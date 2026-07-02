@@ -30,9 +30,9 @@ const PERFILES = [
       "Nuevas fuentes de ingreso: membresías, post-PL, especialistas.",
     ],
     fears: [
-      "Tu metodología es intocable — ELEVA construye alrededor de ella.",
+      "Tu metodología es intocable, ELEVA construye alrededor de ella.",
       "No volvemos tu centro frío ni corporativo.",
-      "Seleccionamos con quién trabajamos — el fit es mutuo.",
+      "Seleccionamos con quién trabajamos, el fit es mutuo.",
     ],
     cta: "Agendar diagnóstico",
     ctaHref: "/build",
@@ -57,8 +57,8 @@ const PERFILES = [
       "Reportes automáticos por generación, cohorte y sede.",
     ],
     fears: [
-      "La curva de adopción está cubierta — entrenamos a tu equipo completo.",
-      "No rompemos lo que ya funciona — instalamos sobre lo existente.",
+      "La curva de adopción está cubierta, entrenamos a tu equipo completo.",
+      "No rompemos lo que ya funciona, instalamos sobre lo existente.",
       "Soporte de 30 días post-entrega para consolidar el uso.",
     ],
     cta: "Solicitar diagnóstico",
@@ -84,7 +84,7 @@ const PERFILES = [
       "Certificación bajo los estándares del Trainer Readiness Standard™.",
     ],
     fears: [
-      "No te imponemos una metodología — profundizamos la tuya.",
+      "No te imponemos una metodología, profundizamos la tuya.",
       "Formación presencial con práctica real, no videos genéricos.",
       "Tu certificación es reconocida dentro del ecosistema ELEVA.",
     ],
@@ -111,7 +111,7 @@ const PERFILES = [
       "Roles y responsabilidades claramente definidos por escrito.",
     ],
     fears: [
-      "La herramienta es fácil de usar — te entrenamos en el proceso.",
+      "La herramienta es fácil de usar, te entrenamos en el proceso.",
       "No necesitas saber de tecnología para usarla.",
       "Soporte continuo del equipo ELEVA durante la implementación.",
     ],
@@ -148,15 +148,15 @@ export default function ParaCentrosPage() {
             </Link>
             <div className="hidden sm:flex items-center gap-2">
               <div className="w-6 h-6 rounded-md bg-violet-600 flex items-center justify-center">
-                <span className="text-white font-black text-[10px]">E</span>
+                <span className="text-foreground font-black text-[10px]">E</span>
               </div>
               <span className="font-black text-foreground text-sm">ELEVA</span>
-              <span className="text-white/20">/</span>
+              <span className="text-foreground/20">/</span>
               <span className="text-muted-foreground text-sm">Para centros</span>
             </div>
           </div>
           <Link href="/build">
-            <button className="flex items-center gap-1.5 px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white rounded-lg text-[13px] font-bold transition-colors">
+            <button className="flex items-center gap-1.5 px-4 py-2 bg-violet-600 hover:bg-violet-500 text-foreground rounded-lg text-[13px] font-bold transition-colors">
               <Calendar className="w-3.5 h-3.5" /> Diagnóstico
             </button>
           </Link>
@@ -174,7 +174,7 @@ export default function ParaCentrosPage() {
             className="space-y-4"
           >
             <p className="text-xs font-bold text-violet-400 uppercase tracking-widest">Para centros de transformación</p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground leading-tight">
               ELEVA habla<br />
               <span className="text-muted-foreground font-light">tu idioma.</span>
             </h1>
@@ -198,7 +198,7 @@ export default function ParaCentrosPage() {
                     "flex flex-col items-center gap-2 py-4 px-3 rounded-2xl border transition-all text-center",
                     isActive
                       ? `${p.color.badge} ${p.color.border}`
-                      : "border-white/8 bg-white/3 hover:border-white/15 hover:bg-white/5"
+                      : "border-foreground/8 bg-foreground/3 hover:border-foreground/15 hover:bg-foreground/5"
                   )}
                 >
                   <PIcon className={cn("w-5 h-5", isActive ? "" : "text-muted-foreground")} />
@@ -237,20 +237,20 @@ export default function ParaCentrosPage() {
                       </p>
                     </div>
                   </div>
-                  <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight max-w-2xl">
+                  <h2 className="text-3xl sm:text-4xl font-black text-foreground leading-tight max-w-2xl">
                     {perfil.headline}
                   </h2>
                   <p className="text-muted-foreground leading-relaxed max-w-xl">{perfil.sub}</p>
                   <div className="flex flex-col sm:flex-row gap-3 pt-2">
                     <Link href={perfil.ctaHref}>
-                      <button className="flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl transition-colors text-sm group">
+                      <button className="flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-500 text-foreground font-bold rounded-xl transition-colors text-sm group">
                         <Calendar className="w-4 h-4" />
                         {perfil.cta}
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                       </button>
                     </Link>
                     <Link href={perfil.secondaryHref}>
-                      <button className="flex items-center gap-2 px-6 py-3 glass border border-white/10 hover:border-white/20 text-white font-bold rounded-xl transition-all text-sm">
+                      <button className="flex items-center gap-2 px-6 py-3 glass border border-foreground/10 hover:border-foreground/20 text-foreground font-bold rounded-xl transition-all text-sm">
                         {perfil.secondaryCta}
                       </button>
                     </Link>
@@ -261,10 +261,10 @@ export default function ParaCentrosPage() {
               {/* Lower 2-col */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Lo que ganas */}
-                <div className="glass rounded-2xl border border-white/6 p-6 space-y-4">
+                <div className="glass rounded-2xl border border-foreground/6 p-6 space-y-4">
                   <div className="flex items-center gap-2.5">
                     <TrendingUp className="w-4 h-4 text-emerald-400" />
-                    <p className="text-xs font-bold text-white uppercase tracking-widest">Lo que ganas con ELEVA</p>
+                    <p className="text-xs font-bold text-foreground uppercase tracking-widest">Lo que ganas con ELEVA</p>
                   </div>
                   <ul className="space-y-3">
                     {perfil.gana.map((g) => (
@@ -277,10 +277,10 @@ export default function ParaCentrosPage() {
                 </div>
 
                 {/* Lo que te preocupa */}
-                <div className="glass rounded-2xl border border-white/6 p-6 space-y-4">
+                <div className="glass rounded-2xl border border-foreground/6 p-6 space-y-4">
                   <div className="flex items-center gap-2.5">
                     <ShieldCheck className="w-4 h-4 text-violet-400" />
-                    <p className="text-xs font-bold text-white uppercase tracking-widest">Lo que te preocupaba</p>
+                    <p className="text-xs font-bold text-foreground uppercase tracking-widest">Lo que te preocupaba</p>
                   </div>
                   <ul className="space-y-3">
                     {perfil.fears.map((f) => (
@@ -294,7 +294,7 @@ export default function ParaCentrosPage() {
                   </ul>
 
                   {/* Switch profile hint */}
-                  <div className="border-t border-white/6 pt-4">
+                  <div className="border-t border-foreground/6 pt-4">
                     <p className="text-xs text-muted-foreground">
                       ¿Eres otro perfil en el centro?{" "}
                       {PERFILES.filter((p) => p.id !== active).map((p, i, arr) => (
@@ -305,7 +305,7 @@ export default function ParaCentrosPage() {
                           >
                             {p.label.split(" /")[0]}
                           </button>
-                          {i < arr.length - 1 && <span className="text-white/20"> · </span>}
+                          {i < arr.length - 1 && <span className="text-foreground/20"> · </span>}
                         </span>
                       ))}
                     </p>
@@ -313,10 +313,10 @@ export default function ParaCentrosPage() {
                 </div>
               </div>
 
-              {/* El ciclo completo — mini strip */}
-              <div className="glass rounded-2xl border border-white/6 p-6">
+              {/* El ciclo completo, mini strip */}
+              <div className="glass rounded-2xl border border-foreground/6 p-6">
                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">
-                  ELEVA trabaja para todo el centro — no solo para un rol
+                  ELEVA trabaja para todo el centro, no solo para un rol
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {PERFILES.map((p) => {
@@ -327,7 +327,7 @@ export default function ParaCentrosPage() {
                         onClick={() => setActive(p.id as PerfilId)}
                         className={cn(
                           "flex flex-col items-center gap-2 p-3 rounded-xl border text-center transition-all",
-                          active === p.id ? p.color.badge + " " + p.color.border : "border-white/6 hover:border-white/12"
+                          active === p.id ? p.color.badge + " " + p.color.border : "border-foreground/6 hover:border-foreground/12"
                         )}
                       >
                         <PIcon className="w-4 h-4" />
@@ -347,7 +347,7 @@ export default function ParaCentrosPage() {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded-md bg-violet-600 flex items-center justify-center">
-              <span className="text-white font-black text-[10px]">E</span>
+              <span className="text-foreground font-black text-[10px]">E</span>
             </div>
             <span className="font-black text-foreground text-sm">ELEVA</span>
           </div>

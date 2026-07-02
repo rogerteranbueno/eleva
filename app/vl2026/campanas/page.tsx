@@ -19,7 +19,7 @@ const ONBOARDING = {
   description: "Envía campañas de email y WhatsApp a generaciones activas, egresados o toda la comunidad. Automatiza recordatorios, reactivaciones y bienvenidas.",
   tips: [
     { emoji: "📬", text: "Filtra por generación, fase o nivel de momentum para segmentar con precisión." },
-    { emoji: "🤖", text: "Las automatizaciones se ejecutan solas — bienvenidas, recordatorios de pago, cumpleaños." },
+    { emoji: "🤖", text: "Las automatizaciones se ejecutan solas, bienvenidas, recordatorios de pago, cumpleaños." },
     { emoji: "📊", text: "Ve tasas de apertura y clicks en tiempo real para saber qué resuena con tu comunidad." },
   ],
   cta: "Ver campañas →",
@@ -44,7 +44,7 @@ type Campaign = {
 const CAMPAIGNS: Campaign[] = [
   {
     id: "c1",
-    name: "Reactivación — Generación Norte (inactivos 30+ días)",
+    name: "Reactivación, Generación Norte (inactivos 30+ días)",
     type: "whatsapp",
     status: "enviada",
     audience: "Gen. Norte · Inactivos",
@@ -55,7 +55,7 @@ const CAMPAIGNS: Campaign[] = [
   },
   {
     id: "c2",
-    name: "Invitación Noche de Invitados — Jue 12 junio",
+    name: "Invitación Noche de Invitados, Jue 12 junio",
     type: "email",
     status: "enviada",
     audience: "Toda la comunidad",
@@ -66,7 +66,7 @@ const CAMPAIGNS: Campaign[] = [
   },
   {
     id: "c3",
-    name: "Recordatorio de pago — Junio 2025",
+    name: "Recordatorio de pago, Junio 2025",
     type: "whatsapp",
     status: "programada",
     audience: "Participantes con pago pendiente",
@@ -76,7 +76,7 @@ const CAMPAIGNS: Campaign[] = [
   },
   {
     id: "c4",
-    name: "Bienvenida nuevos participantes — Gen. Omega",
+    name: "Bienvenida nuevos participantes, Gen. Omega",
     type: "whatsapp",
     status: "activa",
     audience: "Gen. Omega · Nuevos",
@@ -85,7 +85,7 @@ const CAMPAIGNS: Campaign[] = [
   },
   {
     id: "c5",
-    name: "Newsletter mensual — Mayo 2025",
+    name: "Newsletter mensual, Mayo 2025",
     type: "email",
     status: "enviada",
     audience: "Toda la comunidad",
@@ -96,7 +96,7 @@ const CAMPAIGNS: Campaign[] = [
   },
   {
     id: "c6",
-    name: "Oferta — Entrenamiento 1 · Julio",
+    name: "Oferta, Entrenamiento 1 · Julio",
     type: "email",
     status: "borrador",
     audience: "Egresados sin generación activa",
@@ -249,7 +249,7 @@ function NewCampaignDrawer({ onClose }: { onClose: () => void }) {
               </div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground glass rounded-lg p-3">
                 <Zap className="w-3.5 h-3.5 text-violet-400" />
-                {`{nombre}`}, {`{generacion}`}, {`{coach}`} — variables disponibles para personalizar
+                {`{nombre}`}, {`{generacion}`}, {`{coach}`}, variables disponibles para personalizar
               </div>
               <button
                 onClick={handleSend}
@@ -273,9 +273,9 @@ function NewCampaignDrawer({ onClose }: { onClose: () => void }) {
               <div className="glass rounded-xl p-4 text-left space-y-2">
                 <p className="text-xs text-muted-foreground">Resultados aparecerán aquí en los próximos minutos</p>
                 <div className="flex gap-4">
-                  <div><p className="text-lg font-black text-white">{audiences.find(a => a.id === selectedAudience)?.count ?? "—"}</p><p className="text-[10px] text-muted-foreground">Enviadas</p></div>
-                  <div><p className="text-lg font-black text-violet-400">—</p><p className="text-[10px] text-muted-foreground">Abiertas</p></div>
-                  <div><p className="text-lg font-black text-cyan-400">—</p><p className="text-[10px] text-muted-foreground">Clicks</p></div>
+                  <div><p className="text-lg font-black text-white">{audiences.find(a => a.id === selectedAudience)?.count ?? "-"}</p><p className="text-[10px] text-muted-foreground">Enviadas</p></div>
+                  <div><p className="text-lg font-black text-violet-400">-</p><p className="text-[10px] text-muted-foreground">Abiertas</p></div>
+                  <div><p className="text-lg font-black text-cyan-400">-</p><p className="text-[10px] text-muted-foreground">Clicks</p></div>
                 </div>
               </div>
               <button onClick={onClose} className="w-full py-3 rounded-xl glass border border-white/10 text-white font-semibold text-sm hover:bg-white/5 transition-all">

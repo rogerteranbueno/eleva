@@ -17,12 +17,12 @@ const principles = [
   {
     n: "02",
     title: "Los coaches necesitan formación, no sólo experiencia.",
-    body: "Haber vivido el proceso no te convierte en el mejor en facilitarlo. Facilitar transformación es una habilidad técnica que se aprende, practica y mide — igual que cualquier otra.",
+    body: "Haber vivido el proceso no te convierte en el mejor en facilitarlo. Facilitar transformación es una habilidad técnica que se aprende, practica y mide, igual que cualquier otra.",
   },
   {
     n: "03",
     title: "Los datos no reemplazan la intuición. La hacen más precisa.",
-    body: "El mejor coach del mundo mejora cuando sabe cómo llegó el participante antes de entrar a la sala. Los datos no matan el arte — le dan contexto.",
+    body: "El mejor coach del mundo mejora cuando sabe cómo llegó el participante antes de entrar a la sala. Los datos no matan el arte, le dan contexto.",
   },
   {
     n: "04",
@@ -37,7 +37,7 @@ const principles = [
   {
     n: "06",
     title: "La ética no es un módulo. Es el piso mínimo.",
-    body: "Trabajamos con personas en estados de apertura y vulnerabilidad. La seguridad, los límites, la confidencialidad y el consentimiento no son opcionales — son el requisito de entrada.",
+    body: "Trabajamos con personas en estados de apertura y vulnerabilidad. La seguridad, los límites, la confidencialidad y el consentimiento no son opcionales, son el requisito de entrada.",
   },
   {
     n: "07",
@@ -290,7 +290,7 @@ export default function RecursosPage() {
               Los marcos de trabajo que usamos.
             </h2>
             <p className="mt-4 text-muted-foreground max-w-xl">
-              Cada marco es un modelo diagnóstico y operativo. No son etiquetas de marketing — son herramientas activas que usamos en cada implementación.
+              Cada marco es un modelo diagnóstico y operativo. No son etiquetas de marketing, son herramientas activas que usamos en cada implementación.
             </p>
           </motion.div>
 

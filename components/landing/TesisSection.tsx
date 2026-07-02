@@ -65,7 +65,7 @@ export function TesisSection() {
           <p className="text-xs font-bold text-violet-400 uppercase tracking-widest mb-4">
             La tesis de ELEVA
           </p>
-          <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-4">
+          <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight mb-4">
             No venimos a reemplazar tu esencia.
           </h2>
           <p className="text-2xl text-muted-foreground font-light">
@@ -86,7 +86,7 @@ export function TesisSection() {
                 className={`glass rounded-2xl p-7 border transition-colors space-y-5 ${a.border}`}
               >
                 <div className="flex items-center gap-3">
-                  <div className={`w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center ${a.icon}`}>
+                  <div className={`w-9 h-9 rounded-xl bg-foreground/5 flex items-center justify-center ${a.icon}`}>
                     <Icon className="w-4.5 h-4.5" />
                   </div>
                   <span className={`text-[11px] px-2.5 py-1 rounded-full border font-bold uppercase tracking-wider ${a.badge}`}>
@@ -94,7 +94,7 @@ export function TesisSection() {
                   </span>
                 </div>
                 <div>
-                  <p className="font-black text-white text-lg leading-snug mb-2">{p.headline}</p>
+                  <p className="font-black text-foreground text-lg leading-snug mb-2">{p.headline}</p>
                   <p className="text-base text-muted-foreground leading-relaxed">{p.body}</p>
                 </div>
               </motion.div>

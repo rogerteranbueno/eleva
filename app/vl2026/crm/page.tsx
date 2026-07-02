@@ -20,7 +20,7 @@ const ONBOARDING = {
   badge: "Vista del dueño · Módulo CRM",
   badgeColor: "violet" as const,
   title: "Tu centro, del Excel a la visibilidad total",
-  description: "Cada participante en un solo lugar — momentum, pagos, actividad y seguimiento. Ya no necesitas preguntar cómo va cada quien: ELEVA te lo dice antes de que sea tarde.",
+  description: "Cada participante en un solo lugar, momentum, pagos, actividad y seguimiento. Ya no necesitas preguntar cómo va cada quien: ELEVA te lo dice antes de que sea tarde.",
   tips: [
     { emoji: "📊", text: "Filtra por estado de pago, riesgo o generación para priorizar sin perder tiempo." },
     { emoji: "⚡", text: "Actúa directo desde la lista: manda un mensaje, asigna coach o actualiza notas." },
@@ -235,7 +235,7 @@ export default function CRMPage() {
         <p className="text-xs text-violet-300 leading-relaxed">
           <span className="font-semibold text-white">Sin ELEVA esto sería un Excel.</span>{" "}
           Filas sin actualizar, pagos que nadie persigue, participantes que abandonan sin que nadie lo note.
-          Con ELEVA cada registro se actualiza solo — y el sistema te dice quién necesita atención hoy.
+          Con ELEVA cada registro se actualiza solo, y el sistema te dice quién necesita atención hoy.
         </p>
       </div>
 
@@ -278,7 +278,7 @@ export default function CRMPage() {
 
       {/* Participant list */}
       <div className="glass rounded-2xl overflow-hidden">
-        {/* Table header — desktop only */}
+        {/* Table header, desktop only */}
         <div className="hidden sm:grid grid-cols-[1fr_130px_100px_100px_120px] gap-4 px-5 py-3 border-b border-white/6 text-[11px] uppercase tracking-widest text-muted-foreground font-medium">
           <span>Participante</span>
           <span>Momentum</span>

@@ -36,7 +36,7 @@ export default function GlobalError({
         Algo salió mal
       </h1>
       <p className="text-muted-foreground max-w-sm text-base leading-relaxed mb-8">
-        Ocurrió un error inesperado. Intenta recargar — si el problema persiste,
+        Ocurrió un error inesperado. Intenta recargar, si el problema persiste,
         escríbenos a{" "}
         <a
           href="mailto:hola@elevaapp.io"

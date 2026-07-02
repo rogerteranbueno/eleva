@@ -45,7 +45,7 @@ export function BuildTeaserSection() {
         <div className="glass-violet rounded-3xl p-8 sm:p-12 border border-violet-500/20">
           <div className="grid md:grid-cols-2 gap-10 items-center">
 
-            {/* Left — copy */}
+            {/* Left, copy */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -68,7 +68,7 @@ export function BuildTeaserSection() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-sm font-bold transition-colors shadow-lg shadow-violet-600/25"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-violet-600 hover:bg-violet-700 text-foreground rounded-xl text-sm font-bold transition-colors shadow-lg shadow-violet-600/25"
                 >
                   {c.cta}
                   <ArrowRight className="w-4 h-4" />
@@ -77,7 +77,7 @@ export function BuildTeaserSection() {
               <p className="text-xs text-muted-foreground">{c.note}</p>
             </motion.div>
 
-            {/* Right — question cards */}
+            {/* Right, question cards */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -91,7 +91,7 @@ export function BuildTeaserSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08 }}
-                  className="flex items-center gap-3 glass rounded-xl px-4 py-3 border border-white/8"
+                  className="flex items-center gap-3 glass rounded-xl px-4 py-3 border border-foreground/8"
                 >
                   <div className="w-7 h-7 rounded-lg bg-violet-500/15 flex items-center justify-center flex-shrink-0">
                     <Icon className="w-3.5 h-3.5 text-violet-400" />

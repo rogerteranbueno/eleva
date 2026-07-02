@@ -303,7 +303,7 @@ function BecasPanel() {
           <Ticket className="w-4 h-4 text-amber-400" />
           <div>
             <p className="text-xs font-bold text-amber-400">Becas disponibles</p>
-            <p className="text-[10px] text-muted-foreground">Ganadas en revisiones de promesas — para enrolar a La Posibilidad</p>
+            <p className="text-[10px] text-muted-foreground">Ganadas en revisiones de promesas, para enrolar a La Posibilidad</p>
           </div>
         </div>
         <div className="text-right">
@@ -409,7 +409,7 @@ export default function EnrolamientoPage() {
         </button>
       </div>
 
-      {/* Becas panel — collapsible */}
+      {/* Becas panel, collapsible */}
       {showBecas && <BecasPanel />}
 
       {/* How it works */}
@@ -513,7 +513,7 @@ export default function EnrolamientoPage() {
           <p className="text-xs font-bold text-foreground">¿Cómo aumentar la conversión?</p>
           <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
             El contacto en las primeras 48 horas después del compromiso tiene 3x más probabilidad de convertirse en inscripción.
-            Los "comprometidos" sin contacto en los últimos 3 días requieren intervención del coach de su cohorte — no del staff.
+            Los "comprometidos" sin contacto en los últimos 3 días requieren intervención del coach de su cohorte, no del staff.
             Las becas disponibles son el argumento más poderoso: reduce la fricción económica del primer paso.
           </p>
         </div>

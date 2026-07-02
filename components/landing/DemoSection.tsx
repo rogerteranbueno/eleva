@@ -48,7 +48,7 @@ export function DemoSection() {
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-base font-bold transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-700 text-foreground rounded-xl text-base font-bold transition-colors"
           >
             {c.cta}
             <ArrowRight className="w-5 h-5" />

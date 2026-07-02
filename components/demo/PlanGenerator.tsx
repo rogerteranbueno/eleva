@@ -44,7 +44,7 @@ const TASKS: Task[] = [
     priority: "high",
     label: "ALTA",
     icon: TrendingDown,
-    title: "Intervenir Generación Norte — tendencia a la baja",
+    title: "Intervenir Generación Norte, tendencia a la baja",
     detail: "Programar sesión grupal esta semana con Marco. Momentum bajó 7 pts en 14 días.",
     metric: "67 participantes · -7 pts esta semana",
     defaultAssignee: "marco",
@@ -55,7 +55,7 @@ const TASKS: Task[] = [
     label: "MEDIA",
     icon: Calendar,
     title: "Confirmar asistencia evento Gen. Omega",
-    detail: "Enviar recordatorio SMS/WhatsApp hoy. Sesión en vivo jueves 7pm — 59 sin confirmar.",
+    detail: "Enviar recordatorio SMS/WhatsApp hoy. Sesión en vivo jueves 7pm, 59 sin confirmar.",
     metric: "Sesión en vivo · jueves 7pm",
     defaultAssignee: "carlos",
   },
@@ -64,7 +64,7 @@ const TASKS: Task[] = [
     priority: "info",
     label: "BAJA",
     icon: CreditCard,
-    title: "Seguimiento pago pendiente — Valeria Romo",
+    title: "Seguimiento pago pendiente, Valeria Romo",
     detail: "Contactar amablemente. Mes 4 de PL vencido hace 3 días. Único atraso en historial.",
     metric: "$4,200 MXN · vencido hace 3 días",
     defaultAssignee: "carlos",
@@ -175,7 +175,7 @@ export function PlanGenerator() {
               <p className="text-sm font-bold text-white">Convertir en Plan</p>
               <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-violet-500/15 text-violet-400 border border-violet-500/20 font-semibold">IA</span>
             </div>
-            <p className="text-[11px] text-muted-foreground">Analicé 6 señales de LEVEL — {TASKS.length} acciones prioritarias esta semana</p>
+            <p className="text-[11px] text-muted-foreground">Analicé 6 señales de LEVEL, {TASKS.length} acciones prioritarias esta semana</p>
           </div>
         </div>
         {completedCount > 0 && (

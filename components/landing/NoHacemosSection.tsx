@@ -7,7 +7,7 @@ import { X } from "lucide-react"
 const NO_HACEMOS = [
   {
     title: "No somos un software de gestión.",
-    body: "ELEVA no es un CRM ni un ERP. Es una implementación que instala capacidad — y ELEVA OS es la herramienta que la sostiene, no el producto principal.",
+    body: "ELEVA no es un CRM ni un ERP. Es una implementación que instala capacidad, y ELEVA OS es la herramienta que la sostiene, no el producto principal.",
   },
   {
     title: "No reemplazamos tu metodología.",
@@ -19,7 +19,7 @@ const NO_HACEMOS = [
   },
   {
     title: "No somos un proveedor de contenido.",
-    body: "No vendemos cursos online. No tenemos biblioteca de videos. Hacemos implementación presencial y estratégica — con resultados medibles.",
+    body: "No vendemos cursos online. No tenemos biblioteca de videos. Hacemos implementación presencial y estratégica, con resultados medibles.",
   },
   {
     title: "No hacemos enrolamiento agresivo.",
@@ -27,7 +27,7 @@ const NO_HACEMOS = [
   },
   {
     title: "No prometemos crecimiento sin trabajo.",
-    body: "Lo que instalamos es estructura y sistema. El crecimiento es consecuencia del trabajo del equipo sobre esa estructura — nunca promesas vacías.",
+    body: "Lo que instalamos es estructura y sistema. El crecimiento es consecuencia del trabajo del equipo sobre esa estructura, nunca promesas vacías.",
   },
 ]
 
@@ -49,7 +49,7 @@ export function NoHacemosSection() {
           <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
             Claridad antes de avanzar
           </p>
-          <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
+          <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight">
             Lo que ELEVA<br />
             <span className="text-muted-foreground font-light">no hace.</span>
           </h2>
@@ -64,13 +64,13 @@ export function NoHacemosSection() {
               key={item.title}
               custom={i + 1}
               variants={fadeUp}
-              className="glass rounded-2xl p-5 border border-white/6 space-y-3 group"
+              className="glass rounded-2xl p-5 border border-foreground/6 space-y-3 group"
             >
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <X className="w-3 h-3 text-red-400" />
                 </div>
-                <p className="font-black text-white text-sm leading-snug">{item.title}</p>
+                <p className="font-black text-foreground text-sm leading-snug">{item.title}</p>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed pl-9">{item.body}</p>
             </motion.div>

@@ -15,7 +15,7 @@ const ONBOARDING = {
   badge: "Vista del dueño · Pantalla 2 de 3",
   badgeColor: "violet" as const,
   title: "Participantes en riesgo",
-  description: "ELEVA detecta automáticamente quién está perdiendo momentum antes de que abandone. No esperas a que el coach te lo diga — el sistema ya lo sabe.",
+  description: "ELEVA detecta automáticamente quién está perdiendo momentum antes de que abandone. No esperas a que el coach te lo diga, el sistema ya lo sabe.",
   tips: [
     { emoji: "🔴", text: "Valeria lleva 11 días inactiva y está en prioridad máxima. Es la primera de la lista." },
     { emoji: "⚡", text: "Envía un recordatorio, asigna una misión o invita a un evento sin salir de esta pantalla." },
@@ -102,7 +102,7 @@ function PreTrainingPanel({
         <div>
           <p className="text-[10px] font-black uppercase tracking-widest text-amber-400 mb-3 flex items-center gap-1.5">
             <AlertTriangle className="w-3 h-3" />
-            Sin confirmar — {pending.length} personas
+            Sin confirmar, {pending.length} personas
           </p>
           <div className="space-y-2">
             {pending.map((p) => (
@@ -167,7 +167,7 @@ function PreTrainingPanel({
         <div>
           <p className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-3 flex items-center gap-1.5">
             <CheckCircle className="w-3 h-3" />
-            Confirmados — {done.length} personas
+            Confirmados, {done.length} personas
           </p>
           <div className="space-y-2">
             {done.map((p) => (

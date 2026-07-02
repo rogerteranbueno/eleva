@@ -22,7 +22,7 @@ function ExpandableSection({
     <div className="glass rounded-2xl overflow-hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-start gap-4 p-6 text-left hover:bg-white/2 transition-colors"
+        className="w-full flex items-start gap-4 p-6 text-left hover:bg-foreground/2 transition-colors"
       >
         <div className="flex-1 min-w-0">
           <h3 className="text-base font-bold text-foreground">{title}</h3>
@@ -64,7 +64,7 @@ export function FAQSection() {
     faqs: [
       {
         q: "Does ELEVA replace word-of-mouth enrollment?",
-        a: "No. Word of mouth is one of the most powerful engines this industry has and ELEVA doesn't eliminate it — it amplifies it. It adds digital channels so the center doesn't depend solely on that, and gives participants tools to make inviting easier and more natural.",
+        a: "No. Word of mouth is one of the most powerful engines this industry has and ELEVA doesn't eliminate it, it amplifies it. It adds digital channels so the center doesn't depend solely on that, and gives participants tools to make inviting easier and more natural.",
       },
       {
         q: "Is it a generic CRM?",

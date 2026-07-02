@@ -43,7 +43,7 @@ const DIVISIONES = [
     accent: "blue",
     href: "/metodo",
     headline: "El sistema operativo del centro.",
-    body: "Dashboard, seguimiento, cohortes, comunidad y datos — todo en un lugar para que el centro funcione cuando el dueño no está mirando.",
+    body: "Dashboard, seguimiento, cohortes, comunidad y datos, todo en un lugar para que el centro funcione cuando el dueño no está mirando.",
     bullets: [
       "Dashboard en tiempo real",
       "Momentum Score y alertas",
@@ -96,12 +96,12 @@ export function DivisionesSection() {
             <p className="text-xs font-bold text-violet-400 uppercase tracking-widest mb-4">
               Una infraestructura completa
             </p>
-            <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
+            <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight">
               Cuatro divisiones.<br />
-              <span className="text-white/45 font-light italic">Un solo ecosistema.</span>
+              <span className="text-foreground/45 font-light italic">Un solo ecosistema.</span>
             </h2>
           </div>
-          <p className="text-white/60 text-base max-w-xs leading-relaxed">
+          <p className="text-foreground/60 text-base max-w-xs leading-relaxed">
             No optimizamos una parte del centro. Instalamos un sistema para todo el ciclo.
           </p>
         </motion.div>
@@ -109,7 +109,7 @@ export function DivisionesSection() {
         {/* Bento grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
 
-          {/* Featured: Academy — spans 2 cols */}
+          {/* Featured: Academy, spans 2 cols */}
           {(() => {
             const d = DIVISIONES[0]
             const a = ACCENT[d.accent]
@@ -132,11 +132,11 @@ export function DivisionesSection() {
                 </div>
 
                 <div className="space-y-3">
-                  <h3 className="font-black text-white text-xl leading-tight">{d.headline}</h3>
-                  <p className="text-white/80 text-base leading-relaxed max-w-md">{d.body}</p>
+                  <h3 className="font-black text-foreground text-xl leading-tight">{d.headline}</h3>
+                  <p className="text-foreground/80 text-base leading-relaxed max-w-md">{d.body}</p>
                   <ul className="grid grid-cols-2 gap-y-2 gap-x-4 mt-4">
                     {d.bullets.map((b) => (
-                      <li key={b} className="flex items-center gap-2 text-sm text-white/80">
+                      <li key={b} className="flex items-center gap-2 text-sm text-foreground/80">
                         <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotMap[d.accent]}`} />
                         {b}
                       </li>
@@ -144,8 +144,8 @@ export function DivisionesSection() {
                   </ul>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                  <div className="flex items-center gap-1.5 text-[10px] text-white/35">
+                <div className="flex items-center justify-between pt-4 border-t border-foreground/5">
+                  <div className="flex items-center gap-1.5 text-[10px] text-foreground/35">
                     <span className="w-1.5 h-1.5 rounded-full bg-violet-400 inline-block" />
                     Credenciales verificadas en Acreditta
                   </div>
@@ -160,7 +160,7 @@ export function DivisionesSection() {
             )
           })()}
 
-          {/* Standards — tall right card */}
+          {/* Standards, tall right card */}
           {(() => {
             const d = DIVISIONES[3]
             const a = ACCENT[d.accent]
@@ -182,11 +182,11 @@ export function DivisionesSection() {
                   </span>
                 </div>
                 <div className="space-y-2">
-                  <h3 className="font-black text-white text-base leading-tight">{d.headline}</h3>
-                  <p className="text-white/75 text-sm leading-relaxed">{d.body}</p>
+                  <h3 className="font-black text-foreground text-base leading-tight">{d.headline}</h3>
+                  <p className="text-foreground/75 text-sm leading-relaxed">{d.body}</p>
                   <ul className="space-y-1.5 mt-3">
                     {d.bullets.map((b) => (
-                      <li key={b} className="flex items-center gap-2 text-sm text-white/75">
+                      <li key={b} className="flex items-center gap-2 text-sm text-foreground/75">
                         <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotMap[d.accent]}`} />
                         {b}
                       </li>
@@ -202,7 +202,7 @@ export function DivisionesSection() {
             )
           })()}
 
-          {/* Growth + OS — bottom row, 2 equal cards */}
+          {/* Growth + OS, bottom row, 2 equal cards */}
           {DIVISIONES.slice(1, 3).map((d, i) => {
             const a = ACCENT[d.accent]
             const Icon = d.icon
@@ -223,11 +223,11 @@ export function DivisionesSection() {
                   </span>
                 </div>
                 <div className="space-y-2">
-                  <h3 className="font-black text-white text-base leading-tight">{d.headline}</h3>
-                  <p className="text-white/75 text-sm leading-relaxed">{d.body}</p>
+                  <h3 className="font-black text-foreground text-base leading-tight">{d.headline}</h3>
+                  <p className="text-foreground/75 text-sm leading-relaxed">{d.body}</p>
                   <ul className="space-y-1.5 mt-3">
                     {d.bullets.map((b) => (
-                      <li key={b} className="flex items-center gap-2 text-sm text-white/75">
+                      <li key={b} className="flex items-center gap-2 text-sm text-foreground/75">
                         <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotMap[d.accent]}`} />
                         {b}
                       </li>

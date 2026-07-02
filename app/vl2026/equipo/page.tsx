@@ -20,7 +20,7 @@ const ONBOARDING = {
   title: "Sabe exactamente qué hace tu equipo",
   description: "¿Tu coach está teniendo contacto con sus participantes? ¿Completó sus sesiones este mes? Sin ELEVA, nunca sabrías. Aquí todo es visible.",
   tips: [
-    { emoji: "🚨", text: "Ana lleva 9 días sin contactar a su generación — ELEVA lo detectó antes de que lo notaras." },
+    { emoji: "🚨", text: "Ana lleva 9 días sin contactar a su generación, ELEVA lo detectó antes de que lo notaras." },
     { emoji: "📉", text: "El momentum de Gen. Norte bajó 7 puntos esta semana. Está vinculado a la sesión perdida de Marco." },
     { emoji: "✅", text: "Daniela completó las 6 sesiones del mes con momentum en alza. Así se ve un coach que trabaja." },
   ],
@@ -356,8 +356,8 @@ export default function EquipoPage() {
             { time: "hace 45 min", text: "Daniela Torres completó sesión semanal con Gen. Vía 12", type: "ok" },
             { time: "hace 2 hrs",  text: "Marco Fuentes tuvo 1:1 con Andrés Mora (momentum subió 4 pts)", type: "ok" },
             { time: "hace 3 hrs",  text: "Ana Reyes no ha agendado sesión grupal esta semana", type: "warn" },
-            { time: "hace 1 día",  text: "Marco Fuentes — sesión grupal reprogramada (momentum bajó -7 pts)", type: "warn" },
-            { time: "hace 9 días", text: "Ana Reyes — último contacto registrado con Generación Omega", type: "critical" },
+            { time: "hace 1 día",  text: "Marco Fuentes, sesión grupal reprogramada (momentum bajó -7 pts)", type: "warn" },
+            { time: "hace 9 días", text: "Ana Reyes, último contacto registrado con Generación Omega", type: "critical" },
           ].map((entry, i) => (
             <div key={i} className="flex items-start gap-3">
               <div className={cn(

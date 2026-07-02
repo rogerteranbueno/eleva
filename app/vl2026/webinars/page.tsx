@@ -14,7 +14,7 @@ const ONBOARDING = {
   badge: "Vista del dueño · Webinars",
   badgeColor: "violet" as const,
   title: "Noches de invitados que retienen y atraen",
-  description: "Miércoles y jueves de 8 a 9:30pm. Expertos de todo el mundo en temas que impactan la vida de tu comunidad — gratis para atraer leads, exclusivos para retener miembros.",
+  description: "Miércoles y jueves de 8 a 9:30pm. Expertos de todo el mundo en temas que impactan la vida de tu comunidad, gratis para atraer leads, exclusivos para retener miembros.",
   tips: [
     { emoji: "🌍", text: "Los webinars públicos son tu mejor herramienta de adquisición sin publicidad pagada." },
     { emoji: "🔒", text: "Los exclusivos para miembros justifican la membresía mensual y crean hábito de asistencia." },
@@ -77,7 +77,7 @@ const WEBINARS: Webinar[] = [
   },
   {
     id: "w3",
-    title: "Mentoría grupal — Cierra tus compromisos del mes",
+    title: "Mentoría grupal, Cierra tus compromisos del mes",
     guest: "Ana Reyes",
     guestRole: "Coach Gen. Omega · LEVEL",
     guestCountry: "🇲🇽 México",

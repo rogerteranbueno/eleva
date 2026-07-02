@@ -115,7 +115,7 @@ const STAGE_DATA_EN = [
     label: "Acquire",
     color: "cyan" as const,
     headline: "Enrollment starts long before the sale",
-    story: "Your center runs webinars and open events. Current participants invite their people — a win-win: they bring someone to experience the center, your community grows, and the prospect learns about it without pressure.\n\nELEVA logs every attendee in the CRM, detects interest signals (opened the email, attended the webinar, asked in the chat) and automatically sends value content. By the time enrollment comes, they already know you.",
+    story: "Your center runs webinars and open events. Current participants invite their people, a win-win: they bring someone to experience the center, your community grows, and the prospect learns about it without pressure.\n\nELEVA logs every attendee in the CRM, detects interest signals (opened the email, attended the webinar, asked in the chat) and automatically sends value content. By the time enrollment comes, they already know you.",
     stat: { value: "80%", label: "easier to enroll a nurtured lead" },
     features: [
       { icon: "🎙️", text: "Free demo webinars and open events" },
@@ -139,7 +139,7 @@ const STAGE_DATA_EN = [
     label: "Activate",
     color: "yellow" as const,
     headline: "From enrolled to committed in the first 7 days",
-    story: "The excitement of enrollment fades fast without a system to sustain it. ELEVA activates participants the moment they sign — with clear onboarding, their complete file, and their first mission ready.\n\nNo one shows up cold on day one. No one gets lost in a WhatsApp group asking what comes next.",
+    story: "The excitement of enrollment fades fast without a system to sustain it. ELEVA activates participants the moment they sign, with clear onboarding, their complete file, and their first mission ready.\n\nNo one shows up cold on day one. No one gets lost in a WhatsApp group asking what comes next.",
     stat: { value: "7 days", label: "to consolidate the participation habit" },
     features: [
       { icon: "🚀", text: "Automatic welcome portal upon enrollment" },
@@ -163,7 +163,7 @@ const STAGE_DATA_EN = [
     label: "Retain",
     color: "pink" as const,
     headline: "No one leaves in silence",
-    story: "Retention isn't just stopping people from leaving — it's giving them reasons to stay every single day. ELEVA combines multi-channel communication, expert content, gamification, and a self-reinforcing community.\n\nWhen someone starts to disengage, the system detects it before the coach does, with time to intervene before it's too late.",
+    story: "Retention isn't just stopping people from leaving, it's giving them reasons to stay every single day. ELEVA combines multi-channel communication, expert content, gamification, and a self-reinforcing community.\n\nWhen someone starts to disengage, the system detects it before the coach does, with time to intervene before it's too late.",
     stat: { value: "3x", label: "more retention with active gamification" },
     features: [
       { icon: "📱", text: "Multi-channel tracking: WhatsApp, Email, SMS, push notifications" },
@@ -171,7 +171,7 @@ const STAGE_DATA_EN = [
       { icon: "🏆", text: "Gamification: Momentum Score, daily streak, cohort leaderboard" },
       { icon: "🔍", text: "Professional directory: coaches, specialists, and experts with real reviews" },
       { icon: "⚠️", text: "Early risk alert: intervention before dropout" },
-      { icon: "🩺", text: "Integrated specialists: nutritionists, psychologists, financial coaches — bookable" },
+      { icon: "🩺", text: "Integrated specialists: nutritionists, psychologists, financial coaches, bookable" },
     ],
     visual: [
       { step: "Early detection", note: "System detects momentum drop" },
@@ -187,7 +187,7 @@ const STAGE_DATA_EN = [
     label: "Scale",
     color: "violet" as const,
     headline: "Grow without reinventing the model",
-    story: "Real scaling isn't bringing in more people — it's turning your center into an operation that works with or without a great weekend. ELEVA gives you full visibility: how many advance between phases, which cohort is at risk, which city is growing fastest.\n\nOne panel for multiple locations, coaches, and formats — no chaos.",
+    story: "Real scaling isn't bringing in more people, it's turning your center into an operation that works with or without a great weekend. ELEVA gives you full visibility: how many advance between phases, which cohort is at risk, which city is growing fastest.\n\nOne panel for multiple locations, coaches, and formats, no chaos.",
     stat: { value: "1 panel", label: "for all locations, coaches and cohorts" },
     features: [
       { icon: "📈", text: "Phase-to-phase conversion: how many advance from Basic to Advanced to Path" },
@@ -390,7 +390,7 @@ export function HowItWorksSection() {
             <p className="text-foreground font-bold text-base">{c.footer}</p>
             <p className="text-sm text-muted-foreground">{c.footerSub}</p>
           </div>
-          <Link href="/vl2026" className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold transition-colors whitespace-nowrap">
+          <Link href="/vl2026" className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-foreground text-sm font-bold transition-colors whitespace-nowrap">
             {c.footerCta} <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>

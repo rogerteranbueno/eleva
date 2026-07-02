@@ -108,7 +108,7 @@ function CohortCard({ cohort, onClick }: {
               </div>
               <span className={cn("text-xs font-bold w-8 text-right flex-shrink-0",
                 level.status === "upcoming" ? "text-white/20" : c.text)}>
-                {level.status === "upcoming" ? "—" : level.count}
+                {level.status === "upcoming" ? "-" : level.count}
               </span>
             </div>
           )
@@ -189,7 +189,7 @@ function FunnelStep({ level, prevCount, maxCount, isLast, onClick }: {
             <p className="text-xs text-muted-foreground">{level.sublabel}</p>
             <p className="text-[10px] text-muted-foreground mt-0.5">
               Coach: <span className="text-foreground">{level.coach}</span>
-              {level.startDate !== "—" && (
+              {level.startDate !== "-" && (
                 <> · {level.startDate}{level.endDate ? ` → ${level.endDate}` : ""}</>
               )}
             </p>
@@ -300,7 +300,7 @@ function ParticipantList({ cohortId, levelId, onBack }: {
             <Icon className={cn("w-4 h-4", c.text)} />
           </div>
           <div>
-            <h2 className="font-bold text-white">{level.label} — {cohort.name}</h2>
+            <h2 className="font-bold text-white">{level.label}, {cohort.name}</h2>
             <p className="text-xs text-muted-foreground">{level.sublabel}</p>
           </div>
         </div>
@@ -463,7 +463,7 @@ function CohortFunnel({ cohortId, onBack, onDrillLevel }: {
       {/* Funnel steps */}
       <div>
         <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium mb-3 px-1">
-          Embudo de transformación — toca cada nivel para ver los participantes
+          Embudo de transformación, toca cada nivel para ver los participantes
         </p>
         {cohort.levels.map((level, i) => (
           <FunnelStep

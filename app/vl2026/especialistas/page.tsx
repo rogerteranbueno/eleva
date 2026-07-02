@@ -15,10 +15,10 @@ const ONBOARDING = {
   badge: "Vista del participante · Expertos",
   badgeColor: "cyan" as const,
   title: "Tu red de expertos",
-  description: "Tu coach conoce tu objetivo. Estos especialistas están aquí para ayudarte a hacerlo realidad — más allá de las sesiones grupales.",
+  description: "Tu coach conoce tu objetivo. Estos especialistas están aquí para ayudarte a hacerlo realidad, más allá de las sesiones grupales.",
   tips: [
     { emoji: "🎯", text: "Los especialistas 'Recomendados' los eligió tu coach según tu objetivo declarado." },
-    { emoji: "📅", text: "Reservar una sesión es gratis — pagas solo si confirmas la cita." },
+    { emoji: "📅", text: "Reservar una sesión es gratis, pagas solo si confirmas la cita." },
     { emoji: "💬", text: "Puedes ver el historial de tus sesiones anteriores en tu expediente." },
   ],
   cta: "Ver especialistas →",
@@ -474,7 +474,7 @@ function SpecialistCard({
       ) : (
         <div className="w-full py-2.5 rounded-xl border border-green-500/30 text-green-400 text-sm font-semibold flex items-center justify-center gap-2">
           <CheckCircle className="w-4 h-4" />
-          Sesión agendada — te llegará confirmación
+          Sesión agendada, te llegará confirmación
         </div>
       )}
     </div>

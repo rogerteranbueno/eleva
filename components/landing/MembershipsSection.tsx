@@ -18,7 +18,7 @@ export function MembershipsSection() {
         note: "Included with enrollment",
         badge: null,
         highlight: false,
-        color: "border-white/10",
+        color: "border-foreground/10",
         features: [
           { text: "Access to in-person training sessions", included: true },
           { text: "Missions and momentum app", included: true },
@@ -76,7 +76,7 @@ export function MembershipsSection() {
         note: "Incluido con el enrolamiento",
         badge: null,
         highlight: false,
-        color: "border-white/10",
+        color: "border-foreground/10",
         features: [
           { text: "Acceso a entrenamientos presenciales", included: true },
           { text: "App de misiones y momentum", included: true },
@@ -161,7 +161,7 @@ export function MembershipsSection() {
             {tier.badge && (
               <div className={cn(
                 "absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold",
-                tier.highlight ? "bg-violet-600 text-white" : "bg-amber-500 text-black"
+                tier.highlight ? "bg-violet-600 text-foreground" : "bg-amber-500 text-black"
               )}>
                 {tier.badge}
               </div>
@@ -173,7 +173,7 @@ export function MembershipsSection() {
             <ul className="space-y-2.5 flex-1">
               {tier.features.map((f) => (
                 <li key={f.text} className="flex items-start gap-2 text-sm">
-                  <CheckCircle className={cn("w-4 h-4 mt-0.5 flex-shrink-0", f.included ? "text-violet-400" : "text-white/15")} />
+                  <CheckCircle className={cn("w-4 h-4 mt-0.5 flex-shrink-0", f.included ? "text-violet-400" : "text-foreground/15")} />
                   <span className={f.included ? "text-foreground" : "text-muted-foreground/40 line-through"}>{f.text}</span>
                 </li>
               ))}

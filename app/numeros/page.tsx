@@ -174,7 +174,7 @@ function ROICalculator() {
       </div>
 
       <div className="rounded-2xl bg-gradient-to-r from-violet-600/20 to-green-600/10 border border-violet-500/25 p-6">
-        <p className="text-xs uppercase tracking-widest text-violet-400 font-bold mb-4">Con ELEVA — lo que recuperas</p>
+        <p className="text-xs uppercase tracking-widest text-violet-400 font-bold mb-4">Con ELEVA, lo que recuperas</p>
         <div className="grid grid-cols-3 gap-4">
           <div className="text-center">
             <p className="text-3xl font-black text-green-400">{fmt(recuperableMorosidad)}</p>
@@ -193,7 +193,7 @@ function ROICalculator() {
           <div>
             <p className="text-xs text-white/30">ROI anual estimado del sistema</p>
             <p className="text-4xl font-black text-white mt-0.5">
-              {roiAnual > 0 ? `${Math.round(roiAnual)}%` : "—"}
+              {roiAnual > 0 ? `${Math.round(roiAnual)}%` : "-"}
             </p>
           </div>
           <Link href="/vl2026" className="flex items-center gap-2 px-5 py-3 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold text-sm transition-colors">
@@ -291,8 +291,8 @@ export default function NumerosPage() {
               </span>
             </h1>
             <p className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed">
-              Cada módulo de ELEVA tiene un impacto medible. Aquí están los datos reales —
-              crecimiento, retención, cobranza, operación y ROI — de centros que ya operan con el sistema.
+              Cada módulo de ELEVA tiene un impacto medible. Aquí están los datos reales -
+              crecimiento, retención, cobranza, operación y ROI, de centros que ya operan con el sistema.
             </p>
           </div>
         </section>
@@ -331,8 +331,8 @@ export default function NumerosPage() {
                   { icon: DollarSign, color: "text-red-400", bg: "bg-red-500/10", value: "18–25%", label: "de ingresos mensuales", sub: "se pierden por cobranza tardía, sin seguimiento o sin comprobante" },
                   { icon: Users, color: "text-orange-400", bg: "bg-orange-500/10", value: "34%", label: "de participantes activos", sub: "no llegan al siguiente nivel por falta de seguimiento personalizado" },
                   { icon: Clock, color: "text-yellow-400", bg: "bg-yellow-500/10", value: "3.2 días", label: "de retraso promedio", sub: "para detectar un pago vencido o una incidencia crítica sin sistema" },
-                  { icon: AlertCircle, color: "text-red-400", bg: "bg-red-500/10", value: "67%", label: "de centros usan WhatsApp", sub: "como principal herramienta operativa — sin historial ni trazabilidad" },
-                  { icon: Brain, color: "text-violet-400", bg: "bg-violet-500/10", value: "88%", label: "de sesiones de coaching", sub: "se dan sin brief previo — el coach llega sin contexto del participante" },
+                  { icon: AlertCircle, color: "text-red-400", bg: "bg-red-500/10", value: "67%", label: "de centros usan WhatsApp", sub: "como principal herramienta operativa, sin historial ni trazabilidad" },
+                  { icon: Brain, color: "text-violet-400", bg: "bg-violet-500/10", value: "88%", label: "de sesiones de coaching", sub: "se dan sin brief previo, el coach llega sin contexto del participante" },
                   { icon: TrendingDown, color: "text-orange-400", bg: "bg-orange-500/10", value: "5–8 hrs", label: "duplicadas por evento", sub: "el staff repite trabajo por falta de un sistema centralizado" },
                 ].map((s) => (
                   <div key={s.label} className="rounded-2xl bg-white/[0.03] border border-white/8 p-5 flex gap-4">
@@ -393,7 +393,7 @@ export default function NumerosPage() {
                   <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">un número detrás.</span>
                 </h2>
                 <p className="text-white/40 max-w-xl mx-auto">
-                  No es marketing — son resultados medibles por funcionalidad, documentados en centros reales.
+                  No es marketing, son resultados medibles por funcionalidad, documentados en centros reales.
                 </p>
               </div>
             </Fade>
@@ -413,7 +413,7 @@ export default function NumerosPage() {
                 <ModuleCard
                   num="02" icon={CheckCircle2} color="text-green-400" bg="border-green-500/15 bg-green-500/[0.04]"
                   title="Registro y check-in"
-                  insight="La mesa de registro manual consume 3-4 horas por evento entre preparación, ejecución y reporte. Con ELEVA es menos de 20 minutos — y sin errores."
+                  insight="La mesa de registro manual consume 3-4 horas por evento entre preparación, ejecución y reporte. Con ELEVA es menos de 20 minutos, y sin errores."
                   stats={[
                     { label: "Tiempo de registro por evento", before: "3.5 hrs", after: "18 min", positive: true },
                     { label: "Errores en datos de participantes", before: "23%", after: "1.2%", positive: true },
@@ -433,7 +433,7 @@ export default function NumerosPage() {
                 <ModuleCard
                   num="04" icon={Brain} color="text-indigo-400" bg="border-indigo-500/15 bg-indigo-500/[0.04]"
                   title="Brief de coaches"
-                  insight="Cuando un coach llega con contexto del participante — historial, objetivos, última sesión, estado emocional registrado — la satisfacción sube 41 puntos NPS y la retención mejora 28%."
+                  insight="Cuando un coach llega con contexto del participante, historial, objetivos, última sesión, estado emocional registrado, la satisfacción sube 41 puntos NPS y la retención mejora 28%."
                   stats={[
                     { label: "Sesiones con brief previo", before: "12%", after: "100%", positive: true },
                     { label: "Retención de participante activo", before: "43%", after: "71%", positive: true },
@@ -560,7 +560,7 @@ export default function NumerosPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
               {[
                 {
-                  title: "Año 0 — Sin sistema",
+                  title: "Año 0, Sin sistema",
                   color: "border-white/10",
                   items: [
                     { label: "Participantes activos", value: "60", neg: false },
@@ -572,7 +572,7 @@ export default function NumerosPage() {
                   ]
                 },
                 {
-                  title: "Año 1 — Con ELEVA (meses 1-6)",
+                  title: "Año 1, Con ELEVA (meses 1-6)",
                   color: "border-violet-500/20",
                   items: [
                     { label: "Participantes activos", value: "78 (+30%)", neg: false },
@@ -584,7 +584,7 @@ export default function NumerosPage() {
                   ]
                 },
                 {
-                  title: "Año 1 — Con ELEVA (meses 7-12)",
+                  title: "Año 1, Con ELEVA (meses 7-12)",
                   color: "border-green-500/20 bg-green-500/[0.03]",
                   items: [
                     { label: "Participantes activos", value: "108 (+80%)", neg: false },
@@ -660,7 +660,7 @@ export default function NumerosPage() {
                   </span>
                 </h2>
                 <p className="text-white/40 max-w-lg mx-auto">
-                  El demo de ELEVA está corriendo en vivo con datos reales de un centro — LEVEL Transformación CDMX. Puedes explorar cada módulo sin registro.
+                  El demo de ELEVA está corriendo en vivo con datos reales de un centro, LEVEL Transformación CDMX. Puedes explorar cada módulo sin registro.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
                   <Link href="/vl2026" className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold text-lg transition-colors shadow-xl shadow-violet-600/30">

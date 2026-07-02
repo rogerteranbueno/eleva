@@ -336,7 +336,7 @@ export default function BuildPage() {
                         <p className="text-muted-foreground text-sm">Comenzamos por lo básico para personalizar el diagnóstico.</p>
                       </div>
                       <TextInput label="Nombre del centro" placeholder="Ej. Centro VIA Monterrey" value={answers.centro} onChange={(v) => set("centro", v)} />
-                      <TextInput label="País / Ciudad" placeholder="Ej. México — Guadalajara" value={answers.ciudad} onChange={(v) => set("ciudad", v)} />
+                      <TextInput label="País / Ciudad" placeholder="Ej. México, Guadalajara" value={answers.ciudad} onChange={(v) => set("ciudad", v)} />
                       <div className="space-y-2">
                         <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">¿Cuántos años llevan operando?</label>
                         <div className="grid grid-cols-2 gap-2.5">
@@ -386,7 +386,7 @@ export default function BuildPage() {
                         <h1 className="text-2xl sm:text-3xl font-black text-white mb-1.5 leading-tight">
                           Tu equipo y sistema.
                         </h1>
-                        <p className="text-muted-foreground text-sm">Sin juicios — queremos entender tu punto de partida real.</p>
+                        <p className="text-muted-foreground text-sm">Sin juicios, queremos entender tu punto de partida real.</p>
                       </div>
                       <div className="space-y-2">
                         <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Situación de entrenadores</label>
@@ -416,7 +416,7 @@ export default function BuildPage() {
                         <h1 className="text-2xl sm:text-3xl font-black text-white mb-1.5 leading-tight">
                           ¿Cuáles son tus principales retos?
                         </h1>
-                        <p className="text-muted-foreground text-sm">Elige todos los que apliquen — de aquí salen las prioridades del diagnóstico.</p>
+                        <p className="text-muted-foreground text-sm">Elige todos los que apliquen, de aquí salen las prioridades del diagnóstico.</p>
                       </div>
                       <div className="grid grid-cols-2 gap-2.5">
                         {RETOS.map((r) => {

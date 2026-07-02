@@ -11,12 +11,12 @@ const ONBOARDING = {
   screenId: "tribu",
   badge: "Vista del participante · Pantalla 4 de 4",
   badgeColor: "cyan" as const,
-  title: "Mi Tribu — Generación Omega",
-  description: "La comunidad viva donde los participantes se apoyan entre entrenamientos. No es un grupo de WhatsApp — es un espacio diseñado para que la transformación continúe.",
+  title: "Mi Tribu, Generación Omega",
+  description: "La comunidad viva donde los participantes se apoyan entre entrenamientos. No es un grupo de WhatsApp, es un espacio diseñado para que la transformación continúe.",
   tips: [
     { emoji: "📌", text: "El post fijado del coach establece el tono de la semana para toda la generación." },
-    { emoji: "🏆", text: "El reto de la semana es grupal — toca 'Unirme al reto' y ve cómo sube el contador." },
-    { emoji: "🔥", text: "El leaderboard de racha muestra quién tiene más días activos consecutivos — Valeria está al final." },
+    { emoji: "🏆", text: "El reto de la semana es grupal, toca 'Unirme al reto' y ve cómo sube el contador." },
+    { emoji: "🔥", text: "El leaderboard de racha muestra quién tiene más días activos consecutivos, Valeria está al final." },
   ],
   cta: "Explorar la Tribu →",
 }
@@ -98,7 +98,7 @@ export default function TribuPage() {
         </div>
         <p className="text-sm text-foreground">
           Comparte en el feed una acción que tomaste hacia tu objetivo esta semana.
-          Sin filtros, sin perfección — solo lo real.
+          Sin filtros, sin perfección, solo lo real.
         </p>
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs">

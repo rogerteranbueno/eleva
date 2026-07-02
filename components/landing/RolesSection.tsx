@@ -121,7 +121,7 @@ export function RolesSection() {
             className="glass rounded-2xl p-5 space-y-4"
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-foreground/5 flex items-center justify-center">
                 {icons[i]}
               </div>
               <h3 className="font-bold text-foreground">{role.title}</h3>

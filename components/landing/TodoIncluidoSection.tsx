@@ -47,7 +47,7 @@ const FEATURES: Feature[] = [
     desc: "Flujo de check-in con búsqueda en tiempo real, walk-ins, y datos al dueño al instante.",
     audience: "ops",
     tooltipTitle: "¿Cómo busco a alguien?",
-    tooltipText: "Escribe el nombre o el número de teléfono — el sistema filtra mientras escribes, no necesitas presionar Enter. Si alguien no aparece en la lista aunque sí debería estar, usa el botón Walk-in para registrar su entrada de todos modos. El sistema crea un perfil temporal y notifica al dueño.",
+    tooltipText: "Escribe el nombre o el número de teléfono, el sistema filtra mientras escribes, no necesitas presionar Enter. Si alguien no aparece en la lista aunque sí debería estar, usa el botón Walk-in para registrar su entrada de todos modos. El sistema crea un perfil temporal y notifica al dueño.",
   },
   {
     id: "expediente",
@@ -57,7 +57,7 @@ const FEATURES: Feature[] = [
     desc: "El sistema guía paso a paso: datos básicos, asignación de generación, bienvenida automática por WhatsApp.",
     audience: "ops",
     tooltipTitle: "¿Qué datos necesito para crear un perfil?",
-    tooltipText: "Solo necesitas nombre completo y teléfono para crear el perfil. El resto — email, objetivo, fuente de captación — se puede completar después. Al asignar la generación, el sistema envía automáticamente un WhatsApp de bienvenida con el nombre del participante y el nombre de su coach.",
+    tooltipText: "Solo necesitas nombre completo y teléfono para crear el perfil. El resto, email, objetivo, fuente de captación, se puede completar después. Al asignar la generación, el sistema envía automáticamente un WhatsApp de bienvenida con el nombre del participante y el nombre de su coach.",
   },
   {
     id: "pagos",
@@ -66,8 +66,8 @@ const FEATURES: Feature[] = [
     name: "Gestión de cobros",
     desc: "Dashboard de pagos pendientes, badges de alerta visibles en cada pantalla, recordatorios automáticos.",
     audience: "ops",
-    tooltipTitle: "Veo un badge rojo en el nombre de alguien — ¿qué hago?",
-    tooltipText: "El badge rojo indica pago vencido. No bloquees la entrada — el sistema ya generó una alerta automática al dueño y al coach. Tu trabajo es informarle con amabilidad si te preguntan: \"Tu coach ya sabe, él te va a contactar hoy.\" Anota si el participante mencionó algo sobre su situación en las notas del CRM.",
+    tooltipTitle: "Veo un badge rojo en el nombre de alguien, ¿qué hago?",
+    tooltipText: "El badge rojo indica pago vencido. No bloquees la entrada, el sistema ya generó una alerta automática al dueño y al coach. Tu trabajo es informarle con amabilidad si te preguntan: \"Tu coach ya sabe, él te va a contactar hoy.\" Anota si el participante mencionó algo sobre su situación en las notas del CRM.",
   },
   {
     id: "pretraining",
@@ -87,7 +87,7 @@ const FEATURES: Feature[] = [
     desc: "Vista por generación, contacto directo con coaches, plantillas de mensajes aprobadas por el dueño.",
     audience: "ops",
     tooltipTitle: "¿Puedo inventar el mensaje o uso la plantilla?",
-    tooltipText: "Siempre usa las plantillas — son los textos aprobados por el director del centro. Si necesitas decir algo que no está cubierto por ninguna plantilla, primero consulta con el dueño antes de enviar. Las plantillas existen para que la comunicación del centro sea consistente y profesional, independientemente de quién esté en turno.",
+    tooltipText: "Siempre usa las plantillas, son los textos aprobados por el director del centro. Si necesitas decir algo que no está cubierto por ninguna plantilla, primero consulta con el dueño antes de enviar. Las plantillas existen para que la comunicación del centro sea consistente y profesional, independientemente de quién esté en turno.",
   },
   {
     id: "crm",
@@ -97,7 +97,7 @@ const FEATURES: Feature[] = [
     desc: "Directorio completo con momentum, historial, pagos, notas de coach y etiquetas de riesgo.",
     audience: "ops",
     tooltipTitle: "¿Qué anoto en las notas del CRM?",
-    tooltipText: "Anota todo lo que un coach o el dueño necesitaría saber: \"Llegó tarde y mencionó problemas con el transporte\", \"Preguntó por opciones de pago\", \"Vino con su pareja, que también está interesada\". No filtes — lo que parece menor puede ser la clave que el coach necesita para retener a alguien.",
+    tooltipText: "Anota todo lo que un coach o el dueño necesitaría saber: \"Llegó tarde y mencionó problemas con el transporte\", \"Preguntó por opciones de pago\", \"Vino con su pareja, que también está interesada\". No filtes, lo que parece menor puede ser la clave que el coach necesita para retener a alguien.",
   },
   {
     id: "pulso",
@@ -107,7 +107,7 @@ const FEATURES: Feature[] = [
     desc: "Vista en tiempo real del momentum por generación, alertas de abandono, resumen financiero y KPIs del centro.",
     audience: "owner",
     tooltipTitle: "¿Qué significa el Momentum Score?",
-    tooltipText: "El Momentum Score (0–100%) mide la actividad y compromiso de cada participante: asistencia a eventos, misiones completadas, interacción en el feed y racha de días activos. Debajo de 40% el sistema genera alerta automática. Debajo de 25% es riesgo crítico — el participante probablemente abandonará en los próximos 7–10 días sin intervención directa.",
+    tooltipText: "El Momentum Score (0–100%) mide la actividad y compromiso de cada participante: asistencia a eventos, misiones completadas, interacción en el feed y racha de días activos. Debajo de 40% el sistema genera alerta automática. Debajo de 25% es riesgo crítico, el participante probablemente abandonará en los próximos 7–10 días sin intervención directa.",
   },
   {
     id: "atencion",
@@ -127,7 +127,7 @@ const FEATURES: Feature[] = [
     desc: "Métricas de cada coach: participantes atendidos, sesiones del mes, momentum de su generación y alertas de inactividad.",
     audience: "owner",
     tooltipTitle: "¿Qué hago si un coach tiene muchos días sin contacto grupal?",
-    tooltipText: "Un semáforo rojo en \"último contacto grupal\" significa que pasaron más de 5 días sin que el coach publicara en el feed o enviara mensaje a su generación. Empieza con una conversación de apoyo — no de control. Pregunta cómo está y si necesita algo. Los coaches con alta carga suelen desconectarse sin darse cuenta, no por desidia.",
+    tooltipText: "Un semáforo rojo en \"último contacto grupal\" significa que pasaron más de 5 días sin que el coach publicara en el feed o enviara mensaje a su generación. Empieza con una conversación de apoyo, no de control. Pregunta cómo está y si necesita algo. Los coaches con alta carga suelen desconectarse sin darse cuenta, no por desidia.",
   },
   {
     id: "coach",
@@ -137,7 +137,7 @@ const FEATURES: Feature[] = [
     desc: "Vista de su generación, expedientes de participantes, sugerencias de IA para cada sesión y notas compartidas.",
     audience: "coach",
     tooltipTitle: "¿Las notas que escribo las ve el dueño?",
-    tooltipText: "Sí. Todas las notas de expediente son visibles para el dueño del centro y para operaciones. Escribe como si el participante no pudiera leerlas — con verdad profesional, no con juicios personales. Las notas son el historial clínico del proceso de transformación de cada persona.",
+    tooltipText: "Sí. Todas las notas de expediente son visibles para el dueño del centro y para operaciones. Escribe como si el participante no pudiera leerlas, con verdad profesional, no con juicios personales. Las notas son el historial clínico del proceso de transformación de cada persona.",
   },
   {
     id: "mensajes",
@@ -147,7 +147,7 @@ const FEATURES: Feature[] = [
     desc: "Plantillas listas para eventos, cobros, bienvenidas y seguimiento. Enviadas por WhatsApp con un toque.",
     audience: "all",
     tooltipTitle: "¿Puedo personalizar los mensajes?",
-    tooltipText: "Los campos entre corchetes [nombre] y [generación] se reemplazan automáticamente al enviar. El texto base está aprobado por el director — es tu marco de referencia. Si quieres agregar algo personal al final, puedes, pero mantén el texto base intacto para que el mensaje llegue con el tono y la información correcta.",
+    tooltipText: "Los campos entre corchetes [nombre] y [generación] se reemplazan automáticamente al enviar. El texto base está aprobado por el director, es tu marco de referencia. Si quieres agregar algo personal al final, puedes, pero mantén el texto base intacto para que el mensaje llegue con el tono y la información correcta.",
   },
   {
     id: "finanzas",
@@ -157,12 +157,12 @@ const FEATURES: Feature[] = [
     desc: "MRR, cobrado vs pendiente, desglose por generación, P&L simplificado y proyección del próximo mes.",
     audience: "owner",
     tooltipTitle: "¿El margen neto incluye los coaches?",
-    tooltipText: "Sí. El margen neto descuenta coaches, staff general y plataforma. No incluye renta del espacio, materiales físicos ni gastos variables del evento — esos los puedes agregar en la configuración del centro para tener un P&L más preciso. El número que ves es el punto de partida, no el definitivo.",
+    tooltipText: "Sí. El margen neto descuenta coaches, staff general y plataforma. No incluye renta del espacio, materiales físicos ni gastos variables del evento, esos los puedes agregar en la configuración del centro para tener un P&L más preciso. El número que ves es el punto de partida, no el definitivo.",
   },
 ]
 
 const AUDIENCES: { id: Feature["audience"]; label: string; color: string }[] = [
-  { id: "all",   label: "Todos",     color: "bg-white/8 text-white border-white/15" },
+  { id: "all",   label: "Todos",     color: "bg-foreground/8 text-foreground border-foreground/15" },
   { id: "ops",   label: "Operativo", color: "bg-cyan-500/15 text-cyan-400 border-cyan-500/25" },
   { id: "owner", label: "Dueño",     color: "bg-violet-500/15 text-violet-400 border-violet-500/25" },
   { id: "coach", label: "Coach",     color: "bg-emerald-500/15 text-emerald-400 border-emerald-500/25" },
@@ -173,7 +173,7 @@ function audienceBadge(audience: Feature["audience"]) {
     ops:   "bg-cyan-500/15 text-cyan-400 border border-cyan-500/20",
     owner: "bg-violet-500/15 text-violet-400 border border-violet-500/20",
     coach: "bg-emerald-500/15 text-emerald-400 border border-emerald-500/20",
-    all:   "bg-white/5 text-muted-foreground border border-white/10",
+    all:   "bg-foreground/5 text-muted-foreground border border-foreground/10",
   }
   const labels: Record<Feature["audience"], string> = {
     ops: "Ops", owner: "Dueño", coach: "Coach", all: "Todos",
@@ -283,7 +283,7 @@ export function TodoIncluidoSection() {
       >
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-600/15 border border-cyan-500/30 text-cyan-400 text-xs font-semibold mb-5">
           <BookOpen className="w-3.5 h-3.5" />
-          Programa completo — software + capacitación + procesos
+          Programa completo, software + capacitación + procesos
         </div>
 
         <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight mb-5">
@@ -293,8 +293,8 @@ export function TodoIncluidoSection() {
 
         <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
           La mayoría del staff operativo viene de los propios entrenamientos. Tienen el corazón y el compromiso,
-          pero no siempre los procesos. ELEVA está diseñado para que cualquier persona — sin experiencia previa
-          en software ni en administración — pueda operar el centro desde su primer turno.
+          pero no siempre los procesos. ELEVA está diseñado para que cualquier persona, sin experiencia previa
+          en software ni en administración, pueda operar el centro desde su primer turno.
         </p>
       </motion.div>
 
@@ -313,7 +313,7 @@ export function TodoIncluidoSection() {
             <div className="flex-1 space-y-4">
               <div>
                 <p className="text-lg font-bold text-foreground mb-1">
-                  El staff llega capacitado desde el primer turno — no el tercero.
+                  El staff llega capacitado desde el primer turno, no el tercero.
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   Cada pantalla del sistema tiene guías integradas, textos de contexto y flujos paso a paso.
@@ -326,7 +326,7 @@ export function TodoIncluidoSection() {
                 {[
                   { stat: "98%", label: "del staff aprende el sistema en su primer turno" },
                   { stat: "0", label: "horas de capacitación externa requeridas" },
-                  { stat: "Siempre", label: "disponibles — los (?) están en cada pantalla" },
+                  { stat: "Siempre", label: "disponibles, los (?) están en cada pantalla" },
                 ].map((s) => (
                   <div key={s.stat} className="bg-foreground/[0.04] border border-border rounded-xl p-3 text-center">
                     <p className="text-xl font-black text-cyan-400">{s.stat}</p>
@@ -352,7 +352,7 @@ export function TodoIncluidoSection() {
               <HelpCircle className="w-4.5 h-4.5 text-violet-400" />
             </div>
             <div>
-              <p className="text-sm font-bold text-foreground">Los (?) están en todas partes — y no son decorativos</p>
+              <p className="text-sm font-bold text-foreground">Los (?) están en todas partes, y no son decorativos</p>
               <p className="text-xs text-muted-foreground">Responden exactamente la duda del momento, en el contexto donde surge</p>
             </div>
           </div>
@@ -378,7 +378,7 @@ export function TodoIncluidoSection() {
               {
                 screen: "Comunidad",
                 q: "¿Puedo inventar el mensaje si las plantillas no aplican?",
-                a: "Consulta con el dueño antes. Las plantillas cubren el 95% de los casos — si no aplica ninguna, es una situación que el director necesita manejar directamente.",
+                a: "Consulta con el dueño antes. Las plantillas cubren el 95% de los casos, si no aplica ninguna, es una situación que el director necesita manejar directamente.",
               },
             ].map((ex, i) => (
               <div key={i} className="bg-foreground/[0.03] border border-border rounded-xl p-3.5 space-y-2">
@@ -464,7 +464,7 @@ export function TodoIncluidoSection() {
               "Hub de comunidad con contacto directo a coaches",
               "Motor de IA para detección de riesgo de abandono",
               "Finanzas: MRR, cobrado, pendiente y margen neto",
-              "Sesión de implementación incluida — arrancamos juntos",
+              "Sesión de implementación incluida, arrancamos juntos",
             ].map((item) => (
               <div key={item} className="flex items-start gap-2.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-green-400 flex-shrink-0 mt-0.5" />
@@ -478,7 +478,7 @@ export function TodoIncluidoSection() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-sm font-bold transition-colors"
+                className="flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-700 text-foreground rounded-xl text-sm font-bold transition-colors"
               >
                 Explorar el panel de operaciones
                 <ArrowRight className="w-4 h-4" />

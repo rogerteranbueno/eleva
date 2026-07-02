@@ -78,19 +78,19 @@ export default function EstandarElevaPage() {
     <div className="min-h-screen bg-background text-foreground">
 
       {/* Nav */}
-      <nav className="fixed top-0 inset-x-0 z-50 border-b border-white/5 bg-background/80 backdrop-blur-xl">
+      <nav className="fixed top-0 inset-x-0 z-50 border-b border-foreground/5 bg-background/80 backdrop-blur-xl">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-white transition-colors">
+            <Link href="/" className="hover:text-foreground transition-colors">
               <ArrowLeft className="w-4 h-4" />
             </Link>
-            <span className="text-white/20">/</span>
-            <Link href="/" className="hover:text-white transition-colors">ELEVA</Link>
-            <span className="text-white/20">/</span>
+            <span className="text-foreground/20">/</span>
+            <Link href="/" className="hover:text-foreground transition-colors">ELEVA</Link>
+            <span className="text-foreground/20">/</span>
             <span className="text-violet-400 font-semibold">Estándar</span>
           </div>
           <Link href="/build">
-            <button className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold rounded-lg transition-colors">
+            <button className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-foreground text-sm font-bold rounded-lg transition-colors">
               Agendar diagnóstico
             </button>
           </Link>
@@ -110,25 +110,25 @@ export default function EstandarElevaPage() {
               <ShieldCheck className="w-4 h-4 text-violet-400" />
               <span className="text-xs font-bold text-violet-400 uppercase tracking-widest">El estándar ELEVA</span>
             </div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.05] tracking-tighter">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tighter">
               El nuevo estándar
               <br />
               para formar entrenadores
               <br />
-              <span className="text-white/55 font-light italic">y profesionalizar centros.</span>
+              <span className="text-foreground/55 font-light italic">y profesionalizar centros.</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
               No certificamos por calentar una silla. Certificamos por desempeño observable. Esto es lo que eso significa en la práctica.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/pacto">
-                <button className="flex items-center gap-2.5 px-7 py-4 bg-violet-600 hover:bg-violet-500 text-white font-black rounded-xl text-base transition-colors group">
+                <button className="flex items-center gap-2.5 px-7 py-4 bg-violet-600 hover:bg-violet-500 text-foreground font-black rounded-xl text-base transition-colors group">
                   Aplicar a PACTO
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </button>
               </Link>
               <Link href="/academia">
-                <button className="flex items-center gap-2.5 px-7 py-4 glass border border-white/10 hover:border-white/20 text-white font-bold rounded-xl text-base transition-colors">
+                <button className="flex items-center gap-2.5 px-7 py-4 glass border border-foreground/10 hover:border-foreground/20 text-foreground font-bold rounded-xl text-base transition-colors">
                   Ver certificaciones
                 </button>
               </Link>
@@ -139,7 +139,7 @@ export default function EstandarElevaPage() {
       </section>
 
       {/* Competencias */}
-      <section className="py-24 px-6 border-t border-white/5" ref={compRef.ref}>
+      <section className="py-24 px-6 border-t border-foreground/5" ref={compRef.ref}>
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -148,7 +148,7 @@ export default function EstandarElevaPage() {
             className="mb-12"
           >
             <p className="text-xs font-bold text-violet-400 uppercase tracking-widest mb-4">Qué exige el estándar</p>
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight mb-4">
               6 áreas. 24 competencias mínimas.
             </h2>
             <p className="text-muted-foreground max-w-xl leading-relaxed">
@@ -163,13 +163,13 @@ export default function EstandarElevaPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={compRef.inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, ease, delay: i * 0.08 }}
-                className="glass rounded-2xl border border-white/5 p-5 space-y-3"
+                className="glass rounded-2xl border border-foreground/5 p-5 space-y-3"
               >
                 <p className="text-xs font-bold text-violet-400 uppercase tracking-widest">{cat.cat}</p>
                 {cat.items.map((item) => (
                   <div key={item} className="flex items-start gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-violet-400/60 mt-0.5 shrink-0" />
-                    <p className="text-sm text-white/60 leading-snug">{item}</p>
+                    <p className="text-sm text-foreground/60 leading-snug">{item}</p>
                   </div>
                 ))}
               </motion.div>
@@ -179,7 +179,7 @@ export default function EstandarElevaPage() {
       </section>
 
       {/* Certificaciones */}
-      <section className="py-24 px-6 border-t border-white/5" ref={certRef.ref}>
+      <section className="py-24 px-6 border-t border-foreground/5" ref={certRef.ref}>
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -188,7 +188,7 @@ export default function EstandarElevaPage() {
             className="mb-12"
           >
             <p className="text-xs font-bold text-violet-400 uppercase tracking-widest mb-4">Niveles de certificación</p>
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight mb-4">
               Cómo certificamos.
             </h2>
             <p className="text-muted-foreground max-w-xl leading-relaxed">
@@ -213,14 +213,14 @@ export default function EstandarElevaPage() {
                     <AcredittaBadge size="sm" />
                   </div>
                   <div>
-                    <p className="font-black text-white text-lg leading-tight">{cert.name}</p>
+                    <p className="font-black text-foreground text-lg leading-tight">{cert.name}</p>
                     <p className="text-sm text-muted-foreground mt-1 leading-snug">{cert.description}</p>
                   </div>
-                  <div className="space-y-2 pt-2 border-t border-white/5">
+                  <div className="space-y-2 pt-2 border-t border-foreground/5">
                     {cert.requirements.map((r) => (
                       <div key={r} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-white/50 mt-0.5 shrink-0" />
-                        <p className="text-xs text-white/70 leading-snug">{r}</p>
+                        <CheckCircle2 className="w-3.5 h-3.5 text-foreground/50 mt-0.5 shrink-0" />
+                        <p className="text-xs text-foreground/70 leading-snug">{r}</p>
                       </div>
                     ))}
                   </div>
@@ -232,7 +232,7 @@ export default function EstandarElevaPage() {
       </section>
 
       {/* Tabla comparativa */}
-      <section className="py-24 px-6 border-t border-white/5" ref={tableRef.ref}>
+      <section className="py-24 px-6 border-t border-foreground/5" ref={tableRef.ref}>
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -240,8 +240,8 @@ export default function EstandarElevaPage() {
             transition={{ duration: 0.6, ease }}
             className="mb-10"
           >
-            <p className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Comparación directa</p>
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            <p className="text-xs font-bold text-foreground/50 uppercase tracking-widest mb-4">Comparación directa</p>
+            <h2 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">
               Otros programas vs. ELEVA.
             </h2>
           </motion.div>
@@ -250,10 +250,10 @@ export default function EstandarElevaPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={tableRef.inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease, delay: 0.15 }}
-            className="rounded-2xl border border-white/8 overflow-hidden"
+            className="rounded-2xl border border-foreground/8 overflow-hidden"
           >
-            <div className="grid grid-cols-2 border-b border-white/8">
-              <div className="px-5 py-3 bg-red-500/5 border-r border-white/8">
+            <div className="grid grid-cols-2 border-b border-foreground/8">
+              <div className="px-5 py-3 bg-red-500/5 border-r border-foreground/8">
                 <p className="text-xs font-bold text-red-400 uppercase tracking-wide">Modelo heredado</p>
               </div>
               <div className="px-5 py-3 bg-violet-500/5">
@@ -266,15 +266,15 @@ export default function EstandarElevaPage() {
                 initial={{ opacity: 0 }}
                 animate={tableRef.inView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.4, ease, delay: 0.2 + i * 0.05 }}
-                className={`grid grid-cols-2 border-b border-white/5 last:border-0 ${i % 2 === 0 ? "" : "bg-white/[0.01]"}`}
+                className={`grid grid-cols-2 border-b border-foreground/5 last:border-0 ${i % 2 === 0 ? "" : "bg-white/[0.01]"}`}
               >
-                <div className="px-5 py-3.5 border-r border-white/5 flex items-start gap-2">
+                <div className="px-5 py-3.5 border-r border-foreground/5 flex items-start gap-2">
                   <span className="text-red-500 text-sm shrink-0 mt-0.5">✗</span>
-                  <p className="text-sm text-white/60 leading-snug">{left}</p>
+                  <p className="text-sm text-foreground/60 leading-snug">{left}</p>
                 </div>
                 <div className="px-5 py-3.5 flex items-start gap-2">
                   <span className="text-violet-400 text-sm shrink-0 mt-0.5">✓</span>
-                  <p className="text-sm text-white/80 leading-snug">{right}</p>
+                  <p className="text-sm text-foreground/80 leading-snug">{right}</p>
                 </div>
               </motion.div>
             ))}
@@ -283,32 +283,32 @@ export default function EstandarElevaPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-32 px-6 border-t border-white/5" ref={ctaRef.ref}>
+      <section className="py-32 px-6 border-t border-foreground/5" ref={ctaRef.ref}>
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={ctaRef.inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease }}
           className="max-w-3xl mx-auto text-center space-y-8"
         >
-          <h2 className="text-5xl sm:text-6xl font-black text-white leading-[1.05] tracking-tight">
+          <h2 className="text-5xl sm:text-6xl font-black text-foreground leading-[1.05] tracking-tight">
             Forma entrenadores que
             <br />
             <span className="text-violet-400">sepan lo que hacen</span>
             <br />
-            <span className="text-white/55 font-light italic">y por qué lo hacen.</span>
+            <span className="text-foreground/55 font-light italic">y por qué lo hacen.</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
             PACTO instala la academia interna, los protocolos y el sistema operativo para que tu centro pueda formar entrenadores propios con criterio y estándar profesional.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/pacto">
-              <button className="flex items-center gap-2.5 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-black rounded-xl text-base transition-colors group">
+              <button className="flex items-center gap-2.5 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-foreground font-black rounded-xl text-base transition-colors group">
                 Aplicar a PACTO
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </button>
             </Link>
             <Link href="/historia-transformacion">
-              <button className="flex items-center gap-2.5 px-8 py-4 glass border border-white/10 hover:border-white/20 text-white font-bold rounded-xl text-base transition-colors">
+              <button className="flex items-center gap-2.5 px-8 py-4 glass border border-foreground/10 hover:border-foreground/20 text-foreground font-bold rounded-xl text-base transition-colors">
                 Ver la historia de la industria
               </button>
             </Link>

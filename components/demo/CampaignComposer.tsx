@@ -73,7 +73,7 @@ export function CampaignComposer({ insight, onClose, onSent }: CampaignComposerP
       whatsapp: `WhatsApp enviado a ${insight.recipients.count} participantes ✓`,
       email: `Email enviado a ${insight.recipients.count} destinatarios ✓`,
       sms: `SMS enviado a ${insight.recipients.count} participantes ✓`,
-      campaign: `Campaña lanzada — ${insight.recipients.count} personas en segmento ✓`,
+      campaign: `Campaña lanzada, ${insight.recipients.count} personas en segmento ✓`,
     }
     setTimeout(() => {
       onSent(labels[channel])
@@ -137,7 +137,7 @@ export function CampaignComposer({ insight, onClose, onSent }: CampaignComposerP
               <div className="bg-[#0b2616] border border-green-500/20 rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-[10px] text-green-400 font-semibold uppercase tracking-widest">Vista previa — WhatsApp Business</span>
+                  <span className="text-[10px] text-green-400 font-semibold uppercase tracking-widest">Vista previa, WhatsApp Business</span>
                 </div>
                 <div className="bg-[#1d4d2a] rounded-2xl rounded-tl-sm px-3 py-2.5 max-w-[85%]">
                   <p className="text-sm text-white whitespace-pre-wrap leading-relaxed">{insight.messages.whatsapp}</p>
@@ -152,7 +152,7 @@ export function CampaignComposer({ insight, onClose, onSent }: CampaignComposerP
               <div className="flex items-center justify-between text-xs text-muted-foreground">
                 <span className="flex items-center gap-1.5 text-green-400/70">
                   <Sparkles className="w-3 h-3" />
-                  IA redactó el mensaje — puedes editarlo
+                  IA redactó el mensaje, puedes editarlo
                 </span>
                 <span>{insight.messages.whatsapp.length} caracteres</span>
               </div>
@@ -175,7 +175,7 @@ export function CampaignComposer({ insight, onClose, onSent }: CampaignComposerP
               <div className="flex items-center gap-2">
                 <span className="flex items-center gap-1.5 text-xs text-blue-400/80">
                   <Sparkles className="w-3 h-3" />
-                  Personalización activa — {"{nombre}"} se reemplaza automáticamente
+                  Personalización activa, {"{nombre}"} se reemplaza automáticamente
                 </span>
               </div>
             </div>
@@ -191,7 +191,7 @@ export function CampaignComposer({ insight, onClose, onSent }: CampaignComposerP
               />
               <div className="flex items-center justify-between text-xs">
                 <span className={cn("font-medium", smsLen > 160 ? "text-red-400" : "text-muted-foreground")}>
-                  {smsLen}/160 caracteres{smsLen > 160 ? " — 2 SMS" : ""}
+                  {smsLen}/160 caracteres{smsLen > 160 ? ", 2 SMS" : ""}
                 </span>
                 <span className="text-muted-foreground">
                   {insight.recipients.count} SMS · estimado ${(insight.recipients.count * 0.008).toFixed(2)} USD

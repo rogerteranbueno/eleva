@@ -24,7 +24,7 @@ const ATTENDANCE_CFG: Record<OpsAttendanceStatus, { label: string; color: string
   "pendiente":   { label: "Esperado",   color: "text-yellow-400",        dot: "bg-yellow-400" },
   "no-show":     { label: "No llegó",   color: "text-red-400",           dot: "bg-red-400" },
   "walk-in":     { label: "Walk-in",    color: "text-violet-400",        dot: "bg-violet-400" },
-  "no-aplica":   { label: "—",          color: "text-muted-foreground",  dot: "bg-muted-foreground/30" },
+  "no-aplica":   { label: "-",          color: "text-muted-foreground",  dot: "bg-muted-foreground/30" },
 }
 
 const PAYMENT_CFG: Record<OpsPaymentStatus, { label: string; color: string; bg: string }> = {
@@ -72,7 +72,7 @@ type DetailTab = "resumen" | "pagos" | "enrolamiento" | "incidencias" | "notas"
 function QuickActions({ p, onAction }: { p: OpsParticipant; onAction: (msg: string) => void }) {
   const actions = [
     ...(p.todayStatus === "pendiente" || p.todayStatus === "confirmado" ? [
-      { label: "Registrar llegada", icon: CheckCircle2, color: "bg-green-600 hover:bg-green-700 text-white", action: () => onAction(`${p.name} — entrada confirmada ✓`) },
+      { label: "Registrar llegada", icon: CheckCircle2, color: "bg-green-600 hover:bg-green-700 text-white", action: () => onAction(`${p.name}, entrada confirmada ✓`) },
     ] : []),
     ...(p.todayStatus !== "no-aplica" && p.todayStatus !== "checkedin" ? [
       { label: "Marcar no-show",   icon: XCircle,      color: "bg-red-500/15 hover:bg-red-500/25 text-red-400 border border-red-500/30", action: () => onAction(`${p.name} marcado como ausente`) },
@@ -498,7 +498,7 @@ function ParticipantRow({
 
       {/* Next training status */}
       <span className={cn("hidden lg:inline-block text-[10px] font-semibold w-20 text-right truncate", nextCfg?.color ?? "text-muted-foreground")}>
-        {nextCfg?.label ?? "—"}
+        {nextCfg?.label ?? "-"}
       </span>
 
       {/* Arrow */}
@@ -536,7 +536,7 @@ function WalkInDrawer({ onClose, onAdd }: { onClose: () => void; onAdd: (name: s
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold text-white text-lg">Registro walk-in</h2>
-                <p className="text-xs text-muted-foreground">Solo lo esencial — expediente completo después</p>
+                <p className="text-xs text-muted-foreground">Solo lo esencial, expediente completo después</p>
               </div>
               <button onClick={onClose} className="p-1.5 rounded hover:bg-white/5 text-muted-foreground"><X className="w-4 h-4" /></button>
             </div>
@@ -647,20 +647,20 @@ export default function RegistroPage() {
   function addWalkIn(name: string) {
     const newP: OpsParticipant = {
       id: `w-${Date.now()}`, name, avatar: name.split(" ").map((w) => w[0]).slice(0,2).join("").toUpperCase(),
-      phone: "—", email: "—",
-      levelCode: "lead", levelLabel: "Walk-in · Sin expediente", cohorte: "Sin asignar", coach: "—",
+      phone: "-", email: "-",
+      levelCode: "lead", levelLabel: "Walk-in · Sin expediente", cohorte: "Sin asignar", coach: "-",
       todayStatus: "walk-in", arrivalTime: new Date().toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit" }),
       nextTraining: null, nextTrainingDate: null, nextTrainingStatus: null,
-      paymentStatus: "pendiente", amountTotal: 0, amountPaid: 0, concept: "—", daysOverdue: null,
+      paymentStatus: "pendiente", amountTotal: 0, amountPaid: 0, concept: "-", daysOverdue: null,
       hasComprobante: false, hasBeca: false, becaAmount: null,
       referredBy: null, enrolledCount: 0, becasAvailable: 0,
       overallStatus: "seguimiento", responsable: "Karla Ríos",
       incidents: [], missingInfo: ["nombre completo", "WhatsApp", "email", "expediente completo"],
-      notes: "Walk-in — expediente pendiente de completar", coachNote: null, courseHistory: [],
+      notes: "Walk-in, expediente pendiente de completar", coachNote: null, courseHistory: [],
     }
     setExtra((prev) => [newP, ...prev])
     setSelected(newP)
-    show(`${name} — walk-in registrado ✓`)
+    show(`${name}, walk-in registrado ✓`)
   }
 
   return (

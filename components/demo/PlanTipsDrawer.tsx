@@ -48,7 +48,7 @@ export const PLAN_CONFIGS: Record<string, PlanConfig> = {
     status: "warning",
     statusLabel: "Por debajo del umbral saludable (>70%)",
     tips: [
-      { emoji: "🚨", title: "Intervenir los 14 en riesgo hoy mismo", desc: "Distribuye la lista entre coaches: máx. 5 personas cada uno. Mensaje personalizado antes de las 6pm — no blast masivo.", priority: "hoy" },
+      { emoji: "🚨", title: "Intervenir los 14 en riesgo hoy mismo", desc: "Distribuye la lista entre coaches: máx. 5 personas cada uno. Mensaje personalizado antes de las 6pm, no blast masivo.", priority: "hoy" },
       { emoji: "🔍", title: "Identifica la cohorte que arrastra el promedio", desc: "Generación Norte está en 58%. Agenda una llamada de 15 min con Marco para entender qué pasó en las últimas 2 semanas.", priority: "hoy" },
       { emoji: "⚡", title: "Lanza una misión de reconexión", desc: "Una misión especial de win rápido (24h de plazo) sube el momentum sin depender de eventos. Actívala para todas las cohortes simultáneamente.", priority: "esta-semana" },
       { emoji: "📅", title: "Maximiza la asistencia al evento del jueves", desc: "Con 34% confirmado, un recordatorio personalizado hoy puede subir eso a 70%+. El evento en 4 días es tu mejor palanca de momentum.", priority: "esta-semana" },
@@ -59,7 +59,7 @@ export const PLAN_CONFIGS: Record<string, PlanConfig> = {
     metric: "Participantes Activos",
     value: "247",
     status: "good",
-    statusLabel: "+12% vs mes anterior — tendencia positiva",
+    statusLabel: "+12% vs mes anterior, tendencia positiva",
     tips: [
       { emoji: "📸", title: "Documenta qué cambió este mes", desc: "El +12% no es accidente. ¿Fue un evento? ¿Una campaña? ¿Un coach específico? Identifícalo para replicarlo en el siguiente ciclo.", priority: "esta-semana" },
       { emoji: "🌟", title: "Convierte tus top 10 en referidores activos", desc: "Los más activos del mes son tus mejores embajadores. Mándales un mensaje personal de agradecimiento y pídeles que inviten a alguien a la siguiente sesión.", priority: "esta-semana" },
@@ -86,7 +86,7 @@ export const PLAN_CONFIGS: Record<string, PlanConfig> = {
     status: "warning",
     statusLabel: "1 cohorte en atención (Norte 58%)",
     tips: [
-      { emoji: "⚠️", title: "Norte es prioridad esta semana", desc: "58% de momentum con tendencia a la baja. Marco necesita una activación grupal antes del jueves — no esperes al próximo evento programado.", priority: "hoy" },
+      { emoji: "⚠️", title: "Norte es prioridad esta semana", desc: "58% de momentum con tendencia a la baja. Marco necesita una activación grupal antes del jueves, no esperes al próximo evento programado.", priority: "hoy" },
       { emoji: "🏆", title: "Celebra públicamente a Vía 12 (81%)", desc: "Reconocer públicamente la cohorte con mejor momentum crea competencia sana. Un shoutout en todos los grupos levanta el espíritu de las otras.", priority: "esta-semana" },
       { emoji: "🚀", title: "Omega en 74%: inicia pre-enrolamiento", desc: "Con una cohorte saludable y en fase avanzada, es el momento de presentar el siguiente nivel. Los actuales participantes de Omega son tus mejores vendedores.", priority: "esta-semana" },
       { emoji: "📋", title: "Establece un ritual de revisión semanal por cohorte", desc: "15 minutos por coach cada lunes para revisar momentum, asistencias y riesgo. La consistencia previene que una cohorte caiga como lo hizo Norte.", priority: "este-mes" },
@@ -96,7 +96,7 @@ export const PLAN_CONFIGS: Record<string, PlanConfig> = {
     metric: "Próximo Evento",
     value: "4 días",
     status: "warning",
-    statusLabel: "Solo 34% confirmado — objetivo mínimo 65%",
+    statusLabel: "Solo 34% confirmado, objetivo mínimo 65%",
     tips: [
       { emoji: "📲", title: "Recordatorio personalizado HOY a los 59 sin confirmar", desc: "No uses el grupo. Mensaje directo de cada coach a sus participantes. Mención de por qué este evento específico es importante para su proceso.", priority: "hoy" },
       { emoji: "📞", title: "Llamada a los 10 más inactivos del grupo", desc: "Los que tienen momentum bajo y no han confirmado son los que más necesitan venir. Una llamada de 3 minutos tiene 70% de tasa de conversión.", priority: "hoy" },
@@ -108,7 +108,7 @@ export const PLAN_CONFIGS: Record<string, PlanConfig> = {
     metric: "Generación Omega",
     value: "74% momentum",
     status: "good",
-    statusLabel: "Saludable — PL Mes 3 de 5",
+    statusLabel: "Saludable, PL Mes 3 de 5",
     tips: [
       { emoji: "🎯", title: "Aprovecha el momentum para el siguiente ciclo", desc: "Con 74% en mes 3, es el mejor momento para presentar qué sigue después de PL. Planta la semilla ahora, cosecha en 2 meses.", priority: "esta-semana" },
       { emoji: "🌟", title: "Identifica los 5 de mayor momentum como mentores", desc: "Los participantes destacados de Omega pueden apoyar a los de Norte. El peer-mentoring sube momentum en ambos grupos.", priority: "esta-semana" },
@@ -119,9 +119,9 @@ export const PLAN_CONFIGS: Record<string, PlanConfig> = {
     metric: "Generación Norte",
     value: "58% momentum",
     status: "critical",
-    statusLabel: "En atención — Expansión completada, momentum cayó 7pts",
+    statusLabel: "En atención, Expansión completada, momentum cayó 7pts",
     tips: [
-      { emoji: "🚨", title: "Activa a Marco hoy con un plan concreto", desc: "Sin contacto grupal hace 12 días. Marco necesita una sesión de 'reset' con el grupo esta semana. Propón fecha y hora tú — no esperes que él la proponga.", priority: "hoy" },
+      { emoji: "🚨", title: "Activa a Marco hoy con un plan concreto", desc: "Sin contacto grupal hace 12 días. Marco necesita una sesión de 'reset' con el grupo esta semana. Propón fecha y hora tú, no esperes que él la proponga.", priority: "hoy" },
       { emoji: "⚡", title: "Misión de cohorte con deadline de 48 horas", desc: "Una misión corta y urgente (48h) reinicia el hábito de participación. Que sea tan sencilla que nadie tenga excusa de no hacerla.", priority: "hoy" },
       { emoji: "🔍", title: "Segmenta: <45% de momentum reciben atención individual", desc: "Dentro de Norte hay probablemente 5-8 personas que están jalando el promedio hacia abajo. Identifícalas y dales intervención personal, no grupal.", priority: "esta-semana" },
       { emoji: "📅", title: "Evento de reconexión en los próximos 7 días", desc: "Un encuentro presencial o virtual corto (60 min) específico para Norte, fuera de los eventos generales. La cercanía del grupo sube el momentum 8-12 puntos.", priority: "esta-semana" },
@@ -131,7 +131,7 @@ export const PLAN_CONFIGS: Record<string, PlanConfig> = {
     metric: "Generación Vía 12",
     value: "81% momentum",
     status: "good",
-    statusLabel: "Muy activa — Despertar completado",
+    statusLabel: "Muy activa, Despertar completado",
     tips: [
       { emoji: "🏆", title: "Celebra públicamente el 81%", desc: "En el próximo evento general, reconoce a Vía 12 frente a todos. Crea competencia positiva y eleva el estatus del grupo en la comunidad.", priority: "esta-semana" },
       { emoji: "🌱", title: "Prepara la transición al siguiente módulo", desc: "Con Despertar completado y momentum alto, este es el mejor momento para introducir qué sigue. La apertura al aprendizaje es máxima.", priority: "esta-semana" },

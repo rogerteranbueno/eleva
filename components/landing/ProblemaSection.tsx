@@ -7,7 +7,7 @@ import { X } from "lucide-react"
 const SINTOMAS = [
   "Las inscripciones llegan por WhatsApp y nadie sabe exactamente cuántas hay.",
   "El expediente del participante vive en una hoja de Excel que nadie actualiza.",
-  "El seguimiento post-entrenamiento depende del criterio —y la memoria— del coach.",
+  "El seguimiento post-entrenamiento depende del criterio -y la memoria- del coach.",
   "El PL termina y no hay sistema para sostener lo que se prometió en sala.",
   "No sabes quién está perdiendo momentum hasta que ya abandonó.",
   "El crecimiento depende casi por completo de que la última generación enrole bien.",
@@ -36,7 +36,7 @@ export function ProblemaSection() {
           <p className="text-xs font-bold text-violet-400 uppercase tracking-widest mb-4">
             El estado natural de la industria
           </p>
-          <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-6">
+          <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight mb-6">
             Lo que te trajo hasta aquí no necesariamente{" "}
             <span className="text-muted-foreground font-normal">
               te llevará a la siguiente etapa.
@@ -67,7 +67,7 @@ export function ProblemaSection() {
 
         {/* Remate */}
         <motion.div custom={8} variants={fadeUp} className="border-l-2 border-violet-500/40 pl-6 max-w-2xl">
-          <p className="text-xl font-bold text-white leading-snug">
+          <p className="text-xl font-bold text-foreground leading-snug">
             No es falta de compromiso.
           </p>
           <p className="text-xl text-muted-foreground leading-snug">

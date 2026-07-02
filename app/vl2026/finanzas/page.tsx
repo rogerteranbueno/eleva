@@ -20,7 +20,7 @@ const ONBOARDING = {
   badge: "Vista del dueño · Finanzas",
   badgeColor: "violet" as const,
   title: "Tu centro como negocio",
-  description: "Revenue, costos, margen y quién no ha pagado — todo en un lugar. Sin hojas de cálculo, sin perseguir a tu equipo para saber cómo van las finanzas.",
+  description: "Revenue, costos, margen y quién no ha pagado, todo en un lugar. Sin hojas de cálculo, sin perseguir a tu equipo para saber cómo van las finanzas.",
   tips: [
     { emoji: "💰", text: "El desglose por generación te dice exactamente de dónde viene cada peso del mes." },
     { emoji: "📊", text: "El P&L simplificado muestra tu margen real después de coaches y operación." },
@@ -95,16 +95,16 @@ type FinEntry = {
 }
 
 const HISTORIAL: FinEntry[] = [
-  { id: "h1",  type: "ingreso", category: "Mensualidad",   description: "Pago PL — Valeria Romo",       amount: 4200,  date: "04 jun 2025 · 09:12",  registeredBy: "Karla Ríos (Ops)" },
-  { id: "h2",  type: "ingreso", category: "Mensualidad",   description: "Pago PL — Diego Salinas",      amount: 4200,  date: "04 jun 2025 · 08:45",  registeredBy: "Sistema automático" },
-  { id: "h3",  type: "egreso",  category: "Coach",         description: "Honorarios Ana Reyes — Junio",            amount: 18000, date: "03 jun 2025 · 14:00",  registeredBy: "Ricardo Vargas (Dueño)" },
-  { id: "h4",  type: "egreso",  category: "Coach",         description: "Honorarios Marco Díaz — Junio",           amount: 18000, date: "03 jun 2025 · 13:58",  registeredBy: "Ricardo Vargas (Dueño)" },
-  { id: "h5",  type: "egreso",  category: "Plataforma",    description: "Suscripción ELEVA — Junio 2025",        amount: 8500,  date: "01 jun 2025 · 00:00",  registeredBy: "Sistema automático" },
-  { id: "h6",  type: "ingreso", category: "Inscripción",   description: "Despertar — 6 nuevos participantes",      amount: 41400, date: "31 may 2025 · 18:20",  registeredBy: "Karla Ríos (Ops)", note: "Generación Norte — sesión mayo" },
-  { id: "h7",  type: "ingreso", category: "Mensualidad",   description: "Cobro masivo PL — 38 pagos",   amount: 159600,date: "01 may 2025 · 09:00",  registeredBy: "Sistema automático", note: "38 de 42 cobraron en fecha" },
-  { id: "h8",  type: "egreso",  category: "Operativo",     description: "Renta sala Despertar — mayo",             amount: 12000, date: "28 may 2025 · 11:00",  registeredBy: "Karla Ríos (Ops)" },
-  { id: "h9",  type: "egreso",  category: "Marketing",     description: "Pauta redes sociales — mayo",             amount: 4500,  date: "25 may 2025 · 10:00",  registeredBy: "Ricardo Vargas (Dueño)" },
-  { id: "h10", type: "ingreso", category: "Membresía",     description: "Membresía Expansión — 3 nuevos",          amount: 3600,  date: "20 may 2025 · 16:30",  registeredBy: "Karla Ríos (Ops)" },
+  { id: "h1",  type: "ingreso", category: "Mensualidad",   description: "Pago PL, Valeria Romo",       amount: 4200,  date: "04 jun 2025 · 09:12",  registeredBy: "Karla Ríos (Ops)" },
+  { id: "h2",  type: "ingreso", category: "Mensualidad",   description: "Pago PL, Diego Salinas",      amount: 4200,  date: "04 jun 2025 · 08:45",  registeredBy: "Sistema automático" },
+  { id: "h3",  type: "egreso",  category: "Coach",         description: "Honorarios Ana Reyes, Junio",            amount: 18000, date: "03 jun 2025 · 14:00",  registeredBy: "Ricardo Vargas (Dueño)" },
+  { id: "h4",  type: "egreso",  category: "Coach",         description: "Honorarios Marco Díaz, Junio",           amount: 18000, date: "03 jun 2025 · 13:58",  registeredBy: "Ricardo Vargas (Dueño)" },
+  { id: "h5",  type: "egreso",  category: "Plataforma",    description: "Suscripción ELEVA, Junio 2025",        amount: 8500,  date: "01 jun 2025 · 00:00",  registeredBy: "Sistema automático" },
+  { id: "h6",  type: "ingreso", category: "Inscripción",   description: "Despertar, 6 nuevos participantes",      amount: 41400, date: "31 may 2025 · 18:20",  registeredBy: "Karla Ríos (Ops)", note: "Generación Norte, sesión mayo" },
+  { id: "h7",  type: "ingreso", category: "Mensualidad",   description: "Cobro masivo PL, 38 pagos",   amount: 159600,date: "01 may 2025 · 09:00",  registeredBy: "Sistema automático", note: "38 de 42 cobraron en fecha" },
+  { id: "h8",  type: "egreso",  category: "Operativo",     description: "Renta sala Despertar, mayo",             amount: 12000, date: "28 may 2025 · 11:00",  registeredBy: "Karla Ríos (Ops)" },
+  { id: "h9",  type: "egreso",  category: "Marketing",     description: "Pauta redes sociales, mayo",             amount: 4500,  date: "25 may 2025 · 10:00",  registeredBy: "Ricardo Vargas (Dueño)" },
+  { id: "h10", type: "ingreso", category: "Membresía",     description: "Membresía Expansión, 3 nuevos",          amount: 3600,  date: "20 may 2025 · 16:30",  registeredBy: "Karla Ríos (Ops)" },
 ]
 
 function fmt(n: number) {
@@ -289,7 +289,7 @@ export default function FinanzasPage() {
           {
             label: "Ingresos del mes", value: fmt(monthlyRevenue), sub: "Mensualidades + inscripciones",
             color: "text-white", icon: DollarSign, iconColor: "text-violet-400",
-            tip: <InfoTooltip title="Ingresos del mes" source="Suma de mensualidades cobradas + inscripciones nuevas en el mes en curso." formula="MRR = Σ(cuota × participantes_activos)" why="Es el MRR (Monthly Recurring Revenue) — la métrica base para proyectar crecimiento y tomar decisiones de inversión." benchmark=">$200K MXN/mes para un centro de 80+ participantes" side="bottom" />,
+            tip: <InfoTooltip title="Ingresos del mes" source="Suma de mensualidades cobradas + inscripciones nuevas en el mes en curso." formula="MRR = Σ(cuota × participantes_activos)" why="Es el MRR (Monthly Recurring Revenue), la métrica base para proyectar crecimiento y tomar decisiones de inversión." benchmark=">$200K MXN/mes para un centro de 80+ participantes" side="bottom" />,
           },
           {
             label: "Cobrado", value: fmt(collected), sub: `${collectedPct}% del total`,
@@ -411,7 +411,7 @@ export default function FinanzasPage() {
 
           <div className="h-px bg-white/6" />
 
-          {/* Costs — scaled by coaches count */}
+          {/* Costs, scaled by coaches count */}
           <div>
             <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Costos</p>
             <div className="space-y-1.5">
@@ -503,11 +503,11 @@ export default function FinanzasPage() {
         <div className="space-y-2">
           {[
             { label: "Participantes activos sin pago registrado", count: 3, action: "Revisar expedientes", color: "red", tip: "Pueden estar en cohorte sin haber concluido el proceso de pago." },
-            { label: "Pago registrado sin comprobante adjunto", count: 1, action: "Ver movimiento", color: "orange", tip: "Registrado por staff — requiere comprobante para cierres mensuales." },
+            { label: "Pago registrado sin comprobante adjunto", count: 1, action: "Ver movimiento", color: "orange", tip: "Registrado por staff, requiere comprobante para cierres mensuales." },
             { label: "Monto pagado distinto al plan acordado", count: 2, action: "Ver acuerdos", color: "orange", tip: "Probable pago parcial sin nota de acuerdo. Verificar con ops." },
             { label: "Campaña de cobranza enviada sin seguimiento", count: 1, action: "Ver campaña", color: "yellow", tip: "La campaña del 28 de mayo no tuvo respuesta registrada." },
             { label: "Participante con saldo vencido y momentum alto", count: 1, action: "Ver participante", color: "yellow", tip: "Diego Salinas tiene momentum 94% pero pago pendiente. Recordatorio amable recomendado." },
-            { label: "Participante completado con saldo pendiente", count: 0, action: "—", color: "green", tip: "Sin casos detectados este mes." },
+            { label: "Participante completado con saldo pendiente", count: 0, action: "-", color: "green", tip: "Sin casos detectados este mes." },
           ].map(({ label, count, action, color, tip }) => (
             <details key={label} className={cn(
               "group rounded-xl border transition-colors",
@@ -559,7 +559,7 @@ export default function FinanzasPage() {
       <div className="glass-violet rounded-2xl p-5 space-y-4">
         <div className="flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-violet-400" />
-          <p className="font-semibold text-white text-sm">Proyección — Julio 2025</p>
+          <p className="font-semibold text-white text-sm">Proyección, Julio 2025</p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {[
@@ -591,7 +591,7 @@ export default function FinanzasPage() {
               <div>
                 <p className="text-sm font-bold text-white">Anomalías detectadas automáticamente</p>
                 <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                  ELEVA monitorea cada movimiento financiero y detecta inconsistencias — pagos sin comprobante, participantes activos
+                  ELEVA monitorea cada movimiento financiero y detecta inconsistencias, pagos sin comprobante, participantes activos
                   sin pago registrado, becas no autorizadas, comprobantes duplicados. Esto no es solo un dashboard: es disciplina financiera.
                 </p>
               </div>
@@ -615,7 +615,7 @@ export default function FinanzasPage() {
           {/* Alta severity */}
           {anomalies.filter(a => a.severity === "alta").length > 0 && (
             <div className="space-y-2">
-              <p className="text-[10px] uppercase tracking-widest text-red-400 font-semibold">🔴 Alta prioridad — resolver antes del cierre</p>
+              <p className="text-[10px] uppercase tracking-widest text-red-400 font-semibold">🔴 Alta prioridad, resolver antes del cierre</p>
               {anomalies.filter(a => a.severity === "alta").map((a) => (
                 <AnomalyCard key={a.id} a={a} onResolve={() => resolveAnomaly(a.id)} />
               ))}
@@ -625,7 +625,7 @@ export default function FinanzasPage() {
           {/* Media severity */}
           {anomalies.filter(a => a.severity === "media").length > 0 && (
             <div className="space-y-2">
-              <p className="text-[10px] uppercase tracking-widest text-yellow-400 font-semibold">🟡 Prioridad media — esta semana</p>
+              <p className="text-[10px] uppercase tracking-widest text-yellow-400 font-semibold">🟡 Prioridad media, esta semana</p>
               {anomalies.filter(a => a.severity === "media").map((a) => (
                 <AnomalyCard key={a.id} a={a} onResolve={() => resolveAnomaly(a.id)} />
               ))}
@@ -635,7 +635,7 @@ export default function FinanzasPage() {
           {/* Baja */}
           {anomalies.filter(a => a.severity === "baja").length > 0 && (
             <div className="space-y-2">
-              <p className="text-[10px] uppercase tracking-widest text-violet-400 font-semibold">🔵 Bajo impacto — revisar cuando puedas</p>
+              <p className="text-[10px] uppercase tracking-widest text-violet-400 font-semibold">🔵 Bajo impacto, revisar cuando puedas</p>
               {anomalies.filter(a => a.severity === "baja").map((a) => (
                 <AnomalyCard key={a.id} a={a} onResolve={() => resolveAnomaly(a.id)} />
               ))}

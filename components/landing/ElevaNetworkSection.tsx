@@ -36,7 +36,7 @@ const networkBenefits = [
   {
     icon: BookOpen,
     title: "Biblioteca de recursos ELEVA",
-    body: "Protocolos, marcos de trabajo, guías de facilitación, casos de estudio y materiales de apoyo — todo disponible en el ecosistema ELEVA OS.",
+    body: "Protocolos, marcos de trabajo, guías de facilitación, casos de estudio y materiales de apoyo, todo disponible en el ecosistema ELEVA OS.",
     accent: "blue",
   },
   {
@@ -58,7 +58,7 @@ export function ElevaNetworkSection() {
   const { ref, inView } = useInView(0.08)
 
   return (
-    <section ref={ref} className="py-28 px-6 border-t border-white/5">
+    <section ref={ref} className="py-28 px-6 border-t border-foreground/5">
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
@@ -70,19 +70,19 @@ export function ElevaNetworkSection() {
         >
           <div className="space-y-5">
             <p className="text-xs font-bold text-emerald-400 uppercase tracking-widest">Red ELEVA</p>
-            <h2 className="text-4xl sm:text-5xl font-black text-white leading-[1.1] tracking-tight">
+            <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-[1.1] tracking-tight">
               La formación no termina
               <br />
               con el diploma.
-              <span className="text-white/40 font-light italic block mt-1">Empieza.</span>
+              <span className="text-foreground/40 font-light italic block mt-1">Empieza.</span>
             </h2>
           </div>
           <div className="space-y-4">
-            <p className="text-white/70 leading-relaxed">
-              Los coaches certificados ELEVA entran a una red activa de práctica, supervisión y crecimiento continuo. No formamos entrenadores para que tengan un certificado — los formamos para que tengan una carrera.
+            <p className="text-foreground/70 leading-relaxed">
+              Los coaches certificados ELEVA entran a una red activa de práctica, supervisión y crecimiento continuo. No formamos entrenadores para que tengan un certificado, los formamos para que tengan una carrera.
             </p>
-            <p className="text-white/70 leading-relaxed">
-              La red ELEVA garantiza acceso a la <strong className="text-white/90">cancha</strong>: centros afiliados donde practicar, mentores que han facilitado miles de horas, y una comunidad que entiende exactamente el contexto en el que operas.
+            <p className="text-foreground/70 leading-relaxed">
+              La red ELEVA garantiza acceso a la <strong className="text-foreground/90">cancha</strong>: centros afiliados donde practicar, mentores que han facilitado miles de horas, y una comunidad que entiende exactamente el contexto en el que operas.
             </p>
             <AcredittaBadge size="md" className="mt-2" />
           </div>
@@ -101,14 +101,14 @@ export function ElevaNetworkSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, ease, delay: i * 0.07 }}
-                className={`glass rounded-2xl border border-white/6 p-6 space-y-4 hover:border-white/12 transition-colors ${isFeature ? "lg:col-span-1 row-span-1" : ""}`}
+                className={`glass rounded-2xl border border-foreground/6 p-6 space-y-4 hover:border-foreground/12 transition-colors ${isFeature ? "lg:col-span-1 row-span-1" : ""}`}
               >
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${a.icon}`}>
                   <Icon className="w-5 h-5" />
                 </div>
                 <div className="space-y-2">
-                  <p className="font-black text-white text-base leading-tight">{b.title}</p>
-                  <p className="text-base text-white/75 leading-relaxed">{b.body}</p>
+                  <p className="font-black text-foreground text-base leading-tight">{b.title}</p>
+                  <p className="text-base text-foreground/75 leading-relaxed">{b.body}</p>
                 </div>
               </motion.div>
             )
@@ -120,7 +120,7 @@ export function ElevaNetworkSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease, delay: 0.45 }}
-          className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 rounded-2xl border border-white/5 glass"
+          className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 rounded-2xl border border-foreground/5 glass"
         >
           {[
             { val: "40+",   label: "Coaches certificados en la red" },
@@ -129,8 +129,8 @@ export function ElevaNetworkSection() {
             { val: "∞",     label: "Horas de supervisión disponibles" },
           ].map((s) => (
             <div key={s.label} className="text-center space-y-1">
-              <p className="text-2xl sm:text-3xl font-black text-white">{s.val}</p>
-              <p className="text-sm text-white/65 leading-snug">{s.label}</p>
+              <p className="text-2xl sm:text-3xl font-black text-foreground">{s.val}</p>
+              <p className="text-sm text-foreground/65 leading-snug">{s.label}</p>
             </div>
           ))}
         </motion.div>
@@ -142,11 +142,11 @@ export function ElevaNetworkSection() {
           transition={{ duration: 0.5, ease, delay: 0.55 }}
           className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
         >
-          <p className="text-sm text-white/50 max-w-md">
+          <p className="text-sm text-foreground/50 max-w-md">
             Ser parte de la red no es automático. Se accede completando el proceso de formación y certificación ELEVA.
           </p>
           <Link href="/academia">
-            <button className="flex items-center gap-2 px-5 py-3 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl text-sm transition-colors group shrink-0">
+            <button className="flex items-center gap-2 px-5 py-3 bg-violet-600 hover:bg-violet-500 text-foreground font-bold rounded-xl text-sm transition-colors group shrink-0">
               Ver certificaciones
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </button>

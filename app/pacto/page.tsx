@@ -97,15 +97,15 @@ const FASE_ACCENT: Record<string, { badge: string; line: string }> = {
 const FAQ = [
   {
     q: "¿Qué pasa con la metodología propia de mi centro?",
-    a: "PACTO no reemplaza tu metodología. La tomamos como base y construimos alrededor de ella — formación de entrenadores, operación, seguimiento y crecimiento bajo tu propia cultura y lenguaje. Tu propiedad intelectual es intocable.",
+    a: "PACTO no reemplaza tu metodología. La tomamos como base y construimos alrededor de ella, formación de entrenadores, operación, seguimiento y crecimiento bajo tu propia cultura y lenguaje. Tu propiedad intelectual es intocable.",
   },
   {
     q: "¿Cuánto tiempo toma completar PACTO?",
-    a: "El programa tiene una duración de 14–16 semanas de implementación activa. El ritmo se ajusta según el tamaño del equipo y los compromisos operativos del centro. No es un curso de fin de semana — es una implementación real.",
+    a: "El programa tiene una duración de 14–16 semanas de implementación activa. El ritmo se ajusta según el tamaño del equipo y los compromisos operativos del centro. No es un curso de fin de semana, es una implementación real.",
   },
   {
     q: "¿Necesito contratar ELEVA OS para hacer PACTO?",
-    a: "ELEVA OS se instala como parte del módulo 09 de PACTO. No necesitas contratarlo por separado de antemano — está incluido en la implementación.",
+    a: "ELEVA OS se instala como parte del módulo 09 de PACTO. No necesitas contratarlo por separado de antemano, está incluido en la implementación.",
   },
   {
     q: "¿Es presencial o virtual?",
@@ -126,12 +126,12 @@ const FAQ = [
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className={cn("border rounded-xl overflow-hidden transition-colors", open ? "border-white/12" : "border-white/6")}>
+    <div className={cn("border rounded-xl overflow-hidden transition-colors", open ? "border-foreground/12" : "border-foreground/6")}>
       <button
         onClick={() => setOpen((p) => !p)}
         className="w-full flex items-start justify-between gap-4 px-5 py-4 text-left"
       >
-        <span className="text-sm font-bold text-white leading-snug">{q}</span>
+        <span className="text-sm font-bold text-foreground leading-snug">{q}</span>
         <ChevronDown className={cn("w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5 transition-transform", open && "rotate-180")} />
       </button>
       <AnimatePresence>
@@ -163,18 +163,18 @@ export default function PACTOPage() {
             <Link href="/" className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors text-sm">
               <ArrowLeft className="w-4 h-4" /> Inicio
             </Link>
-            <div className="w-px h-4 bg-white/10" />
+            <div className="w-px h-4 bg-foreground/10" />
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 rounded-md bg-violet-600 flex items-center justify-center">
-                <span className="text-white font-black text-[10px]">E</span>
+                <span className="text-foreground font-black text-[10px]">E</span>
               </div>
               <span className="font-black text-foreground text-sm tracking-tight">ELEVA</span>
-              <span className="text-white/20 text-sm">/</span>
+              <span className="text-foreground/20 text-sm">/</span>
               <span className="font-black text-violet-400 text-sm">PACTO</span>
             </div>
           </div>
           <Link href="/build">
-            <button className="flex items-center gap-1.5 px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white rounded-lg text-[13px] font-bold transition-colors">
+            <button className="flex items-center gap-1.5 px-4 py-2 bg-violet-600 hover:bg-violet-500 text-foreground rounded-lg text-[13px] font-bold transition-colors">
               Aplicar <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </Link>
@@ -204,7 +204,7 @@ export default function PACTOPage() {
               <Zap className="w-3 h-3" /> Producto estrella · ELEVA
             </motion.div>
 
-            <h1 className="text-7xl sm:text-8xl md:text-9xl font-black text-white tracking-tight leading-none mb-4">
+            <h1 className="text-7xl sm:text-8xl md:text-9xl font-black text-foreground tracking-tight leading-none mb-4">
               PACTO
             </h1>
             <p className="text-xl sm:text-2xl text-muted-foreground font-light mb-3 max-w-xl mx-auto">
@@ -216,14 +216,14 @@ export default function PACTOPage() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/build">
-                <button className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-base font-black transition-colors shadow-lg shadow-violet-600/20 group">
+                <button className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-foreground rounded-xl text-base font-black transition-colors shadow-lg shadow-violet-600/20 group">
                   <Calendar className="w-4.5 h-4.5" />
                   Aplicar a PACTO
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </button>
               </Link>
               <a href="#modulos">
-                <button className="flex items-center gap-2 px-6 py-3.5 glass border border-white/10 hover:border-white/20 text-white font-bold rounded-xl transition-all text-sm">
+                <button className="flex items-center gap-2 px-6 py-3.5 glass border border-foreground/10 hover:border-foreground/20 text-foreground font-bold rounded-xl transition-all text-sm">
                   Ver los módulos
                 </button>
               </a>
@@ -242,7 +242,7 @@ export default function PACTOPage() {
                 { value: "8 entregables", label: "al cierre del programa" },
               ].map((s) => (
                 <div key={s.label} className="text-center">
-                  <p className="text-2xl font-black text-white">{s.value}</p>
+                  <p className="text-2xl font-black text-foreground">{s.value}</p>
                   <p className="text-xs text-muted-foreground">{s.label}</p>
                 </div>
               ))}
@@ -261,7 +261,7 @@ export default function PACTOPage() {
             <div className="space-y-6">
               <div>
                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">Qué es PACTO</p>
-                <h2 className="text-4xl font-black text-white leading-tight mb-5">
+                <h2 className="text-4xl font-black text-foreground leading-tight mb-5">
                   No es una capacitación.<br />
                   <span className="text-muted-foreground font-light">Es capacidad instalada.</span>
                 </h2>
@@ -270,7 +270,7 @@ export default function PACTOPage() {
                 </p>
               </div>
               <p className="text-foreground/80 leading-relaxed">
-                No viene a decirte cómo entrenar — viene a instalar la estructura que permite que tu entrenamiento escale: entrenadores propios, staff preparado, procesos documentados, datos en tiempo real y un plan de crecimiento real.
+                No viene a decirte cómo entrenar, viene a instalar la estructura que permite que tu entrenamiento escale: entrenadores propios, staff preparado, procesos documentados, datos en tiempo real y un plan de crecimiento real.
               </p>
               <div className="glass rounded-2xl p-5 border border-violet-500/15 space-y-1">
                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Copy central</p>
@@ -283,9 +283,9 @@ export default function PACTOPage() {
             <div className="space-y-6">
               <div>
                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">Para quién es</p>
-                <h3 className="text-xl font-black text-white mb-4">Centros activos con ambición de escalar</h3>
+                <h3 className="text-xl font-black text-foreground mb-4">Centros activos con ambición de escalar</h3>
                 <p className="text-foreground/80 leading-relaxed mb-5">
-                  Centros que ya tienen comunidad, entrenamientos en curso y una visión de crecimiento — pero que siguen operando con improvisación, entrenadores externos, seguimiento manual y decisiones tomadas sin datos.
+                  Centros que ya tienen comunidad, entrenamientos en curso y una visión de crecimiento, pero que siguen operando con improvisación, entrenadores externos, seguimiento manual y decisiones tomadas sin datos.
                 </p>
               </div>
 
@@ -316,12 +316,12 @@ export default function PACTOPage() {
           <div className="space-y-10">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Contenido del programa</p>
-              <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
+              <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight">
                 12 módulos.<br />
                 <span className="text-muted-foreground font-light">Un centro transformado.</span>
               </h2>
               <p className="text-muted-foreground text-sm">
-                Cada módulo pertenece a una división ELEVA — los colores marcan qué área del centro estamos construyendo.
+                Cada módulo pertenece a una división ELEVA, los colores marcan qué área del centro estamos construyendo.
               </p>
             </div>
 
@@ -338,11 +338,11 @@ export default function PACTOPage() {
               {MODULOS.map((m) => (
                 <div
                   key={m.num}
-                  className="glass rounded-xl p-4 border border-white/6 flex items-start gap-3 group hover:border-white/10 transition-colors"
+                  className="glass rounded-xl p-4 border border-foreground/6 flex items-start gap-3 group hover:border-foreground/10 transition-colors"
                 >
                   <span className="text-[11px] font-black text-violet-400/60 flex-shrink-0 mt-0.5 w-6">{m.num}</span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-white font-semibold leading-snug">{m.title}</p>
+                    <p className="text-sm text-foreground font-semibold leading-snug">{m.title}</p>
                   </div>
                   <span className={cn("text-[9px] px-2 py-0.5 rounded-full border font-bold uppercase tracking-wider flex-shrink-0 self-start mt-0.5", AREA_COLOR[m.area])}>
                     {m.area}
@@ -363,7 +363,7 @@ export default function PACTOPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div className="space-y-4">
               <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Al terminar PACTO</p>
-              <h2 className="text-4xl font-black text-white leading-tight">
+              <h2 className="text-4xl font-black text-foreground leading-tight">
                 Lo que el centro<br />
                 <span className="text-muted-foreground font-light">tiene en sus manos.</span>
               </h2>
@@ -372,7 +372,7 @@ export default function PACTOPage() {
               </p>
               <div className="pt-4">
                 <Link href="/build">
-                  <button className="flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold text-sm transition-colors group">
+                  <button className="flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-500 text-foreground rounded-xl font-bold text-sm transition-colors group">
                     Agendar diagnóstico <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </button>
                 </Link>
@@ -386,7 +386,7 @@ export default function PACTOPage() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05, duration: 0.4 }}
                   viewport={{ once: true }}
-                  className="flex items-start gap-3 glass rounded-xl p-4 border border-white/6"
+                  className="flex items-start gap-3 glass rounded-xl p-4 border border-foreground/6"
                 >
                   <div className="w-6 h-6 rounded-full bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <Check className="w-3 h-3 text-emerald-400" />
@@ -408,7 +408,7 @@ export default function PACTOPage() {
           <div className="space-y-10">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Ruta del programa</p>
-              <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
+              <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight">
                 16 semanas.<br />
                 <span className="text-muted-foreground font-light">5 fases de implementación.</span>
               </h2>
@@ -416,7 +416,7 @@ export default function PACTOPage() {
 
             <div className="relative">
               {/* Vertical line desktop */}
-              <div className="hidden lg:block absolute left-[88px] top-0 bottom-0 w-px bg-white/6" />
+              <div className="hidden lg:block absolute left-[88px] top-0 bottom-0 w-px bg-foreground/6" />
 
               <div className="space-y-5">
                 {FASES.map((f) => {
@@ -432,12 +432,12 @@ export default function PACTOPage() {
                     >
                       {/* Step indicator */}
                       <div className="hidden lg:flex flex-col items-center flex-shrink-0 w-14">
-                        <div className={cn("w-6 h-6 rounded-full border-2 flex items-center justify-center text-[10px] font-black text-white relative z-10", a.badge)}>
+                        <div className={cn("w-6 h-6 rounded-full border-2 flex items-center justify-center text-[10px] font-black text-foreground relative z-10", a.badge)}>
                           {f.num}
                         </div>
                       </div>
 
-                      <div className="glass rounded-2xl border border-white/6 p-5 flex-1 hover:border-white/10 transition-colors">
+                      <div className="glass rounded-2xl border border-foreground/6 p-5 flex-1 hover:border-foreground/10 transition-colors">
                         <div className="flex flex-col sm:flex-row sm:items-start gap-4">
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-2">
@@ -448,7 +448,7 @@ export default function PACTOPage() {
                                 {f.weeks}
                               </span>
                             </div>
-                            <h3 className="font-black text-white text-base">{f.title}</h3>
+                            <h3 className="font-black text-foreground text-base">{f.title}</h3>
                           </div>
                           <ul className="sm:w-80 space-y-1.5 flex-shrink-0">
                             {f.items.map((item) => (
@@ -478,7 +478,7 @@ export default function PACTOPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-5">
               <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Inversión</p>
-              <h2 className="text-4xl font-black text-white leading-tight">
+              <h2 className="text-4xl font-black text-foreground leading-tight">
                 Una implementación seria<br />
                 <span className="text-muted-foreground font-light">con un precio transparente.</span>
               </h2>
@@ -504,11 +504,11 @@ export default function PACTOPage() {
             <div className="glass rounded-3xl border border-violet-500/20 p-8 space-y-6">
               <div className="space-y-1">
                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Precio base</p>
-                <p className="text-5xl font-black text-white">Desde USD $15,000</p>
+                <p className="text-5xl font-black text-foreground">Desde USD $15,000</p>
                 <p className="text-xs text-muted-foreground">El alcance final se define tras el diagnóstico inicial sin costo.</p>
               </div>
 
-              <div className="border-t border-white/6 pt-5 space-y-2">
+              <div className="border-t border-foreground/6 pt-5 space-y-2">
                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Incluye</p>
                 <ul className="space-y-1.5">
                   {["12 módulos + 5 fases de implementación", "ELEVA OS instalado y configurado", "Formación de entrenadores y staff", "Playbooks y procesos documentados", "Plan de crecimiento a 90 días", "Soporte 30 días post-entrega"].map((i) => (
@@ -522,12 +522,12 @@ export default function PACTOPage() {
 
               <div className="space-y-3">
                 <Link href="/build">
-                  <button className="w-full flex items-center justify-center gap-2 py-4 bg-violet-600 hover:bg-violet-500 text-white font-black rounded-xl transition-colors group text-base">
+                  <button className="w-full flex items-center justify-center gap-2 py-4 bg-violet-600 hover:bg-violet-500 text-foreground font-black rounded-xl transition-colors group text-base">
                     Aplicar a PACTO <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </button>
                 </Link>
                 <p className="text-center text-[10px] text-muted-foreground">
-                  El equipo de ELEVA revisa cada solicitud — sólo trabajamos con centros con los que hay fit real.
+                  El equipo de ELEVA revisa cada solicitud, sólo trabajamos con centros con los que hay fit real.
                 </p>
               </div>
             </div>
@@ -544,7 +544,7 @@ export default function PACTOPage() {
           <div className="space-y-8">
             <div className="text-center">
               <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">Por qué PACTO cubre todo</p>
-              <h2 className="text-3xl font-black text-white">Las 4 divisiones ELEVA trabajan en conjunto.</h2>
+              <h2 className="text-3xl font-black text-foreground">Las 4 divisiones ELEVA trabajan en conjunto.</h2>
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {[
@@ -553,7 +553,7 @@ export default function PACTOPage() {
                 { icon: LayoutDashboard, label: "ELEVA OS",    sub: "Sistema operativo",          color: "blue" },
                 { icon: ShieldCheck,   label: "ELEVA Standards", sub: "Protocolos y ética",      color: "amber" },
               ].map(({ icon: Icon, label, sub, color }) => (
-                <div key={label} className="glass rounded-2xl p-5 border border-white/6 flex flex-col items-center text-center gap-3">
+                <div key={label} className="glass rounded-2xl p-5 border border-foreground/6 flex flex-col items-center text-center gap-3">
                   <div className={cn(
                     "w-10 h-10 rounded-xl flex items-center justify-center",
                     color === "violet" ? "bg-violet-500/10 text-violet-400" :
@@ -564,7 +564,7 @@ export default function PACTOPage() {
                     <Icon className="w-4.5 h-4.5" />
                   </div>
                   <div>
-                    <p className="text-xs font-black text-white">{label}</p>
+                    <p className="text-xs font-black text-foreground">{label}</p>
                     <p className="text-[10px] text-muted-foreground mt-0.5">{sub}</p>
                   </div>
                 </div>
@@ -583,7 +583,7 @@ export default function PACTOPage() {
           <div className="space-y-8">
             <div className="text-center space-y-3">
               <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Preguntas frecuentes</p>
-              <h2 className="text-4xl font-black text-white leading-tight">
+              <h2 className="text-4xl font-black text-foreground leading-tight">
                 Las respuestas que<br />
                 <span className="text-muted-foreground font-light">suelen importar.</span>
               </h2>
@@ -616,7 +616,7 @@ export default function PACTOPage() {
               <div className="h-px flex-1 max-w-24 bg-gradient-to-l from-transparent to-white/8" />
             </div>
 
-            <h2 className="text-5xl sm:text-6xl font-black text-white leading-tight">
+            <h2 className="text-5xl sm:text-6xl font-black text-foreground leading-tight">
               Tu centro ya tiene<br />
               <span className="text-muted-foreground font-light italic">la metodología.</span>
             </h2>
@@ -626,14 +626,14 @@ export default function PACTOPage() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link href="/build">
-                <button className="flex items-center gap-2.5 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-black rounded-xl transition-colors text-base group">
+                <button className="flex items-center gap-2.5 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-foreground font-black rounded-xl transition-colors text-base group">
                   <Calendar className="w-4.5 h-4.5" />
                   Aplicar a PACTO
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </button>
               </Link>
               <Link href="/">
-                <button className="flex items-center gap-2 px-6 py-4 glass border border-white/10 hover:border-white/20 text-white font-bold rounded-xl transition-all text-sm">
+                <button className="flex items-center gap-2 px-6 py-4 glass border border-foreground/10 hover:border-foreground/20 text-foreground font-bold rounded-xl transition-all text-sm">
                   Conocer todo ELEVA
                 </button>
               </Link>
@@ -650,7 +650,7 @@ export default function PACTOPage() {
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 rounded-md bg-violet-600 flex items-center justify-center">
-                <span className="text-white font-black text-[10px]">E</span>
+                <span className="text-foreground font-black text-[10px]">E</span>
               </div>
               <span className="font-black text-foreground text-sm">ELEVA</span>
             </div>

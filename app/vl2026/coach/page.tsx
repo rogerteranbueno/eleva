@@ -59,7 +59,7 @@ const PARTICIPANTS: Participant[] = [
 const AI_SESSION_INSIGHTS = [
   { icon: "🎯", title: "Abre con reconocimiento grupal", desc: "34 personas tienen momentum >70%. Nombrarlas (sin lista exhaustiva) crea energía positiva desde el inicio y eleva el estándar del grupo." },
   { icon: "🔥", title: "No menciones los ausentes en los primeros 15 min", desc: "Crear FOMO es más efectivo que señalar ausencias. Haz que los presentes sientan que están en el lugar correcto." },
-  { icon: "💡", title: "Pregunta de apertura sugerida", desc: "\"¿Cuál fue el mayor reto de este mes y qué hiciste con él?\" — abre a toda la generación, sin presionar a nadie específico." },
+  { icon: "💡", title: "Pregunta de apertura sugerida", desc: "\"¿Cuál fue el mayor reto de este mes y qué hiciste con él?\", abre a toda la generación, sin presionar a nadie específico." },
   { icon: "⚠️", title: "Valeria y Omar en riesgo crítico", desc: "Ambos tienen momentum <40%. Planea un break-out o check-in individual al finalizar. No los señales en plenario." },
   { icon: "📈", title: "Diego puede co-facilitar el cierre", desc: "Su momentum alto y liderazgo natural lo hacen ideal para cerrar la sesión con su testimonio del mes. Pregúntale antes." },
 ]

@@ -49,17 +49,17 @@ export function LegacySection() {
             <Clock className="w-4 h-4 text-amber-400" />
             <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">La industria tiene historia</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-black text-white leading-[1.1] tracking-tight mb-6">
+          <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-[1.1] tracking-tight mb-6">
             La transformación no empezó ayer.
             <br />
-            <span className="text-white/60 font-light italic">Pero tampoco puede seguir operando como hace 50 años.</span>
+            <span className="text-foreground/60 font-light italic">Pero tampoco puede seguir operando como hace 50 años.</span>
           </h2>
-          <div className="space-y-4 text-lg leading-relaxed text-white/75">
+          <div className="space-y-4 text-lg leading-relaxed text-foreground/75">
             <p>
-              Durante décadas, la industria de la transformación personal fue influida por modelos como <strong className="text-white">est</strong>, <strong className="text-white">Lifespring</strong>, <strong className="text-white">Landmark</strong> y otros entrenamientos de alto impacto. Muchos abrieron conversaciones poderosas sobre responsabilidad, lenguaje y posibilidad. Su influencia llegó hasta América Latina y sigue presente en muchos programas actuales.
+              Durante décadas, la industria de la transformación personal fue influida por modelos como <strong className="text-foreground">est</strong>, <strong className="text-foreground">Lifespring</strong>, <strong className="text-foreground">Landmark</strong> y otros entrenamientos de alto impacto. Muchos abrieron conversaciones poderosas sobre responsabilidad, lenguaje y posibilidad. Su influencia llegó hasta América Latina y sigue presente en muchos programas actuales.
             </p>
             <p>
-              También dejaron preguntas importantes — documentadas públicamente — sobre ética, presión grupal, formación de entrenadores, seguridad psicológica y modelos de negocio basados en enrolamiento.
+              También dejaron preguntas importantes, documentadas públicamente, sobre ética, presión grupal, formación de entrenadores, seguridad psicológica y modelos de negocio basados en enrolamiento.
             </p>
           </div>
 
@@ -83,7 +83,7 @@ export function LegacySection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.65, ease, delay: 0.15 }}
         >
-          <p className="text-xs font-bold text-white/50 uppercase tracking-widest mb-6">De modelos heredados al estándar ELEVA</p>
+          <p className="text-xs font-bold text-foreground/50 uppercase tracking-widest mb-6">De modelos heredados al estándar ELEVA</p>
           <div className="grid lg:grid-cols-2 gap-4">
 
             {/* Legacy column */}
@@ -103,7 +103,7 @@ export function LegacySection() {
                   <div className="w-7 h-7 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center shrink-0 mt-0.5">
                     <item.icon className="w-3.5 h-3.5 text-red-400" />
                   </div>
-                  <p className="text-sm text-white/65 leading-snug">{item.text}</p>
+                  <p className="text-sm text-foreground/65 leading-snug">{item.text}</p>
                 </motion.div>
               ))}
             </div>
@@ -111,7 +111,7 @@ export function LegacySection() {
             {/* ELEVA column */}
             <div className="rounded-2xl border border-violet-500/25 bg-violet-500/4 p-6 space-y-2">
               <div className="flex items-center gap-2 mb-5">
-                <span className="w-5 h-5 rounded bg-violet-600 flex items-center justify-center text-white font-black text-[10px]">E</span>
+                <span className="w-5 h-5 rounded bg-violet-600 flex items-center justify-center text-foreground font-black text-[10px]">E</span>
                 <p className="text-sm font-bold text-violet-400 uppercase tracking-wide">Estándar ELEVA</p>
               </div>
               {eleva.map((item, i) => (
@@ -125,7 +125,7 @@ export function LegacySection() {
                   <div className="w-7 h-7 rounded-lg bg-violet-500/10 border border-violet-500/25 flex items-center justify-center shrink-0 mt-0.5">
                     <item.icon className="w-3.5 h-3.5 text-violet-400" />
                   </div>
-                  <p className="text-sm text-white/85 leading-snug">{item.text}</p>
+                  <p className="text-sm text-foreground/85 leading-snug">{item.text}</p>
                 </motion.div>
               ))}
             </div>
@@ -137,10 +137,10 @@ export function LegacySection() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease, delay: 0.4 }}
-          className="border-t border-white/5 pt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+          className="border-t border-foreground/5 pt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
         >
           <div className="max-w-xl">
-            <p className="text-lg font-black text-white leading-tight">
+            <p className="text-lg font-black text-foreground leading-tight">
               ELEVA no cancela esa historia.
               <span className="text-violet-400"> La eleva.</span>
             </p>
@@ -150,13 +150,13 @@ export function LegacySection() {
           </div>
           <div className="flex gap-3 shrink-0">
             <Link href="/estandar-eleva">
-              <button className="flex items-center gap-2 px-5 py-3 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl transition-colors text-sm group">
+              <button className="flex items-center gap-2 px-5 py-3 bg-violet-600 hover:bg-violet-500 text-foreground font-bold rounded-xl transition-colors text-sm group">
                 Ver el estándar
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </button>
             </Link>
             <Link href="/historia-transformacion">
-              <button className="flex items-center gap-2 px-5 py-3 glass border border-white/10 hover:border-white/20 text-white/70 font-semibold rounded-xl transition-colors text-sm">
+              <button className="flex items-center gap-2 px-5 py-3 glass border border-foreground/10 hover:border-foreground/20 text-foreground/70 font-semibold rounded-xl transition-colors text-sm">
                 Ver historia
               </button>
             </Link>

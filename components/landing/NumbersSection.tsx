@@ -61,7 +61,7 @@ interface StatDef {
 export function StatCounter({ stat }: { stat: StatDef }) {
   const { value, ref } = useCountUp(stat.value)
   return (
-    <div ref={ref} className={cn("rounded-2xl p-4 lg:p-5 text-center border border-white/6 flex flex-col gap-2 overflow-hidden", stat.bg)}>
+    <div ref={ref} className={cn("rounded-2xl p-4 lg:p-5 text-center border border-foreground/6 flex flex-col gap-2 overflow-hidden", stat.bg)}>
       <p className={cn("text-3xl lg:text-4xl font-black leading-none break-all", stat.color)}>
         {stat.prefix ?? ""}{value}{stat.suffix}
       </p>
@@ -155,7 +155,7 @@ export function NumbersSection() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
 
-          {/* Hero stat — +240% — spans 2 cols, tall */}
+          {/* Hero stat, +240%, spans 2 cols, tall */}
           <motion.div
             ref={heroRef}
             initial={{ opacity: 0, scale: 0.96 }}
@@ -174,7 +174,7 @@ export function NumbersSection() {
             </div>
           </motion.div>
 
-          {/* Stat 2 — 68% */}
+          {/* Stat 2, 68% */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -187,7 +187,7 @@ export function NumbersSection() {
             <p className="text-xs text-muted-foreground mt-2 leading-snug">{c.stat2Sub} <span className="text-foreground/60">{c.stat2Sub2}</span></p>
           </motion.div>
 
-          {/* Stat 3 — 3x */}
+          {/* Stat 3, 3x */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -200,7 +200,7 @@ export function NumbersSection() {
             <p className="text-xs text-muted-foreground mt-2 leading-snug">{c.stat3Sub}</p>
           </motion.div>
 
-          {/* Stat 4 — 80% */}
+          {/* Stat 4, 80% */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -213,7 +213,7 @@ export function NumbersSection() {
             <p className="text-xs text-muted-foreground mt-2 leading-snug">{c.stat4Sub}</p>
           </motion.div>
 
-          {/* Stat 5 — 4hrs */}
+          {/* Stat 5, 4hrs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -237,7 +237,7 @@ export function NumbersSection() {
           <p className="text-sm text-foreground/80 text-center sm:text-left max-w-lg">
             {c.footerText} <span className="text-foreground font-bold">{c.footerBold}</span> {c.footerText2}
           </p>
-          <Link href="/vl2026/pulso" className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold transition-colors whitespace-nowrap">
+          <Link href="/vl2026/pulso" className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-foreground text-sm font-bold transition-colors whitespace-nowrap">
             {c.footerCta} <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>

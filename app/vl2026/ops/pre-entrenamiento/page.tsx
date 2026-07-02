@@ -154,7 +154,7 @@ export default function PreEntrenamientoPage() {
   function handleConfirm(id: string) {
     const name = people.find((p) => p.id === id)?.name ?? ""
     setPeople((prev) => prev.map((p) => p.id === id ? { ...p, confirmed: true } : p))
-    show(`${name} — confirmado para el Despertar ✓`)
+    show(`${name}, confirmado para el Despertar ✓`)
   }
 
   function handleContact(id: string) {

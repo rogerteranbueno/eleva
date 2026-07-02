@@ -39,7 +39,7 @@ export function HeroSection() {
         </motion.div>
 
         {/* Headline */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-white leading-[1.04] tracking-tight mb-6 max-w-4xl mx-auto">
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-foreground leading-[1.04] tracking-tight mb-6 max-w-4xl mx-auto">
           Convierte tu centro de transformación en una{" "}
           <span className="gradient-text">institución escalable.</span>
         </h1>
@@ -54,7 +54,7 @@ export function HeroSection() {
         <div className="flex items-center justify-center gap-2 flex-wrap mb-10">
           {PILLARS.map((p, i) => (
             <span key={p} className="text-[11px] text-muted-foreground/70 font-medium">
-              {p}{i < PILLARS.length - 1 && <span className="ml-2 text-white/15">·</span>}
+              {p}{i < PILLARS.length - 1 && <span className="ml-2 text-foreground/15">·</span>}
             </span>
           ))}
         </div>
@@ -65,7 +65,7 @@ export function HeroSection() {
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-base font-bold transition-colors shadow-lg shadow-violet-600/25 glow-violet"
+              className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-foreground rounded-xl text-base font-bold transition-colors shadow-lg shadow-violet-600/25 glow-violet"
             >
               Agendar diagnóstico
               <ArrowRight className="w-5 h-5" />
@@ -75,7 +75,7 @@ export function HeroSection() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-2 px-6 py-3.5 bg-white/5 hover:bg-white/8 border border-white/10 hover:border-white/18 text-foreground rounded-xl text-sm font-semibold transition-all"
+              className="flex items-center gap-2 px-6 py-3.5 bg-foreground/5 hover:bg-foreground/8 border border-foreground/10 hover:border-foreground/18 text-foreground rounded-xl text-sm font-semibold transition-all"
             >
               Ver programas
             </motion.button>
@@ -91,7 +91,7 @@ export function HeroSection() {
         >
           {STATS.map(({ value, label }) => (
             <div key={label} className="text-center">
-              <p className="text-3xl font-black text-white mb-1">{value}</p>
+              <p className="text-3xl font-black text-foreground mb-1">{value}</p>
               <p className="text-xs text-muted-foreground leading-snug">{label}</p>
             </div>
           ))}

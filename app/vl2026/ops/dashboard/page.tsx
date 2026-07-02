@@ -314,7 +314,7 @@ export default function OpsDashboardPage() {
           {FINANCIALS.pendingParticipants.filter((p) => p.overdueDays > 0).length > 0 && (
             <div className="pt-2 border-t border-white/5 space-y-2">
               <p className="text-[10px] text-red-400 font-semibold uppercase tracking-wider">
-                Pagos vencidos — avisar a su coach
+                Pagos vencidos, avisar a su coach
               </p>
               {FINANCIALS.pendingParticipants
                 .filter((p) => p.overdueDays > 0)

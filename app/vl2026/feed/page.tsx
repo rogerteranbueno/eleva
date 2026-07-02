@@ -18,11 +18,11 @@ const ONBOARDING = {
   screenId: "feed",
   badge: "Vista del participante · Pantalla 1 de 4",
   badgeColor: "cyan" as const,
-  title: "Mi Feed — como Valeria",
-  description: "Cambiaste al lado del participante. Esto es lo que Valeria ve cada mañana cuando abre ELEVA — todo lo que necesita en un solo lugar.",
+  title: "Mi Feed, como Valeria",
+  description: "Cambiaste al lado del participante. Esto es lo que Valeria ve cada mañana cuando abre ELEVA, todo lo que necesita en un solo lugar.",
   tips: [
     { emoji: "💜", text: "Ana Reyes (su coach) ya le dejó un mensaje de apoyo personalizado." },
-    { emoji: "✅", text: "Su misión de la semana vence en 2 días — puede completarla desde aquí." },
+    { emoji: "✅", text: "Su misión de la semana vence en 2 días, puede completarla desde aquí." },
     { emoji: "📅", text: "La sesión en vivo del jueves aparece con un botón de confirmación directo." },
   ],
   cta: "Ver el feed de Valeria →",
@@ -88,7 +88,7 @@ export default function FeedPage() {
             </div>
             <p className="text-sm text-foreground mt-1 leading-relaxed">
               Valeria, sé que las últimas semanas han sido intensas. Estoy aquí cuando estés lista.
-              Tu compromiso de finanzas sigue en pie — y tú también. 💜
+              Tu compromiso de finanzas sigue en pie, y tú también. 💜
             </p>
             <p className="text-xs text-muted-foreground mt-2">hace 2 horas</p>
           </div>
@@ -180,7 +180,7 @@ export default function FeedPage() {
 
         <p className="text-xs text-muted-foreground leading-relaxed">
           {enrolledCount === 0
-            ? "Este fin de semana es tu oportunidad de crear impacto. Enrola a dos personas que quieran transformar su vida — comienzan en el próximo Entrenamiento 1."
+            ? "Este fin de semana es tu oportunidad de crear impacto. Enrola a dos personas que quieran transformar su vida, comienzan en el próximo Entrenamiento 1."
             : enrolledCount === 1
             ? "¡Ya enrolaste a una persona! Un enrolado más y cumples tu compromiso de este fin de semana."
             : "🎉 ¡Completaste tu compromiso de enrolamiento! Tu generación sigue creciendo."}

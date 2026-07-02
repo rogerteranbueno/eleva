@@ -97,16 +97,16 @@ interface AIResponse {
 
 const AI_RESPONSES: Record<QueryId, AIResponse> = {
   resumen: {
-    headline: "Centro en estado de alerta moderada — acción requerida esta semana",
+    headline: "Centro en estado de alerta moderada, acción requerida esta semana",
     alert: { level: "yellow", text: "⚠️ 3 señales críticas detectadas" },
     summary: "El centro opera a 67% de momentum promedio, por debajo del umbral óptimo de 75%. La Generación Norte muestra la caída más preocupante (-7 pts en 2 semanas). Revenue en crecimiento (+12% vs mayo) pero con $48,600 MXN pendientes de cobro. Ana Reyes lleva 9 días sin contacto grupal con Gen. Omega.",
     chart: "kpis",
     insights: [
-      "14 participantes bajo umbral crítico — representan $235,200 MXN en riesgo de churn",
+      "14 participantes bajo umbral crítico, representan $235,200 MXN en riesgo de churn",
       "Gen. Norte cayó de 65% → 58% en 14 días sin intervención del coach",
       "Ana Reyes tiene 3 sesiones sin completar de 6 planeadas este mes",
       "El evento del jueves tiene solo 34% de confirmación (30/89 participantes)",
-      "Diego Salinas activo 22 días consecutivos — candidato ideal para embajador",
+      "Diego Salinas activo 22 días consecutivos, candidato ideal para embajador",
     ],
     actions: [
       "Activar protocolo de retención para 4 participantes con >50% prob. de churn",
@@ -115,19 +115,19 @@ const AI_RESPONSES: Record<QueryId, AIResponse> = {
     ],
   },
   riesgo: {
-    headline: "4 participantes en zona de cancelación inminente — $67,200 MXN en riesgo",
-    alert: { level: "red", text: "🔴 Acción urgente — ventana de 7 días" },
-    summary: "El modelo detecta probabilidad de churn basándose en 3 variables: días de inactividad, momentum actual y patrón de pagos. La correlación más fuerte es la combinación inactividad +7 días + momentum <35% — históricamente el 83% de participantes en ese cuadrante no renueva.",
+    headline: "4 participantes en zona de cancelación inminente, $67,200 MXN en riesgo",
+    alert: { level: "red", text: "🔴 Acción urgente, ventana de 7 días" },
+    summary: "El modelo detecta probabilidad de churn basándose en 3 variables: días de inactividad, momentum actual y patrón de pagos. La correlación más fuerte es la combinación inactividad +7 días + momentum <35%, históricamente el 83% de participantes en ese cuadrante no renueva.",
     chart: "churn",
     insights: [
-      "Valeria Romo: 89% — inactiva 11d, momentum 23%, pago vencido 3d. Patrón idéntico a 3 cancelaciones del Q1",
-      "Paola Serrano: 76% — 1 misión completada en 8 semanas, pago vencido 7d",
-      "Roberto Campos: 61% — cayó de 68% → 31% en 21 días. Velocidad de caída alarmante",
-      "Carlos Peñafiel: 48% — tendencia descendente, pago pendiente. Umbral de riesgo en 10 días",
+      "Valeria Romo: 89%, inactiva 11d, momentum 23%, pago vencido 3d. Patrón idéntico a 3 cancelaciones del Q1",
+      "Paola Serrano: 76%, 1 misión completada en 8 semanas, pago vencido 7d",
+      "Roberto Campos: 61%, cayó de 68% → 31% en 21 días. Velocidad de caída alarmante",
+      "Carlos Peñafiel: 48%, tendencia descendente, pago pendiente. Umbral de riesgo en 10 días",
       "Sin intervención esta semana: pérdida estimada $67,200 MXN + costo de reposición (3x)",
     ],
     actions: [
-      "Llamada personal del founder a Valeria hoy — no mensaje, llamada",
+      "Llamada personal del founder a Valeria hoy, no mensaje, llamada",
       "Coach Marco contacta a Paola y Roberto hoy antes de las 6pm",
       "Suspender cobro automático de Carlos por 7 días para evitar fricción",
     ],
@@ -135,47 +135,47 @@ const AI_RESPONSES: Record<QueryId, AIResponse> = {
   revenue: {
     headline: "Proyección: $389,000 MXN en agosto si se retiene a participantes en riesgo",
     alert: { level: "yellow", text: "⚠️ $67,200 MXN en riesgo si no hay intervención esta semana" },
-    summary: "El crecimiento mensual es consistente (+12% promedio). La proyección de $389K en agosto asume retención del 92%. Si los 4 participantes de alto riesgo cancelan, la proyección cae a $321,800 — un delta de $67,200 que cambia el margen de 72% a 63%. El costo de retenerlos (1 llamada, 1 sesión) es ~$800 MXN.",
+    summary: "El crecimiento mensual es consistente (+12% promedio). La proyección de $389K en agosto asume retención del 92%. Si los 4 participantes de alto riesgo cancelan, la proyección cae a $321,800, un delta de $67,200 que cambia el margen de 72% a 63%. El costo de retenerlos (1 llamada, 1 sesión) es ~$800 MXN.",
     chart: "revenue",
     insights: [
       "MRR actual $247,400 · Revenue total incluyendo nuevas inscripciones: $342,200",
-      "Margen neto 72.6% ($213,100) — referencia del sector en metodologías de 5 meses: 58-65%",
+      "Margen neto 72.6% ($213,100), referencia del sector en metodologías de 5 meses: 58-65%",
       "3 pagos vencidos concentran el 90% de la mora: Paola ($8,900), Omar ($4,200), Valeria ($4,200)",
       "Próxima inscripción nueva generación estimada en $94,800 adicionales en julio",
       "Si Gen. Norte convierte al 85% en PL: +$258,720 MXN en el siguiente ciclo",
     ],
     actions: [
-      "Enviar recordatorio de pago a Paola Serrano hoy — mayor monto vencido",
+      "Enviar recordatorio de pago a Paola Serrano hoy, mayor monto vencido",
       "Preparar oferta de plan de pagos para evitar churn por causa financiera",
-      "Definir fecha y cupo para la próxima inscripción — demanda latente identificada",
+      "Definir fecha y cupo para la próxima inscripción, demanda latente identificada",
     ],
   },
   coaches: {
-    headline: "Daniela Torres es el benchmark del equipo — Ana Reyes necesita intervención",
+    headline: "Daniela Torres es el benchmark del equipo, Ana Reyes necesita intervención",
     alert: { level: "yellow", text: "⚠️ Ana Reyes: 3 sesiones sin completar, 9 días sin contacto grupal" },
     summary: "El análisis compara a los 3 coaches en 5 dimensiones: momentum del grupo, % de sesiones completadas, frecuencia de contacto, participantes en riesgo activo y cumplimiento de misiones. Daniela Torres lidera en todas las categorías con Gen. Vía 12 al 81%. Ana Reyes tiene el grupo más grande (89) y el mayor número de participantes en riesgo (6).",
     chart: "radar",
     insights: [
       "Daniela Torres: 100% sesiones completadas, contacto grupal hace 0 días, solo 2 en riesgo",
-      "Marco Fuentes: recuperándose — momentum subió de 52% → 58% en 10 días tras intervención",
+      "Marco Fuentes: recuperándose, momentum subió de 52% → 58% en 10 días tras intervención",
       "Ana Reyes: mayor volumen (89 participantes) pero métricas de contacto en zona crítica",
       "Correlación identificada: cada día adicional sin contacto grupal = -1.2% momentum promedio",
       "Costo de un coach ausente: 3-4 participantes en riesgo adicionales por semana",
     ],
     actions: [
-      "Reunión 1:1 con Ana Reyes esta semana — revisar carga y definir plan de contacto",
+      "Reunión 1:1 con Ana Reyes esta semana, revisar carga y definir plan de contacto",
       "Asignar apoyo: Rodrigo Peña como co-facilitador para Gen. Omega temporalmente",
       "Implementar KPI semanal de coaches visible en dashboard público del equipo",
     ],
   },
   cohortes: {
-    headline: "Generación Norte en caída estructural — intervención colectiva esta semana",
-    alert: { level: "red", text: "🔴 Norte bajó 7 pts en 14 días — patrón pre-abandono colectivo" },
+    headline: "Generación Norte en caída estructural, intervención colectiva esta semana",
+    alert: { level: "red", text: "🔴 Norte bajó 7 pts en 14 días, patrón pre-abandono colectivo" },
     summary: "El momentum de Generación Norte lleva 14 días cayendo sin recuperación. La combinación de coach con bajo contacto grupal (12 días) + 3 participantes con inactividad +7 días + fase completada (Expansión) crea el patrón típico de abandono colectivo post-curso. Históricamente, generaciones en este patrón tienen 40% de no-conversión a PL.",
     chart: "cohort",
     insights: [
       "Norte: 58% momentum · -7 pts en 14 días · Marco Fuentes sin contacto grupal hace 12 días",
-      "Omega: estable en 74% pero con 6 participantes en riesgo individual — presión interna",
+      "Omega: estable en 74% pero con 6 participantes en riesgo individual, presión interna",
       "Vía 12: liderando con 81% · Daniela Torres contactó hoy · solo 2 en riesgo",
       "Riesgo de no-conversión de Norte a PL: estimado 35-40% sin intervención",
       "Revenue en riesgo si Norte no convierte: $258,720 MXN del siguiente ciclo",
@@ -211,7 +211,7 @@ function KPIsDashboard() {
         ))}
       </div>
       <div className="glass rounded-xl p-3">
-        <p className="text-xs text-muted-foreground mb-2">Momentum del centro — 30 días</p>
+        <p className="text-xs text-muted-foreground mb-2">Momentum del centro, 30 días</p>
         <ResponsiveContainer width="100%" height={80}>
           <AreaChart data={MOMENTUM_HISTORY.slice(-20)} margin={{ top: 2, right: 4, left: -25, bottom: 0 }}>
             <defs>

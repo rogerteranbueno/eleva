@@ -42,7 +42,7 @@ export function FinalCTASection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="mailto:hola@elevaapp.io"
-            className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-base font-bold transition-colors"
+            className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-700 text-foreground rounded-xl text-base font-bold transition-colors"
           >
             {c.cta1}
             <ArrowRight className="w-5 h-5" />

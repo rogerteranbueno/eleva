@@ -51,13 +51,13 @@ export function TestimonialsSection() {
     badge: "05 · Real cases",
     h2a: "The growth",
     h2b: "speaks for itself.",
-    ndaNote: "We can't show you our clients — but we can show you what they say.",
+    ndaNote: "We can't show you our clients, but we can show you what they say.",
     ndaDetail: "All clients sign an NDA. Their results are real; their identity stays protected.",
   } : {
     badge: "05 · Casos reales",
     h2a: "El crecimiento",
     h2b: "habla por sí solo.",
-    ndaNote: "No podemos mostrarte a nuestros clientes — pero sí lo que dicen.",
+    ndaNote: "No podemos mostrarte a nuestros clientes, pero sí lo que dicen.",
     ndaDetail: "Todos los clientes firman un NDA. Sus resultados son reales; su identidad queda protegida.",
   }
 
@@ -112,7 +112,7 @@ export function TestimonialsSection() {
                 &ldquo;{lang === "en" ? t.quoteEn : t.quote}&rdquo;
               </p>
               <div className="flex items-center gap-3">
-                <div className={cn("w-9 h-9 rounded-full flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0", t.avatarColor)}>
+                <div className={cn("w-9 h-9 rounded-full flex items-center justify-center text-[10px] font-bold text-foreground flex-shrink-0", t.avatarColor)}>
                   {t.avatar}
                 </div>
                 <div>

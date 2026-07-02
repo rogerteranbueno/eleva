@@ -88,7 +88,7 @@ export function ContrastSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.06 }}
-              className="grid grid-cols-2 border-b border-border last:border-0 hover:bg-white/2 transition-colors"
+              className="grid grid-cols-2 border-b border-border last:border-0 hover:bg-foreground/2 transition-colors"
             >
               <div className="p-4 flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0" />
@@ -102,7 +102,7 @@ export function ContrastSection() {
           ))}
         </div>
 
-        {/* Mobile — collapsed by default */}
+        {/* Mobile, collapsed by default */}
         <div className="sm:hidden space-y-2">
           {visibleRows.map((row, i) => (
             <motion.div

@@ -29,7 +29,7 @@ const programs = [
     format: "Online + 1 presencial",
     level: "Formación inicial",
     description:
-      "La certificación base de ELEVA Academy. Entrena la capacidad de diseñar y facilitar experiencias de transformación que tienen impacto medible — no solo motivación del momento.",
+      "La certificación base de ELEVA Academy. Entrena la capacidad de diseñar y facilitar experiencias de transformación que tienen impacto medible, no solo motivación del momento.",
     outcomes: [
       "Diseño de arcos de transformación de 12+ semanas",
       "Facilitación de dinámicas de alta carga emocional",
@@ -69,7 +69,7 @@ const programs = [
     format: "Cohort online",
     level: "Dirección",
     description:
-      "Formación para dueños y directores. No sobre cómo dar entrenamientos — sobre cómo construir la organización que los hace posibles a escala.",
+      "Formación para dueños y directores. No sobre cómo dar entrenamientos, sobre cómo construir la organización que los hace posibles a escala.",
     outcomes: [
       "Modelo operativo de centros de transformación",
       "Gestión de equipos de coaches y staff",
@@ -141,7 +141,7 @@ const differentiators = [
 const faqs = [
   {
     q: "¿Necesito tener un centro para inscribirme?",
-    a: "No. Los programas CTF™ e IFS™ están abiertos a coaches independientes. Los programas DCT™ y LCT™ están pensados para personas dentro de una organización — centro, empresa o escuela — aunque no es requisito excluyente.",
+    a: "No. Los programas CTF™ e IFS™ están abiertos a coaches independientes. Los programas DCT™ y LCT™ están pensados para personas dentro de una organización, centro, empresa o escuela, aunque no es requisito excluyente.",
   },
   {
     q: "¿Cómo se diferencia de otras certificaciones de coaching?",
@@ -153,7 +153,7 @@ const faqs = [
   },
   {
     q: "¿Qué pasa si mi centro ya está en PACTO?",
-    a: "PACTO incluye componentes de ELEVA Academy para tu equipo de coaches — específicamente módulos del CTF™ adaptados al contexto institucional. Si tu equipo completa PACTO y quiere la certificación completa, hay un proceso de reconocimiento de aprendizaje previo.",
+    a: "PACTO incluye componentes de ELEVA Academy para tu equipo de coaches, específicamente módulos del CTF™ adaptados al contexto institucional. Si tu equipo completa PACTO y quiere la certificación completa, hay un proceso de reconocimiento de aprendizaje previo.",
   },
   {
     q: "¿Hay becas o financiamiento?",
@@ -198,19 +198,19 @@ export default function AcademiaPage() {
     <div className="min-h-screen bg-background text-foreground">
 
       {/* ── Nav ── */}
-      <nav className="fixed top-0 inset-x-0 z-50 border-b border-white/5 bg-background/80 backdrop-blur-xl">
+      <nav className="fixed top-0 inset-x-0 z-50 border-b border-foreground/5 bg-background/80 backdrop-blur-xl">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-white transition-colors">
+            <Link href="/" className="hover:text-foreground transition-colors">
               <ArrowLeft className="w-4 h-4" />
             </Link>
-            <span className="text-white/20">/</span>
-            <Link href="/" className="hover:text-white transition-colors">ELEVA</Link>
-            <span className="text-white/20">/</span>
+            <span className="text-foreground/20">/</span>
+            <Link href="/" className="hover:text-foreground transition-colors">ELEVA</Link>
+            <span className="text-foreground/20">/</span>
             <span className="text-violet-400 font-semibold">Academia</span>
           </div>
           <Link href="/build">
-            <button className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold rounded-lg transition-colors">
+            <button className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-foreground text-sm font-bold rounded-lg transition-colors">
               Agendar diagnóstico
             </button>
           </Link>
@@ -231,12 +231,12 @@ export default function AcademiaPage() {
             </div>
 
             <div className="space-y-5">
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black text-white leading-[1.0] tracking-tighter">
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black text-foreground leading-[1.0] tracking-tighter">
                 Coaches que
                 <br />
                 <span className="gradient-text">transforman</span>
                 <br />
-                <span className="text-white/55 font-light italic">de verdad.</span>
+                <span className="text-foreground/55 font-light italic">de verdad.</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
                 La mayoría de los coaches sabe el material. Pocos saben cómo llevarlo a otro ser humano en transformación.
@@ -246,27 +246,27 @@ export default function AcademiaPage() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="#programas">
-                <button className="flex items-center gap-2.5 px-7 py-4 bg-violet-600 hover:bg-violet-500 text-white font-black rounded-xl transition-colors text-base group">
+                <button className="flex items-center gap-2.5 px-7 py-4 bg-violet-600 hover:bg-violet-500 text-foreground font-black rounded-xl transition-colors text-base group">
                   Ver certificaciones
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </button>
               </Link>
               <Link href="/build">
-                <button className="flex items-center gap-2.5 px-7 py-4 glass border border-white/10 hover:border-white/20 text-white font-bold rounded-xl transition-colors text-base">
+                <button className="flex items-center gap-2.5 px-7 py-4 glass border border-foreground/10 hover:border-foreground/20 text-foreground font-bold rounded-xl transition-colors text-base">
                   Hablar con admisiones
                 </button>
               </Link>
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/5 max-w-lg">
+            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-foreground/5 max-w-lg">
               {[
                 { val: "4", label: "certificaciones activas" },
                 { val: "40+", label: "coaches certificados" },
                 { val: "6", label: "países en LATAM" },
               ].map((s) => (
                 <div key={s.label}>
-                  <p className="text-3xl font-black text-white">{s.val}</p>
+                  <p className="text-3xl font-black text-foreground">{s.val}</p>
                   <p className="text-xs text-muted-foreground leading-tight mt-0.5">{s.label}</p>
                 </div>
               ))}
@@ -279,7 +279,7 @@ export default function AcademiaPage() {
       </section>
 
       {/* ── El problema ── */}
-      <section className="py-24 px-6 border-t border-white/5" ref={problemRef.ref}>
+      <section className="py-24 px-6 border-t border-foreground/5" ref={problemRef.ref}>
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -289,18 +289,18 @@ export default function AcademiaPage() {
           >
             <div className="space-y-6">
               <p className="text-xs font-bold text-violet-400 uppercase tracking-widest">El problema real</p>
-              <h2 className="text-4xl sm:text-5xl font-black text-white leading-[1.1] tracking-tight">
+              <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-[1.1] tracking-tight">
                 Saber de transformación no es lo mismo que saber transformar.
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  El 90% de los coaches de centros de transformación llegó a ese rol porque pasó por el proceso y lo vivió de cerca. Eso es valioso — y no es suficiente.
+                  El 90% de los coaches de centros de transformación llegó a ese rol porque pasó por el proceso y lo vivió de cerca. Eso es valioso, y no es suficiente.
                 </p>
                 <p>
                   Facilitar transformación grupal requiere habilidades específicas: leer la sala, sostener el espacio emocional, diseñar arcos de aprendizaje, manejar quiebres, calibrar energía. Nadie nace sabiéndolas. Y casi nadie las enseña con rigor.
                 </p>
                 <p>
-                  El resultado es que la calidad de la transformación depende de la intuición del coach individual — no de un sistema replicable. Eso hace al centro frágil.
+                  El resultado es que la calidad de la transformación depende de la intuición del coach individual, no de un sistema replicable. Eso hace al centro frágil.
                 </p>
               </div>
             </div>
@@ -343,7 +343,7 @@ export default function AcademiaPage() {
                   initial={{ opacity: 0, x: -16 }}
                   animate={problemRef.inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, ease, delay: i * 0.07 }}
-                  className="flex items-start gap-3 p-4 glass rounded-xl border border-white/5"
+                  className="flex items-start gap-3 p-4 glass rounded-xl border border-foreground/5"
                 >
                   <span className={`text-lg font-black ${item.color} mt-0.5 shrink-0`}>{item.icon}</span>
                   <p className="text-sm text-muted-foreground leading-snug">{item.title}</p>
@@ -356,7 +356,7 @@ export default function AcademiaPage() {
             initial={{ opacity: 0 }}
             animate={problemRef.inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, ease, delay: 0.5 }}
-            className="mt-14 text-center text-xl font-bold text-white/70"
+            className="mt-14 text-center text-xl font-bold text-foreground/70"
           >
             ELEVA Academy existe para resolver exactamente eso.
           </motion.p>
@@ -364,7 +364,7 @@ export default function AcademiaPage() {
       </section>
 
       {/* ── Programas ── */}
-      <section id="programas" className="py-24 px-6 border-t border-white/5" ref={programsRef.ref}>
+      <section id="programas" className="py-24 px-6 border-t border-foreground/5" ref={programsRef.ref}>
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -373,7 +373,7 @@ export default function AcademiaPage() {
             className="mb-12"
           >
             <p className="text-xs font-bold text-violet-400 uppercase tracking-widest mb-4">Certificaciones</p>
-            <h2 className="text-4xl sm:text-5xl font-black text-white leading-[1.1] tracking-tight max-w-2xl">
+            <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-[1.1] tracking-tight max-w-2xl">
               Cuatro caminos. Un estándar.
             </h2>
           </motion.div>
@@ -393,7 +393,7 @@ export default function AcademiaPage() {
                 <span className={`text-xs font-bold px-2 py-0.5 rounded-full border ${accentMap[p.accent]} block w-fit mb-2`}>
                   {p.badge}
                 </span>
-                <p className="text-white font-bold text-sm leading-snug">{p.subtitle}</p>
+                <p className="text-foreground font-bold text-sm leading-snug">{p.subtitle}</p>
                 <p className="text-xs text-muted-foreground mt-1">{p.duration}</p>
               </button>
             ))}
@@ -415,41 +415,41 @@ export default function AcademiaPage() {
                   <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${accentMap[prog.accent]}`}>
                     {prog.badge}
                   </span>
-                  <h3 className="text-3xl font-black text-white mt-3 leading-tight">
+                  <h3 className="text-3xl font-black text-foreground mt-3 leading-tight">
                     {prog.title}
                     <span className="text-muted-foreground font-light ml-2 text-2xl">{prog.subtitle}</span>
                   </h3>
                   <p className="text-muted-foreground mt-3 leading-relaxed">{prog.description}</p>
                 </div>
 
-                <div className="glass rounded-2xl border border-white/5 p-6 space-y-3">
+                <div className="glass rounded-2xl border border-foreground/5 p-6 space-y-3">
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Lo que desarrollas</p>
                   {prog.outcomes.map((o) => (
                     <div key={o} className="flex items-start gap-2.5">
                       <CheckCircle2 className="w-4 h-4 text-violet-400 mt-0.5 shrink-0" />
-                      <p className="text-sm text-white/80 leading-snug">{o}</p>
+                      <p className="text-sm text-foreground/80 leading-snug">{o}</p>
                     </div>
                   ))}
                 </div>
 
                 <div className="p-4 rounded-xl border border-violet-500/20 bg-violet-500/5">
                   <p className="text-xs font-bold text-violet-400 uppercase tracking-widest mb-1">Para quién</p>
-                  <p className="text-sm text-white/70 leading-snug">{prog.for}</p>
+                  <p className="text-sm text-foreground/70 leading-snug">{prog.for}</p>
                 </div>
               </div>
 
               {/* Sidebar */}
               <div className="space-y-4">
-                <div className="glass rounded-2xl border border-white/5 p-6 space-y-5">
+                <div className="glass rounded-2xl border border-foreground/5 p-6 space-y-5">
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Detalles</p>
                   {[
                     { label: "Duración", value: prog.duration },
                     { label: "Formato", value: prog.format },
                     { label: "Nivel", value: prog.level },
                   ].map((d) => (
-                    <div key={d.label} className="flex justify-between items-start border-t border-white/5 pt-4 first:border-0 first:pt-0">
+                    <div key={d.label} className="flex justify-between items-start border-t border-foreground/5 pt-4 first:border-0 first:pt-0">
                       <p className="text-xs text-muted-foreground">{d.label}</p>
-                      <p className="text-sm text-white font-semibold text-right max-w-[140px]">{d.value}</p>
+                      <p className="text-sm text-foreground font-semibold text-right max-w-[140px]">{d.value}</p>
                     </div>
                   ))}
                 </div>
@@ -458,13 +458,13 @@ export default function AcademiaPage() {
                 <AcredittaTrustBar />
 
                 <Link href="/build" className="block">
-                  <button className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-violet-600 hover:bg-violet-500 text-white font-black rounded-xl transition-colors group">
+                  <button className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-violet-600 hover:bg-violet-500 text-foreground font-black rounded-xl transition-colors group">
                     Solicitar admisión
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </button>
                 </Link>
                 <Link href="/pacto" className="block">
-                  <button className="w-full flex items-center justify-center gap-2 px-6 py-3 glass border border-white/10 hover:border-white/20 text-white/70 font-semibold rounded-xl transition-colors text-sm">
+                  <button className="w-full flex items-center justify-center gap-2 px-6 py-3 glass border border-foreground/10 hover:border-foreground/20 text-foreground/70 font-semibold rounded-xl transition-colors text-sm">
                     Ver programa PACTO
                   </button>
                 </Link>
@@ -475,7 +475,7 @@ export default function AcademiaPage() {
       </section>
 
       {/* ── Diferenciadores ── */}
-      <section className="py-24 px-6 border-t border-white/5" ref={diffRef.ref}>
+      <section className="py-24 px-6 border-t border-foreground/5" ref={diffRef.ref}>
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -484,7 +484,7 @@ export default function AcademiaPage() {
             className="mb-12"
           >
             <p className="text-xs font-bold text-violet-400 uppercase tracking-widest mb-4">Por qué ELEVA Academy</p>
-            <h2 className="text-4xl sm:text-5xl font-black text-white leading-[1.1] tracking-tight max-w-2xl">
+            <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-[1.1] tracking-tight max-w-2xl">
               Lo que la hace diferente.
             </h2>
           </motion.div>
@@ -496,12 +496,12 @@ export default function AcademiaPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={diffRef.inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, ease, delay: i * 0.08 }}
-                className="glass rounded-2xl border border-white/5 p-6 space-y-3"
+                className="glass rounded-2xl border border-foreground/5 p-6 space-y-3"
               >
                 <div className="w-9 h-9 rounded-xl bg-violet-500/10 flex items-center justify-center">
                   <d.icon className="w-4.5 h-4.5 text-violet-400" />
                 </div>
-                <p className="font-bold text-white">{d.title}</p>
+                <p className="font-bold text-foreground">{d.title}</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">{d.body}</p>
               </motion.div>
             ))}
@@ -513,7 +513,7 @@ export default function AcademiaPage() {
       <ElevaNetworkSection />
 
       {/* ── FAQ ── */}
-      <section className="py-24 px-6 border-t border-white/5" ref={faqRef.ref}>
+      <section className="py-24 px-6 border-t border-foreground/5" ref={faqRef.ref}>
         <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -522,7 +522,7 @@ export default function AcademiaPage() {
             className="mb-10"
           >
             <p className="text-xs font-bold text-violet-400 uppercase tracking-widest mb-4">Preguntas frecuentes</p>
-            <h2 className="text-3xl sm:text-4xl font-black text-white leading-[1.15] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-black text-foreground leading-[1.15] tracking-tight">
               Lo que siempre nos preguntan.
             </h2>
           </motion.div>
@@ -534,13 +534,13 @@ export default function AcademiaPage() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={faqRef.inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, ease, delay: i * 0.07 }}
-                className="glass rounded-2xl border border-white/5 overflow-hidden"
+                className="glass rounded-2xl border border-foreground/5 overflow-hidden"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   className="w-full flex items-center justify-between gap-4 p-6 text-left"
                 >
-                  <p className="font-semibold text-white text-sm sm:text-base">{faq.q}</p>
+                  <p className="font-semibold text-foreground text-sm sm:text-base">{faq.q}</p>
                   <ChevronDown
                     className={`w-4 h-4 text-muted-foreground shrink-0 transition-transform duration-200 ${
                       openFaq === i ? "rotate-180" : ""
@@ -567,7 +567,7 @@ export default function AcademiaPage() {
       </section>
 
       {/* ── CTA Final ── */}
-      <section className="py-32 px-6 border-t border-white/5" ref={ctaRef.ref}>
+      <section className="py-32 px-6 border-t border-foreground/5" ref={ctaRef.ref}>
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={ctaRef.inView ? { opacity: 1, y: 0 } : {}}
@@ -576,26 +576,26 @@ export default function AcademiaPage() {
         >
           <div className="space-y-5">
             <p className="text-xs font-bold text-violet-400 uppercase tracking-widest">El siguiente nivel</p>
-            <h2 className="text-5xl sm:text-6xl font-black text-white leading-[1.05] tracking-tight">
+            <h2 className="text-5xl sm:text-6xl font-black text-foreground leading-[1.05] tracking-tight">
               Tu equipo de coaches<br />
               es tu mayor<br />
-              <span className="text-white/55 font-light italic">ventaja competitiva.</span>
+              <span className="text-foreground/55 font-light italic">ventaja competitiva.</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              Los centros que escalan sin perder calidad lo hacen porque sus coaches son mejores que los del promedio — y siguen mejorando.
+              Los centros que escalan sin perder calidad lo hacen porque sus coaches son mejores que los del promedio, y siguen mejorando.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/build">
-              <button className="flex items-center gap-2.5 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-black rounded-xl transition-colors text-base group">
+              <button className="flex items-center gap-2.5 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-foreground font-black rounded-xl transition-colors text-base group">
                 <Star className="w-4 h-4" />
                 Hablar con admisiones
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </button>
             </Link>
             <Link href="/pacto">
-              <button className="flex items-center gap-2.5 px-8 py-4 glass border border-white/10 hover:border-white/20 text-white font-bold rounded-xl transition-colors text-base">
+              <button className="flex items-center gap-2.5 px-8 py-4 glass border border-foreground/10 hover:border-foreground/20 text-foreground font-bold rounded-xl transition-colors text-base">
                 Ver programa PACTO
               </button>
             </Link>

@@ -151,7 +151,7 @@ export function InsightModal({ ins, onClose }: { ins: InsightDef; onClose: () =>
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 16, scale: 0.97 }}
         transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-        className="relative max-w-lg w-full rounded-2xl bg-[#0E0C1A] border border-white/12 shadow-2xl overflow-hidden"
+        className="relative max-w-lg w-full rounded-2xl bg-[#0E0C1A] border border-foreground/12 shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         <div className={`h-0.5 w-full ${ins.statColor.replace("text-", "bg-").replace("400", "500")}`} />
@@ -166,40 +166,40 @@ export function InsightModal({ ins, onClose }: { ins: InsightDef; onClose: () =>
             </div>
             <button
               onClick={onClose}
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/8 hover:bg-white/15 transition-colors text-white/60 hover:text-white flex-shrink-0 mt-1"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-foreground/8 hover:bg-foreground/15 transition-colors text-foreground/60 hover:text-foreground flex-shrink-0 mt-1"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
 
-          <h3 className="text-base font-bold text-white leading-snug mb-3">
+          <h3 className="text-base font-bold text-foreground leading-snug mb-3">
             {ins.modal.title}
           </h3>
 
-          <p className="text-sm text-white/70 leading-relaxed mb-5">
+          <p className="text-sm text-foreground/70 leading-relaxed mb-5">
             {ins.modal.body}
           </p>
 
-          <div className="rounded-xl border border-white/10 bg-white/4 overflow-hidden mb-4">
-            <p className="text-[10px] uppercase tracking-widest text-white/40 font-semibold px-4 py-2.5 border-b border-white/8">
+          <div className="rounded-xl border border-foreground/10 bg-foreground/4 overflow-hidden mb-4">
+            <p className="text-[10px] uppercase tracking-widest text-foreground/40 font-semibold px-4 py-2.5 border-b border-foreground/8">
               {calcLabel}
             </p>
             {ins.modal.calc.map((row, i) => (
               <div
                 key={i}
-                className={`flex items-center justify-between gap-4 px-4 py-3 ${i < ins.modal.calc.length - 1 ? "border-b border-white/6" : ""} ${row.highlight ? "bg-white/4" : ""}`}
+                className={`flex items-center justify-between gap-4 px-4 py-3 ${i < ins.modal.calc.length - 1 ? "border-b border-foreground/6" : ""} ${row.highlight ? "bg-foreground/4" : ""}`}
               >
-                <span className={`text-xs leading-snug ${row.highlight ? "text-white font-medium" : "text-white/60"}`}>
+                <span className={`text-xs leading-snug ${row.highlight ? "text-foreground font-medium" : "text-foreground/60"}`}>
                   {row.label}
                 </span>
-                <span className={`text-sm font-bold whitespace-nowrap flex-shrink-0 ${row.highlight ? ins.statColor : "text-white/80"}`}>
+                <span className={`text-sm font-bold whitespace-nowrap flex-shrink-0 ${row.highlight ? ins.statColor : "text-foreground/80"}`}>
                   {row.value}
                 </span>
               </div>
             ))}
           </div>
 
-          <p className="text-[11px] text-white/35 leading-relaxed">
+          <p className="text-[11px] text-foreground/35 leading-relaxed">
             {ins.modal.note}
           </p>
         </div>
@@ -221,7 +221,7 @@ export function InsightsSection() {
     h2b: "the industry doesn't see.",
     sub: "Every center that operates with ELEVA generates data. With 40+ active centers, we now know exactly which behaviors predict growth and which predict dropout.",
     whyLabel: "Why?",
-    footer: "These patterns are built into the system. They're not metrics to review — they're",
+    footer: "These patterns are built into the system. They're not metrics to review, they're",
     footerEm: "automatic actions already configured from day one.",
   } : {
     badge: "Lo que aprendimos de 40+ centros",
@@ -251,11 +251,11 @@ export function InsightsSection() {
               {c.badge}
             </span>
           </div>
-          <h2 className="text-5xl sm:text-6xl font-black text-white leading-[1.05]">
+          <h2 className="text-5xl sm:text-6xl font-black text-foreground leading-[1.05]">
             {c.h2a}<br />
             <span className="gradient-text">{c.h2b}</span>
           </h2>
-          <p className="text-white/80 mt-4 max-w-xl text-base leading-relaxed">
+          <p className="text-foreground/80 mt-4 max-w-xl text-base leading-relaxed">
             {c.sub}
           </p>
         </motion.div>
@@ -268,13 +268,13 @@ export function InsightsSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-center rounded-2xl p-5 md:p-6 border border-white/10 bg-white/4 hover:bg-white/6 hover:border-white/18 transition-colors group"
+              className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-center rounded-2xl p-5 md:p-6 border border-foreground/10 bg-foreground/4 hover:bg-foreground/6 hover:border-foreground/18 transition-colors group"
             >
               <div className="space-y-3">
                 <span className={`inline-block text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border ${ins.stageBg} ${ins.stageColor}`}>
                   {ins.stage}
                 </span>
-                <p className="text-sm text-white/90 leading-relaxed">
+                <p className="text-sm text-foreground/90 leading-relaxed">
                   {ins.signal}
                 </p>
               </div>
@@ -287,18 +287,18 @@ export function InsightsSection() {
                 <span className={`text-5xl md:text-6xl font-black leading-none ${ins.statColor} group-hover/stat:scale-105 transition-transform`}>
                   {ins.stat}
                 </span>
-                <span className="flex items-center gap-1 text-[10px] text-white/40 group-hover/stat:text-white/70 transition-colors font-medium uppercase tracking-wider">
+                <span className="flex items-center gap-1 text-[10px] text-foreground/40 group-hover/stat:text-foreground/70 transition-colors font-medium uppercase tracking-wider">
                   <Info className="w-3 h-3 flex-shrink-0" />
                   {c.whyLabel}
                 </span>
-                <ArrowRight className="hidden md:block w-4 h-4 text-white/20 rotate-90 flex-shrink-0 mt-1" />
+                <ArrowRight className="hidden md:block w-4 h-4 text-foreground/20 rotate-90 flex-shrink-0 mt-1" />
               </button>
 
               <div className="space-y-3">
-                <p className="text-base font-bold text-white leading-snug">
+                <p className="text-base font-bold text-foreground leading-snug">
                   {ins.outcome}
                 </p>
-                <p className="text-xs text-white/60 leading-relaxed border-l-2 border-white/20 pl-3">
+                <p className="text-xs text-foreground/60 leading-relaxed border-l-2 border-foreground/20 pl-3">
                   {ins.insight}
                 </p>
               </div>
@@ -312,9 +312,9 @@ export function InsightsSection() {
           viewport={{ once: true }}
           className="mt-10 text-center"
         >
-          <p className="text-white/60 text-sm">
+          <p className="text-foreground/60 text-sm">
             {c.footer}{" "}
-            <span className="text-white font-semibold">{c.footerEm}</span>
+            <span className="text-foreground font-semibold">{c.footerEm}</span>
           </p>
         </motion.div>
       </div>

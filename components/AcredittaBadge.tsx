@@ -49,7 +49,7 @@ export function AcredittaTrustBar({ className = "" }: { className?: string }) {
     <div className={`flex flex-wrap items-center gap-3 ${className}`}>
       <AcredittaBadge size="sm" />
       <p className="text-xs text-white/40">
-        Las credenciales ELEVA Academy son emitidas y verificadas a través de Acreditta —
+        Las credenciales ELEVA Academy son emitidas y verificadas a través de Acreditta -
         plataforma de credenciales digitales con validez internacional.
       </p>
     </div>

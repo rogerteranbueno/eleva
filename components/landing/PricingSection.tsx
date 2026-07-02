@@ -12,7 +12,7 @@ export function PricingSection() {
     eyebrow: "Investment",
     h2a: "A system that pays for itself",
     h2b: "in the first month.",
-    sub: "On average, centers that operate the system with discipline cover the implementation cost in less than 90 days — through better retention, lower delinquency, and more prepared cohorts. All figures are approximate and based on results from existing clients.",
+    sub: "On average, centers that operate the system with discipline cover the implementation cost in less than 90 days, through better retention, lower delinquency, and more prepared cohorts. All figures are approximate and based on results from existing clients.",
     ndaBanner: "All clients operate under NDA. Your strategy, your numbers and your growth are confidential.",
     growthLabel: "Expected growth",
     packages: [
@@ -62,7 +62,7 @@ export function PricingSection() {
         weeklyHours: "160–200 hrs/wk",
         growthMultiple: "5x – 10x",
         growthNote: "Approximate range based on robust implementations in similar centers",
-        description: "Everything in Base, plus a dedicated team that implements it all, ensures it works, and stays with you for 6 months. This isn't just software — it's a full operational transformation with people behind every process.",
+        description: "Everything in Base, plus a dedicated team that implements it all, ensures it works, and stays with you for 6 months. This isn't just software, it's a full operational transformation with people behind every process.",
         involvementNote: "6 months of deep involvement",
         followUp: "6 months of strategic accompaniment with monthly sessions. We solve operational problems with your team, manage speakers and events, and stay until the system runs itself.",
         features: [
@@ -70,15 +70,15 @@ export function PricingSection() {
           { text: "Coach module: each coach gets a full brief and participant context before every session", included: true },
           { text: "Advanced CRM: AI-driven conjectures, dropout risk detection, behavioral patterns and automatic action plans", included: true },
           { text: "Monthly insights from 20+ centers in Sydney, Johannesburg, London, Madrid, Barcelona, Paris, New York, Mexico City, São Paulo and more", included: true },
-          { text: "Full event management: speaker selection, calendar building, coordination — we handle it all", included: true },
+          { text: "Full event management: speaker selection, calendar building, coordination, we handle it all", included: true },
           { text: "Dedicated team that implements, configures and ensures everything works", included: true },
           { text: "Social media strategy: identity, tone, content calendar", included: true },
           { text: "Positioning and traditional media: PR, alliances, events", included: true },
           { text: "6 months of strategic sessions until the system runs itself", included: true },
         ],
         cta: "Schedule strategy session",
-        ctaStyle: "bg-violet-600 hover:bg-violet-500 text-white",
-        recommendedNote: "This plan includes a team that implements everything and makes sure it works. You are not alone — we are inside your operation with you for 6 months.",
+        ctaStyle: "bg-violet-600 hover:bg-violet-500 text-foreground",
+        recommendedNote: "This plan includes a team that implements everything and makes sure it works. You are not alone, we are inside your operation with you for 6 months.",
       },
     ],
     maintenanceLabel: "Monthly maintenance",
@@ -98,7 +98,7 @@ export function PricingSection() {
     eyebrow: "Inversión",
     h2a: "Un sistema que se paga",
     h2b: "solo en el primer mes.",
-    sub: "En promedio, los centros que operan el sistema con disciplina recuperan la inversión en menos de 90 días — a través de mejor retención, menor morosidad y cohortes más preparadas. Todos los números son aproximados y con base en resultados de clientes existentes.",
+    sub: "En promedio, los centros que operan el sistema con disciplina recuperan la inversión en menos de 90 días, a través de mejor retención, menor morosidad y cohortes más preparadas. Todos los números son aproximados y con base en resultados de clientes existentes.",
     ndaBanner: "Todos los clientes operan bajo NDA. Tu estrategia, tus números y tu crecimiento son confidenciales.",
     growthLabel: "Crecimiento esperado",
     packages: [
@@ -148,7 +148,7 @@ export function PricingSection() {
         weeklyHours: "160–200 hrs/sem",
         growthMultiple: "5x – 10x",
         growthNote: "Rango aproximado con base en implementaciones robustas en centros similares",
-        description: "Todo lo de Base, más un equipo dedicado que lo implementa todo, se asegura de que funcione y se queda contigo 6 meses. No es solo software — es una transformación operativa completa con personas detrás de cada proceso.",
+        description: "Todo lo de Base, más un equipo dedicado que lo implementa todo, se asegura de que funcione y se queda contigo 6 meses. No es solo software, es una transformación operativa completa con personas detrás de cada proceso.",
         involvementNote: "6 meses de involucramiento profundo",
         followUp: "6 meses de acompañamiento estratégico con sesiones mensuales. Resolvemos problemas operativos con tu equipo, gestionamos speakers y eventos, y nos quedamos hasta que el sistema corra solo.",
         features: [
@@ -156,15 +156,15 @@ export function PricingSection() {
           { text: "Módulo de coaches: cada coach recibe un brief completo y contexto del participante antes de cada sesión", included: true },
           { text: "CRM avanzado: conjeturas automáticas, detección de riesgo de abandono, patrones de comportamiento y planes de acción basados en tus datos", included: true },
           { text: "Insights mensuales de más de 20 centros en Sydney, Johannesburgo, Londres, Madrid, Barcelona, París, Nueva York, Ciudad de México, São Paulo y más", included: true },
-          { text: "Gestión completa de eventos: selección de speakers, armado de calendario, coordinación — nosotros nos encargamos de todo", included: true },
+          { text: "Gestión completa de eventos: selección de speakers, armado de calendario, coordinación, nosotros nos encargamos de todo", included: true },
           { text: "Equipo dedicado que implementa, configura y garantiza que todo funcione", included: true },
           { text: "Estrategia de redes sociales: identidad, tono, calendario de contenidos", included: true },
           { text: "Posicionamiento y medios tradicionales: PR, alianzas, eventos", included: true },
           { text: "6 meses de sesiones estratégicas hasta que el sistema corra solo", included: true },
         ],
         cta: "Agendar sesión estratégica",
-        ctaStyle: "bg-violet-600 hover:bg-violet-500 text-white",
-        recommendedNote: "Este plan incluye un equipo que implementa todo y se asegura de que funcione. No estás solo — estamos dentro de tu operación contigo durante 6 meses.",
+        ctaStyle: "bg-violet-600 hover:bg-violet-500 text-foreground",
+        recommendedNote: "Este plan incluye un equipo que implementa todo y se asegura de que funcione. No estás solo, estamos dentro de tu operación contigo durante 6 meses.",
       },
     ],
     maintenanceLabel: "Mantenimiento mensual",
@@ -218,7 +218,7 @@ export function PricingSection() {
             )}
           >
             {pkg.badge && (
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-violet-600 text-white text-xs font-bold whitespace-nowrap">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-violet-600 text-foreground text-xs font-bold whitespace-nowrap">
                 {pkg.badge}
               </div>
             )}
@@ -282,7 +282,7 @@ export function PricingSection() {
 
             <p className="text-[11px] text-muted-foreground italic mb-5">{pkg.followUp}</p>
 
-            {/* Recommended callout — Elite only */}
+            {/* Recommended callout, Elite only */}
             {pkg.recommendedNote && (
               <div className="flex items-start gap-2.5 mb-5 p-3.5 rounded-xl bg-violet-600/15 border border-violet-500/30">
                 <Zap className="w-4 h-4 text-violet-400 flex-shrink-0 mt-0.5" />

@@ -13,9 +13,9 @@ const ONBOARDING = {
   badge: "Vista del participante · Pantalla 2 de 4",
   badgeColor: "cyan" as const,
   title: "Misiones semanales",
-  description: "Cada semana Valeria tiene una misión personalizada a su fase y objetivo. No es un checklist genérico — es un arco de transformación diseñado por el centro.",
+  description: "Cada semana Valeria tiene una misión personalizada a su fase y objetivo. No es un checklist genérico, es un arco de transformación diseñado por el centro.",
   tips: [
-    { emoji: "🔥", text: "Su racha es 0 días — rota hace 11 días. Por eso está en riesgo en el panel del dueño." },
+    { emoji: "🔥", text: "Su racha es 0 días, rota hace 11 días. Por eso está en riesgo en el panel del dueño." },
     { emoji: "✅", text: "Toca 'Marcar como completada' y observa cómo sube el Momentum Score al instante." },
     { emoji: "🗺️", text: "La lista de todas las misiones muestra su progreso completo en la ruta de PL." },
   ],

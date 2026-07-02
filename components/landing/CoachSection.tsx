@@ -74,10 +74,10 @@ export function CoachSection() {
     sub1: "Most centers don't know what their participants are achieving, or who in their community could become a coach, lead a masterclass, or contribute from their specialty. Without visibility, there's no recurring revenue, no professional appeal, no internal growth.",
     sub2: "ELEVA gives them a verified platform where",
     sub2Em: "nutritionists, coaches, psychologists and specialists from your community",
-    sub2End: " contribute through webinars, masterclasses and consulting — and you, as a center, gain recurring revenue, credibility, and a self-sustaining professional ecosystem.",
+    sub2End: " contribute through webinars, masterclasses and consulting, and you, as a center, gain recurring revenue, credibility, and a self-sustaining professional ecosystem.",
     bookBtn: "Book a session",
     coachCTA: "Are you a coach or specialist?",
-    coachCTASub: "Join the ELEVA network and get clients from verified centers without investing in marketing. You charge directly — we just connect.",
+    coachCTASub: "Join the ELEVA network and get clients from verified centers without investing in marketing. You charge directly, we just connect.",
     coachCTABtn: "Apply now",
     sessionsLabel: "sessions",
     currency: "USD/hr",
@@ -132,7 +132,7 @@ export function CoachSection() {
           >
             <div className="flex items-start gap-4">
               <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${coach.color} flex items-center justify-center flex-shrink-0`}>
-                <span className="text-white font-black text-sm">{coach.avatar}</span>
+                <span className="text-foreground font-black text-sm">{coach.avatar}</span>
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
@@ -151,12 +151,12 @@ export function CoachSection() {
                 </div>
                 <div className="flex gap-1.5 mt-3 flex-wrap">
                   {(lang === "en" ? coach.tagsEn : coach.tags).map((t) => (
-                    <span key={t} className="text-[10px] bg-white/5 text-muted-foreground rounded-full px-2 py-0.5">{t}</span>
+                    <span key={t} className="text-[10px] bg-foreground/5 text-muted-foreground rounded-full px-2 py-0.5">{t}</span>
                   ))}
                 </div>
               </div>
             </div>
-            <button className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 hover:bg-violet-600/20 border border-white/10 hover:border-violet-500/40 text-sm text-foreground font-semibold transition-all">
+            <button className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-foreground/5 hover:bg-violet-600/20 border border-foreground/10 hover:border-violet-500/40 text-sm text-foreground font-semibold transition-all">
               <Clock className="w-3.5 h-3.5" />
               {c.bookBtn}
             </button>
@@ -179,7 +179,7 @@ export function CoachSection() {
         </div>
         <Link
           href="/vl2026/pulso"
-          className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold transition-colors"
+          className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-foreground text-sm font-semibold transition-colors"
         >
           {c.coachCTABtn} <ArrowRight className="w-4 h-4" />
         </Link>

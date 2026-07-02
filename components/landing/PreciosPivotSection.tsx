@@ -89,14 +89,14 @@ const PLANES = [
 ]
 
 const ACCENT_STYLES: Record<string, { card: string; badge: string; btn: string }> = {
-  white:   { card: "border-white/10",           badge: "bg-white/8 text-white/60 border-white/10",               btn: "bg-white/8 hover:bg-white/12 border border-white/10 text-white" },
-  violet:  { card: "border-violet-500/35",       badge: "bg-violet-500/10 text-violet-300 border-violet-500/20",  btn: "bg-violet-600 hover:bg-violet-500 text-white" },
-  emerald: { card: "border-emerald-500/25",      badge: "bg-emerald-500/10 text-emerald-300 border-emerald-500/20", btn: "bg-white/8 hover:bg-white/12 border border-white/10 text-white" },
-  amber:   { card: "border-amber-500/25",        badge: "bg-amber-500/10 text-amber-300 border-amber-500/20",     btn: "bg-white/8 hover:bg-white/12 border border-white/10 text-white" },
+  white:   { card: "border-foreground/10",           badge: "bg-foreground/8 text-foreground/60 border-foreground/10",               btn: "bg-foreground/8 hover:bg-foreground/12 border border-foreground/10 text-foreground" },
+  violet:  { card: "border-violet-500/35",       badge: "bg-violet-500/10 text-violet-300 border-violet-500/20",  btn: "bg-violet-600 hover:bg-violet-500 text-foreground" },
+  emerald: { card: "border-emerald-500/25",      badge: "bg-emerald-500/10 text-emerald-300 border-emerald-500/20", btn: "bg-foreground/8 hover:bg-foreground/12 border border-foreground/10 text-foreground" },
+  amber:   { card: "border-amber-500/25",        badge: "bg-amber-500/10 text-amber-300 border-amber-500/20",     btn: "bg-foreground/8 hover:bg-foreground/12 border border-foreground/10 text-foreground" },
 }
 
 const CHECK_COLORS: Record<string, string> = {
-  white: "text-white/50", violet: "text-violet-400", emerald: "text-emerald-400", amber: "text-amber-400",
+  white: "text-foreground/50", violet: "text-violet-400", emerald: "text-emerald-400", amber: "text-amber-400",
 }
 
 const fadeUp = {
@@ -117,7 +117,7 @@ export function PreciosPivotSection() {
           <p className="text-xs font-bold text-violet-400 uppercase tracking-widest">
             Formas de trabajar con ELEVA
           </p>
-          <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
+          <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight">
             No es comprar software.<br />
             <span className="text-muted-foreground font-light">Es invertir en capacidad instalada.</span>
           </h2>
@@ -135,7 +135,7 @@ export function PreciosPivotSection() {
               >
                 {p.featured && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="bg-violet-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                    <span className="bg-violet-600 text-foreground text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
                       Más solicitado
                     </span>
                   </div>
@@ -145,9 +145,9 @@ export function PreciosPivotSection() {
                   <span className={`text-[10px] px-2.5 py-1 rounded-full border font-bold uppercase tracking-wider ${a.badge}`}>
                     {p.tag}
                   </span>
-                  <p className="font-black text-white text-base leading-snug">{p.name}</p>
+                  <p className="font-black text-foreground text-base leading-snug">{p.name}</p>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-2xl font-black text-white">{p.price}</span>
+                    <span className="text-2xl font-black text-foreground">{p.price}</span>
                     {p.freq && <span className="text-muted-foreground text-xs">{p.freq}</span>}
                   </div>
                   <p className="text-xs text-muted-foreground leading-relaxed">{p.description}</p>

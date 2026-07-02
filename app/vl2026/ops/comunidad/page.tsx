@@ -47,7 +47,7 @@ const TEMPLATES = [
     id: "absence",
     label: "Seguimiento de ausencia",
     icon: "🤝",
-    text: "Hola [nombre], notamos que no pudiste estar en la sesión de hoy. Estamos aquí para apoyarte — cuéntanos cómo estás.",
+    text: "Hola [nombre], notamos que no pudiste estar en la sesión de hoy. Estamos aquí para apoyarte, cuéntanos cómo estás.",
   },
 ]
 
@@ -166,7 +166,7 @@ function CohortCard({
           {atRiskInCohorte.length > 0 && (
             <div className="space-y-2">
               <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">
-                En riesgo — comunicar al coach
+                En riesgo, comunicar al coach
               </p>
               {atRiskInCohorte.slice(0, 4).map((p) => (
                 <div key={p.id} className="flex items-center gap-2.5">
@@ -187,7 +187,7 @@ function CohortCard({
               ))}
               {atRiskInCohorte.length > 4 && (
                 <p className="text-[10px] text-muted-foreground pl-1">
-                  +{atRiskInCohorte.length - 4} más — ver en Atención
+                  +{atRiskInCohorte.length - 4} más, ver en Atención
                 </p>
               )}
             </div>
@@ -289,10 +289,10 @@ export default function ComunidadPage() {
         </div>
       </div>
 
-      {/* Overdue payments — notify coaches */}
+      {/* Overdue payments, notify coaches */}
       <div className="space-y-3">
         <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">
-          Pagos vencidos — coordinar con coaches
+          Pagos vencidos, coordinar con coaches
         </p>
         <div className="glass rounded-xl divide-y divide-white/5">
           {FINANCIALS.pendingParticipants.map((p) => (

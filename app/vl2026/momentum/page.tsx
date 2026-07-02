@@ -89,7 +89,7 @@ export default function MomentumPage() {
                   title="Momentum Score"
                   source="Calculado diariamente a las 12am. Combina 4 factores ponderados: check-ins (30%), misiones (35%), participación grupal (20%) y eventos (15%)."
                   formula="Score = Σ(factor_i × peso_i)"
-                  why="Un número único que refleja tu nivel de compromiso activo. El dueño y tu coach lo ven en tiempo real — sirve para saber cuándo alguien necesita apoyo antes de que lo pida."
+                  why="Un número único que refleja tu nivel de compromiso activo. El dueño y tu coach lo ven en tiempo real, sirve para saber cuándo alguien necesita apoyo antes de que lo pida."
                   benchmark=">65 activo · 40-65 en riesgo · <40 crítico"
                   action="Si caes por debajo de 40, tu coach recibe una alerta automática."
                   side="right"
