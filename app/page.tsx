@@ -8,6 +8,7 @@ import { useLang } from "@/lib/i18n"
 
 import { HeroSection } from "@/components/landing/HeroSection"
 import { ProblemaSection } from "@/components/landing/ProblemaSection"
+import { LegacySection } from "@/components/landing/LegacySection"
 import { TesisSection } from "@/components/landing/TesisSection"
 import { DivisionesSection } from "@/components/landing/DivisionesSection"
 import { CicloSection } from "@/components/landing/CicloSection"
@@ -17,6 +18,7 @@ import { NoHacemosSection } from "@/components/landing/NoHacemosSection"
 import { PreciosPivotSection } from "@/components/landing/PreciosPivotSection"
 import { CierreSection } from "@/components/landing/CierreSection"
 import { Footer } from "@/components/landing/Footer"
+import { HistoryHint } from "@/components/landing/HistoryHint"
 
 // ─── Theme hook ───────────────────────────────────────────────────────────────
 
@@ -172,16 +174,20 @@ export default function HomePage() {
         <SectionDivider />
         <ProblemaSection />
         <SectionDivider />
+        <LegacySection />
+        <SectionDivider />
         <TesisSection />
         <SectionDivider />
         <DivisionesSection />
         <SectionDivider />
         <CicloSection />
+        <HistoryHint variant={1} />
         <SectionDivider />
         {/* anchor for "Ver programas" CTA */}
         <div id="programas">
           <PACTOSection />
         </div>
+        <HistoryHint variant={3} />
         <SectionDivider />
         <MarcosSection />
         <SectionDivider />
