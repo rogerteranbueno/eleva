@@ -17,7 +17,7 @@ const PLANES = [
       "Auditoría de funnel y admisiones",
       "Auditoría de experiencia del participante",
       "Revisión de staff y roles",
-      "Continuidad Básico → Avanzado → PL",
+      "Continuidad Básico → Avanzado → Nivel 3",
       "Riesgos operativos y mapa de oportunidades",
       "Roadmap de 90 días + sesión ejecutiva",
     ],

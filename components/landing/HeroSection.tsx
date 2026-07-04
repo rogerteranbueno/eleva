@@ -77,7 +77,7 @@ export function HeroSection() {
               whileTap={{ scale: 0.97 }}
               className="flex items-center gap-2 px-6 py-3.5 bg-foreground/5 hover:bg-foreground/8 border border-foreground/10 hover:border-foreground/18 text-foreground rounded-xl text-sm font-semibold transition-all"
             >
-              Ver programas
+              Ver cómo funciona
             </motion.button>
           </a>
         </div>

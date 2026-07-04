@@ -13,7 +13,7 @@ const MODULOS = [
   "Intervención, corrección y seguridad psicológica",
   "Staff, roles y operación de sala",
   "Admisiones, enrolamiento y ventas éticas",
-  "PL continuity y programas posteriores",
+  "Continuidad de programas y seguimiento post-graduación",
   "Data, dashboards y seguimiento con ELEVA OS",
   "Academia interna del centro",
   "Expansión y nuevas sedes",
@@ -26,7 +26,7 @@ const ENTREGABLES = [
   "Procesos críticos documentados",
   "ELEVA OS instalado y en uso",
   "Métricas operativas activas",
-  "Modelo de continuidad post-PL",
+  "Modelo de continuidad post-graduación",
   "Plan de crecimiento a 90 días",
   "Roadmap de nuevas fuentes de ingreso",
 ]

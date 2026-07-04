@@ -18,9 +18,9 @@ export function CierreSection() {
       >
         {/* Decorative rule */}
         <div className="flex items-center gap-4 mb-16 max-w-xs mx-auto sm:max-w-none">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
           <div className="w-1 h-1 rounded-full bg-violet-400" />
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
         </div>
 
         <div className="text-center space-y-8">

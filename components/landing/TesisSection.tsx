@@ -66,10 +66,10 @@ export function TesisSection() {
             La tesis de ELEVA
           </p>
           <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight mb-4">
-            No venimos a reemplazar tu esencia.
+            ELEVA te da la estructura que tu centro necesita.
           </h2>
           <p className="text-2xl text-muted-foreground font-light">
-            La volvemos entrenable, medible y escalable.
+            Sin reemplazar tu esencia: la volvemos entrenable, medible y escalable.
           </p>
         </motion.div>
 

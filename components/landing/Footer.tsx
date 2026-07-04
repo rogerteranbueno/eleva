@@ -73,9 +73,16 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-muted-foreground">{copyright}</p>
-          <p className="text-xs text-muted-foreground">{region}</p>
+        <div className="border-t border-border pt-6 space-y-3">
+          <p className="text-xs text-muted-foreground/60 text-center leading-relaxed max-w-2xl mx-auto">
+            {lang === "en"
+              ? "ELEVA® is the institutional standard for transformation centers in LATAM. Credentials verified by Acreditta. Methodology developed with professional ethics and applied psychology frameworks."
+              : "ELEVA® es el estándar institucional para centros de transformación en LATAM. Credenciales verificadas por Acreditta. Metodología desarrollada con ética profesional y marcos de psicología aplicada."}
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-xs text-muted-foreground">{copyright}</p>
+            <p className="text-xs text-muted-foreground">{region}</p>
+          </div>
         </div>
       </div>
     </footer>

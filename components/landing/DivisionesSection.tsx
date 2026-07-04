@@ -31,7 +31,7 @@ const DIVISIONES = [
     headline: "Estrategia para crecer sin improvisar.",
     body: "Revenue, expansión, continuidad y nuevas fuentes de ingreso diseñadas para centros que ya tienen metodología.",
     bullets: [
-      "Continuidad Básico → Avanzado → PL",
+      "Continuidad Básico → Avanzado → Nivel 3",
       "Expansión a nuevas sedes",
       "Enrolamiento ético",
     ],

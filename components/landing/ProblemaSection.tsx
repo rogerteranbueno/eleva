@@ -8,7 +8,7 @@ const SINTOMAS = [
   "Las inscripciones llegan por WhatsApp y nadie sabe exactamente cuántas hay.",
   "El expediente del participante vive en una hoja de Excel que nadie actualiza.",
   "El seguimiento post-entrenamiento depende del criterio -y la memoria- del coach.",
-  "El PL termina y no hay sistema para sostener lo que se prometió en sala.",
+  "El programa más profundo termina y no hay sistema para sostener lo que se prometió en sala.",
   "No sabes quién está perdiendo momentum hasta que ya abandonó.",
   "El crecimiento depende casi por completo de que la última generación enrole bien.",
 ]
@@ -37,14 +37,14 @@ export function ProblemaSection() {
             El estado natural de la industria
           </p>
           <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight mb-6">
-            Lo que te trajo hasta aquí no necesariamente{" "}
+            Lo que sirvió ayer{" "}
             <span className="text-muted-foreground font-normal">
-              te llevará a la siguiente etapa.
+              ya no alcanza para lo que quieres construir mañana.
             </span>
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
             Los centros de transformación nacen desde una sala poderosa.
-            Pero crecen cuando esa sala se convierte en sistema.
+            Crecen cuando esa sala se convierte en sistema.
           </p>
         </motion.div>
 

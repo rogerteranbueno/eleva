@@ -29,8 +29,8 @@ const MARCOS = [
     short: "PCS",
     accent: "emerald",
     description:
-      "El modelo de seguimiento que mantiene a los participantes avanzando de básico a avanzado a PL, y de ahí a la comunidad activa. Medible en cada transición.",
-    levels: ["Básico", "Avanzado", "PL", "Graduado", "Champion"],
+      "El modelo de seguimiento que mantiene a los participantes avanzando de básico a avanzado a nivel 3, y de ahí a la comunidad activa. Medible en cada transición.",
+    levels: ["Básico", "Avanzado", "Nivel 3", "Graduado", "Champion"],
   },
   {
     icon: LayoutDashboard,

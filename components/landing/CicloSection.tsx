@@ -17,9 +17,9 @@ const CICLO = [
   { label: "Experiencia",  icon: Sparkles,       color: "#5B21B6", group: "basico",    desc: "El entrenamiento en sala, el corazón del modelo" },
   { label: "Seguimiento",  icon: Activity,       color: "#4C1D95", group: "basico",    desc: "Tracking post-entrenamiento, coaching y actividad" },
   { label: "Avanzado",     icon: TrendingUp,     color: "#1D4ED8", group: "avanzado",  desc: "Nivel 2, profundización y liderazgo personal" },
-  { label: "PL",           icon: Trophy,         color: "#1E40AF", group: "avanzado",  desc: "Nivel 3, transformación profunda y enrolamiento" },
+  { label: "Nivel 3",           icon: Trophy,         color: "#1E40AF", group: "avanzado",  desc: "Nivel 3, transformación profunda, liderazgo y enrolamiento" },
   { label: "Comunidad",    icon: Users,          color: "#065F46", group: "comunidad", desc: "Red de participantes activos y graduados" },
-  { label: "Post-PL",      icon: Heart,          color: "#047857", group: "comunidad", desc: "Acompañamiento y continuidad después de graduarse" },
+  { label: "Graduados",      icon: Heart,          color: "#047857", group: "comunidad", desc: "Acompañamiento post-graduación y continuidad" },
   { label: "Recompra",     icon: RefreshCw,      color: "#10B981", group: "growth",    desc: "Nuevos programas, intensivos y formaciones" },
   { label: "Referidos",    icon: Share2,         color: "#34D399", group: "growth",    desc: "Participantes que llevan a nuevas personas al centro" },
   { label: "Nuevas sedes", icon: Building2,      color: "#6EE7B7", group: "growth",    desc: "Expansión geográfica con el sistema replicado" },
@@ -35,8 +35,8 @@ const GRUPOS: Record<string, { label: string; color: string }> = {
 
 const RESULTADOS = [
   { value: "Más personas entrando",         sub: "atracción y admisiones",    accent: "violet" },
-  { value: "Más participantes avanzando",   sub: "básico → avanzado → PL",    accent: "blue" },
-  { value: "Más graduados activos",         sub: "comunidad y post-PL",        accent: "emerald" },
+  { value: "Más participantes avanzando",   sub: "básico → avanzado → nivel 3",    accent: "blue" },
+  { value: "Más graduados activos",         sub: "comunidad y graduados",        accent: "emerald" },
   { value: "Más staff preparado",           sub: "academia interna",           accent: "violet" },
   { value: "Menos improvisación",           sub: "sistema y datos",            accent: "teal" },
 ]
