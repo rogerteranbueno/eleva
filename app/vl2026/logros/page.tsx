@@ -26,12 +26,11 @@ const RECENT_ACTIVITY = [
   { label: "Sesión con coach Ana Reyes",          pts: +30,  icon: Heart,    color: "text-pink-400",   daysAgo: 25 },
 ]
 
-const LEADERBOARD = [
-  { name: "Carmen Valdés", avatar: "CV", pts: 6420, level: "Líder" },
-  { name: "Héctor Ramírez", avatar: "HR", pts: 5180, level: "Visionario" },
-  { name: "Diego Salinas",  avatar: "DS", pts: 4950, level: "Visionario" },
-  { name: "Paola Serrano",  avatar: "PS", pts: 3800, level: "Visionario" },
-  { name: "Valeria Romo",   avatar: "VR", pts: 1850, level: "Explorador", isMe: true },
+const GENERACION_STATS = [
+  { label: "Misiones completadas", value: "68%", sub: "esta semana · meta: 75%", color: "text-violet-400", bar: 68, barColor: "bg-violet-500" },
+  { label: "Momentum promedio",    value: "54",  sub: "generación Omega",        color: "text-cyan-400",   bar: 54, barColor: "bg-cyan-500" },
+  { label: "Racha grupal",         value: "11d", sub: "mejor racha: 18 días",    color: "text-orange-400", bar: 61, barColor: "bg-orange-500" },
+  { label: "Asistencia a eventos", value: "82%", sub: "promedio del programa",   color: "text-green-400",  bar: 82, barColor: "bg-green-500" },
 ]
 
 interface Badge {
@@ -251,37 +250,35 @@ export default function LogrosPage() {
         </div>
       </div>
 
-      {/* Leaderboard */}
+      {/* Pulso de tu generación */}
       <div className="glass rounded-xl overflow-hidden">
         <div className="flex items-center gap-2 px-4 py-3 border-b border-white/6">
           <Users className="w-3.5 h-3.5 text-violet-400" />
-          <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">Ranking · Generación Omega</p>
+          <div className="flex-1">
+            <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">Pulso de tu generación</p>
+          </div>
+          <span className="text-[10px] text-muted-foreground">Gen. Omega · 24 personas</span>
         </div>
-        <div className="divide-y divide-white/4">
-          {LEADERBOARD.map((p, i) => (
-            <div
-              key={p.name}
-              className={cn(
-                "flex items-center gap-3 px-4 py-3",
-                p.isMe && "bg-violet-500/5 border-l-2 border-violet-500/50"
-              )}
-            >
-              <span className={cn(
-                "text-sm font-black w-5 text-center",
-                i === 0 ? "text-yellow-400" : i === 1 ? "text-gray-300" : i === 2 ? "text-orange-400" : "text-muted-foreground"
-              )}>
-                {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `${i + 1}`}
-              </span>
-              <AvatarBadge initials={p.avatar} size="sm" color={p.isMe ? "violet" : "auto"} />
-              <div className="flex-1 min-w-0">
-                <p className={cn("text-sm font-semibold truncate", p.isMe ? "text-violet-300" : "text-white")}>
-                  {p.name} {p.isMe && <span className="text-[10px] text-violet-400">(tú)</span>}
-                </p>
-                <p className="text-[10px] text-muted-foreground">{p.level}</p>
+        <div className="p-4 grid grid-cols-2 gap-3">
+          {GENERACION_STATS.map((s) => (
+            <div key={s.label} className="space-y-2">
+              <div className="flex items-end justify-between">
+                <p className="text-[10px] text-muted-foreground leading-tight">{s.label}</p>
+                <p className={cn("text-lg font-black leading-none", s.color)}>{s.value}</p>
               </div>
-              <span className="text-sm font-black text-white whitespace-nowrap">{p.pts.toLocaleString()} pts</span>
+              <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
+                <div className={cn("h-full rounded-full", s.barColor)} style={{ width: `${s.bar}%` }} />
+              </div>
+              <p className="text-[10px] text-muted-foreground/70">{s.sub}</p>
             </div>
           ))}
+        </div>
+        <div className="px-4 pb-4">
+          <div className="rounded-xl bg-violet-500/6 border border-violet-500/15 px-3 py-2.5">
+            <p className="text-[11px] text-violet-300 leading-snug">
+              Tu generación tiene el mayor momentum promedio de los últimos 3 meses. Tu participación cuenta.
+            </p>
+          </div>
         </div>
       </div>
     </div>

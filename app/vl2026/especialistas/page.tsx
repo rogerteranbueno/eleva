@@ -3,7 +3,7 @@
 import { useState } from "react"
 import {
   Star, Filter, Search, DollarSign, Calendar, CheckCircle,
-  Clock, Users, Sparkles, ChevronRight, X,
+  Clock, Users, Sparkles, ChevronRight, X, Lock, MessageCircle,
 } from "lucide-react"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
@@ -273,6 +273,10 @@ export default function EspecialistasPage() {
     show(`Sesión agendada con ${booking?.name} ✓`)
   }
 
+  function handleRequestReferral(name: string) {
+    show(`Solicitud enviada a Ana Reyes · ${name} ✓`)
+  }
+
   return (
     <div className="p-6 max-w-3xl mx-auto space-y-6">
       <OnboardingModal config={ONBOARDING} />
@@ -326,6 +330,7 @@ export default function EspecialistasPage() {
               isBooked={booked.has(s.id)}
               highlight
               onBook={() => setBooking(s)}
+              onRequestReferral={() => handleRequestReferral(s.name)}
             />
           ))}
         </div>
@@ -344,6 +349,7 @@ export default function EspecialistasPage() {
               isBooked={booked.has(s.id)}
               highlight={false}
               onBook={() => setBooking(s)}
+              onRequestReferral={() => handleRequestReferral(s.name)}
             />
           ))}
         </div>
@@ -367,11 +373,13 @@ function SpecialistCard({
   isBooked,
   highlight,
   onBook,
+  onRequestReferral,
 }: {
   specialist: typeof SPECIALISTS[0]
   isBooked: boolean
   highlight: boolean
   onBook: () => void
+  onRequestReferral: () => void
 }) {
   const [expanded, setExpanded] = useState(false)
 
@@ -455,26 +463,44 @@ function SpecialistCard({
       )}
 
       {/* CTA */}
-      {!isBooked ? (
-        <button
-          onClick={onBook}
-          disabled={!s.available}
-          className={cn(
-            "w-full py-2.5 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-2",
-            s.available
-              ? highlight
-                ? "bg-cyan-600 hover:bg-cyan-700 text-white"
-                : "glass border border-white/15 hover:border-white/25 text-white"
-              : "bg-white/5 text-muted-foreground cursor-not-allowed"
-          )}
-        >
-          <Calendar className="w-4 h-4" />
-          {s.available ? `Reservar sesión · ${s.nextSlot}` : `Próximo espacio: ${s.nextSlot}`}
-        </button>
+      {s.recomendado ? (
+        !isBooked ? (
+          <button
+            onClick={onBook}
+            disabled={!s.available}
+            className={cn(
+              "w-full py-2.5 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-2",
+              s.available
+                ? highlight
+                  ? "bg-cyan-600 hover:bg-cyan-700 text-white"
+                  : "glass border border-white/15 hover:border-white/25 text-white"
+                : "bg-white/5 text-muted-foreground cursor-not-allowed"
+            )}
+          >
+            <Calendar className="w-4 h-4" />
+            {s.available ? `Reservar sesión · ${s.nextSlot}` : `Próximo espacio: ${s.nextSlot}`}
+          </button>
+        ) : (
+          <div className="w-full py-2.5 rounded-xl border border-green-500/30 text-green-400 text-sm font-semibold flex items-center justify-center gap-2">
+            <CheckCircle className="w-4 h-4" />
+            Sesión agendada, te llegará confirmación
+          </div>
+        )
       ) : (
-        <div className="w-full py-2.5 rounded-xl border border-green-500/30 text-green-400 text-sm font-semibold flex items-center justify-center gap-2">
-          <CheckCircle className="w-4 h-4" />
-          Sesión agendada, te llegará confirmación
+        <div className="space-y-2">
+          <div className="flex items-start gap-2 px-3 py-2 rounded-lg bg-white/3 border border-white/8">
+            <Lock className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0 mt-0.5" />
+            <p className="text-[11px] text-muted-foreground leading-snug">
+              Tu coach puede derivarte a este especialista cuando lo considere apropiado para tu objetivo.
+            </p>
+          </div>
+          <button
+            onClick={onRequestReferral}
+            className="w-full py-2.5 rounded-xl glass border border-white/12 hover:border-violet-500/30 text-muted-foreground hover:text-violet-300 text-sm font-semibold transition-colors flex items-center justify-center gap-2"
+          >
+            <MessageCircle className="w-4 h-4" />
+            Solicitar derivación al coach
+          </button>
         </div>
       )}
     </div>
