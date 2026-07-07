@@ -60,7 +60,7 @@ export function Footer() {
               </p>
               <div className="space-y-3">
                 <Link href="/build" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  {lang === "en" ? "Book free diagnosis" : "Diagnóstico gratuito"}
+                  {lang === "en" ? "Book a diagnosis" : "Agendar diagnóstico"}
                 </Link>
                 <Link href="/build" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
                   {lang === "en" ? "Apply to PACTO" : "Aplicar a PACTO"}

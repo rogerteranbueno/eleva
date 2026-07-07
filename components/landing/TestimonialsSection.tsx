@@ -48,13 +48,13 @@ export function TestimonialsSection() {
   const { lang } = useLang()
 
   const c = lang === "en" ? {
-    badge: "05 · Real cases",
+    badge: "Real cases",
     h2a: "The growth",
     h2b: "speaks for itself.",
     ndaNote: "We can't show you our clients, but we can show you what they say.",
     ndaDetail: "All clients sign an NDA. Their results are real; their identity stays protected.",
   } : {
-    badge: "05 · Casos reales",
+    badge: "Casos reales",
     h2a: "El crecimiento",
     h2b: "habla por sí solo.",
     ndaNote: "No podemos mostrarte a nuestros clientes, pero sí lo que dicen.",

@@ -763,7 +763,7 @@ export const TODAY_EVENT = {
   name: "Sesión en Vivo — Generación Omega",
   date: "Jueves 5 de junio 2025",
   time: "7:00 pm",
-  location: "Sala Principal · LEVEL Medellín",
+  location: "Sala Principal · TRANSFORMA Medellín",
   cohorte: "Generación Omega",
   expectedAttendees: 89,
   registeredCount: 62,
@@ -1222,9 +1222,9 @@ export const BECAS_TRACKING: BecaRecord[] = [
 ]
 
 export const STAFF_ACCOUNTS = [
-  { id: "s1", name: "Karla Ríos",    avatar: "KR", role: "Mesa de Registro", email: "karla@level.co" },
-  { id: "s2", name: "Daniel Mora",   avatar: "DM", role: "Mesa de Registro", email: "daniel@level.co" },
-  { id: "s3", name: "Paola Juárez",  avatar: "PJ", role: "Operaciones",      email: "paola@level.co" },
+  { id: "s1", name: "Karla Ríos",    avatar: "KR", role: "Mesa de Registro", email: "karla@transforma.co" },
+  { id: "s2", name: "Daniel Mora",   avatar: "DM", role: "Mesa de Registro", email: "daniel@transforma.co" },
+  { id: "s3", name: "Paola Juárez",  avatar: "PJ", role: "Operaciones",      email: "paola@transforma.co" },
 ]
 
 // ─── Ops Console — comprehensive participant type ──────────────────────────────
@@ -1316,7 +1316,7 @@ export const OPS_PARTICIPANTS: OpsParticipant[] = [
     courseHistory: [
       { course: "La Posibilidad (Básico)", date: "15 feb 2025", status: "completado" },
       { course: "La Imposibilidad (Avanzado)", date: "1 mar 2025", status: "completado" },
-      { course: "VIA LEVEL", date: "15 mar 2025", status: "en-proceso" },
+      { course: "VIA TRANSFORMA", date: "15 mar 2025", status: "en-proceso" },
     ],
   },
   {
@@ -1334,7 +1334,7 @@ export const OPS_PARTICIPANTS: OpsParticipant[] = [
     courseHistory: [
       { course: "La Posibilidad (Básico)", date: "15 feb 2025", status: "completado" },
       { course: "La Imposibilidad (Avanzado)", date: "1 mar 2025", status: "completado" },
-      { course: "VIA LEVEL", date: "15 mar 2025", status: "en-proceso" },
+      { course: "VIA TRANSFORMA", date: "15 mar 2025", status: "en-proceso" },
     ],
   },
   {
@@ -1354,7 +1354,7 @@ export const OPS_PARTICIPANTS: OpsParticipant[] = [
     courseHistory: [
       { course: "La Posibilidad (Básico)", date: "15 feb 2025", status: "completado" },
       { course: "La Imposibilidad (Avanzado)", date: "1 mar 2025", status: "completado" },
-      { course: "VIA LEVEL", date: "15 mar 2025", status: "en-proceso" },
+      { course: "VIA TRANSFORMA", date: "15 mar 2025", status: "en-proceso" },
     ],
   },
   {
@@ -1374,7 +1374,7 @@ export const OPS_PARTICIPANTS: OpsParticipant[] = [
     courseHistory: [
       { course: "La Posibilidad (Básico)", date: "15 feb 2025", status: "completado" },
       { course: "La Imposibilidad (Avanzado)", date: "1 mar 2025", status: "completado" },
-      { course: "VIA LEVEL", date: "15 mar 2025", status: "en-proceso" },
+      { course: "VIA TRANSFORMA", date: "15 mar 2025", status: "en-proceso" },
     ],
   },
   {
@@ -1392,7 +1392,7 @@ export const OPS_PARTICIPANTS: OpsParticipant[] = [
     courseHistory: [
       { course: "La Posibilidad (Básico)", date: "15 feb 2025", status: "completado" },
       { course: "La Imposibilidad (Avanzado)", date: "1 mar 2025", status: "completado" },
-      { course: "VIA LEVEL", date: "15 mar 2025", status: "en-proceso" },
+      { course: "VIA TRANSFORMA", date: "15 mar 2025", status: "en-proceso" },
     ],
   },
   // ── Generación Norte (Avanzado completada) ──────────────────────────────
@@ -1401,7 +1401,7 @@ export const OPS_PARTICIPANTS: OpsParticipant[] = [
     phone: "+52 55 5566 7788", email: "mariana.ortiz@hotmail.com",
     levelCode: "expansion", levelLabel: "La Imposibilidad · Completada", cohorte: "Generación Norte", coach: "Pedro Infante",
     todayStatus: "no-aplica", arrivalTime: null,
-    nextTraining: "VIA LEVEL (Mes 1)", nextTrainingDate: "1 jul 2025", nextTrainingStatus: "sin-confirmar",
+    nextTraining: "VIA TRANSFORMA (Mes 1)", nextTrainingDate: "1 jul 2025", nextTrainingStatus: "sin-confirmar",
     paymentStatus: "pendiente", amountTotal: 18000, amountPaid: 8900, concept: "Inscripción VIA", daysOverdue: null,
     hasComprobante: true, hasBeca: false, becaAmount: null,
     referredBy: null, enrolledCount: 0, becasAvailable: 0,
@@ -1418,7 +1418,7 @@ export const OPS_PARTICIPANTS: OpsParticipant[] = [
     phone: "+52 55 3344 5566", email: "paola.serrano@gmail.com",
     levelCode: "expansion", levelLabel: "La Imposibilidad · Completada", cohorte: "Generación Norte", coach: "Pedro Infante",
     todayStatus: "no-aplica", arrivalTime: null,
-    nextTraining: "VIA LEVEL (Mes 1)", nextTrainingDate: "1 jul 2025", nextTrainingStatus: "duda",
+    nextTraining: "VIA TRANSFORMA (Mes 1)", nextTrainingDate: "1 jul 2025", nextTrainingStatus: "duda",
     paymentStatus: "vencido", amountTotal: 8900, amountPaid: 0, concept: "Mensualidad Avanzado", daysOverdue: 7,
     hasComprobante: false, hasBeca: false, becaAmount: null,
     referredBy: null, enrolledCount: 0, becasAvailable: 0,
@@ -1448,7 +1448,7 @@ export const OPS_PARTICIPANTS: OpsParticipant[] = [
     courseHistory: [
       { course: "La Posibilidad (Básico)", date: "17 ene 2025", status: "completado" },
       { course: "La Imposibilidad (Avanzado)", date: "7 feb 2025", status: "completado" },
-      { course: "VIA LEVEL", date: "1 mar 2025", status: "en-proceso" },
+      { course: "VIA TRANSFORMA", date: "1 mar 2025", status: "en-proceso" },
     ],
   },
   {
@@ -1469,7 +1469,7 @@ export const OPS_PARTICIPANTS: OpsParticipant[] = [
     courseHistory: [
       { course: "La Posibilidad (Básico)", date: "17 ene 2025", status: "completado" },
       { course: "La Imposibilidad (Avanzado)", date: "7 feb 2025", status: "completado" },
-      { course: "VIA LEVEL", date: "1 mar 2025", status: "en-proceso" },
+      { course: "VIA TRANSFORMA", date: "1 mar 2025", status: "en-proceso" },
     ],
   },
   // ── Próximo Básico — pre-inscritos ────────────────────────────────────

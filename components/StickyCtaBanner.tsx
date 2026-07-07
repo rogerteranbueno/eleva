@@ -42,9 +42,9 @@ export function StickyCtaBanner() {
           className="fixed bottom-5 inset-x-4 z-50 flex items-center justify-between gap-3 max-w-lg mx-auto px-4 py-3 rounded-2xl bg-violet-600 shadow-2xl shadow-violet-900/60"
         >
           <p className="text-sm font-bold text-foreground leading-tight">
-            ¿Tu centro listo para escalar?{" "}
+            ¿Quieres ordenar tu centro para crecer?{" "}
             <span className="text-violet-200 font-medium hidden sm:inline">
-              Agenda un diagnóstico gratuito.
+              Agenda un diagnóstico.
             </span>
           </p>
           <div className="flex items-center gap-2 shrink-0">

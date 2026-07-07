@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "PACTO, Implementación intensiva para centros de transformación",
     description:
-      "PACTO no es una capacitación. Es capacidad instalada. Academia interna, playbooks, ELEVA OS y plan de crecimiento en 16 semanas.",
+      "PACTO no es un curso. Es una implementación. Academia interna, playbooks, ELEVA OS y plan de crecimiento en 16 semanas.",
     type: "website",
     url: `${BASE_URL}/pacto`,
     locale: "es_MX",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "PACTO, Programa de Aceleración · ELEVA",
-    description: "16 semanas. 12 módulos. 8 entregables. Capacidad instalada, no consultoría.",
+    description: "16 semanas. 12 módulos. 8 entregables. Una implementación completa, no consultoría.",
     images: [`${BASE_URL}/og.png`],
   },
 }

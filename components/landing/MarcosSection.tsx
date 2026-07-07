@@ -11,7 +11,7 @@ const MARCOS = [
     short: "CMM",
     accent: "violet",
     description:
-      "5 niveles que determinan en qué etapa de madurez se encuentra un centro, desde operación reactiva hasta institución escalable. La base de todo diagnóstico ELEVA.",
+      "5 niveles que determinan en qué etapa de madurez se encuentra un centro, desde operación reactiva hasta un centro que puede crecer sin perder orden. La base de todo diagnóstico ELEVA.",
     levels: ["Reactivo", "Estabilizado", "Sistematizado", "Escalable", "Institucional"],
   },
   {

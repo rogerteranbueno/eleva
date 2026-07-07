@@ -98,7 +98,7 @@ const PACKAGES = [
       { text: "IA que analiza tus números y genera planes de acción", on: false },
       { text: "Insights mensuales de más de 20 centros en 5 continentes", on: false },
     ],
-    cta: "Agendar diagnóstico gratuito",
+    cta: "Agendar diagnóstico",
     ctaStyle: "bg-muted hover:bg-muted/80 border border-border text-foreground",
     accentColor: "text-foreground",
   },
@@ -198,7 +198,7 @@ export default function PreciosPage() {
                     <span className={cn("text-3xl font-black", pkg.accentColor)}>{pkg.price}</span>
                     <span className="text-sm text-muted-foreground">{pkg.currency}</span>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1">Precio final definido en la llamada de diagnóstico gratuito</p>
+                  <p className="text-xs text-muted-foreground mt-1">Precio final definido después del diagnóstico de tu centro</p>
                 </div>
                 <p className="text-sm text-foreground/80 leading-relaxed mb-5">{pkg.description}</p>
                 <ul className="space-y-2.5 flex-1 mb-5">
@@ -285,7 +285,7 @@ export default function PreciosPage() {
               <a href="mailto:hola@elevaapp.io">
                 <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                   className="flex items-center gap-2 px-7 py-3.5 glass text-foreground rounded-xl text-sm font-medium hover:opacity-80 transition-all">
-                  Agendar sesión gratuita <ChevronRight className="w-4 h-4" />
+                  Agendar una llamada de 30 min <ChevronRight className="w-4 h-4" />
                 </motion.button>
               </a>
             </div>

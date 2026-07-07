@@ -4,17 +4,11 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight, ChevronDown } from "lucide-react"
 
-const PILLARS = ["Academia", "Consultoría", "Operación", "Datos", "Comunidad"]
-
-const STATS = [
-  { value: "+$500M", label: "mercado LATAM de transformación" },
-  { value: "40+", label: "centros operando con ELEVA" },
-  { value: "3.2x", label: "crecimiento promedio con sistema" },
-]
+const PILLARS = ["Formación", "Operación", "Seguimiento", "Datos", "Crecimiento"]
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden pt-28 pb-20">
+    <section className="relative min-h-[88vh] flex flex-col items-center justify-center px-6 text-center overflow-hidden pt-28 pb-20">
       {/* Glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-violet-600/8 blur-3xl" />
@@ -35,19 +29,20 @@ export function HeroSection() {
           className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-violet-600/12 border border-violet-500/25 text-violet-300 text-xs font-semibold mb-10 tracking-wide"
         >
           <div className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
-          La primera firma institucional para centros de transformación en LATAM
+          Para centros de transformación en LATAM
         </motion.div>
 
         {/* Headline */}
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-foreground leading-[1.04] tracking-tight mb-6 max-w-4xl mx-auto">
-          Convierte tu centro de transformación en una{" "}
-          <span className="gradient-text">institución escalable.</span>
+          Tu centro ya transforma.{" "}
+          <span className="gradient-text">Ahora toca ordenarlo para crecer.</span>
         </h1>
 
         {/* Sub */}
         <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-4">
-          ELEVA forma entrenadores, profesionaliza equipos e instala sistemas de crecimiento
-          para centros que quieren expandirse sin perder su esencia.
+          ELEVA ayuda a centros de transformación a dejar de depender de WhatsApp, Excel
+          y entrenadores externos. Instalamos procesos, equipo y sistema para que tu centro
+          crezca con más orden.
         </p>
 
         {/* Pillar pills */}
@@ -60,7 +55,7 @@ export function HeroSection() {
         </div>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-14">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link href="/build">
             <motion.button
               whileHover={{ scale: 1.03 }}
@@ -71,7 +66,7 @@ export function HeroSection() {
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </Link>
-          <a href="#programas">
+          <a href="#como-funciona">
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
@@ -81,21 +76,6 @@ export function HeroSection() {
             </motion.button>
           </a>
         </div>
-
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.45 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto"
-        >
-          {STATS.map(({ value, label }) => (
-            <div key={label} className="text-center">
-              <p className="text-3xl font-black text-foreground mb-1">{value}</p>
-              <p className="text-xs text-muted-foreground leading-snug">{label}</p>
-            </div>
-          ))}
-        </motion.div>
       </motion.div>
 
       {/* Scroll hint */}
@@ -104,7 +84,7 @@ export function HeroSection() {
         transition={{ repeat: Infinity, duration: 2.2 }}
         className="absolute bottom-8 flex flex-col items-center gap-2 text-muted-foreground/50"
       >
-        <span className="text-[10px] uppercase tracking-widest">Lo que te trajo hasta aquí</span>
+        <span className="text-[10px] uppercase tracking-widest">Formas de trabajar con ELEVA</span>
         <ChevronDown className="w-4 h-4" />
       </motion.div>
     </section>

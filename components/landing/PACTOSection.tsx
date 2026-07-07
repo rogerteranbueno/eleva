@@ -5,30 +5,13 @@ import { useInView } from "@/lib/use-in-view"
 import Link from "next/link"
 import { ArrowRight, Check, Zap } from "lucide-react"
 
-const MODULOS = [
-  "Fundamentos de transformación responsable",
-  "Observador, lenguaje e interpretación",
-  "Presencia y escucha del entrenador",
-  "Diseño de experiencias transformacionales",
-  "Intervención, corrección y seguridad psicológica",
-  "Staff, roles y operación de sala",
-  "Admisiones, enrolamiento y ventas éticas",
-  "Continuidad de programas y seguimiento post-graduación",
-  "Data, dashboards y seguimiento con ELEVA OS",
-  "Academia interna del centro",
-  "Expansión y nuevas sedes",
-  "Proyecto final de implementación",
-]
-
 const ENTREGABLES = [
-  "Ruta de formación de entrenadores diseñada",
-  "Staff entrenado y certificado",
-  "Procesos críticos documentados",
+  "Tu academia interna diseñada",
+  "Equipo entrenado y evaluado",
+  "Procesos documentados y listos para usarse",
   "ELEVA OS instalado y en uso",
-  "Métricas operativas activas",
-  "Modelo de continuidad post-graduación",
+  "Seguimiento después del programa, operando",
   "Plan de crecimiento a 90 días",
-  "Roadmap de nuevas fuentes de ingreso",
 ]
 
 const fadeUp = {
@@ -60,7 +43,7 @@ export function PACTOSection() {
             </div>
           </div>
           <p className="text-lg text-muted-foreground max-w-xl">
-            Programa de Aceleración para Coaches y Centros de Transformación.
+            La forma más rápida de profesionalizar tu centro.
           </p>
         </motion.div>
 
@@ -73,7 +56,7 @@ export function PACTOSection() {
           {/* Top bar */}
           <div className="bg-violet-600/10 border-b border-violet-500/15 px-8 py-5">
             <p className="text-sm font-bold text-violet-300">
-              No es una capacitación. Es capacidad instalada.
+              No es un curso. Es una implementación.
             </p>
           </div>
 
@@ -83,15 +66,15 @@ export function PACTOSection() {
               <div>
                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">Qué es</p>
                 <p className="text-foreground leading-relaxed">
-                  Una implementación intensiva para profesionalizar la formación, operación,
-                  seguimiento y crecimiento de tu centro. No viene a decirte cómo entrenar -
-                  viene a instalar la estructura que permite que tu entrenamiento escale.
+                  En PACTO diseñamos tu academia interna, entrenamos a tu equipo, documentamos
+                  procesos, instalamos ELEVA OS y te dejamos un plan claro de crecimiento.
+                  No viene a decirte cómo entrenar: ordena lo que pasa antes y después de la sala.
                 </p>
               </div>
               <div>
                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">Para quién es</p>
                 <p className="text-foreground leading-relaxed">
-                  Centros con comunidad activa, entrenamientos en curso y ambición de crecer -
+                  Centros con comunidad activa, entrenamientos en curso y ganas de crecer,
                   pero que siguen dependiendo de improvisación, entrenadores externos
                   o decisiones tomadas sin datos.
                 </p>
@@ -105,43 +88,35 @@ export function PACTOSection() {
                   Si contratas el Diagnóstico 360 antes, el monto se descuenta del proyecto.
                 </p>
               </div>
-
-              <Link href="/build">
-                <button className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-violet-600 hover:bg-violet-500 text-foreground font-bold rounded-xl transition-colors group">
-                  Aplicar a PACTO
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                </button>
-              </Link>
             </div>
 
-            {/* Right: modules + deliverables */}
+            {/* Right: deliverables + link to full scope */}
             <div className="space-y-7">
               <div>
-                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">12 Módulos</p>
-                <ul className="space-y-2">
-                  {MODULOS.map((m, i) => (
-                    <li key={i} className="flex items-start gap-2.5 text-xs text-foreground/80">
-                      <span className="text-violet-400 font-black flex-shrink-0 mt-0.5 text-[10px]">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      {m}
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">
+                  Lo que tu centro tiene al terminar
+                </p>
+                <ul className="space-y-2.5">
+                  {ENTREGABLES.map((e) => (
+                    <li key={e} className="flex items-center gap-2.5 text-sm text-foreground/85">
+                      <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                      {e}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="border-t border-foreground/6 pt-6">
-                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">
-                  Lo que el centro tiene al terminar
+              <div className="border-t border-foreground/6 pt-6 space-y-3">
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  El programa completo cubre 12 módulos: formación, operación de sala,
+                  admisiones, seguimiento, datos y expansión.
                 </p>
-                <ul className="space-y-1.5">
-                  {ENTREGABLES.map((e) => (
-                    <li key={e} className="flex items-center gap-2.5 text-xs text-foreground/80">
-                      <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
-                      {e}
-                    </li>
-                  ))}
-                </ul>
+                <Link href="/pacto">
+                  <button className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-foreground/6 hover:bg-foreground/10 border border-foreground/10 hover:border-foreground/20 text-foreground font-bold rounded-xl transition-all group">
+                    Ver alcance completo de PACTO
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

@@ -8,10 +8,10 @@ const COOKIE_MAX_AGE = 7 * 24 * 60 * 60
 
 // Perfiles demo, cada uno lleva directo a su vista de rol
 const DEMO_PROFILES: Record<string, { password: string; to: string; role: string }> = {
-  'dueno@level.com': { password: 'Level2026', to: '/vl2026/pulso',        role: 'dueno' },
-  'coach@level.com': { password: 'Level2026', to: '/vl2026/coach',         role: 'coach' },
-  'ops@level.com':   { password: 'Level2026', to: '/vl2026/ops/dashboard', role: 'ops' },
-  'sara@level.com':  { password: 'Level2026', to: '/vl2026/feed',          role: 'participante' },
+  'dueno@transforma.co':       { password: 'Eleva2026', to: '/vl2026/pulso',        role: 'dueno' },
+  'coach@transforma.co':       { password: 'Eleva2026', to: '/vl2026/coach',         role: 'coach' },
+  'ops@transforma.co':         { password: 'Eleva2026', to: '/vl2026/ops/dashboard', role: 'ops' },
+  'participante@transforma.co':{ password: 'Eleva2026', to: '/vl2026/feed',          role: 'participante' },
 }
 
 async function setDemoCookie(value: string) {

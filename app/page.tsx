@@ -8,18 +8,13 @@ import { useLang } from "@/lib/i18n"
 import { useTheme } from "@/lib/theme"
 
 import { HeroSection } from "@/components/landing/HeroSection"
-import { ProblemaSection } from "@/components/landing/ProblemaSection"
-import { LegacySection } from "@/components/landing/LegacySection"
-import { TesisSection } from "@/components/landing/TesisSection"
-import { DivisionesSection } from "@/components/landing/DivisionesSection"
-import { CicloSection } from "@/components/landing/CicloSection"
-import { PACTOSection } from "@/components/landing/PACTOSection"
-import { MarcosSection } from "@/components/landing/MarcosSection"
-import { NoHacemosSection } from "@/components/landing/NoHacemosSection"
 import { PreciosPivotSection } from "@/components/landing/PreciosPivotSection"
+import { QueHaceSection } from "@/components/landing/QueHaceSection"
+import { PACTOSection } from "@/components/landing/PACTOSection"
+import { TestimonialsSection } from "@/components/landing/TestimonialsSection"
+import { HistoriaTeaserSection } from "@/components/landing/HistoriaTeaserSection"
 import { CierreSection } from "@/components/landing/CierreSection"
 import { Footer } from "@/components/landing/Footer"
-import { HistoryHint } from "@/components/landing/HistoryHint"
 
 // ─── Nav ──────────────────────────────────────────────────────────────────────
 
@@ -155,31 +150,21 @@ export default function HomePage() {
       <main className="pt-16">
         <HeroSection />
         <SectionDivider />
-        <ProblemaSection />
+        {/* anchor for "Precios" nav link */}
+        <div id="precios">
+          <PreciosPivotSection />
+        </div>
         <SectionDivider />
-        <LegacySection />
-        <SectionDivider />
-        <TesisSection />
-        <SectionDivider />
-        <DivisionesSection />
-        <SectionDivider />
-        <CicloSection />
-        <HistoryHint variant={1} />
+        <QueHaceSection />
         <SectionDivider />
         {/* anchor for "Ver programas" CTA */}
         <div id="programas">
           <PACTOSection />
         </div>
-        <HistoryHint variant={3} />
         <SectionDivider />
-        <MarcosSection />
+        <TestimonialsSection />
         <SectionDivider />
-        <NoHacemosSection />
-        <SectionDivider />
-        {/* anchor for "Precios" nav link */}
-        <div id="precios">
-          <PreciosPivotSection />
-        </div>
+        <HistoriaTeaserSection />
         <SectionDivider />
         <CierreSection />
       </main>

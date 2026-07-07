@@ -37,9 +37,9 @@ import { getMomentumColor, cn } from "@/lib/utils"
 
 const FACTORS = [
   { label: "Check-ins diarios", weight: 30, current: 0, icon: <CheckCircle className="w-4 h-4" /> },
-  { label: "Misiones completadas", weight: 35, current: 25, icon: <Target className="w-4 h-4" /> },
+  { label: "Misiones completadas", weight: 35, current: 5, icon: <Target className="w-4 h-4" /> },
   { label: "Participación en cohorte", weight: 20, current: 10, icon: <MessageSquare className="w-4 h-4" /> },
-  { label: "Asistencia a eventos", weight: 15, current: 10, icon: <Calendar className="w-4 h-4" /> },
+  { label: "Asistencia a eventos", weight: 15, current: 8, icon: <Calendar className="w-4 h-4" /> },
 ]
 
 const SUGGESTED_ACTIONS = [

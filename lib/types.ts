@@ -190,4 +190,7 @@ export interface DemoState {
   seenOnboarding: string[]
   selectedCenter: string
   atencionResolved: number
+  contadoraMode: boolean
+  anomaliesApproved: string[]
+  anomaliesRejected: string[]
 }

@@ -262,8 +262,8 @@ export default function PACTOPage() {
               <div>
                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">Qué es PACTO</p>
                 <h2 className="text-4xl font-black text-foreground leading-tight mb-5">
-                  No es una capacitación.<br />
-                  <span className="text-muted-foreground font-light">Es capacidad instalada.</span>
+                  No es un curso.<br />
+                  <span className="text-muted-foreground font-light">Es una implementación.</span>
                 </h2>
                 <p className="text-foreground/80 leading-relaxed">
                   PACTO es una implementación estratégica e intensiva para profesionalizar la formación, la operación, el seguimiento y el crecimiento de un centro de transformación.
@@ -640,7 +640,7 @@ export default function PACTOPage() {
             </div>
 
             <p className="text-xs text-muted-foreground pt-2">
-              No hay registro previo requerido · El diagnóstico inicial es gratuito · Sólo trabajamos con centros con fit real.
+              No hay registro previo requerido · El Diagnóstico 360 se descuenta si contratas PACTO · Sólo trabajamos con centros con fit real.
             </p>
           </motion.div>
         </section>

@@ -46,7 +46,7 @@ export function PricingSection() {
           { text: "AI that analyzes your numbers and generates action plans", included: false },
           { text: "Monthly insights from 20+ centers across 5 continents", included: false },
         ],
-        cta: "Schedule free diagnosis",
+        cta: "Schedule a diagnosis",
         ctaStyle: "bg-muted hover:bg-muted/80 border border-border text-foreground",
         recommendedNote: null as null | string,
       },
@@ -132,7 +132,7 @@ export function PricingSection() {
           { text: "IA que analiza tus números y genera planes de acción", included: false },
           { text: "Insights mensuales de más de 20 centros en 5 continentes", included: false },
         ],
-        cta: "Agendar diagnóstico gratuito",
+        cta: "Agendar diagnóstico",
         ctaStyle: "bg-muted hover:bg-muted/80 border border-border text-foreground",
         recommendedNote: null as null | string,
       },
@@ -229,7 +229,7 @@ export function PricingSection() {
                 <span className={cn("text-3xl font-black", pkg.accentColor)}>{pkg.price}</span>
                 <span className="text-sm text-muted-foreground">{pkg.currency}</span>
               </div>
-              <p className="text-xs text-muted-foreground mt-1">{lang === "en" ? "Final price defined in the free diagnosis call" : "Precio final definido en la llamada de diagnóstico gratuito"}</p>
+              <p className="text-xs text-muted-foreground mt-1">{lang === "en" ? "Final price defined after your center's diagnosis" : "Precio final definido después del diagnóstico de tu centro"}</p>
             </div>
 
             {/* Involvement indicators */}

@@ -42,24 +42,46 @@ const ANOMALY_CFG: Record<string, { label: string; color: string; bg: string }> 
   "registro-no-autorizado":{ label: "Registro no autorizado",color: "text-red-400",    bg: "border-red-500/25 bg-red-500/5" },
 }
 
-function AnomalyCard({ a, onResolve }: { a: FinancialAnomaly; onResolve: () => void }) {
+function AnomalyCard({
+  a, onResolve, contadoraMode, approved, rejected, onApprove, onReject,
+}: {
+  a: FinancialAnomaly
+  onResolve: () => void
+  contadoraMode?: boolean
+  approved?: boolean
+  rejected?: boolean
+  onApprove?: () => void
+  onReject?: () => void
+}) {
+  const [note, setNote] = useState("")
+  const [showNote, setShowNote] = useState(false)
   const cfg = ANOMALY_CFG[a.type] ?? { label: a.type, color: "text-muted-foreground", bg: "border-border bg-foreground/[0.02]" }
+  const isResolved = a.status === "resuelta" || approved || rejected
+
   return (
-    <div className={cn("rounded-xl border p-3.5 space-y-2", cfg.bg)}>
+    <div className={cn("rounded-xl border p-3.5 space-y-2", cfg.bg, (approved || rejected) && "opacity-60")}>
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-2 min-w-0">
           <AlertCircle className={cn("w-4 h-4 flex-shrink-0", cfg.color)} />
           <span className={cn("text-[10px] font-bold uppercase tracking-wider", cfg.color)}>{cfg.label}</span>
         </div>
         <div className="flex items-center gap-1.5 flex-shrink-0">
-          <span className={cn(
-            "text-[9px] font-bold px-1.5 py-0.5 rounded-full",
-            a.status === "pendiente"    ? "bg-red-500/15 text-red-400 border border-red-500/25" :
-            a.status === "en-revision"  ? "bg-yellow-500/15 text-yellow-400 border border-yellow-500/25" :
-            "bg-green-500/15 text-green-400 border border-green-500/25"
-          )}>
-            {a.status === "pendiente" ? "Pendiente" : a.status === "en-revision" ? "En revisión" : "Resuelta"}
-          </span>
+          {approved && (
+            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-green-500/15 text-green-400 border border-green-500/25">Aprobada ✓</span>
+          )}
+          {rejected && (
+            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-red-500/15 text-red-400 border border-red-500/25">Rechazada ✗</span>
+          )}
+          {!approved && !rejected && (
+            <span className={cn(
+              "text-[9px] font-bold px-1.5 py-0.5 rounded-full",
+              a.status === "pendiente"   ? "bg-red-500/15 text-red-400 border border-red-500/25" :
+              a.status === "en-revision" ? "bg-yellow-500/15 text-yellow-400 border border-yellow-500/25" :
+              "bg-green-500/15 text-green-400 border border-green-500/25"
+            )}>
+              {a.status === "pendiente" ? "Pendiente" : a.status === "en-revision" ? "En revisión" : "Resuelta"}
+            </span>
+          )}
         </div>
       </div>
       <p className="text-xs text-foreground/80 leading-relaxed">{a.description}</p>
@@ -70,15 +92,52 @@ function AnomalyCard({ a, onResolve }: { a: FinancialAnomaly; onResolve: () => v
           )}
           <span className="text-[10px] text-muted-foreground">{a.detectedAt} · {a.assignedTo}</span>
         </div>
-        {a.status !== "resuelta" && (
-          <button
-            onClick={onResolve}
-            className="text-[10px] font-semibold text-green-400 hover:text-green-300 transition-colors flex-shrink-0"
-          >
+        {!isResolved && !contadoraMode && (
+          <button onClick={onResolve} className="text-[10px] font-semibold text-green-400 hover:text-green-300 transition-colors flex-shrink-0">
             Marcar resuelta →
           </button>
         )}
       </div>
+
+      {/* Contadora approval flow */}
+      {contadoraMode && !isResolved && (
+        <div className="pt-2 border-t border-foreground/8 space-y-2">
+          {showNote ? (
+            <div className="space-y-2">
+              <textarea
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder="Nota contable (ej: verificado con comprobante adjunto, registrar en cuenta 2201)..."
+                className="w-full text-xs bg-foreground/5 border border-foreground/10 rounded-lg px-3 py-2 resize-none h-16 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-amber-500/40"
+              />
+              <div className="flex gap-2">
+                <button
+                  onClick={() => { onApprove?.(); setShowNote(false) }}
+                  className="flex-1 text-[10px] font-bold py-1.5 rounded-lg bg-green-500/15 text-green-400 border border-green-500/25 hover:bg-green-500/25 transition-colors"
+                >
+                  Aprobar ✓
+                </button>
+                <button
+                  onClick={() => { onReject?.(); setShowNote(false) }}
+                  className="flex-1 text-[10px] font-bold py-1.5 rounded-lg bg-red-500/15 text-red-400 border border-red-500/25 hover:bg-red-500/25 transition-colors"
+                >
+                  Rechazar ✗
+                </button>
+                <button onClick={() => setShowNote(false)} className="text-[10px] text-muted-foreground px-2">
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={() => setShowNote(true)}
+              className="w-full text-[10px] font-semibold py-1.5 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/25 hover:bg-amber-500/20 transition-colors"
+            >
+              Revisar esta anomalía →
+            </button>
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -125,14 +184,19 @@ export default function FinanzasPage() {
   const [newEntry, setNewEntry] = useState({ type: "ingreso" as "ingreso" | "egreso", description: "", amount: "", category: "" })
   const [anomalies, setAnomalies] = useState<FinancialAnomaly[]>(FINANCIAL_ANOMALIES)
 
-  const openAnomalies = anomalies.filter((a) => a.status !== "resuelta")
+  const { state, dispatch } = useDemoStore()
+  const center = CENTERS.find((c) => c.id === state.selectedCenter) ?? CENTERS[0]
+  const contadoraMode = state.contadoraMode
+
+  const openAnomalies = anomalies.filter((a) => {
+    const resolved = a.status === "resuelta" || state.anomaliesApproved.includes(a.id) || state.anomaliesRejected.includes(a.id)
+    return !resolved
+  })
 
   function resolveAnomaly(id: string) {
     setAnomalies((prev) => prev.map((a) => a.id === id ? { ...a, status: "resuelta" as const } : a))
     show("Anomalía marcada como resuelta ✓")
   }
-  const { state } = useDemoStore()
-  const center = CENTERS.find((c) => c.id === state.selectedCenter) ?? CENTERS[0]
 
   function handleRemind(name: string) {
     setReminded((prev) => new Set([...prev, name]))
@@ -172,7 +236,20 @@ export default function FinanzasPage() {
 
   return (
     <div className="p-4 sm:p-6 max-w-4xl mx-auto space-y-6">
-      <OnboardingModal config={ONBOARDING} />
+      {!contadoraMode && <OnboardingModal config={ONBOARDING} />}
+
+      {/* Contadora banner */}
+      {contadoraMode && (
+        <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-amber-500/8 border border-amber-500/25">
+          <div className="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0">
+            <DollarSign className="w-4 h-4 text-amber-400" />
+          </div>
+          <div>
+            <p className="text-sm font-bold text-amber-400">Vista contadora · Rosa Torres</p>
+            <p className="text-xs text-muted-foreground">Solo lectura de datos + aprobación de anomalías. No puedes modificar registros.</p>
+          </div>
+        </div>
+      )}
 
       {/* Header */}
       <div className="flex items-start justify-between gap-3 flex-wrap">
@@ -191,11 +268,13 @@ export default function FinanzasPage() {
         {([
           { id: "resumen",   label: "Resumen",    icon: BarChart3 },
           { id: "historial", label: "Historial",  icon: History },
-          { id: "anomalias", label: "Anomalías",  icon: AlertTriangle, badge: openAnomalies.length },
+          { id: "anomalias", label: contadoraMode ? "Revisar anomalías" : "Anomalías", icon: AlertTriangle, badge: openAnomalies.length },
         ] as { id: FinTab; label: string; icon: React.ElementType; badge?: number }[]).map(({ id, label, icon: Icon, badge }) => (
           <button key={id} onClick={() => setTab(id)}
             className={cn("flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all",
-              tab === id ? "bg-violet-600 text-white" : "text-muted-foreground hover:text-white")}>
+              tab === id
+                ? contadoraMode ? "bg-amber-600 text-white" : "bg-violet-600 text-white"
+                : "text-muted-foreground hover:text-white")}>
             <Icon className="w-3.5 h-3.5" />
             {label}
             {badge != null && badge > 0 && (
@@ -617,7 +696,7 @@ export default function FinanzasPage() {
             <div className="space-y-2">
               <p className="text-[10px] uppercase tracking-widest text-red-400 font-semibold">🔴 Alta prioridad, resolver antes del cierre</p>
               {anomalies.filter(a => a.severity === "alta").map((a) => (
-                <AnomalyCard key={a.id} a={a} onResolve={() => resolveAnomaly(a.id)} />
+                <AnomalyCard key={a.id} a={a} onResolve={() => resolveAnomaly(a.id)} contadoraMode={contadoraMode} approved={state.anomaliesApproved.includes(a.id)} rejected={state.anomaliesRejected.includes(a.id)} onApprove={() => { dispatch({ type: "APPROVE_ANOMALY", id: a.id }); show("Anomalía aprobada ✓") }} onReject={() => { dispatch({ type: "REJECT_ANOMALY", id: a.id }); show("Anomalía rechazada ✗") }} />
               ))}
             </div>
           )}
@@ -627,7 +706,7 @@ export default function FinanzasPage() {
             <div className="space-y-2">
               <p className="text-[10px] uppercase tracking-widest text-yellow-400 font-semibold">🟡 Prioridad media, esta semana</p>
               {anomalies.filter(a => a.severity === "media").map((a) => (
-                <AnomalyCard key={a.id} a={a} onResolve={() => resolveAnomaly(a.id)} />
+                <AnomalyCard key={a.id} a={a} onResolve={() => resolveAnomaly(a.id)} contadoraMode={contadoraMode} approved={state.anomaliesApproved.includes(a.id)} rejected={state.anomaliesRejected.includes(a.id)} onApprove={() => { dispatch({ type: "APPROVE_ANOMALY", id: a.id }); show("Anomalía aprobada ✓") }} onReject={() => { dispatch({ type: "REJECT_ANOMALY", id: a.id }); show("Anomalía rechazada ✗") }} />
               ))}
             </div>
           )}
@@ -637,7 +716,7 @@ export default function FinanzasPage() {
             <div className="space-y-2">
               <p className="text-[10px] uppercase tracking-widest text-violet-400 font-semibold">🔵 Bajo impacto, revisar cuando puedas</p>
               {anomalies.filter(a => a.severity === "baja").map((a) => (
-                <AnomalyCard key={a.id} a={a} onResolve={() => resolveAnomaly(a.id)} />
+                <AnomalyCard key={a.id} a={a} onResolve={() => resolveAnomaly(a.id)} contadoraMode={contadoraMode} approved={state.anomaliesApproved.includes(a.id)} rejected={state.anomaliesRejected.includes(a.id)} onApprove={() => { dispatch({ type: "APPROVE_ANOMALY", id: a.id }); show("Anomalía aprobada ✓") }} onReject={() => { dispatch({ type: "REJECT_ANOMALY", id: a.id }); show("Anomalía rechazada ✗") }} />
               ))}
             </div>
           )}

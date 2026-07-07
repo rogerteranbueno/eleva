@@ -9,7 +9,7 @@ export function BuildTeaserSection() {
   const { lang } = useLang()
 
   const c = lang === "en" ? {
-    eyebrow: "Free diagnosis",
+    eyebrow: "Diagnosis 360",
     h2: "Which system does your center need?",
     sub: "4 questions. 2 minutes. We show you exactly which modules to activate first based on your size, your biggest challenge, and your 12-month goal.",
     questions: [
@@ -19,10 +19,10 @@ export function BuildTeaserSection() {
       { icon: TrendingUp,q: "What is your goal for the next 12 months?" },
     ],
     result: "→ Personalized module map + recommended implementation plan",
-    cta: "Start free diagnosis",
+    cta: "Start my diagnosis",
     note: "No registration · No commitment · 2 minutes",
   } : {
-    eyebrow: "Diagnóstico gratuito",
+    eyebrow: "Diagnóstico 360",
     h2: "¿Qué sistema necesita tu centro?",
     sub: "4 preguntas. 2 minutos. Te mostramos exactamente qué módulos activar primero según tu tamaño, tu mayor desafío y tu meta a 12 meses.",
     questions: [
@@ -32,7 +32,7 @@ export function BuildTeaserSection() {
       { icon: TrendingUp, q: "¿Cuál es tu meta a los próximos 12 meses?" },
     ],
     result: "→ Mapa de módulos personalizado + plan de implementación recomendado",
-    cta: "Iniciar diagnóstico gratuito",
+    cta: "Iniciar mi diagnóstico",
     note: "Sin registro · Sin compromiso · 2 minutos",
   }
 

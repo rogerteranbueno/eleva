@@ -31,12 +31,12 @@ export function CierreSection() {
             className="space-y-5"
           >
             <p className="text-xs font-bold text-violet-400 uppercase tracking-widest">
-              La siguiente generación
+              El siguiente paso
             </p>
             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tight">
-              La siguiente generación<br />
-              de centros no se construye<br />
-              <span className="text-muted-foreground font-light italic">sólo en la sala.</span>
+              Tu centro no necesita<br />
+              más intensidad.<br />
+              <span className="text-muted-foreground font-light italic">Necesita más estructura.</span>
             </h2>
           </motion.div>
 
@@ -47,10 +47,8 @@ export function CierreSection() {
             className="max-w-2xl mx-auto space-y-4 text-muted-foreground text-lg leading-relaxed"
           >
             <p>
-              Se construye con formación real de entrenadores, con sistemas que funcionan cuando el dueño no está, con datos que permiten tomar decisiones antes de que los problemas escalen.
-            </p>
-            <p>
-              ELEVA existe para que los centros que ya tienen la metodología y la comunidad puedan convertirse en instituciones que duran.
+              Si ya tienes comunidad y metodología, ELEVA te ayuda a convertir eso en algo
+              más ordenado, más medible y más fácil de crecer.
             </p>
           </motion.div>
 
@@ -58,18 +56,13 @@ export function CierreSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+            className="flex items-center justify-center pt-4"
           >
             <Link href="/build">
               <button className="flex items-center gap-2.5 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-foreground font-black rounded-xl transition-colors text-base group">
                 <Calendar className="w-4.5 h-4.5" />
-                Agendar diagnóstico gratuito
+                Agendar diagnóstico
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-              </button>
-            </Link>
-            <Link href="/build">
-              <button className="flex items-center gap-2.5 px-8 py-4 glass border border-foreground/10 hover:border-foreground/20 text-foreground font-bold rounded-xl transition-colors text-base">
-                Aplicar a PACTO
               </button>
             </Link>
           </motion.div>
@@ -81,7 +74,7 @@ export function CierreSection() {
             transition={{ delay: 0.45, duration: 0.5 }}
             className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 pt-2"
           >
-            {["Sin contratos anuales", "Onboarding incluido", "ROI medible en < 90 días", "Selección de centros"].map((t) => (
+            {["Te respondemos en menos de 24 horas hábiles", "Si no vemos fit, te lo decimos de frente", "Sin contratos anuales"].map((t) => (
               <p key={t} className="text-xs text-muted-foreground flex items-center gap-1.5">
                 <span className="w-1 h-1 rounded-full bg-emerald-400 inline-block" />
                 {t}

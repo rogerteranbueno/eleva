@@ -12,91 +12,67 @@ const PLANES = [
     freq: "",
     accent: "white",
     tag: "Punto de entrada",
-    description: "Antes de implementar, medimos dónde está parado tu centro.",
+    description: "Revisamos ventas, operación, equipo, continuidad y riesgos. Sales con un plan de 90 días.",
     bullets: [
-      "Auditoría de funnel y admisiones",
+      "Auditoría de ventas y admisiones",
       "Auditoría de experiencia del participante",
       "Revisión de staff y roles",
-      "Continuidad Básico → Avanzado → Nivel 3",
-      "Riesgos operativos y mapa de oportunidades",
-      "Roadmap de 90 días + sesión ejecutiva",
+      "Riesgos operativos y oportunidades",
+      "Plan de 90 días + sesión ejecutiva",
     ],
     note: "El monto se descuenta si contratas PACTO.",
     cta: "Agendar diagnóstico",
     href: "/build",
-    featured: false,
+    featured: true,
   },
   {
-    name: "PACTO Implementation",
+    name: "PACTO",
     price: "Desde USD $15,000",
     freq: "",
     accent: "violet",
-    tag: "Producto estrella",
-    description: "Implementación estratégica para profesionalizar formación, operación, seguimiento y crecimiento.",
+    tag: "Implementación",
+    description: "Implementación para formar a tu equipo, instalar sistema y ordenar el crecimiento.",
     bullets: [
       "Academia interna diseñada",
-      "Formación de entrenadores y coaches",
-      "Capacitación de staff completo",
-      "Procesos y playbooks críticos",
-      "ELEVA OS instalado",
+      "Formación de entrenadores y staff",
+      "Procesos documentados y listos para usarse",
+      "ELEVA OS instalado y en uso",
       "Plan de crecimiento a 90 días",
     ],
-    note: "No es capacitación. Es capacidad instalada.",
-    cta: "Aplicar a PACTO",
-    href: "/build",
-    featured: true,
+    note: "No es un curso. Es una implementación.",
+    cta: "Ver alcance de PACTO",
+    href: "/pacto",
+    featured: false,
   },
   {
     name: "ELEVA Partner",
     price: "Desde USD $1,000",
     freq: "/mes",
     accent: "emerald",
-    tag: "Membresía continua",
-    description: "Un centro no se profesionaliza en un fin de semana. Se sostiene con sistema y comunidad.",
+    tag: "Acompañamiento continuo",
+    description: "Acompañamiento mensual para sostener la operación y seguir creciendo.",
     bullets: [
       "Sesiones mensuales de dirección",
       "Soporte estratégico continuo",
       "Comunidad de directores LATAM",
       "Actualizaciones de playbooks",
       "Benchmark de métricas del sector",
-      "Acceso preferente a especialistas",
     ],
     note: "Disponible tras completar PACTO.",
     cta: "Conocer Partner",
     href: "/build",
     featured: false,
   },
-  {
-    name: "Academia Interna ELEVA",
-    price: "Desde USD $12,000",
-    freq: "/generación",
-    accent: "amber",
-    tag: "Para tu propio equipo",
-    description: "Deja de depender de entrenadores externos para sostener tu expansión.",
-    bullets: [
-      "Diseño de tu programa de formación",
-      "Certificación de tu banca de coaches",
-      "Coordinadores y staff de sala",
-      "Equipo de admisiones y comunidad",
-      "Material y manuales del centro",
-      "Proyecto final con evaluación",
-    ],
-    note: "Preserva tu cultura. Multiplica tu capacidad.",
-    cta: "Consultar disponibilidad",
-    href: "/build",
-    featured: false,
-  },
 ]
 
 const ACCENT_STYLES: Record<string, { card: string; badge: string; btn: string }> = {
-  white:   { card: "border-foreground/10",           badge: "bg-foreground/8 text-foreground/60 border-foreground/10",               btn: "bg-foreground/8 hover:bg-foreground/12 border border-foreground/10 text-foreground" },
-  violet:  { card: "border-violet-500/35",       badge: "bg-violet-500/10 text-violet-300 border-violet-500/20",  btn: "bg-violet-600 hover:bg-violet-500 text-foreground" },
+  white:   { card: "border-violet-500/35",           badge: "bg-violet-500/10 text-violet-300 border-violet-500/20",   btn: "bg-violet-600 hover:bg-violet-500 text-foreground" },
+  violet:  { card: "border-foreground/10",       badge: "bg-foreground/8 text-foreground/60 border-foreground/10",  btn: "bg-foreground/8 hover:bg-foreground/12 border border-foreground/10 text-foreground" },
   emerald: { card: "border-emerald-500/25",      badge: "bg-emerald-500/10 text-emerald-300 border-emerald-500/20", btn: "bg-foreground/8 hover:bg-foreground/12 border border-foreground/10 text-foreground" },
-  amber:   { card: "border-amber-500/25",        badge: "bg-amber-500/10 text-amber-300 border-amber-500/20",     btn: "bg-foreground/8 hover:bg-foreground/12 border border-foreground/10 text-foreground" },
 }
 
 const CHECK_COLORS: Record<string, string> = {
-  white: "text-foreground/50", violet: "text-violet-400", emerald: "text-emerald-400", amber: "text-amber-400",
+  white: "text-violet-400", violet: "text-foreground/50", emerald: "text-emerald-400",
 }
 
 const fadeUp = {
@@ -118,12 +94,15 @@ export function PreciosPivotSection() {
             Formas de trabajar con ELEVA
           </p>
           <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight">
-            No es comprar software.<br />
-            <span className="text-muted-foreground font-light">Es invertir en capacidad instalada.</span>
+            Empieza con claridad,<br />
+            <span className="text-muted-foreground font-light">no con promesas.</span>
           </h2>
+          <p className="text-base text-muted-foreground">
+            Primero entendemos tu centro. Luego proponemos el plan.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {PLANES.map((p, i) => {
             const a = ACCENT_STYLES[p.accent]
             return (
@@ -136,7 +115,7 @@ export function PreciosPivotSection() {
                 {p.featured && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                     <span className="bg-violet-600 text-foreground text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
-                      Más solicitado
+                      Empieza aquí
                     </span>
                   </div>
                 )}
@@ -174,6 +153,10 @@ export function PreciosPivotSection() {
             )
           })}
         </div>
+
+        <motion.p custom={5} variants={fadeUp} className="text-center text-xs text-muted-foreground">
+          Te respondemos en menos de 24 horas hábiles · Si no vemos fit, te lo decimos de frente.
+        </motion.p>
       </motion.div>
     </section>
   )

@@ -13,7 +13,7 @@ const ONBOARDING = {
   screenId: "webinars",
   badge: "Vista del dueño · Webinars",
   badgeColor: "violet" as const,
-  title: "Noches de invitados que retienen y atraen",
+  title: "Agenda de eventos que retienen y atraen leads",
   description: "Miércoles y jueves de 8 a 9:30pm. Expertos de todo el mundo en temas que impactan la vida de tu comunidad, gratis para atraer leads, exclusivos para retener miembros.",
   tips: [
     { emoji: "🌍", text: "Los webinars públicos son tu mejor herramienta de adquisición sin publicidad pagada." },
@@ -260,7 +260,7 @@ export default function WebinarsPage() {
       {/* Header */}
       <div className="flex items-start justify-between gap-3 flex-wrap">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-white">Noches de invitados</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-white">Agenda y Eventos</h1>
           <p className="text-muted-foreground text-sm mt-0.5">Mié y Jue · 8:00 – 9:30 PM · Expertos de todo el mundo</p>
         </div>
         <button

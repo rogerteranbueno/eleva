@@ -23,7 +23,7 @@ const PERFILES = [
     sub: "Tienes la visión. ELEVA te da la estructura para que el equipo la ejecute, los datos para decidir y los sistemas para expandir.",
     promesa: "De operador a director estratégico.",
     gana: [
-      "Capacidad instalada: entrenadores formados y staff preparado.",
+      "Procesos, equipo y sistema listos para usarse: entrenadores formados y staff preparado.",
       "Dashboards de pulso para decidir con datos, no intuición.",
       "Plan de crecimiento a 90 días con métricas claras.",
       "Expansión a nuevas sedes con playbooks replicables.",
@@ -77,7 +77,7 @@ const PERFILES = [
     sub: "Ya tienes energía y compromiso. ELEVA te da el marco, las herramientas y el estándar para que tu impacto sea constante, medible y reproducible.",
     promesa: "De facilitador talentoso a entrenador institucional.",
     gana: [
-      "Formación en los fundamentos de transformación responsable.",
+      "Formación en fundamentos: cuidado, ética y seguridad con personas en procesos intensos.",
       "Estándar de presencia, escucha e intervención ética.",
       "Diseño de experiencias transformacionales con estructura.",
       "Seguridad psicológica y protocolos de contingencia.",

@@ -18,6 +18,9 @@ const INITIAL_STATE: DemoState = {
   seenOnboarding: [],
   selectedCenter: "cdmx",
   atencionResolved: 0,
+  contadoraMode: false,
+  anomaliesApproved: [],
+  anomaliesRejected: [],
 }
 
 type Action =
@@ -32,6 +35,9 @@ type Action =
   | { type: "MARK_ONBOARDING_SEEN"; screenId: string }
   | { type: "SET_CENTER"; centerId: string }
   | { type: "RESOLVE_ATENCION" }
+  | { type: "SET_CONTADORA_MODE"; on: boolean }
+  | { type: "APPROVE_ANOMALY"; id: string }
+  | { type: "REJECT_ANOMALY"; id: string }
   | { type: "RESET" }
 
 function reducer(state: DemoState, action: Action): DemoState {
@@ -58,6 +64,12 @@ function reducer(state: DemoState, action: Action): DemoState {
       return { ...state, selectedCenter: action.centerId }
     case "RESOLVE_ATENCION":
       return { ...state, atencionResolved: Math.min(state.atencionResolved + 1, ATENCION_INITIAL) }
+    case "SET_CONTADORA_MODE":
+      return { ...state, contadoraMode: action.on }
+    case "APPROVE_ANOMALY":
+      return { ...state, anomaliesApproved: [...state.anomaliesApproved, action.id] }
+    case "REJECT_ANOMALY":
+      return { ...state, anomaliesRejected: [...state.anomaliesRejected, action.id] }
     case "RESET":
       return INITIAL_STATE
     default:

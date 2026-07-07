@@ -33,7 +33,7 @@ const hints = {
     accent: "emerald",
   },
   5: {
-    body: "Tu centro no necesita otro gurú. Necesita capacidad instalada: entrenadores propios, staff profesional y sistemas que sostengan el crecimiento.",
+    body: "Tu centro no necesita otro gurú. Necesita procesos, equipo y sistema listos para usarse: entrenadores propios, staff profesional y estructura que sostenga el crecimiento.",
     cta: "Agendar diagnóstico",
     href: "/build",
     accent: "violet",
