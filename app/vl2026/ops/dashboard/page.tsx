@@ -163,7 +163,7 @@ export default function OpsDashboardPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold text-white">{greeting}, Karla</h1>
-            <p className="text-muted-foreground text-xs mt-0.5">Operaciones · LEVEL CDMX</p>
+            <p className="text-muted-foreground text-xs mt-0.5">Operaciones · TRANSFORMA CDMX</p>
           </div>
           {totalUrgencies > 0 && (
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-500/15 border border-red-500/20">

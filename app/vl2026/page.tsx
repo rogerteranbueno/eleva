@@ -73,7 +73,7 @@ export default async function DemoGatePage() {
         </div>
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <Building2 className="w-3.5 h-3.5" />
-          Demo, LEVEL Transformación
+          Demo, TRANSFORMA
         </div>
       </div>
 
@@ -82,7 +82,7 @@ export default async function DemoGatePage() {
         <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs text-violet-300 font-medium">
             <div className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
-            Sistema operativo de LEVEL Transformación
+            Sistema operativo de TRANSFORMA
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-white leading-tight">
             Primero la metodología.<br />

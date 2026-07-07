@@ -446,7 +446,7 @@ export default function InteligenciaPage() {
         </div>
         <div>
           <h1 className="text-xl font-bold text-white">Inteligencia Artificial</h1>
-          <p className="text-xs text-muted-foreground">Análisis en tiempo real · LEVEL CDMX</p>
+          <p className="text-xs text-muted-foreground">Análisis en tiempo real · TRANSFORMA CDMX</p>
         </div>
         <div className="ml-auto flex items-center gap-1.5 text-xs text-green-400 font-medium">
           <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />

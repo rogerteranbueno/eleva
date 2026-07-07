@@ -13,8 +13,8 @@ import type {
 } from "@/lib/types"
 
 export const CENTER = {
-  name: "LEVEL",
-  fullName: "LEVEL Quantum Transformation",
+  name: "TRANSFORMA",
+  fullName: "TRANSFORMA",
   city: "Medellín",
   founder: "Carlos Londoño",
   model: "Básico → Avanzado → PL VIA Visión → PL VIA Intimidad → PL VIA Aprecio → Noche de Confianza → PL Paraíso",
@@ -23,8 +23,8 @@ export const CENTER = {
 export const CENTERS: Center[] = [
   {
     id: "mde",
-    name: "LEVEL Medellín",
-    fullName: "LEVEL Quantum Transformation Medellín",
+    name: "TRANSFORMA Medellín",
+    fullName: "TRANSFORMA Medellín",
     city: "Medellín",
     country: "Colombia",
     founder: "Carlos Londoño",
@@ -43,8 +43,8 @@ export const CENTERS: Center[] = [
   },
   {
     id: "bog",
-    name: "LEVEL Bogotá",
-    fullName: "LEVEL Quantum Transformation Bogotá",
+    name: "TRANSFORMA Bogotá",
+    fullName: "TRANSFORMA Bogotá",
     city: "Bogotá",
     country: "Colombia",
     founder: "Gabriela Salazar",
@@ -63,8 +63,8 @@ export const CENTERS: Center[] = [
   },
   {
     id: "cue",
-    name: "LEVEL Cuenca",
-    fullName: "LEVEL Quantum Transformation Cuenca",
+    name: "TRANSFORMA Cuenca",
+    fullName: "TRANSFORMA Cuenca",
     city: "Cuenca",
     country: "Ecuador",
     founder: "Patricia Andrade",
@@ -83,8 +83,8 @@ export const CENTERS: Center[] = [
   },
   {
     id: "gye",
-    name: "LEVEL Guayaquil",
-    fullName: "LEVEL Quantum Transformation Guayaquil",
+    name: "TRANSFORMA Guayaquil",
+    fullName: "TRANSFORMA Guayaquil",
     city: "Guayaquil",
     country: "Ecuador",
     founder: "Roberto Mora",
@@ -103,8 +103,8 @@ export const CENTERS: Center[] = [
   },
   {
     id: "loj",
-    name: "LEVEL Loja",
-    fullName: "LEVEL Quantum Transformation Loja",
+    name: "TRANSFORMA Loja",
+    fullName: "TRANSFORMA Loja",
     city: "Loja",
     country: "Ecuador",
     founder: "Carlos Ojeda",
@@ -123,8 +123,8 @@ export const CENTERS: Center[] = [
   },
   {
     id: "nyc",
-    name: "LEVEL New York",
-    fullName: "LEVEL Quantum Transformation New York",
+    name: "TRANSFORMA New York",
+    fullName: "TRANSFORMA New York",
     city: "New York",
     country: "USA",
     founder: "Greacy Aguirre",
@@ -143,8 +143,8 @@ export const CENTERS: Center[] = [
   },
   {
     id: "uio",
-    name: "LEVEL Quito",
-    fullName: "LEVEL Quantum Transformation Quito",
+    name: "TRANSFORMA Quito",
+    fullName: "TRANSFORMA Quito",
     city: "Quito",
     country: "Ecuador",
     founder: "Andrés Villacís",

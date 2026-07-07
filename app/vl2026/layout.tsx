@@ -19,7 +19,6 @@ import {
   ShieldCheck,
   DollarSign,
   ClipboardList,
-  UserPlus,
   ChevronDown,
   Check,
   Globe,
@@ -27,11 +26,13 @@ import {
   Trophy,
   GraduationCap,
   Send,
-  Video,
+  Calendar,
   Star,
   GitMerge,
   LayoutDashboard,
   CalendarCheck,
+  Calculator,
+  BarChart2,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { DemoProvider, useDemoStore } from "@/lib/demo-store"
@@ -46,7 +47,7 @@ type NavScreen = {
   badge?: number
 }
 
-type View = "owner" | "ops" | "participant" | "coach"
+type View = "owner" | "ops" | "participant" | "coach" | "contadora"
 
 const ATENCION_TOTAL = 14
 
@@ -60,11 +61,15 @@ function getOwnerScreens(atencionResolved: number): NavScreen[] {
     { href: "/vl2026/equipo",       label: "Visibilidad de Equipo", shortLabel: "Equipo",   icon: ShieldCheck },
     { href: "/vl2026/finanzas",     label: "Finanzas",              shortLabel: "Finanzas", icon: DollarSign },
     { href: "/vl2026/campanas",     label: "Campañas",              shortLabel: "Campañas", icon: Send },
-    { href: "/vl2026/webinars",     label: "Noches de invitados",   shortLabel: "Webinars", icon: Video },
-    { href: "/vl2026/inteligencia", label: "Motor de IA",           shortLabel: "IA",       icon: Brain },
+    { href: "/vl2026/webinars",     label: "Agenda y Eventos",      shortLabel: "Eventos",  icon: Calendar },
+    { href: "/vl2026/inteligencia", label: "Análisis Estratégico",  shortLabel: "Análisis", icon: BarChart2 },
     { href: "/vl2026/expediente",   label: "Expediente (demo)",     shortLabel: "Exp.",     icon: User },
   ]
 }
+
+const CONTADORA_SCREENS: NavScreen[] = [
+  { href: "/vl2026/finanzas", label: "Finanzas del Centro", shortLabel: "Finanzas", icon: DollarSign },
+]
 
 const OPS_SCREENS: NavScreen[] = [
   { href: "/vl2026/ops/dashboard",          label: "Centro de Operaciones", shortLabel: "Centro",       icon: Activity },
@@ -86,16 +91,18 @@ const PARTICIPANT_SCREENS: NavScreen[] = [
 ]
 
 const COACH_SCREENS: NavScreen[] = [
-  { href: "/vl2026/coach", label: "Panel del Coach", shortLabel: "Panel", icon: GraduationCap },
-  { href: "/vl2026/expediente", label: "Expediente IA", shortLabel: "IA", icon: Brain },
-  { href: "/vl2026/crm", label: "Directorio", shortLabel: "CRM", icon: Database },
+  { href: "/vl2026/coach",      label: "Panel del Coach", shortLabel: "Panel", icon: GraduationCap },
+  { href: "/vl2026/expediente", label: "Expediente IA",   shortLabel: "IA",    icon: Brain },
+  { href: "/vl2026/crm",        label: "Directorio",      shortLabel: "CRM",   icon: Database },
 ]
 
-const OWNER_PATHS = getOwnerScreens(0).map((s) => s.href)
-const OPS_PATHS   = OPS_SCREENS.map((s) => s.href)
-const COACH_PATHS = COACH_SCREENS.map((s) => s.href)
+const OWNER_PATHS      = getOwnerScreens(0).map((s) => s.href)
+const OPS_PATHS        = OPS_SCREENS.map((s) => s.href)
+const COACH_PATHS      = COACH_SCREENS.map((s) => s.href)
+const CONTADORA_PATHS  = CONTADORA_SCREENS.map((s) => s.href)
 
-function getViewFromPath(pathname: string): View {
+function getViewFromPath(pathname: string, contadoraMode: boolean): View {
+  if (contadoraMode && CONTADORA_PATHS.includes(pathname)) return "contadora"
   if (OWNER_PATHS.includes(pathname)) return "owner"
   if (OPS_PATHS.includes(pathname) || pathname.startsWith("/vl2026/ops")) return "ops"
   if (COACH_PATHS.includes(pathname) || pathname.startsWith("/vl2026/coach")) return "coach"
@@ -143,18 +150,27 @@ function CenterSelector() {
 
 function ViewSwitcher({ view, className }: { view: View; className?: string }) {
   const router = useRouter()
-  const views = [
-    { id: "owner" as View,       label: "Dueño",  href: "/vl2026/pulso",        activeColor: "bg-violet-600" },
-    { id: "coach" as View,       label: "Coach",  href: "/vl2026/coach",        activeColor: "bg-emerald-600" },
-    { id: "ops" as View,         label: "Ops",    href: "/vl2026/ops/dashboard", activeColor: "bg-cyan-600" },
-    { id: "participant" as View, label: "Usuario",href: "/vl2026/feed",         activeColor: "bg-violet-600" },
+  const { dispatch } = useDemoStore()
+
+  const views: { id: View; label: string; href: string; activeColor: string }[] = [
+    { id: "owner",      label: "Dueño",     href: "/vl2026/pulso",        activeColor: "bg-violet-600" },
+    { id: "coach",      label: "Coach",     href: "/vl2026/coach",        activeColor: "bg-emerald-600" },
+    { id: "ops",        label: "Ops",       href: "/vl2026/ops/dashboard", activeColor: "bg-cyan-600" },
+    { id: "participant",label: "Usuario",   href: "/vl2026/feed",         activeColor: "bg-violet-600" },
+    { id: "contadora",  label: "Contadora", href: "/vl2026/finanzas",     activeColor: "bg-amber-600" },
   ]
+
+  function handleSwitch(v: typeof views[number]) {
+    dispatch({ type: "SET_CONTADORA_MODE", on: v.id === "contadora" })
+    router.push(v.href)
+  }
+
   return (
     <div className={cn("flex rounded-lg overflow-hidden border border-sidebar-border", className)}>
       {views.map((v, i) => (
         <button
           key={v.id}
-          onClick={() => router.push(v.href)}
+          onClick={() => handleSwitch(v)}
           className={cn(
             "flex-1 py-1.5 text-[10px] font-semibold transition-colors",
             i > 0 && "border-l border-sidebar-border",
@@ -171,17 +187,19 @@ function ViewSwitcher({ view, className }: { view: View; className?: string }) {
 function DemoNav() {
   const pathname = usePathname()
   const { dispatch, state } = useDemoStore()
-  const view = getViewFromPath(pathname)
+  const view = getViewFromPath(pathname, state.contadoraMode)
   const screens =
-    view === "owner" ? getOwnerScreens(state.atencionResolved) :
-    view === "ops"   ? OPS_SCREENS :
-    view === "coach" ? COACH_SCREENS :
+    view === "contadora"  ? CONTADORA_SCREENS :
+    view === "owner"      ? getOwnerScreens(state.atencionResolved) :
+    view === "ops"        ? OPS_SCREENS :
+    view === "coach"      ? COACH_SCREENS :
     PARTICIPANT_SCREENS
 
   const navLabel =
-    view === "owner" ? "Panel del dueño" :
-    view === "ops"   ? "Operaciones" :
-    view === "coach" ? "Vista del coach" :
+    view === "contadora" ? "Acceso financiero" :
+    view === "owner"     ? "Panel del dueño" :
+    view === "ops"       ? "Operaciones" :
+    view === "coach"     ? "Vista del coach" :
     "Mi espacio"
 
   return (
@@ -200,11 +218,24 @@ function DemoNav() {
         </div>
       </div>
 
-      {/* Center selector, only in owner view */}
+      {/* Center selector — owner only */}
       {view === "owner" && (
         <div className="p-4 border-b border-sidebar-border">
           <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2 font-medium">Centro</p>
           <CenterSelector />
+        </div>
+      )}
+
+      {/* Contadora badge */}
+      {view === "contadora" && (
+        <div className="px-4 py-3 border-b border-sidebar-border">
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-amber-500/10 border border-amber-500/25">
+            <Calculator className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+            <div className="min-w-0">
+              <p className="text-[11px] font-bold text-amber-400 leading-tight">Acceso contadora</p>
+              <p className="text-[10px] text-muted-foreground truncate">Solo lectura + aprobaciones</p>
+            </div>
+          </div>
         </div>
       )}
 
@@ -221,6 +252,9 @@ function DemoNav() {
         {view === "coach" && (
           <p className="text-[10px] text-muted-foreground mt-2 text-center">Como Ana Reyes · Gen. Omega</p>
         )}
+        {view === "contadora" && (
+          <p className="text-[10px] text-muted-foreground mt-2 text-center">Como Rosa Torres · Contadora</p>
+        )}
       </div>
 
       {/* Navigation */}
@@ -230,6 +264,8 @@ function DemoNav() {
         </p>
         {screens.map(({ href, label, icon: Icon, badge }) => {
           const active = pathname === href
+          const activeColor = view === "contadora" ? "bg-amber-600/15 text-white border-amber-600/30" : "bg-violet-600/15 text-white border border-violet-600/30"
+          const activeIcon  = view === "contadora" ? "text-amber-400" : "text-violet-400"
           return (
             <Link
               key={href}
@@ -237,25 +273,25 @@ function DemoNav() {
               className={cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all group",
                 active
-                  ? "bg-violet-600/15 text-white border border-violet-600/30"
+                  ? `${activeColor} border`
                   : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
               )}
             >
-              <Icon className={cn("w-4 h-4 flex-shrink-0", active ? "text-violet-400" : "")} />
+              <Icon className={cn("w-4 h-4 flex-shrink-0", active ? activeIcon : "")} />
               <span className="flex-1 font-medium">{label}</span>
               {badge && (
                 <span className="w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center">
                   {badge}
                 </span>
               )}
-              {active && <ChevronRight className="w-3 h-3 text-violet-400" />}
+              {active && <ChevronRight className={cn("w-3 h-3", view === "contadora" ? "text-amber-400" : "text-violet-400")} />}
             </Link>
           )
         })}
       </nav>
 
-      {/* AI Assistant, visible for owner, coach, ops only */}
-      {view !== "participant" && (
+      {/* AI Assistant — not for participant or contadora */}
+      {view !== "participant" && view !== "contadora" && (
         <div className="px-3 pb-2">
           <AIAssistant role={view as "owner" | "coach" | "ops"} />
         </div>
@@ -263,6 +299,15 @@ function DemoNav() {
 
       {/* Reset + back + CTA */}
       <div className="p-4 border-t border-sidebar-border space-y-0.5">
+        <a
+          href="https://creania.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-xs font-semibold bg-violet-600/15 border border-violet-600/30 text-violet-300 hover:bg-violet-600/25 transition-colors mb-2"
+        >
+          <Globe className="w-3.5 h-3.5" />
+          Ver ELEVA Hub →
+        </a>
         <a
           href="mailto:hola@elevaapp.io?subject=Quiero%20agendar%20sesión%20estratégica"
           className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-xs font-semibold text-violet-400 hover:text-violet-300 hover:bg-violet-500/10 transition-colors"
@@ -293,27 +338,36 @@ function MobileNav() {
   const pathname = usePathname()
   const router = useRouter()
   const { dispatch, state } = useDemoStore()
-  const view = getViewFromPath(pathname)
+  const view = getViewFromPath(pathname, state.contadoraMode)
   const screens =
-    view === "owner" ? getOwnerScreens(state.atencionResolved) :
-    view === "ops"   ? OPS_SCREENS :
-    view === "coach" ? COACH_SCREENS :
+    view === "contadora" ? CONTADORA_SCREENS :
+    view === "owner"     ? getOwnerScreens(state.atencionResolved) :
+    view === "ops"       ? OPS_SCREENS :
+    view === "coach"     ? COACH_SCREENS :
     PARTICIPANT_SCREENS
+
+  function handleSwitch(id: View, href: string) {
+    dispatch({ type: "SET_CONTADORA_MODE", on: id === "contadora" })
+    router.push(href)
+  }
+
+  const mobileTabs: { id: View; label: string; href: string; active: string }[] = [
+    { id: "owner",       label: "Dueño",     href: "/vl2026/pulso",         active: "text-violet-400 border-b-2 border-violet-600" },
+    { id: "coach",       label: "Coach",     href: "/vl2026/coach",         active: "text-emerald-400 border-b-2 border-emerald-500" },
+    { id: "ops",         label: "Ops",       href: "/vl2026/ops/dashboard", active: "text-cyan-400 border-b-2 border-cyan-500" },
+    { id: "participant", label: "Usuario",   href: "/vl2026/feed",          active: "text-violet-400 border-b-2 border-violet-600" },
+    { id: "contadora",   label: "Contadora", href: "/vl2026/finanzas",      active: "text-amber-400 border-b-2 border-amber-500" },
+  ]
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-sidebar border-t border-sidebar-border">
       {/* View switcher */}
       <div className="flex items-center border-b border-sidebar-border px-1 gap-0">
-        {[
-          { id: "owner" as View,       label: "Dueño",  href: "/vl2026/pulso",        active: "text-violet-400 border-b-2 border-violet-600" },
-          { id: "coach" as View,       label: "Coach",  href: "/vl2026/coach",        active: "text-emerald-400 border-b-2 border-emerald-500" },
-          { id: "ops" as View,         label: "Ops",    href: "/vl2026/ops/dashboard", active: "text-cyan-400 border-b-2 border-cyan-500" },
-          { id: "participant" as View, label: "Usuario",href: "/vl2026/feed",         active: "text-violet-400 border-b-2 border-violet-600" },
-        ].map((v) => (
+        {mobileTabs.map((v) => (
           <button
             key={v.id}
-            onClick={() => router.push(v.href)}
-            className={cn("flex-1 py-1.5 text-[10px] font-semibold transition-colors", view === v.id ? v.active : "text-muted-foreground")}
+            onClick={() => handleSwitch(v.id, v.href)}
+            className={cn("flex-1 py-1.5 text-[9px] font-semibold transition-colors", view === v.id ? v.active : "text-muted-foreground")}
           >
             {v.label}
           </button>
@@ -322,10 +376,11 @@ function MobileNav() {
           <RotateCcw className="w-3 h-3" />
         </button>
       </div>
-      {/* Screen tabs, scrollable when many items (owner has 10) */}
+      {/* Screen tabs */}
       <div className={cn("flex", screens.length > 5 ? "overflow-x-auto scrollbar-none" : "")}>
         {screens.map(({ href, shortLabel, icon: Icon, badge }) => {
           const active = pathname === href
+          const activeColor = view === "contadora" ? "text-amber-400" : "text-violet-400"
           return (
             <Link
               key={href}
@@ -333,7 +388,7 @@ function MobileNav() {
               className={cn(
                 "flex flex-col items-center gap-1 py-2 transition-colors flex-shrink-0",
                 screens.length > 5 ? "w-[62px]" : "flex-1",
-                active ? "text-violet-400" : "text-muted-foreground"
+                active ? activeColor : "text-muted-foreground"
               )}
             >
               <div className="relative">
