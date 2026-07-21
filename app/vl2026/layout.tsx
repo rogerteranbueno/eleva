@@ -423,6 +423,11 @@ function MobileNav() {
 }
 
 function DemoShell({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname()
+  const isGate = pathname === "/vl2026"
+
+  if (isGate) return <>{children}</>
+
   return (
     <div className="flex min-h-screen">
       <DemoNav />
