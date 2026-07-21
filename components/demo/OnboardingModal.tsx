@@ -4,6 +4,19 @@ import { useEffect, useState } from "react"
 import { X } from "lucide-react"
 import { useDemoStore } from "@/lib/demo-store"
 
+const LS_KEY = "eleva_seen_onboarding"
+function getSeenFromStorage(): string[] {
+  if (typeof window === "undefined") return []
+  try { return JSON.parse(localStorage.getItem(LS_KEY) ?? "[]") } catch { return [] }
+}
+function markSeenInStorage(id: string) {
+  if (typeof window === "undefined") return
+  try {
+    const seen = getSeenFromStorage()
+    if (!seen.includes(id)) localStorage.setItem(LS_KEY, JSON.stringify([...seen, id]))
+  } catch {}
+}
+
 export interface OnboardingTip {
   emoji: string
   text: string
@@ -23,11 +36,11 @@ export function OnboardingModal({ config }: { config: OnboardingConfig }) {
   const { state, dispatch } = useDemoStore()
   const [visible, setVisible] = useState(false)
 
-  const alreadySeen = state.seenOnboarding.includes(config.screenId)
+  const alreadySeen =
+    state.seenOnboarding.includes(config.screenId) || getSeenFromStorage().includes(config.screenId)
 
   useEffect(() => {
     if (!alreadySeen) {
-      // Small delay so the page renders first
       const t = setTimeout(() => setVisible(true), 350)
       return () => clearTimeout(t)
     }
@@ -36,6 +49,7 @@ export function OnboardingModal({ config }: { config: OnboardingConfig }) {
   function dismiss() {
     setVisible(false)
     dispatch({ type: "MARK_ONBOARDING_SEEN", screenId: config.screenId })
+    markSeenInStorage(config.screenId)
   }
 
   if (!visible) return null
@@ -47,7 +61,7 @@ export function OnboardingModal({ config }: { config: OnboardingConfig }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 md:left-60 z-50 flex items-center justify-center p-4"
       onClick={dismiss}
     >
       {/* Backdrop */}
