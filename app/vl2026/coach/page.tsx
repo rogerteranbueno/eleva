@@ -9,7 +9,22 @@ import {
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
+import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { cn } from "@/lib/utils"
+
+const ONBOARDING = {
+  screenId: "coach",
+  badge: "Vista del Coach · Ana Reyes, Gen. Omega",
+  badgeColor: "violet" as const,
+  title: "El coach tiene todo lo que necesita aquí",
+  description: "Ana Reyes gestiona 89 participantes sin perder el hilo de ninguno. Sus sesiones, el estado de su tribu y las alertas de quién necesita atención están en un solo lugar, sin WhatsApp.",
+  tips: [
+    { emoji: "👥", text: "8 participantes en riesgo en su generación — el sistema ya los identificó y sugiere qué hacer." },
+    { emoji: "📅", text: "La sesión del jueves tiene 34% de confirmaciones. El coach puede enviar el recordatorio desde aquí." },
+    { emoji: "🧠", text: "El Expediente IA recuerda todo: notas de sesiones, misiones pasadas y el arco de transformación." },
+  ],
+  cta: "Ver el panel del coach →",
+}
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -113,6 +128,7 @@ export default function CoachPage() {
 
   return (
     <div className="p-5 max-w-4xl mx-auto space-y-6">
+      <OnboardingModal config={ONBOARDING} />
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div>

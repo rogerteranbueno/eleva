@@ -19,16 +19,16 @@ import { useDemoStore } from "@/lib/demo-store"
 
 const ONBOARDING = {
   screenId: "pulso",
-  badge: "Vista del dueño · Pantalla 1 de 3",
+  badge: "Vista del Dueño · Carlos Mendoza, TRANSFORMA",
   badgeColor: "violet" as const,
-  title: "Pulso del Centro",
-  description: "Aquí empieza cada mañana el dueño del centro. En 30 segundos sabes el estado completo de tu operación, sin abrir Excel ni revisar grupos de WhatsApp.",
+  title: "Esto es lo que ve tu dueño cada mañana",
+  description: "En 30 segundos sabe el estado completo de su centro: cuánto dinero entró, quién está en riesgo, qué generaciones están thriving y qué necesita su atención hoy — sin abrir Excel, sin revisar 12 grupos de WhatsApp.",
   tips: [
-    { emoji: "🔴", text: "La alerta roja muestra participantes en riesgo automáticamente. Tócala para intervenir." },
-    { emoji: "📊", text: "El Momentum Score es el promedio de todos tus participantes activos en tiempo real." },
-    { emoji: "⚡", text: "La actividad reciente reemplaza el caos de WhatsApp con señales claras de lo que está pasando." },
+    { emoji: "💰", text: "Finanzas en tiempo real: ingresos cobrados, pendientes y margen neto del mes — actualizado automáticamente." },
+    { emoji: "🔴", text: "14 personas en riesgo hoy. El sistema ya sabe quiénes son y qué tan urgente es intervenir — toca el banner rojo." },
+    { emoji: "📊", text: "Momentum Score del centro: el promedio de transformación de todos los participantes activos, en una sola cifra." },
   ],
-  cta: "Explorar el Pulso →",
+  cta: "Explorar el dashboard →",
 }
 
 type InsightDef = {

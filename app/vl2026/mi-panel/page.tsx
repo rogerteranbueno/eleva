@@ -10,9 +10,24 @@ import {
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { MomentumGauge } from "@/components/demo/MomentumGauge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
+import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import { useDemoStore } from "@/lib/demo-store"
 import { VALERIA, COACHES } from "@/data/level"
 import { cn, getMomentumColor } from "@/lib/utils"
+
+const ONBOARDING = {
+  screenId: "mi-panel",
+  badge: "Vista del Participante · Valeria Romo",
+  badgeColor: "cyan" as const,
+  title: "Esto es lo que vive Valeria cada día",
+  description: "El participante tiene su centro de mando personal: su coach, su misión activa, su momentum y lo que pasa en su generación — en una app que reemplaza el desorden de WhatsApp.",
+  tips: [
+    { emoji: "💬", text: "Ana (su coach) ya le dejó un mensaje de apoyo esta semana — sin coordinación manual." },
+    { emoji: "🎯", text: "Su misión de la semana vence en 2 días, puede completarla desde aquí con un clic." },
+    { emoji: "🔥", text: "El Momentum Score sube en tiempo real cada vez que Valeria toma acción en el programa." },
+  ],
+  cta: "Ver el panel de Valeria →",
+}
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -158,6 +173,7 @@ export default function MiPanelPage() {
 
   return (
     <div className="p-6 max-w-3xl mx-auto space-y-6">
+      <OnboardingModal config={ONBOARDING} />
 
       {/* ── Header, personal greeting ── */}
       <div className="glass rounded-2xl p-5">

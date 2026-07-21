@@ -19,6 +19,7 @@ import {
 } from "lucide-react"
 import { AvatarBadge } from "@/components/demo/AvatarBadge"
 import { ActionToast, useActionToast } from "@/components/demo/ActionToast"
+import { OnboardingModal } from "@/components/demo/OnboardingModal"
 import {
   TODAY_EVENT,
   PRE_TRAINING_PENDING,
@@ -28,6 +29,20 @@ import {
   RECENT_ACTIVITY,
 } from "@/data/level"
 import { cn } from "@/lib/utils"
+
+const ONBOARDING = {
+  screenId: "ops-dashboard",
+  badge: "Vista de Ops · Karla Ríos, TRANSFORMA",
+  badgeColor: "violet" as const,
+  title: "Operaciones sin caos ni papeles",
+  description: "Karla tiene visibilidad total de lo que pasa en el centro hoy: nuevos registros, pre-entrenamientos pendientes, confirmaciones de asistencia y alertas — todo en una sola pantalla.",
+  tips: [
+    { emoji: "📋", text: "Mesa de Registro: da de alta un nuevo participante en 3 minutos, sin papel ni Excel." },
+    { emoji: "📈", text: "Pipeline de Enrolamiento: ve quién está listo para convertir y activa el siguiente paso." },
+    { emoji: "🚀", text: "Pre-entrenamiento: la experiencia digital que prepara al participante antes del primer día presencial." },
+  ],
+  cta: "Ver el centro de operaciones →",
+}
 
 // ─── Derived metrics ──────────────────────────────────────────────────────────
 
@@ -158,6 +173,7 @@ export default function OpsDashboardPage() {
 
   return (
     <div className="p-5 max-w-2xl mx-auto space-y-6">
+      <OnboardingModal config={ONBOARDING} />
       {/* Header */}
       <div>
         <div className="flex items-center justify-between">

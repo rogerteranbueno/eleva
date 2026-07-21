@@ -38,6 +38,7 @@ import { cn } from "@/lib/utils"
 import { DemoProvider, useDemoStore } from "@/lib/demo-store"
 import { CENTERS } from "@/data/level"
 import { AIAssistant } from "@/components/demo/AIAssistant"
+import { DemoGuide } from "@/components/demo/DemoGuide"
 
 type NavScreen = {
   href: string
@@ -290,6 +291,9 @@ function DemoNav() {
         })}
       </nav>
 
+      {/* Demo Guide */}
+      <DemoGuide />
+
       {/* AI Assistant — not for participant or contadora */}
       {view !== "participant" && view !== "contadora" && (
         <div className="px-3 pb-2">
@@ -316,7 +320,10 @@ function DemoNav() {
           Agendar sesión gratis
         </a>
         <button
-          onClick={() => dispatch({ type: "RESET" })}
+          onClick={() => {
+            try { localStorage.removeItem("eleva_seen_onboarding") } catch {}
+            dispatch({ type: "RESET" })
+          }}
           className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-xs text-muted-foreground hover:text-foreground hover:bg-sidebar-accent transition-colors"
         >
           <RotateCcw className="w-3.5 h-3.5" />
@@ -372,7 +379,14 @@ function MobileNav() {
             {v.label}
           </button>
         ))}
-        <button onClick={() => dispatch({ type: "RESET" })} className="px-2 py-1.5 text-muted-foreground" title="Reiniciar">
+        <button
+          onClick={() => {
+            try { localStorage.removeItem("eleva_seen_onboarding") } catch {}
+            dispatch({ type: "RESET" })
+          }}
+          className="px-2 py-1.5 text-muted-foreground"
+          title="Reiniciar demo"
+        >
           <RotateCcw className="w-3 h-3" />
         </button>
       </div>
