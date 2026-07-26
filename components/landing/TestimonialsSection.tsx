@@ -1,7 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Star } from "lucide-react"
+import Link from "next/link"
+import { Star, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useLang } from "@/lib/i18n"
 
@@ -87,6 +88,17 @@ export function TestimonialsSection() {
             </div>
           </div>
         </motion.div>
+
+        {/* Case study link */}
+        <div className="mt-2 mb-8">
+          <Link
+            href="/caso"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-violet-500/20 bg-violet-500/5 hover:bg-violet-500/10 hover:border-violet-500/35 transition-all text-sm text-violet-300 font-semibold group"
+          >
+            {lang === "en" ? "Read the full case study →" : "Leer caso de estudio completo"}
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </Link>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {TESTIMONIALS.map((t, i) => (
