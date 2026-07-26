@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { ArrowRight, ChevronDown } from "lucide-react"
+import { ArrowRight, ChevronDown, Building2, GraduationCap } from "lucide-react"
 
-const PILLARS = ["Formación", "Operación", "Seguimiento", "Datos", "Crecimiento"]
+const ease = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
 export function HeroSection() {
   return (
@@ -18,14 +18,14 @@ export function HeroSection() {
       <motion.div
         initial={{ opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+        transition={{ duration: 0.75, ease }}
         className="relative max-w-5xl mx-auto w-full"
       >
         {/* Pill badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.15 }}
+          transition={{ delay: 0.15, ease }}
           className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-violet-600/12 border border-violet-500/25 text-violet-300 text-xs font-semibold mb-10 tracking-wide"
         >
           <div className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
@@ -39,30 +39,62 @@ export function HeroSection() {
         </h1>
 
         {/* Sub */}
-        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-4">
+        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8">
           ELEVA ayuda a centros de transformación a dejar de depender de WhatsApp, Excel
           y entrenadores externos. Instalamos procesos, equipo y sistema para que tu centro
           crezca con más orden.
         </p>
 
-        {/* Pillar pills */}
-        <div className="flex items-center justify-center gap-2 flex-wrap mb-10">
-          {PILLARS.map((p, i) => (
-            <span key={p} className="text-[11px] text-muted-foreground/70 font-medium">
-              {p}{i < PILLARS.length - 1 && <span className="ml-2 text-foreground/15">·</span>}
-            </span>
-          ))}
-        </div>
+        {/* Path selector */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25, duration: 0.55, ease }}
+          className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto mb-10"
+        >
+          <Link
+            href="#precios"
+            className="group flex-1 flex items-center gap-4 text-left px-5 py-4 rounded-xl border border-violet-500/25 bg-violet-500/6 hover:bg-violet-500/12 hover:border-violet-500/45 transition-all"
+          >
+            <div className="w-9 h-9 rounded-lg bg-violet-500/15 flex items-center justify-center flex-shrink-0">
+              <Building2 className="w-4 h-4 text-violet-400" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-foreground">Dirijo un centro</p>
+              <p className="text-xs text-muted-foreground leading-snug mt-0.5">Quiero ordenar operación, equipo y crecimiento</p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-violet-400 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+          </Link>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Link
+            href="/academia"
+            className="group flex-1 flex items-center gap-4 text-left px-5 py-4 rounded-xl border border-foreground/8 bg-foreground/3 hover:bg-foreground/6 hover:border-foreground/15 transition-all"
+          >
+            <div className="w-9 h-9 rounded-lg bg-foreground/8 flex items-center justify-center flex-shrink-0">
+              <GraduationCap className="w-4 h-4 text-foreground/60" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-foreground">Soy coach o entrenador</p>
+              <p className="text-xs text-muted-foreground leading-snug mt-0.5">Quiero certificarme y mejorar mi facilitación</p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+          </Link>
+        </motion.div>
+
+        {/* Primary CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.38, duration: 0.5, ease }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-3"
+        >
           <Link href="/build">
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               className="flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-500 text-foreground rounded-xl text-base font-bold transition-colors shadow-lg shadow-violet-600/25 glow-violet"
             >
-              Agendar diagnóstico
+              Solicitar diagnóstico
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </Link>
@@ -75,7 +107,7 @@ export function HeroSection() {
               Ver cómo funciona
             </motion.button>
           </a>
-        </div>
+        </motion.div>
       </motion.div>
 
       {/* Scroll hint */}
