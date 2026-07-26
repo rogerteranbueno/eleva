@@ -185,7 +185,7 @@ function SuccessScreen({ nombre, centro }: { nombre: string; centro: string }) {
         <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Qué pasa ahora</p>
         {[
           "Revisamos tu perfil y los retos que señalaste.",
-          "Si hay fit, agendamos una sesión de diagnóstico inicial sin costo.",
+          "Si hay fit, agendamos una llamada de calificación para revisar el alcance del diagnóstico.",
           "Te presentamos el roadmap y el alcance de la implementación.",
         ].map((s, i) => (
           <div key={s} className="flex items-start gap-3">

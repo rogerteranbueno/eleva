@@ -258,18 +258,12 @@ export default function AcademiaPage() {
               </Link>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-foreground/5 max-w-lg">
-              {[
-                { val: "4", label: "certificaciones activas" },
-                { val: "40+", label: "coaches certificados" },
-                { val: "6", label: "países en LATAM" },
-              ].map((s) => (
-                <div key={s.label}>
-                  <p className="text-3xl font-black text-foreground">{s.val}</p>
-                  <p className="text-xs text-muted-foreground leading-tight mt-0.5">{s.label}</p>
-                </div>
-              ))}
+            {/* Programs count */}
+            <div className="pt-6 border-t border-foreground/5 max-w-lg">
+              <div>
+                <p className="text-3xl font-black text-foreground">4</p>
+                <p className="text-xs text-muted-foreground leading-tight mt-0.5">certificaciones activas — CTF™, DCT™, LCT™, IFS™</p>
+              </div>
             </div>
 
             {/* Acreditta trust */}
@@ -294,7 +288,7 @@ export default function AcademiaPage() {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  El 90% de los coaches de centros de transformación llegó a ese rol porque pasó por el proceso y lo vivió de cerca. Eso es valioso, y no es suficiente.
+                  La gran mayoría de los coaches de centros de transformación llegó a ese rol porque pasó por el proceso y lo vivió de cerca. Eso es valioso, y no es suficiente.
                 </p>
                 <p>
                   Facilitar transformación grupal requiere habilidades específicas: leer la sala, sostener el espacio emocional, diseñar arcos de aprendizaje, manejar quiebres, calibrar energía. Nadie nace sabiéndolas. Y casi nadie las enseña con rigor.
