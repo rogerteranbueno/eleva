@@ -37,20 +37,17 @@ export function Footer() {
                 {lang === "en" ? "Services" : "Servicios"}
               </p>
               <div className="space-y-3">
-                <Link href="#programas" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/pacto" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
                   {lang === "en" ? "PACTO Implementation" : "Implementación PACTO"}
                 </Link>
                 <Link href="/academia" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
                   {lang === "en" ? "ELEVA Academy" : "ELEVA Academy"}
                 </Link>
-                <Link href="/metodo" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  {lang === "en" ? "Method & OS" : "Método y OS"}
+                <Link href="/caso" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {lang === "en" ? "Case study" : "Caso real"}
                 </Link>
-                <Link href="#precios" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/#como-empezar" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
                   {lang === "en" ? "Pricing" : "Precios"}
-                </Link>
-                <Link href="/recursos" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  {lang === "en" ? "Manifesto" : "Manifiesto"}
                 </Link>
               </div>
             </div>
@@ -81,7 +78,15 @@ export function Footer() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-xs text-muted-foreground">{copyright}</p>
-            <p className="text-xs text-muted-foreground">{region}</p>
+            <div className="flex items-center gap-4">
+              <Link href="/privacidad" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                {lang === "en" ? "Privacy" : "Privacidad"}
+              </Link>
+              <Link href="/terminos" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                {lang === "en" ? "Terms" : "Términos"}
+              </Link>
+              <p className="text-xs text-muted-foreground">{region}</p>
+            </div>
           </div>
         </div>
       </div>

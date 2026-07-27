@@ -15,9 +15,9 @@ const inter = Inter({
 const BASE_URL = "https://elevaapp-drab.vercel.app"
 
 export const metadata: Metadata = {
-  title: "ELEVA, El sistema operativo para centros de transformación",
+  title: "ELEVA — Formación, operación y crecimiento para centros de transformación",
   description:
-    "ELEVA centraliza la operación, la experiencia del participante y el crecimiento de tu centro en un solo sistema construido para cómo funciona esta industria.",
+    "ELEVA forma a tu equipo, ordena tu operación e instala los datos para crecer. El sistema institucional para centros de transformación en LATAM.",
   metadataBase: new URL(BASE_URL),
   openGraph: {
     title: "ELEVA, El sistema operativo para centros de transformación",
@@ -52,8 +52,26 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "ELEVA",
+    url: BASE_URL,
+    logo: `${BASE_URL}/favicon.ico`,
+    description: "La firma institucional para centros de transformación en LATAM.",
+    email: "hola@elevaapp.io",
+    areaServed: ["MX", "CO", "AR", "CL", "PE"],
+    sameAs: [],
+  }
+
   return (
     <html lang="es" className={`${inter.variable} dark`} suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-screen antialiased bg-background text-foreground">
         <ThemeProvider>
           <LangProvider>{children}</LangProvider>
