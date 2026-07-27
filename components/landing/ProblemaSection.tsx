@@ -2,79 +2,69 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "@/lib/use-in-view"
-import { X } from "lucide-react"
+import { UserX, EyeOff, Layers } from "lucide-react"
 
-const SINTOMAS = [
-  "Las inscripciones llegan por WhatsApp y nadie sabe exactamente cuántas hay.",
-  "El expediente del participante vive en una hoja de Excel que nadie actualiza.",
-  "El seguimiento post-entrenamiento depende del criterio -y la memoria- del coach.",
-  "El programa más profundo termina y no hay sistema para sostener lo que se prometió en sala.",
-  "No sabes quién está perdiendo momentum hasta que ya abandonó.",
-  "El crecimiento depende casi por completo de que la última generación enrole bien.",
+const ease = [0.22, 1, 0.36, 1] as [number, number, number, number]
+
+const PROBLEMAS = [
+  {
+    icon: UserX,
+    title: "El dueño es el cuello de botella",
+    body: "Tú facilitas, vendes y administras al mismo tiempo. Cuando fallas o te vas, el centro se detiene. No es sostenible y los dos lo saben.",
+    color: "text-red-400",
+    bg: "bg-red-500/5 border-red-500/15",
+  },
+  {
+    icon: EyeOff,
+    title: "Sin datos, sin defensa",
+    body: "Sabes que alguien abandona cuando ya se fue. No hay nada que detecte quién está en riesgo antes — ni quién está listo para el siguiente programa.",
+    color: "text-orange-400",
+    bg: "bg-orange-500/5 border-orange-500/15",
+  },
+  {
+    icon: Layers,
+    title: "Metodología que no se transfiere",
+    body: "Cada coach enseña diferente porque el cómo está en tu cabeza, no en un sistema. Si el coach estrella se va, se lleva la mitad del centro.",
+    color: "text-amber-400",
+    bg: "bg-amber-500/5 border-amber-500/15",
+  },
 ]
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1, y: 0,
-    transition: { delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-  }),
-}
-
 export function ProblemaSection() {
-  const { ref, inView } = useInView(0.15)
+  const { ref, inView } = useInView(0.1)
 
   return (
-    <section ref={ref} className="py-24 px-6 max-w-5xl mx-auto">
+    <section id="problema" ref={ref} className="py-20 px-6 max-w-5xl mx-auto">
       <motion.div
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        className="space-y-12"
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, ease }}
+        className="text-center mb-12"
       >
-        {/* Header */}
-        <motion.div custom={0} variants={fadeUp} className="max-w-3xl">
-          <p className="text-xs font-bold text-violet-400 uppercase tracking-widest mb-4">
-            El estado natural de la industria
-          </p>
-          <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight mb-6">
-            Lo que sirvió ayer{" "}
-            <span className="text-muted-foreground font-normal">
-              ya no alcanza para lo que quieres construir mañana.
-            </span>
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Los centros de transformación nacen desde una sala poderosa.
-            Crecen cuando esa sala se convierte en sistema.
-          </p>
-        </motion.div>
-
-        {/* Síntomas */}
-        <motion.div custom={1} variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {SINTOMAS.map((s, i) => (
-            <motion.div
-              key={i}
-              custom={i + 2}
-              variants={fadeUp}
-              className="flex items-start gap-3 px-4 py-3.5 rounded-xl bg-red-500/5 border border-red-500/12"
-            >
-              <div className="w-5 h-5 rounded-full bg-red-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <X className="w-2.5 h-2.5 text-red-400" />
-              </div>
-              <p className="text-base text-foreground/90 leading-snug">{s}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Remate */}
-        <motion.div custom={8} variants={fadeUp} className="border-l-2 border-violet-500/40 pl-6 max-w-2xl">
-          <p className="text-xl font-bold text-foreground leading-snug">
-            No es falta de compromiso.
-          </p>
-          <p className="text-xl text-muted-foreground leading-snug">
-            Es falta de estructura.
-          </p>
-        </motion.div>
+        <p className="text-xs font-bold text-muted-foreground/60 uppercase tracking-widest mb-3">
+          Lo que frena a los mejores centros
+        </p>
+        <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight">
+          No es la metodología.<br />
+          <span className="text-muted-foreground font-light italic">Es la organización detrás.</span>
+        </h2>
       </motion.div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {PROBLEMAS.map((p, i) => (
+          <motion.div
+            key={p.title}
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.55, ease, delay: i * 0.1 }}
+            className={`rounded-2xl border p-6 space-y-4 ${p.bg}`}
+          >
+            <p.icon className={`w-6 h-6 ${p.color}`} />
+            <p className="text-base font-black text-foreground leading-snug">{p.title}</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">{p.body}</p>
+          </motion.div>
+        ))}
+      </div>
     </section>
   )
 }

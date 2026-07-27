@@ -8,7 +8,7 @@ const ease = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[88vh] flex flex-col items-center justify-center px-6 text-center overflow-hidden pt-28 pb-20">
+    <section className="relative min-h-[90vh] flex flex-col items-center justify-center px-6 text-center overflow-hidden pt-28 pb-20">
       {/* Glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-violet-600/8 blur-3xl" />
@@ -19,13 +19,13 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.75, ease }}
-        className="relative max-w-5xl mx-auto w-full"
+        className="relative max-w-4xl mx-auto w-full"
       >
-        {/* Pill badge */}
+        {/* Badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.15, ease }}
+          transition={{ delay: 0.1, ease }}
           className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-violet-600/12 border border-violet-500/25 text-violet-300 text-xs font-semibold mb-10 tracking-wide"
         >
           <div className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
@@ -33,27 +33,26 @@ export function HeroSection() {
         </motion.div>
 
         {/* Headline */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-foreground leading-[1.04] tracking-tight mb-6 max-w-4xl mx-auto">
-          Tu centro ya transforma.{" "}
-          <span className="gradient-text">Ahora toca ordenarlo para crecer.</span>
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-foreground leading-[1.04] tracking-tight mb-5 max-w-4xl mx-auto">
+          Tu metodología funciona.{" "}
+          <span className="gradient-text">El centro todavía depende solo de ti.</span>
         </h1>
 
         {/* Sub */}
-        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8">
-          ELEVA ayuda a centros de transformación a dejar de depender de WhatsApp, Excel
-          y entrenadores externos. Instalamos procesos, equipo y sistema para que tu centro
-          crezca con más orden.
+        <p className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed mb-8">
+          El límite de los mejores centros no es la metodología — es la organización detrás de ella.
+          ELEVA forma tu equipo, ordena tu operación e instala los datos para crecer.
         </p>
 
-        {/* Path selector */}
+        {/* Path cards */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, duration: 0.55, ease }}
           className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto mb-10"
         >
-          <Link
-            href="#precios"
+          <a
+            href="#problema"
             className="group flex-1 flex items-center gap-4 text-left px-5 py-4 rounded-xl border border-violet-500/25 bg-violet-500/6 hover:bg-violet-500/12 hover:border-violet-500/45 transition-all"
           >
             <div className="w-9 h-9 rounded-lg bg-violet-500/15 flex items-center justify-center flex-shrink-0">
@@ -64,7 +63,7 @@ export function HeroSection() {
               <p className="text-xs text-muted-foreground leading-snug mt-0.5">Quiero ordenar operación, equipo y crecimiento</p>
             </div>
             <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-violet-400 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
-          </Link>
+          </a>
 
           <Link
             href="/academia"
@@ -98,7 +97,7 @@ export function HeroSection() {
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </Link>
-          <a href="#como-funciona">
+          <a href="#como-empezar">
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
@@ -114,9 +113,8 @@ export function HeroSection() {
       <motion.div
         animate={{ y: [0, 8, 0] }}
         transition={{ repeat: Infinity, duration: 2.2 }}
-        className="absolute bottom-8 flex flex-col items-center gap-2 text-muted-foreground/50"
+        className="absolute bottom-8 flex flex-col items-center gap-2 text-muted-foreground/40"
       >
-        <span className="text-[10px] uppercase tracking-widest">Formas de trabajar con ELEVA</span>
         <ChevronDown className="w-4 h-4" />
       </motion.div>
     </section>

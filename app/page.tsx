@@ -8,9 +8,10 @@ import { useLang } from "@/lib/i18n"
 import { useTheme } from "@/lib/theme"
 
 import { HeroSection } from "@/components/landing/HeroSection"
+import { ProblemaSection } from "@/components/landing/ProblemaSection"
+import { SolucionSection } from "@/components/landing/SolucionSection"
+import { CasoTeaserSection } from "@/components/landing/CasoTeaserSection"
 import { PreciosPivotSection } from "@/components/landing/PreciosPivotSection"
-import { QueHaceSection } from "@/components/landing/QueHaceSection"
-import { PACTOSection } from "@/components/landing/PACTOSection"
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection"
 import { HistoriaTeaserSection } from "@/components/landing/HistoriaTeaserSection"
 import { CierreSection } from "@/components/landing/CierreSection"
@@ -25,10 +26,9 @@ function Nav() {
   const { lang, setLang } = useLang()
 
   const links = [
-    { href: "/academia",   label: lang === "en" ? "Academy"   : "Academia" },
-    { href: "#programas",  label: lang === "en" ? "Programs"  : "Programas" },
-    { href: "/metodo",     label: lang === "en" ? "Method"    : "Sistema" },
-    { href: "#precios",    label: lang === "en" ? "Pricing"   : "Precios" },
+    { href: "/academia",     label: lang === "en" ? "Academy"  : "Academia" },
+    { href: "/caso",         label: lang === "en" ? "Case"     : "Caso real" },
+    { href: "#como-empezar", label: lang === "en" ? "Pricing"  : "Precios" },
   ]
 
   return (
@@ -150,16 +150,14 @@ export default function HomePage() {
       <main className="pt-16">
         <HeroSection />
         <SectionDivider />
-        {/* anchor for "Precios" nav link */}
-        <div id="precios">
+        <ProblemaSection />
+        <SectionDivider />
+        <SolucionSection />
+        <SectionDivider />
+        <CasoTeaserSection />
+        <SectionDivider />
+        <div id="como-empezar">
           <PreciosPivotSection />
-        </div>
-        <SectionDivider />
-        <QueHaceSection />
-        <SectionDivider />
-        {/* anchor for "Ver programas" CTA */}
-        <div id="programas">
-          <PACTOSection />
         </div>
         <SectionDivider />
         <TestimonialsSection />
