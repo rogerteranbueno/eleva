@@ -8,7 +8,7 @@ import {
   EmptyState,
   POST_KIND_LABEL,
 } from "@/components/ui";
-import { hoursAgo } from "@/lib/format";
+import { timeAgo } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
@@ -107,10 +107,8 @@ export default async function MiGeneracionPage() {
                     <div>
                       <p className="text-sm font-medium">{post.people?.full_name}</p>
                       <p className="text-xs text-faint">
-                        {POST_KIND_LABEL[post.kind] ?? post.kind} · hace{" "}
-                        {hoursAgo(post.created_at) < 24
-                          ? `${hoursAgo(post.created_at)} h`
-                          : `${Math.floor(hoursAgo(post.created_at) / 24)} días`}
+                        {POST_KIND_LABEL[post.kind] ?? post.kind} ·{" "}
+                        {timeAgo(post.created_at)}
                       </p>
                     </div>
                   </div>

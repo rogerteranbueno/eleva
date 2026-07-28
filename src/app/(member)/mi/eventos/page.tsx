@@ -2,7 +2,7 @@ import { requireMember } from "@/lib/context";
 import { createUserClient } from "@/lib/supabase/server";
 import { rsvpToEvent } from "@/app/actions/member";
 import { Card, SectionTitle, EmptyState, Badge } from "@/components/ui";
-import { dateTime } from "@/lib/format";
+import { dateTime, MODALITY_LABEL } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
@@ -59,7 +59,8 @@ export default async function MisEventosPage() {
                   <p className="mt-2 text-sm">
                     {dateTime(event.starts_at)}{" "}
                     <span className="text-faint">
-                      · {event.modality} · {event.location_text}
+                      · {MODALITY_LABEL[event.modality] ?? event.modality} ·{" "}
+                      {event.location_text}
                     </span>
                   </p>
                   {status !== "confirmado" && (

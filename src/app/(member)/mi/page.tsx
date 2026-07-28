@@ -9,7 +9,7 @@ import {
   EmptyState,
   POST_KIND_LABEL,
 } from "@/components/ui";
-import { dateTime, relativeDays } from "@/lib/format";
+import { dateTime, relativeDays, MODALITY_LABEL } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
@@ -138,7 +138,8 @@ export default async function MiPage() {
             <p className="mt-2 text-sm">
               {dateTime(nextEvent.starts_at)}{" "}
               <span className="text-faint">
-                · {nextEvent.modality} · {nextEvent.location_text}
+                · {MODALITY_LABEL[nextEvent.modality] ?? nextEvent.modality} ·{" "}
+                {nextEvent.location_text}
               </span>
             </p>
             <div className="mt-4 flex items-center gap-2">

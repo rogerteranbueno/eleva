@@ -13,7 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ELEVA",
+  title: {
+    default: "ELEVA — La plataforma para centros de transformación",
+    template: "%s · ELEVA",
+  },
   description:
     "La plataforma institucional para centros de transformación: operación, decisión y comunidad en un mismo sistema.",
 };

@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import type { SessionContext } from "@/lib/context";
 import { signOut } from "@/app/actions/auth";
 import { Avatar } from "@/components/ui";
+import { roleLabel } from "@/lib/format";
 
 export type NavItem = { href: string; label: string; icon: keyof typeof icons };
 
@@ -72,8 +73,11 @@ export function AppShell({
           <span className="text-lg font-bold tracking-tight">
             ELEVA<span className="text-accent">.</span>
           </span>
-          <span className="text-xs text-faint truncate">{ctx.organizationName}</span>
+          <span className="rounded bg-accent-soft px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent-strong">
+            Alpha
+          </span>
         </Link>
+        <p className="mt-1 px-2 text-xs text-faint truncate">{ctx.organizationName}</p>
         {ctx.isDemo && (
           <p className="mt-2 mx-2 rounded-md bg-gold-soft px-2 py-1 text-[11px] leading-tight text-gold">
             Ambiente demo · datos sintéticos
@@ -121,8 +125,11 @@ export function AppShell({
       <div className="flex min-w-0 flex-1 flex-col">
         {/* Header móvil */}
         <header className="md:hidden sticky top-0 z-20 flex items-center justify-between border-b border-line bg-background/90 px-4 py-3 backdrop-blur">
-          <span className="font-bold">
+          <span className="flex items-center gap-1.5 font-bold">
             ELEVA<span className="text-accent">.</span>
+            <span className="rounded bg-accent-soft px-1 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent-strong">
+              Alpha
+            </span>
           </span>
           <div className="flex items-center gap-2">
             {ctx.isDemo && (
@@ -166,15 +173,3 @@ export function AppShell({
   );
 }
 
-export function roleLabel(role: string) {
-  const map: Record<string, string> = {
-    dueno: "Dirección",
-    oficinas: "Oficinas",
-    entrenador: "Entrenador",
-    staff: "Staff",
-    dream_team: "Dream Team",
-    finanzas: "Finanzas",
-    participante: "Participante",
-  };
-  return map[role] ?? role;
-}

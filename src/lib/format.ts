@@ -42,3 +42,29 @@ export function hoursAgo(iso: string | Date) {
 export function plural(n: number, singular: string, pluralForm: string) {
   return `${n} ${n === 1 ? singular : pluralForm}`;
 }
+
+export function timeAgo(iso: string | Date) {
+  const hours = hoursAgo(iso);
+  if (hours < 1) return "hace unos minutos";
+  if (hours < 24) return `hace ${plural(hours, "hora", "horas")}`;
+  return `hace ${plural(Math.floor(hours / 24), "día", "días")}`;
+}
+
+export function roleLabel(role: string) {
+  const map: Record<string, string> = {
+    dueno: "Dirección",
+    oficinas: "Oficinas",
+    entrenador: "Entrenador",
+    staff: "Staff",
+    dream_team: "Dream Team",
+    finanzas: "Finanzas",
+    participante: "Participante",
+  };
+  return map[role] ?? role;
+}
+
+export const MODALITY_LABEL: Record<string, string> = {
+  presencial: "Presencial",
+  online: "Online",
+  hibrida: "Híbrida",
+};

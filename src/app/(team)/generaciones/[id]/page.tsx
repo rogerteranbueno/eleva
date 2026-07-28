@@ -9,8 +9,7 @@ import {
   ParticipationStateBadge,
   Badge,
 } from "@/components/ui";
-import { dateTime } from "@/lib/format";
-import { roleLabel } from "@/components/AppShell";
+import { dateTime, roleLabel } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
