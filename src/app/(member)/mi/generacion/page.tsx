@@ -1,13 +1,11 @@
+import Link from "next/link";
 import { requireMember } from "@/lib/context";
 import { createUserClient } from "@/lib/supabase/server";
-import { createPost, createComment } from "@/app/actions/member";
-import {
-  Card,
-  SectionTitle,
-  Avatar,
-  EmptyState,
-  POST_KIND_LABEL,
-} from "@/components/ui";
+import { createComment } from "@/app/actions/member";
+import { Card, SectionTitle, Avatar, EmptyState } from "@/components/ui";
+import { Composer } from "@/components/hub/Composer";
+import { ReactionBar } from "@/components/hub/ReactionBar";
+import { POST_TYPE_BY_KIND, FIELD_LABELS } from "@/modules/community/postTypes";
 import { timeAgo } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -25,16 +23,14 @@ export default async function MiGeneracionPage() {
     .maybeSingle();
 
   if (!participation?.cohorts) {
-    return (
-      <EmptyState title="Todavía no estás en una generación activa." />
-    );
+    return <EmptyState title="Todavía no estás en una generación activa." />;
   }
   const cohort = participation.cohorts;
 
   const { data: posts } = await supabase
     .from("posts")
     .select(
-      "id, kind, body, created_at, people:author_person_id(full_name), comments(id, body, created_at, people:author_person_id(full_name))"
+      "id, kind, body, fields, created_at, author_person_id, people:author_person_id(id, full_name), comments(id, body, created_at, people:author_person_id(full_name)), post_reactions(kind, person_id)"
     )
     .eq("cohort_id", cohort.id)
     .order("created_at", { ascending: false });
@@ -48,48 +44,11 @@ export default async function MiGeneracionPage() {
         </p>
       </header>
 
-      <section aria-label="Publicar">
-        <Card>
-          <form action={createPost} className="space-y-3">
-            <input type="hidden" name="cohortId" value={cohort.id} />
-            <div className="flex gap-2">
-              <label htmlFor="kind" className="sr-only">
-                Tipo de publicación
-              </label>
-              <select
-                id="kind"
-                name="kind"
-                className="rounded-lg border border-line bg-raised px-3 py-2 text-sm"
-              >
-                <option value="declaracion">Declaración</option>
-                <option value="aprendizaje">Aprendizaje</option>
-                <option value="pregunta">Pregunta</option>
-                <option value="celebracion">Celebración</option>
-                <option value="evidencia">Evidencia</option>
-              </select>
-            </div>
-            <label htmlFor="body" className="sr-only">
-              Tu publicación
-            </label>
-            <textarea
-              id="body"
-              name="body"
-              rows={3}
-              required
-              placeholder={`¿Qué quieres compartir con tu generación, ${ctx.preferredName}?`}
-              className="w-full rounded-lg border border-line bg-raised px-3 py-2 text-sm leading-relaxed placeholder:text-faint"
-            />
-            <div className="flex justify-end">
-              <button
-                type="submit"
-                className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-[#0b0a12] hover:opacity-90"
-              >
-                Compartir
-              </button>
-            </div>
-          </form>
-        </Card>
-      </section>
+      <Composer
+        cohortId={cohort.id}
+        authorName={ctx.preferredName}
+        isTeam={ctx.isTeam}
+      />
 
       <section aria-label="Conversación">
         <SectionTitle>Conversación</SectionTitle>
@@ -99,60 +58,89 @@ export default async function MiGeneracionPage() {
           </EmptyState>
         ) : (
           <ul className="space-y-4">
-            {posts!.map((post) => (
-              <li key={post.id}>
-                <Card>
-                  <div className="flex items-center gap-3">
-                    <Avatar name={post.people?.full_name ?? "?"} size={34} />
-                    <div>
-                      <p className="text-sm font-medium">{post.people?.full_name}</p>
-                      <p className="text-xs text-faint">
-                        {POST_KIND_LABEL[post.kind] ?? post.kind} ·{" "}
-                        {timeAgo(post.created_at)}
-                      </p>
+            {posts!.map((post) => {
+              const typeDef = POST_TYPE_BY_KIND[post.kind];
+              const fields = (post.fields ?? {}) as Record<string, string>;
+              const counts: Record<string, number> = {};
+              let mine: string | null = null;
+              for (const r of post.post_reactions ?? []) {
+                counts[r.kind] = (counts[r.kind] ?? 0) + 1;
+                if (r.person_id === ctx.personId) mine = r.kind;
+              }
+              return (
+                <li key={post.id}>
+                  <Card>
+                    <div className="flex items-center gap-3">
+                      <Avatar name={post.people?.full_name ?? "?"} size={34} />
+                      <div className="min-w-0 flex-1">
+                        <Link
+                          href={`/mi/personas/${post.people?.id}`}
+                          className="text-sm font-medium hover:text-accent-strong"
+                        >
+                          {post.people?.full_name}
+                        </Link>
+                        <p className="text-xs text-faint">
+                          <span aria-hidden>{typeDef?.emoji}</span>{" "}
+                          {typeDef?.label ?? post.kind} · {timeAgo(post.created_at)}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <p className="mt-3 text-sm leading-relaxed">{post.body}</p>
 
-                  {(post.comments ?? []).length > 0 && (
-                    <ul className="mt-4 space-y-2 border-t border-line pt-3">
-                      {post.comments!.map((c) => (
-                        <li key={c.id} className="flex items-start gap-2.5">
-                          <Avatar name={c.people?.full_name ?? "?"} size={26} />
-                          <div>
-                            <p className="text-xs font-medium">
-                              {c.people?.full_name}
-                            </p>
-                            <p className="text-sm text-muted">{c.body}</p>
+                    {Object.keys(fields).length > 0 && (
+                      <dl className="mt-3 space-y-1.5 rounded-lg bg-raised px-3 py-2.5">
+                        {Object.entries(fields).map(([key, value]) => (
+                          <div key={key} className="text-sm">
+                            <dt className="inline font-semibold text-muted">
+                              {FIELD_LABELS[key] ?? key}:{" "}
+                            </dt>
+                            <dd className="inline">{value}</dd>
                           </div>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                        ))}
+                      </dl>
+                    )}
 
-                  <form action={createComment} className="mt-3 flex gap-2">
-                    <input type="hidden" name="postId" value={post.id} />
-                    <label htmlFor={`comment-${post.id}`} className="sr-only">
-                      Responder
-                    </label>
-                    <input
-                      id={`comment-${post.id}`}
-                      name="body"
-                      type="text"
-                      required
-                      placeholder="Responder…"
-                      className="flex-1 rounded-lg border border-line bg-raised px-3 py-1.5 text-sm placeholder:text-faint"
-                    />
-                    <button
-                      type="submit"
-                      className="rounded-lg border border-line px-3 py-1.5 text-sm text-muted hover:text-foreground"
-                    >
-                      Enviar
-                    </button>
-                  </form>
-                </Card>
-              </li>
-            ))}
+                    <p className="mt-3 text-sm leading-relaxed">{post.body}</p>
+
+                    <ReactionBar postId={post.id} counts={counts} mine={mine} />
+
+                    {(post.comments ?? []).length > 0 && (
+                      <ul className="mt-4 space-y-2 border-t border-line pt-3">
+                        {post.comments!.map((c) => (
+                          <li key={c.id} className="flex items-start gap-2.5">
+                            <Avatar name={c.people?.full_name ?? "?"} size={26} />
+                            <div>
+                              <p className="text-xs font-medium">{c.people?.full_name}</p>
+                              <p className="text-sm text-muted">{c.body}</p>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    <form action={createComment} className="mt-3 flex gap-2">
+                      <input type="hidden" name="postId" value={post.id} />
+                      <label htmlFor={`comment-${post.id}`} className="sr-only">
+                        Responder
+                      </label>
+                      <input
+                        id={`comment-${post.id}`}
+                        name="body"
+                        type="text"
+                        required
+                        placeholder="Responder…"
+                        className="flex-1 rounded-lg border border-line bg-raised px-3 py-1.5 text-sm placeholder:text-faint"
+                      />
+                      <button
+                        type="submit"
+                        className="rounded-lg border border-line px-3 py-1.5 text-sm text-muted hover:text-foreground"
+                      >
+                        Enviar
+                      </button>
+                    </form>
+                  </Card>
+                </li>
+              );
+            })}
           </ul>
         )}
       </section>

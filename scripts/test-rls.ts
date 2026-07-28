@@ -119,13 +119,52 @@ async function main() {
     const { c: peopleC } = await count(ofi, "people");
     check("ve a todas las personas de Aurora", peopleC >= 40, peopleC);
     const { c: partC } = await count(ofi, "participations");
-    check("ve las 35 participaciones", partC === 35, partC);
+    check("ve las 41 participaciones (35 + 6 del pipeline)", partC === 41, partC);
     const { c: chargesC } = await count(ofi, "charges");
     check("ve finanzas de Aurora (20 cargos)", chargesC === 20, chargesC);
     const norteCohorts = await ofi.from("cohorts").select("name").eq("name", "Norte G1");
     check("no ve generaciones del Centro Norte", (norteCohorts.data ?? []).length === 0, norteCohorts.data);
     const { c: attC } = await count(ofi, "attendance_records");
     check("ve la asistencia completa (120 registros)", attC === 120, attC);
+  }
+
+  console.log("\n— Capa social: reacciones, reconocimientos y avisos —");
+  {
+    const anon = createClient(URL, ANON, { auth: { persistSession: false } });
+    for (const table of ["post_reactions", "recognitions", "notifications"]) {
+      const { c } = await count(anon, table);
+      check(`anónimo no ve ${table}`, c === 0);
+    }
+
+    const norte = await loginAs("norte@norte.demo");
+    for (const table of ["post_reactions", "recognitions", "notifications"]) {
+      const { c } = await count(norte, table);
+      check(`Centro Norte no ve ${table} de Aurora`, c === 0, c);
+    }
+
+    const val = await loginAs("participante@aurora.demo");
+    const { c: reactionsC } = await count(val, "post_reactions");
+    check("Valeria ve las reacciones de su generación", reactionsC >= 3, reactionsC);
+    const { c: recC } = await count(val, "recognitions");
+    check("Valeria ve su reconocimiento recibido", recC >= 1, recC);
+    const fake = await val.from("post_reactions").insert({
+      organization_id: AURORA_ORG,
+      post_id: "ef000000-0000-4000-8000-000000000001",
+      person_id: "ae000000-0000-4000-8000-000000000010", // Luis, no ella
+      kind: "poderoso",
+    });
+    check("no puede reaccionar a nombre de otra persona", fake.error !== null);
+    const fakeNotif = await val.from("notifications").insert({
+      organization_id: AURORA_ORG,
+      person_id: VALERIA_PERSON,
+      kind: "sistema",
+      text: "spoofed",
+    });
+    check("no puede fabricarse avisos (insert server-only)", fakeNotif.error !== null);
+
+    const ex = await loginAs("exstaff@aurora.demo");
+    const { c: exRecC } = await count(ex, "recognitions");
+    check("ex staff (vencida) no ve reconocimientos", exRecC === 0, exRecC);
   }
 
   console.log("\n— Dueña (Mariana): Pulso y auditoría permitidos —");

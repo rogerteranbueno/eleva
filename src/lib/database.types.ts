@@ -835,6 +835,54 @@ export type Database = {
           },
         ]
       }
+      notifications: {
+        Row: {
+          created_at: string
+          href: string | null
+          id: string
+          kind: string
+          organization_id: string
+          person_id: string
+          read: boolean
+          text: string
+        }
+        Insert: {
+          created_at?: string
+          href?: string | null
+          id?: string
+          kind: string
+          organization_id: string
+          person_id: string
+          read?: boolean
+          text: string
+        }
+        Update: {
+          created_at?: string
+          href?: string | null
+          id?: string
+          kind?: string
+          organization_id?: string
+          person_id?: string
+          read?: boolean
+          text?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       organization_memberships: {
         Row: {
           created_at: string
@@ -1149,9 +1197,11 @@ export type Database = {
       people: {
         Row: {
           created_at: string
+          declaration: string | null
           email: string | null
           full_name: string
           id: string
+          looking_for: string[]
           phone: string | null
           preferred_name: string | null
           updated_at: string
@@ -1159,9 +1209,11 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          declaration?: string | null
           email?: string | null
           full_name: string
           id?: string
+          looking_for?: string[]
           phone?: string | null
           preferred_name?: string | null
           updated_at?: string
@@ -1169,9 +1221,11 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          declaration?: string | null
           email?: string | null
           full_name?: string
           id?: string
+          looking_for?: string[]
           phone?: string | null
           preferred_name?: string | null
           updated_at?: string
@@ -1179,12 +1233,62 @@ export type Database = {
         }
         Relationships: []
       }
+      post_reactions: {
+        Row: {
+          created_at: string
+          id: string
+          kind: string
+          organization_id: string
+          person_id: string
+          post_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          kind: string
+          organization_id: string
+          person_id: string
+          post_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          kind?: string
+          organization_id?: string
+          person_id?: string
+          post_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_reactions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_reactions_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_reactions_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       posts: {
         Row: {
           author_person_id: string
           body: string
           cohort_id: string | null
           created_at: string
+          fields: Json
           id: string
           kind: string
           organization_id: string
@@ -1195,6 +1299,7 @@ export type Database = {
           body: string
           cohort_id?: string | null
           created_at?: string
+          fields?: Json
           id?: string
           kind?: string
           organization_id: string
@@ -1205,6 +1310,7 @@ export type Database = {
           body?: string
           cohort_id?: string | null
           created_at?: string
+          fields?: Json
           id?: string
           kind?: string
           organization_id?: string
@@ -1262,6 +1368,58 @@ export type Database = {
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recognitions: {
+        Row: {
+          created_at: string
+          from_person_id: string
+          id: string
+          impact: string | null
+          organization_id: string
+          text: string
+          to_person_id: string
+        }
+        Insert: {
+          created_at?: string
+          from_person_id: string
+          id?: string
+          impact?: string | null
+          organization_id: string
+          text: string
+          to_person_id: string
+        }
+        Update: {
+          created_at?: string
+          from_person_id?: string
+          id?: string
+          impact?: string | null
+          organization_id?: string
+          text?: string
+          to_person_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recognitions_from_person_id_fkey"
+            columns: ["from_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recognitions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recognitions_to_person_id_fkey"
+            columns: ["to_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
             referencedColumns: ["id"]
           },
         ]

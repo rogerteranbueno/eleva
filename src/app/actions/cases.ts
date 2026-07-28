@@ -206,6 +206,82 @@ export async function dismissCase(formData: FormData) {
   revalidatePath(`/casos/${caseRow.id}`);
 }
 
+/** Responde la primera contribución directamente desde el caso: crea el
+ *  comentario en el Hub, registra la intervención y avisa a la persona. */
+export async function replyFromCase(formData: FormData) {
+  const caseId = String(formData.get("caseId"));
+  const postId = String(formData.get("postId"));
+  const body = String(formData.get("body") ?? "").trim();
+  if (!body) throw new Error("Escribe tu respuesta.");
+
+  const { ctx, service, caseRow } = await getAuthorizedCase(caseId);
+
+  const { data: post } = await service
+    .from("posts")
+    .select("id, author_person_id, cohort_id")
+    .eq("id", postId)
+    .eq("organization_id", ctx.organizationId)
+    .single();
+  if (!post) throw new Error("La publicación no existe.");
+
+  const { error } = await service.from("comments").insert({
+    organization_id: ctx.organizationId,
+    post_id: post.id,
+    author_person_id: ctx.personId,
+    body,
+  });
+  if (error) throw new Error("No se pudo publicar la respuesta.");
+
+  await service.from("interventions").insert({
+    organization_id: ctx.organizationId,
+    case_id: caseRow.id,
+    kind: "contactar",
+    channel: "ninguno",
+    notes: "Respondió la publicación directamente en el Hub de la generación.",
+    performed_by: ctx.personId,
+  });
+  await service
+    .from("cases")
+    .update({ status: "esperando", updated_at: new Date().toISOString() })
+    .eq("id", caseRow.id);
+  await service
+    .from("signals")
+    .update({
+      status: "revisada",
+      reviewed_at: new Date().toISOString(),
+      reviewed_by: ctx.personId,
+    })
+    .eq("case_id", caseRow.id)
+    .eq("status", "abierta");
+
+  await service.from("notifications").insert({
+    organization_id: ctx.organizationId,
+    person_id: post.author_person_id,
+    kind: "comentario",
+    text: `${ctx.personName} respondió a tu publicación.`,
+    href: "/mi/generacion",
+  });
+
+  await logAudit(service, {
+    organizationId: ctx.organizationId,
+    actorPersonId: ctx.personId,
+    action: "intervention.registered",
+    objectType: "case",
+    objectId: caseRow.id,
+    details: { kind: "respuesta_en_hub", post_id: post.id },
+  });
+  await emitDomainEvent(service, {
+    organizationId: ctx.organizationId,
+    name: "first_contribution.responded",
+    actor: { type: "person", id: ctx.personId },
+    subject: { type: "post", id: post.id },
+    scope: { type: "cohort", id: post.cohort_id ?? "" },
+  });
+
+  revalidatePath(`/casos/${caseRow.id}`);
+  revalidatePath("/hoy");
+}
+
 export async function generateAIDraft(
   caseId: string,
   channel: string

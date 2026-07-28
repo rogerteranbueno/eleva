@@ -6,6 +6,7 @@ import {
   registerIntervention,
   recordOutcome,
   dismissCase,
+  replyFromCase,
 } from "@/app/actions/cases";
 import {
   Card,
@@ -95,6 +96,21 @@ export default async function CasePage({
   const hasIntervention = (interventions ?? []).length > 0;
   const person = caseRow.people;
   const consentChannels = (consents ?? []).map((c) => c.channel);
+
+  // Si el caso es "primera contribución sin respuesta", trae el post para
+  // poder responderlo directamente desde aquí y cerrar el loop del anfitrión.
+  const contributionSignal = (signals ?? []).find(
+    (s) => (s.evidence as { post_id?: string } | null)?.post_id
+  );
+  const { data: contributionPost } =
+    isOpen && !hasIntervention && contributionSignal
+      ? await service
+          .from("posts")
+          .select("id, kind, body, created_at, people:author_person_id(full_name)")
+          .eq("id", (contributionSignal.evidence as { post_id: string }).post_id)
+          .eq("organization_id", ctx.organizationId)
+          .maybeSingle()
+      : { data: null };
 
   const aiReading = isOpen
     ? await getCaseExplanation(service, ctx.organizationId, {
@@ -225,6 +241,44 @@ export default async function CasePage({
               </li>
             ))}
           </ol>
+        </section>
+      )}
+
+      {isOpen && !hasIntervention && contributionPost && (
+        <section aria-label="Responder en el Hub">
+          <SectionTitle>Responder directamente en el Hub</SectionTitle>
+          <Card>
+            <blockquote className="border-l-2 border-line-strong pl-3">
+              <p className="text-sm leading-relaxed">{contributionPost.body}</p>
+              <p className="mt-1.5 text-xs text-faint">
+                {contributionPost.people?.full_name} · {dateTime(contributionPost.created_at)}
+              </p>
+            </blockquote>
+            <form action={replyFromCase} className="mt-4 space-y-3">
+              <input type="hidden" name="caseId" value={caseRow.id} />
+              <input type="hidden" name="postId" value={contributionPost.id} />
+              <label htmlFor="reply-body" className="block text-sm font-medium">
+                Tu respuesta{" "}
+                <span className="font-normal text-faint">
+                  — se publica en la conversación de la generación a tu nombre
+                </span>
+              </label>
+              <textarea
+                id="reply-body"
+                name="body"
+                rows={3}
+                required
+                placeholder="Gracias por compartirlo…"
+                className="w-full rounded-lg border border-line bg-raised px-3 py-2 text-sm leading-relaxed placeholder:text-faint"
+              />
+              <button
+                type="submit"
+                className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-[#0b0a12] hover:opacity-90"
+              >
+                Responder y registrar intervención
+              </button>
+            </form>
+          </Card>
         </section>
       )}
 

@@ -13,7 +13,10 @@ export default async function MemberLayout({
   const nav: NavItem[] = [
     { href: "/mi", label: "Inicio", icon: "inicio" },
     { href: "/mi/generacion", label: "Mi generación", icon: "generacion" },
+    { href: "/mi/personas", label: "Personas", icon: "personas" },
     { href: "/mi/eventos", label: "Eventos", icon: "eventos" },
+    { href: "/mi/avisos", label: "Avisos", icon: "avisos" },
+    { href: "/mi/perfil", label: "Mi perfil", icon: "perfil" },
   ];
 
   return (
