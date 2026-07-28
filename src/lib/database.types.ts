@@ -14,6 +14,50 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_summaries: {
+        Row: {
+          content: Json
+          created_at: string
+          id: string
+          kind: string
+          model: string | null
+          organization_id: string
+          ref_id: string | null
+          source: string
+          usage: Json
+        }
+        Insert: {
+          content: Json
+          created_at?: string
+          id?: string
+          kind: string
+          model?: string | null
+          organization_id: string
+          ref_id?: string | null
+          source: string
+          usage?: Json
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          id?: string
+          kind?: string
+          model?: string | null
+          organization_id?: string
+          ref_id?: string | null
+          source?: string
+          usage?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_summaries_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       attendance_records: {
         Row: {
           corrected: boolean
@@ -1672,6 +1716,7 @@ export type Database = {
       has_role: { Args: { org: string; roles: string[] }; Returns: boolean }
       is_cohort_member: { Args: { cohort: string }; Returns: boolean }
       is_team: { Args: { org: string }; Returns: boolean }
+      is_team_for_my_cohort: { Args: { p_person: string }; Returns: boolean }
       shares_cohort_with: { Args: { p_person: string }; Returns: boolean }
     }
     Enums: {

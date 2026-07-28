@@ -107,6 +107,16 @@ export async function requireMember(): Promise<SessionContext> {
   return ctx;
 }
 
+/** Home por rol: cada quien empieza por su trabajo, no por el mapa de módulos. */
+export function teamHome(ctx: SessionContext): string {
+  if (ctx.roles.includes("dueno")) return "/pulso";
+  if (ctx.roles.includes("oficinas")) return "/hoy";
+  if (ctx.roles.includes("finanzas")) return "/finanzas";
+  if (ctx.roles.includes("entrenador")) return "/generaciones";
+  if (ctx.isTeam) return "/hoy";
+  return "/mi";
+}
+
 /** Capacidades derivadas de roles. Ocultar un botón no es control de acceso:
  *  estas mismas funciones se usan en los comandos de servidor. */
 export const can = {

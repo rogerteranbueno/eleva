@@ -206,6 +206,32 @@ export async function dismissCase(formData: FormData) {
   revalidatePath(`/casos/${caseRow.id}`);
 }
 
+export async function generateAIDraft(
+  caseId: string,
+  channel: string
+): Promise<string | null> {
+  const { ctx, service, caseRow } = await getAuthorizedCase(caseId);
+  if (!caseRow.subject_person_id) return null;
+
+  const [{ data: person }, { data: signals }] = await Promise.all([
+    service
+      .from("people")
+      .select("preferred_name, full_name")
+      .eq("id", caseRow.subject_person_id)
+      .single(),
+    service.from("signals").select("explanation").eq("case_id", caseRow.id),
+  ]);
+  if (!person) return null;
+
+  const { draftContactMessage } = await import("@/lib/ai");
+  return draftContactMessage(service, ctx.organizationId, {
+    organizationName: ctx.organizationName,
+    personPreferredName: person.preferred_name ?? person.full_name.split(" ")[0],
+    channel,
+    signals: signals ?? [],
+  });
+}
+
 export async function refreshSignals() {
   const ctx = await requireTeam(["dueno", "oficinas"]);
   const service = createServiceClient();

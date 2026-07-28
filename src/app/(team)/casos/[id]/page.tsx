@@ -13,8 +13,11 @@ import {
   PriorityBadge,
   CaseStatusBadge,
   PersonLink,
+  Badge,
 } from "@/components/ui";
 import { dateTime, hoursAgo } from "@/lib/format";
+import { aiEnabled, getCaseExplanation } from "@/lib/ai";
+import { DraftField } from "./DraftField";
 
 export const dynamic = "force-dynamic";
 
@@ -93,6 +96,20 @@ export default async function CasePage({
   const person = caseRow.people;
   const consentChannels = (consents ?? []).map((c) => c.channel);
 
+  const aiReading = isOpen
+    ? await getCaseExplanation(service, ctx.organizationId, {
+        id: caseRow.id,
+        title: caseRow.title,
+        updatedAt: caseRow.opened_at,
+        signals: (signals ?? []).map((s) => ({
+          name: s.signal_definitions?.name,
+          explanation: s.explanation,
+        })),
+        personName: person?.full_name,
+        consentChannels,
+      })
+    : null;
+
   const draftDefault = person
     ? `Hola, ${person.preferred_name ?? person.full_name.split(" ")[0]}. Desde ${ctx.organizationName} queremos saber cómo estás. No necesitas explicarnos nada; si te sirve, podemos ayudarte a encontrar una forma ligera de retomar o resolver cualquier pendiente. ¿Te gustaría que lo veamos juntos?`
     : "";
@@ -153,6 +170,21 @@ export default async function CasePage({
           )}
         </div>
       </section>
+
+      {aiReading && (
+        <section aria-label="Lectura del caso">
+          <SectionTitle action={<Badge variant="accent">IA · Claude</Badge>}>
+            Lectura del caso
+          </SectionTitle>
+          <div className="rounded-(--radius-card) border border-accent/25 bg-accent-soft/40 p-5">
+            <p className="text-sm leading-relaxed">{aiReading.text}</p>
+            <p className="mt-2 text-xs text-faint">
+              Propuesta generada por IA con la evidencia del caso. La decisión es
+              tuya.
+            </p>
+          </div>
+        </section>
+      )}
 
       {(hasIntervention || (outcomes ?? []).length > 0) && (
         <section aria-label="Historial">
@@ -245,21 +277,11 @@ export default async function CasePage({
                 </div>
               </div>
               {person && (
-                <div>
-                  <label htmlFor="draftMessage" className="block text-sm font-medium">
-                    Borrador del mensaje{" "}
-                    <span className="font-normal text-faint">
-                      — tú decides si lo envías y cómo; el sistema no contacta a nadie
-                    </span>
-                  </label>
-                  <textarea
-                    id="draftMessage"
-                    name="draftMessage"
-                    rows={4}
-                    defaultValue={draftDefault}
-                    className="mt-1 w-full rounded-lg border border-line bg-raised px-3 py-2 text-sm leading-relaxed"
-                  />
-                </div>
+                <DraftField
+                  caseId={caseRow.id}
+                  defaultValue={draftDefault}
+                  aiAvailable={aiEnabled()}
+                />
               )}
               <div>
                 <label htmlFor="notes" className="block text-sm font-medium">

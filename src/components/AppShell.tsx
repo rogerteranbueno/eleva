@@ -30,6 +30,18 @@ const icons = {
   generacion: (
     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM23 21v-2a4 4 0 0 0-3-3.87" />
   ),
+  finanzas: (
+    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+  ),
+  agenda: (
+    <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2ZM9 16l2 2 4-4" />
+  ),
+  equipo: (
+    <path d="M18 21a6 6 0 0 0-12 0M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM21 8l-2 2-1-1" />
+  ),
+  crm: (
+    <path d="M3 4h18l-7 8v6l-4 2v-8L3 4Z" />
+  ),
 } as const;
 
 function Icon({ name }: { name: keyof typeof icons }) {
@@ -49,13 +61,27 @@ function Icon({ name }: { name: keyof typeof icons }) {
   );
 }
 
+const SYSTEM_MAP = [
+  { label: "ELEVA OS", state: "activo" },
+  { label: "Hub Centro", state: "activo" },
+  { label: "Growth", state: "proximamente" },
+  { label: "Hub Global", state: "proximamente" },
+  { label: "Standards", state: "proximamente" },
+] as const;
+
 export function AppShell({
   ctx,
   nav,
+  homeHref = "/",
+  showSystemMap = false,
+  extra,
   children,
 }: {
   ctx: SessionContext;
   nav: NavItem[];
+  homeHref?: string;
+  showSystemMap?: boolean;
+  extra?: ReactNode;
   children: ReactNode;
 }) {
   const pathname = usePathname();
@@ -69,7 +95,7 @@ export function AppShell({
     <div className="flex min-h-dvh w-full">
       {/* Rail lateral — desktop */}
       <aside className="hidden md:flex w-60 shrink-0 flex-col border-r border-line bg-surface/60 px-4 py-6 sticky top-0 h-dvh">
-        <Link href="/" className="flex items-center gap-2 px-2">
+        <Link href={homeHref} className="flex items-center gap-2 px-2">
           <span className="text-lg font-bold tracking-tight">
             ELEVA<span className="text-accent">.</span>
           </span>
@@ -83,7 +109,7 @@ export function AppShell({
             Ambiente demo · datos sintéticos
           </p>
         )}
-        <nav className="mt-6 flex flex-col gap-1" aria-label="Principal">
+        <nav className="mt-6 flex flex-col gap-1 overflow-y-auto" aria-label="Principal">
           {nav.map((item) => (
             <Link
               key={item.href}
@@ -100,6 +126,33 @@ export function AppShell({
             </Link>
           ))}
         </nav>
+        {showSystemMap && (
+          <div className="mt-5 border-t border-line pt-4 px-2">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-faint">
+              El sistema ELEVA
+            </p>
+            <ul className="mt-2 space-y-1">
+              {SYSTEM_MAP.map((s) => (
+                <li
+                  key={s.label}
+                  className="flex items-center justify-between text-xs"
+                >
+                  <span className={s.state === "activo" ? "text-muted" : "text-faint"}>
+                    {s.label}
+                  </span>
+                  {s.state === "activo" ? (
+                    <span className="size-1.5 rounded-full bg-ok" aria-label="activo" />
+                  ) : (
+                    <span className="text-[9px] uppercase tracking-wider text-faint">
+                      pronto
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {extra}
         <div className="mt-auto border-t border-line pt-4 px-1">
           <div className="flex items-center gap-3">
             <Avatar name={ctx.personName} size={34} />

@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createUserClient } from "@/lib/supabase/server";
-import { getSessionContext } from "@/lib/context";
+import { getSessionContext, teamHome } from "@/lib/context";
 
 export type AuthState = { error?: string };
 
@@ -28,7 +28,7 @@ export async function signIn(
   }
 
   const ctx = await getSessionContext();
-  redirect(ctx?.isTeam ? "/hoy" : "/mi");
+  redirect(ctx ? teamHome(ctx) : "/mi");
 }
 
 export async function signOut() {

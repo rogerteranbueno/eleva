@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
-import { getSessionContext } from "@/lib/context";
+import { getSessionContext, teamHome } from "@/lib/context";
 import { LoginForm } from "./LoginForm";
 
 export default async function LoginPage() {
   const ctx = await getSessionContext();
-  if (ctx) redirect(ctx.isTeam ? "/hoy" : "/mi");
+  if (ctx) redirect(teamHome(ctx));
 
   return (
     <div className="flex min-h-dvh flex-col items-center justify-center px-4 py-10">

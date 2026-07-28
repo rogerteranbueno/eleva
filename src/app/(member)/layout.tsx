@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { requireMember } from "@/lib/context";
 import { AppShell, type NavItem } from "@/components/AppShell";
+import { DemoGuide } from "@/components/demo/DemoGuide";
 
 export default async function MemberLayout({
   children,
@@ -16,7 +17,12 @@ export default async function MemberLayout({
   ];
 
   return (
-    <AppShell ctx={ctx} nav={nav}>
+    <AppShell
+      ctx={ctx}
+      nav={nav}
+      homeHref="/mi"
+      extra={ctx.isDemo ? <DemoGuide roles={ctx.roles} /> : null}
+    >
       {children}
     </AppShell>
   );
