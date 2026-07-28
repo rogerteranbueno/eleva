@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test:rls": "tsx scripts/test-rls.ts"
+    "test:rls": "tsx scripts/test-rls.ts",
+    "signals": "tsx scripts/run-signals.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",
