@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { requireTeam } from "@/lib/context";
+import { requireCapability } from "@/lib/capabilities";
 import { createServiceClient } from "@/lib/supabase/server";
 import { Card, SectionTitle, Avatar, Badge } from "@/components/ui";
 import { dateShort, roleLabel } from "@/lib/format";
@@ -7,7 +7,7 @@ import { dateShort, roleLabel } from "@/lib/format";
 export const dynamic = "force-dynamic";
 
 export default async function EquipoPage() {
-  const ctx = await requireTeam();
+  const ctx = await requireCapability("team.read");
   const service = createServiceClient();
 
   const [{ data: assignments }, { data: teamAssignments }] = await Promise.all([
@@ -19,16 +19,20 @@ export default async function EquipoPage() {
       .order("role"),
     service
       .from("team_assignments")
-      .select("role, person_id, cohorts(id, name)")
+      .select("role, person_id, ends_at, stage_runs(name, generation_cycles(id, name))")
       .eq("organization_id", ctx.organizationId),
   ]);
 
   const now = new Date().toISOString();
   const cohortsBy = new Map<string, { name: string; id: string }[]>();
   for (const ta of teamAssignments ?? []) {
-    if (!ta.cohorts) continue;
+    if (!ta.stage_runs?.generation_cycles) continue;
+    if (ta.ends_at && ta.ends_at <= now) continue;
     const list = cohortsBy.get(ta.person_id) ?? [];
-    list.push({ name: ta.cohorts.name, id: ta.cohorts.id });
+    list.push({
+      name: `${ta.stage_runs.generation_cycles.name} · ${ta.stage_runs.name.split(" ")[0]}`,
+      id: ta.stage_runs.generation_cycles.id,
+    });
     cohortsBy.set(ta.person_id, list);
   }
 
@@ -71,7 +75,7 @@ export default async function EquipoPage() {
                     {cohorts.length > 0 && (
                       <p className="mt-1.5 text-xs text-muted">
                         {cohorts.map((c, j) => (
-                          <span key={c.id}>
+                          <span key={`${c.id}-${j}`}>
                             {j > 0 && " · "}
                             <Link
                               href={`/generaciones/${c.id}`}

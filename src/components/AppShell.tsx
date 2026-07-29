@@ -67,11 +67,13 @@ function Icon({ name }: { name: keyof typeof icons }) {
   );
 }
 
+/** Estado real por capacidad. Declarar "activo" lo que aún no existe es la
+ *  forma más rápida de perder la confianza de quien compra. */
 const SYSTEM_MAP = [
-  { label: "ELEVA OS", state: "activo" },
-  { label: "Hub Centro", state: "activo" },
+  { label: "ELEVA OS", state: "alpha" },
+  { label: "Hub Centro", state: "alpha" },
   { label: "Growth", state: "proximamente" },
-  { label: "Hub Global", state: "proximamente" },
+  { label: "Red ELEVA", state: "proximamente" },
   { label: "Standards", state: "proximamente" },
 ] as const;
 
@@ -80,6 +82,8 @@ export function AppShell({
   nav,
   homeHref = "/",
   showSystemMap = false,
+  notificationsHref,
+  unreadCount = 0,
   extra,
   children,
 }: {
@@ -87,6 +91,9 @@ export function AppShell({
   nav: NavItem[];
   homeHref?: string;
   showSystemMap?: boolean;
+  /** Campana: saca los avisos de la barra inferior para que quepa el perfil. */
+  notificationsHref?: string;
+  unreadCount?: number;
   extra?: ReactNode;
   children: ReactNode;
 }) {
@@ -143,16 +150,16 @@ export function AppShell({
                   key={s.label}
                   className="flex items-center justify-between text-xs"
                 >
-                  <span className={s.state === "activo" ? "text-muted" : "text-faint"}>
+                  <span className={s.state === "alpha" ? "text-muted" : "text-faint"}>
                     {s.label}
                   </span>
-                  {s.state === "activo" ? (
-                    <span className="size-1.5 rounded-full bg-ok" aria-label="activo" />
-                  ) : (
-                    <span className="text-[9px] uppercase tracking-wider text-faint">
-                      pronto
-                    </span>
-                  )}
+                  <span
+                    className={`text-[9px] uppercase tracking-wider ${
+                      s.state === "alpha" ? "text-accent-strong" : "text-faint"
+                    }`}
+                  >
+                    {s.state === "alpha" ? "alpha" : "pronto"}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -190,11 +197,27 @@ export function AppShell({
               Alpha
             </span>
           </span>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             {ctx.isDemo && (
               <span className="rounded-md bg-gold-soft px-2 py-0.5 text-[10px] text-gold">
                 demo
               </span>
+            )}
+            {notificationsHref && (
+              <Link
+                href={notificationsHref}
+                aria-label={
+                  unreadCount > 0 ? `Avisos, ${unreadCount} sin leer` : "Avisos"
+                }
+                className="relative text-muted hover:text-foreground"
+              >
+                <Icon name="avisos" />
+                {unreadCount > 0 && (
+                  <span className="absolute -right-1 -top-1 flex min-w-4 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-bold text-[#0b0a12]">
+                    {unreadCount > 9 ? "9+" : unreadCount}
+                  </span>
+                )}
+              </Link>
             )}
             <form action={signOut}>
               <button type="submit" className="text-xs text-muted underline underline-offset-4">

@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { requireTeam } from "@/lib/context";
+import { requireCapability, hasCapability } from "@/lib/capabilities";
 import { createServiceClient } from "@/lib/supabase/server";
 import { logAudit, emitDomainEvent } from "@/lib/audit";
 import { runSignalEngine } from "@/modules/operations/signals";
@@ -13,15 +13,22 @@ import { runSignalEngine } from "@/modules/operations/signals";
  */
 
 async function getAuthorizedCase(caseId: string) {
-  const ctx = await requireTeam(["dueno", "oficinas", "entrenador"]);
+  // La autorización depende del TIPO de caso: los de finanzas solo los
+  // operan roles financieros (el entrenador no toca dinero).
+  const ctx = await requireCapability(["case.operate.operational", "case.operate.finance"]);
   const service = createServiceClient();
   const { data: caseRow } = await service
     .from("cases")
-    .select("id, organization_id, status, subject_person_id, title")
+    .select("id, organization_id, kind, status, subject_person_id, title")
     .eq("id", caseId)
     .eq("organization_id", ctx.organizationId)
     .single();
   if (!caseRow) throw new Error("El caso no existe en tu organización.");
+  const allowed = hasCapability(
+    ctx,
+    caseRow.kind === "finanzas" ? "case.operate.finance" : "case.operate.operational"
+  );
+  if (!allowed) throw new Error("Este tipo de caso no corresponde a tu rol.");
   return { ctx, service, caseRow };
 }
 
@@ -83,9 +90,11 @@ export async function registerIntervention(formData: FormData) {
     objectId: caseRow.id,
     details: { kind, channel },
   });
+  // Nombre honesto: registrar una intervención (y su borrador) NO es haber
+  // ejecutado el contacto — eso lo hace una persona fuera del sistema.
   await emitDomainEvent(service, {
     organizationId: ctx.organizationId,
-    name: "intervention.executed",
+    name: "intervention.recorded",
     actor: { type: "person", id: ctx.personId },
     subject: { type: "case", id: caseRow.id },
     properties: { kind, channel },
@@ -218,7 +227,7 @@ export async function replyFromCase(formData: FormData) {
 
   const { data: post } = await service
     .from("posts")
-    .select("id, author_person_id, cohort_id")
+    .select("id, author_person_id, space_id, spaces(cycle_id)")
     .eq("id", postId)
     .eq("organization_id", ctx.organizationId)
     .single();
@@ -259,7 +268,7 @@ export async function replyFromCase(formData: FormData) {
     person_id: post.author_person_id,
     kind: "comentario",
     text: `${ctx.personName} respondió a tu publicación.`,
-    href: "/mi/generacion",
+    href: `/mi/comunidad/p/${post.id}`,
   });
 
   await logAudit(service, {
@@ -275,7 +284,7 @@ export async function replyFromCase(formData: FormData) {
     name: "first_contribution.responded",
     actor: { type: "person", id: ctx.personId },
     subject: { type: "post", id: post.id },
-    scope: { type: "cohort", id: post.cohort_id ?? "" },
+    scope: post.spaces?.cycle_id ? { type: "cycle", id: post.spaces.cycle_id } : undefined,
   });
 
   revalidatePath(`/casos/${caseRow.id}`);
@@ -309,7 +318,7 @@ export async function generateAIDraft(
 }
 
 export async function refreshSignals() {
-  const ctx = await requireTeam(["dueno", "oficinas"]);
+  const ctx = await requireCapability("case.operate.operational");
   const service = createServiceClient();
   const result = await runSignalEngine(service, ctx.organizationId);
   await logAudit(service, {

@@ -100,23 +100,61 @@ export function MetricStateBadge({
   return <Badge variant={item.variant}>{note ? `${item.label} · ${note}` : item.label}</Badge>;
 }
 
-export function ParticipationStateBadge({ state }: { state: string }) {
-  const labels: Record<string, { label: string; variant: keyof typeof badgeVariants }> = {
-    lead: { label: "Lead", variant: "neutral" },
-    aplicado: { label: "Aplicó", variant: "neutral" },
-    registrado: { label: "Registrada", variant: "accent" },
-    pago_parcial: { label: "Pago parcial", variant: "gold" },
-    pagado: { label: "Pagado", variant: "aqua" },
+export function CaseKindBadge({ kind }: { kind: string }) {
+  const map: Record<string, { label: string; variant: keyof typeof badgeVariants }> = {
+    finanzas: { label: "Finanzas", variant: "gold" },
+    entrega: { label: "Entrega", variant: "accent" },
+    pase: { label: "Pase", variant: "aqua" },
+    registro: { label: "Registro", variant: "neutral" },
+    comunidad: { label: "Comunidad", variant: "ok" },
+    operacion: { label: "Operación", variant: "neutral" },
+  };
+  const item = map[kind] ?? map.operacion;
+  return <Badge variant={item.variant}>{item.label}</Badge>;
+}
+
+/** Plano de REGISTRO de una participación (nunca mezclado con entrega). */
+export function RegistrationBadge({ status }: { status: string }) {
+  const map: Record<string, { label: string; variant: keyof typeof badgeVariants }> = {
+    invitado: { label: "Invitada", variant: "neutral" },
+    iniciado: { label: "Registro iniciado", variant: "accent" },
+    incompleto: { label: "Registro incompleto", variant: "gold" },
     confirmado: { label: "Confirmada", variant: "aqua" },
+    cancelado: { label: "Cancelada", variant: "neutral" },
+  };
+  const item = map[status] ?? { label: status, variant: "neutral" as const };
+  return <Badge variant={item.variant}>{item.label}</Badge>;
+}
+
+/** Plano de ENTREGA: cómo vive la etapa, no si pagó ni si continúa. */
+export function DeliveryBadge({ status }: { status: string }) {
+  const map: Record<string, { label: string; variant: keyof typeof badgeVariants }> = {
+    esperado: { label: "Por comenzar", variant: "neutral" },
     activo: { label: "Activa", variant: "ok" },
     pausa: { label: "En pausa", variant: "gold" },
+    retirado: { label: "Retirada", variant: "danger" },
     completo: { label: "Completó", variant: "ok" },
     no_completo: { label: "No completó", variant: "neutral" },
-    elegible_siguiente: { label: "Elegible al siguiente", variant: "accent" },
-    inscrito_siguiente: { label: "Inscrita al siguiente", variant: "aqua" },
-    alumni: { label: "Alumni", variant: "neutral" },
   };
-  const item = labels[state] ?? { label: state, variant: "neutral" as const };
+  const item = map[status] ?? { label: status, variant: "neutral" as const };
+  return <Badge variant={item.variant}>{item.label}</Badge>;
+}
+
+/** Paso del PASE de continuidad (el funnel medible). */
+export function PassBadge({ passStatus, nextStatus }: { passStatus: string; nextStatus?: string }) {
+  if (nextStatus && ["inscrito", "iniciado"].includes(nextStatus)) {
+    return <Badge variant="ok">{nextStatus === "iniciado" ? "Iniciada" : "Inscrita"}</Badge>;
+  }
+  const map: Record<string, { label: string; variant: keyof typeof badgeVariants }> = {
+    no_evaluado: { label: "Sin evaluar", variant: "neutral" },
+    elegible: { label: "Elegible", variant: "accent" },
+    conversado: { label: "Conversado", variant: "aqua" },
+    ofrecido: { label: "Ofrecido", variant: "aqua" },
+    aceptado: { label: "Aceptado · sin inscribir", variant: "gold" },
+    declinado: { label: "Declinó", variant: "neutral" },
+    diferido: { label: "Diferido", variant: "neutral" },
+  };
+  const item = map[passStatus] ?? { label: passStatus, variant: "neutral" as const };
   return <Badge variant={item.variant}>{item.label}</Badge>;
 }
 
@@ -126,6 +164,9 @@ export const POST_KIND_LABEL: Record<string, string> = {
   pregunta: "Pregunta",
   celebracion: "Celebración",
   evidencia: "Evidencia",
+  proyecto: "Proyecto",
+  ayuda: "Pido apoyo",
+  oportunidad: "Oportunidad",
   aviso: "Aviso",
 };
 

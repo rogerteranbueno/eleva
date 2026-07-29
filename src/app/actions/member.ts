@@ -20,12 +20,12 @@ export async function rsvpToEvent(formData: FormData) {
   const { error } = await supabase.from("rsvps").upsert(
     {
       organization_id: ctx.organizationId,
-      event_id: eventId,
+      event_occurrence_id: eventId,
       person_id: ctx.personId,
       status,
       responded_at: new Date().toISOString(),
     },
-    { onConflict: "event_id,person_id" }
+    { onConflict: "event_occurrence_id,person_id" }
   );
   if (error) throw new Error("No pudimos registrar tu respuesta. Intenta de nuevo.");
 
@@ -33,10 +33,11 @@ export async function rsvpToEvent(formData: FormData) {
     organizationId: ctx.organizationId,
     name: "event.rsvp_created",
     actor: { type: "person", id: ctx.personId },
-    subject: { type: "event", id: eventId },
+    subject: { type: "event_occurrence", id: eventId },
     properties: { status },
   });
   revalidatePath("/mi");
+  revalidatePath("/mi/eventos");
 }
 
 export async function completeMission(formData: FormData) {
@@ -47,25 +48,25 @@ export async function completeMission(formData: FormData) {
   const service = createServiceClient();
   const { data: mission } = await service
     .from("missions")
-    .select("id, cohort_id, organization_id")
+    .select("id, stage_run_id, organization_id")
     .eq("id", missionId)
     .eq("organization_id", ctx.organizationId)
     .single();
   if (!mission) throw new Error("La misión no existe.");
 
   const { data: participation } = await service
-    .from("participations")
+    .from("stage_participations")
     .select("id")
-    .eq("cohort_id", mission.cohort_id)
+    .eq("stage_run_id", mission.stage_run_id)
     .eq("person_id", ctx.personId)
     .single();
-  if (!participation) throw new Error("No formas parte de esta generación.");
+  if (!participation) throw new Error("No formas parte de esta etapa.");
 
   const supabase = await createUserClient();
   const { error } = await supabase.from("mission_completions").insert({
     organization_id: ctx.organizationId,
     mission_id: mission.id,
-    participation_id: participation.id,
+    stage_participation_id: participation.id,
     note: note || null,
   });
   if (error && !error.message.includes("duplicate")) {
@@ -77,52 +78,53 @@ export async function completeMission(formData: FormData) {
     name: "mission.completed",
     actor: { type: "person", id: ctx.personId },
     subject: { type: "mission", id: mission.id },
-    scope: { type: "cohort", id: mission.cohort_id },
+    scope: { type: "stage_run", id: mission.stage_run_id },
   });
   revalidatePath("/mi");
 }
 
-export async function createPost(formData: FormData) {
+/** Marca un libro del PL como leído. Es un logro propio, no una tarea vigilada. */
+export async function markReadingDone(formData: FormData) {
   const ctx = await requireMember();
-  const cohortId = String(formData.get("cohortId"));
-  const kind = String(formData.get("kind") || "declaracion");
-  const body = String(formData.get("body") ?? "").trim();
-  if (body.length < 3) throw new Error("Escribe tu publicación antes de compartirla.");
+  const assignmentId = String(formData.get("assignmentId"));
 
-  const { POST_TYPE_BY_KIND } = await import("@/modules/community/postTypes");
-  const typeDef = POST_TYPE_BY_KIND[kind];
-  if (!typeDef) throw new Error("Tipo de publicación inválido.");
-  if (typeDef.teamOnly && !ctx.isTeam) throw new Error("Solo el equipo publica avisos.");
+  const service = createServiceClient();
+  const { data: assignment } = await service
+    .from("reading_assignments")
+    .select("id, stage_run_id")
+    .eq("id", assignmentId)
+    .eq("organization_id", ctx.organizationId)
+    .single();
+  if (!assignment) throw new Error("La lectura no existe.");
 
-  const fields: Record<string, string> = {};
-  for (const def of typeDef.fields) {
-    const value = String(formData.get(`field_${def.key}`) ?? "").trim();
-    if (def.required && !value) throw new Error(`Falta el campo «${def.label}».`);
-    if (value) fields[def.key] = value;
-  }
+  const { data: participation } = await service
+    .from("stage_participations")
+    .select("id")
+    .eq("stage_run_id", assignment.stage_run_id)
+    .eq("person_id", ctx.personId)
+    .single();
+  if (!participation) throw new Error("No formas parte de esta etapa.");
 
   const supabase = await createUserClient();
-  const { error } = await supabase.from("posts").insert({
+  const { error } = await supabase.from("reading_progress").insert({
     organization_id: ctx.organizationId,
-    cohort_id: cohortId,
-    author_person_id: ctx.personId,
-    kind,
-    body,
-    fields: fields as never,
-    visibility_scope: "generacion",
+    assignment_id: assignment.id,
+    stage_participation_id: participation.id,
   });
-  if (error) throw new Error("No pudimos publicar. Intenta de nuevo.");
+  if (error && !error.message.includes("duplicate")) {
+    throw new Error("No pudimos registrar tu lectura. Intenta de nuevo.");
+  }
 
-  await emitDomainEvent(createServiceClient(), {
+  await emitDomainEvent(service, {
     organizationId: ctx.organizationId,
-    name: "post.created",
+    name: "reading.completed",
     actor: { type: "person", id: ctx.personId },
-    scope: { type: "cohort", id: cohortId },
-    properties: { kind },
+    subject: { type: "reading_assignment", id: assignment.id },
   });
   revalidatePath("/mi");
-  revalidatePath("/mi/generacion");
 }
+
+/* createPost vive ahora en actions/community.ts: publica en un ESPACIO. */
 
 async function notify(args: {
   organizationId: string;
@@ -168,7 +170,7 @@ export async function createComment(formData: FormData) {
       personId: post.author_person_id,
       kind: "comentario",
       text: `${ctx.personName} respondió a tu publicación.`,
-      href: "/mi/generacion",
+      href: "/mi/comunidad",
     });
   }
 
@@ -179,7 +181,7 @@ export async function createComment(formData: FormData) {
     subject: { type: "post", id: postId },
   });
   revalidatePath("/mi");
-  revalidatePath("/mi/generacion");
+  revalidatePath("/mi/comunidad");
 }
 
 /** Una reacción por persona por post; volver a elegir la misma la quita. */
@@ -222,11 +224,11 @@ export async function reactToPost(formData: FormData) {
         personId: post.author_person_id,
         kind: "reaccion",
         text: `${ctx.personName} reaccionó «${REACTION_BY_KIND[kind]?.label ?? kind}» a tu publicación.`,
-        href: "/mi/generacion",
+        href: "/mi/comunidad",
       });
     }
   }
-  revalidatePath("/mi/generacion");
+  revalidatePath("/mi/comunidad");
   revalidatePath("/mi");
 }
 

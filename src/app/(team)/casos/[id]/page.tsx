@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { requireTeam } from "@/lib/context";
+import { requireCapability, hasCapability } from "@/lib/capabilities";
 import { createServiceClient } from "@/lib/supabase/server";
 import {
   registerIntervention,
@@ -13,6 +13,7 @@ import {
   SectionTitle,
   PriorityBadge,
   CaseStatusBadge,
+  CaseKindBadge,
   PersonLink,
   Badge,
 } from "@/components/ui";
@@ -49,18 +50,25 @@ export default async function CasePage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const ctx = await requireTeam();
+  const ctx = await requireCapability(["case.operate.operational", "case.operate.finance"]);
   const service = createServiceClient();
 
   const { data: caseRow } = await service
     .from("cases")
     .select(
-      "id, title, priority, status, due_at, opened_at, closed_at, closed_reason, subject_person_id, people:subject_person_id(id, full_name, preferred_name, phone, email), cohorts(id, name)"
+      "id, title, kind, priority, status, due_at, opened_at, closed_at, closed_reason, subject_person_id, people:subject_person_id(id, full_name, preferred_name, phone, email), stage_runs(name, cycle_id, generation_cycles(name))"
     )
     .eq("id", id)
     .eq("organization_id", ctx.organizationId)
     .single();
   if (!caseRow) notFound();
+
+  // Capacidad por tipo: un caso de finanzas no existe para quien no opera dinero.
+  const kindAllowed = hasCapability(
+    ctx,
+    caseRow.kind === "finanzas" ? "case.operate.finance" : "case.operate.operational"
+  );
+  if (!kindAllowed) notFound();
 
   const [{ data: signals }, { data: interventions }, { data: outcomes }, { data: consents }] =
     await Promise.all([
@@ -142,6 +150,7 @@ export default async function CasePage({
         <div className="flex flex-wrap items-center gap-2">
           <h1 className="text-2xl font-bold tracking-tight">{caseRow.title}</h1>
           <PriorityBadge priority={caseRow.priority} />
+          <CaseKindBadge kind={caseRow.kind} />
           <CaseStatusBadge status={caseRow.status} />
         </div>
         <p className="mt-2 text-sm text-muted">
@@ -151,13 +160,13 @@ export default async function CasePage({
               <PersonLink id={person.id} name={person.full_name} /> ·{" "}
             </>
           )}
-          {caseRow.cohorts?.name && (
+          {caseRow.stage_runs && (
             <>
               <Link
-                href={`/generaciones/${caseRow.cohorts.id}`}
+                href={`/generaciones/${caseRow.stage_runs.cycle_id}`}
                 className="hover:text-foreground underline-offset-4 hover:underline"
               >
-                {caseRow.cohorts.name}
+                {caseRow.stage_runs.generation_cycles?.name} · {caseRow.stage_runs.name}
               </Link>{" "}
               ·{" "}
             </>
@@ -433,8 +442,9 @@ export default async function CasePage({
                 </button>
               </form>
               <p className="mt-2 text-xs text-faint">
-                Si el dato fuente está mal (p. ej. una asistencia sin registrar),
-                corrígelo también en su origen para que la señal no reaparezca.
+                Descartar no borra la realidad: si la condición persiste (un pago
+                vencido, una llamada sin hacer), la señal reaparece la próxima
+                semana. Si el dato fuente está mal, corrígelo en su origen.
               </p>
             </Card>
           </details>

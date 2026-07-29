@@ -1,13 +1,19 @@
 import { createServiceClient } from "@/lib/supabase/server";
-import { getWeeklySummary } from "@/lib/ai";
+import { getWeeklySummary, type Audience } from "@/lib/ai";
 import type { Metric } from "@/modules/intelligence/metrics";
 import { SectionTitle, Badge } from "@/components/ui";
 
-/** Resumen semanal del Pulso — generado por Claude cuando hay API key,
- *  plantilla determinista cuando no. Siempre etiquetado con su fuente. */
+/**
+ * Resumen semanal del Pulso — generado por Claude cuando hay API key,
+ * plantilla determinista cuando no. Siempre etiquetado con su fuente.
+ *
+ * `metrics` DEBE llegar ya filtrado por las capacidades de quien mira: lo que
+ * no puede ver no entra al prompt. La audiencia además separa el caché.
+ */
 export async function WeeklySummary({
   organizationId,
   organizationName,
+  audience,
   metrics,
   centerMomentum,
   openCases,
@@ -15,13 +21,14 @@ export async function WeeklySummary({
 }: {
   organizationId: string;
   organizationName: string;
+  audience: Audience;
   metrics: Metric[];
   centerMomentum: number;
   openCases: number;
   integrity: string[];
 }) {
   const service = createServiceClient();
-  const summary = await getWeeklySummary(service, organizationId, {
+  const summary = await getWeeklySummary(service, organizationId, audience, {
     metrics,
     centerMomentum,
     openCases,

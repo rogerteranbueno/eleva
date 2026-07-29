@@ -7,8 +7,9 @@ import { ArrowRight, ChevronRight, Menu, X } from "lucide-react"
 
 const LINKS = [
   { href: "/plataforma", label: "Plataforma" },
+  { href: "/hub-centro", label: "Hub Centro" },
+  { href: "/red-eleva", label: "Red ELEVA" },
   { href: "/estandar-eleva", label: "Estándar" },
-  { href: "/historia-transformacion", label: "Historia" },
   { href: "/#como-empezar", label: "Precios" },
 ]
 

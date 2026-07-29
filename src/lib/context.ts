@@ -6,6 +6,8 @@ export type Role =
   | "dueno"
   | "oficinas"
   | "entrenador"
+  | "coach"
+  | "capitan"
   | "staff"
   | "dream_team"
   | "finanzas"
@@ -15,6 +17,8 @@ export const TEAM_ROLES: Role[] = [
   "dueno",
   "oficinas",
   "entrenador",
+  "coach",
+  "capitan",
   "staff",
   "dream_team",
   "finanzas",
@@ -112,19 +116,14 @@ export function teamHome(ctx: SessionContext): string {
   if (ctx.roles.includes("dueno")) return "/pulso";
   if (ctx.roles.includes("oficinas")) return "/hoy";
   if (ctx.roles.includes("finanzas")) return "/finanzas";
-  if (ctx.roles.includes("entrenador")) return "/generaciones";
+  if (ctx.roles.includes("entrenador") || ctx.roles.includes("coach")) return "/generaciones";
+  if (ctx.roles.includes("capitan")) return "/cobertura";
+  if (ctx.roles.includes("staff")) return "/mi-grupo";
   if (ctx.isTeam) return "/hoy";
   return "/mi";
 }
 
-/** Capacidades derivadas de roles. Ocultar un botón no es control de acceso:
- *  estas mismas funciones se usan en los comandos de servidor. */
-export const can = {
-  viewFinance: (ctx: SessionContext) =>
-    ctx.roles.some((r) => ["dueno", "finanzas", "oficinas"].includes(r)),
-  operateCases: (ctx: SessionContext) =>
-    ctx.roles.some((r) => ["dueno", "oficinas", "entrenador"].includes(r)),
-  viewPulse: (ctx: SessionContext) =>
-    ctx.roles.some((r) => ["dueno", "oficinas", "finanzas", "entrenador"].includes(r)),
-  viewAudit: (ctx: SessionContext) => ctx.roles.includes("dueno"),
-};
+export type CaseKind = "finanzas" | "entrega" | "pase" | "registro" | "comunidad" | "operacion";
+
+/* La autorización vive en `lib/capabilities.ts`. Aquí solo queda la sesión:
+   quién eres, en qué centro y con qué roles vigentes. */

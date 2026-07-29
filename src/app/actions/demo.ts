@@ -14,7 +14,10 @@ const DEMO_ACCOUNTS = new Set([
   "oficinas@aurora.demo",
   "entrenador@aurora.demo",
   "finanzas@aurora.demo",
+  "capitan@aurora.demo",
+  "staff@aurora.demo",
   "participante@aurora.demo",
+  "pl@aurora.demo",
 ]);
 
 export async function switchDemoUser(formData: FormData) {

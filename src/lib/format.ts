@@ -55,6 +55,8 @@ export function roleLabel(role: string) {
     dueno: "Dirección",
     oficinas: "Oficinas",
     entrenador: "Entrenador",
+    coach: "Coach",
+    capitan: "Capitán",
     staff: "Staff",
     dream_team: "Dream Team",
     finanzas: "Finanzas",
@@ -67,4 +69,57 @@ export const MODALITY_LABEL: Record<string, string> = {
   presencial: "Presencial",
   online: "Online",
   hibrida: "Híbrida",
+};
+
+/** Vocabulario canónico del ciclo (doc 18). Nunca "cohorte", nunca "sesión N". */
+export const STAGE_LABEL: Record<string, string> = {
+  basico: "Básico",
+  avanzado: "Avanzado",
+  pl: "PL",
+};
+
+export const EVENT_KIND_LABEL: Record<string, string> = {
+  dia_basico: "Día de Básico",
+  dia_avanzado: "Día de Avanzado",
+  hito_pl: "Hito del PL",
+  graduacion: "Graduación",
+  actividad_equipo: "Actividad de equipo",
+  llamada: "Llamada",
+  evento_centro: "Evento del centro",
+  evento_alumni: "Evento alumni",
+};
+
+export const PASS_STATUS_LABEL: Record<string, string> = {
+  no_evaluado: "Sin evaluar",
+  elegible: "Elegible",
+  conversado: "Conversado",
+  ofrecido: "Ofrecido",
+  aceptado: "Aceptado",
+  declinado: "Declinado",
+  diferido: "Diferido",
+};
+
+export const NEXT_STATUS_LABEL: Record<string, string> = {
+  sin_intencion: "Sin inscripción",
+  reservado: "Reservado",
+  inscrito: "Inscrito",
+  iniciado: "Iniciado",
+  no_show: "No llegó",
+};
+
+export const REGISTRATION_LABEL: Record<string, string> = {
+  invitado: "Invitado",
+  iniciado: "Registro iniciado",
+  incompleto: "Registro incompleto",
+  confirmado: "Confirmado",
+  cancelado: "Cancelado",
+};
+
+export const DELIVERY_LABEL: Record<string, string> = {
+  esperado: "Por comenzar",
+  activo: "Activo",
+  pausa: "En pausa",
+  retirado: "Retirado",
+  completo: "Completó",
+  no_completo: "No completó",
 };

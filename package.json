@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "test:rls": "tsx scripts/test-rls.ts",
+    "test:modelo": "tsx scripts/test-modelo.ts",
+    "test:rutas": "tsx scripts/test-rutas.ts",
     "signals": "tsx scripts/run-signals.ts"
   },
   "dependencies": {

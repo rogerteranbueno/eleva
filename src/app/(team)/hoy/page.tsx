@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { requireTeam } from "@/lib/context";
+import { requireCapability, hasCapability } from "@/lib/capabilities";
 import { createServiceClient } from "@/lib/supabase/server";
 import { refreshSignals } from "@/app/actions/cases";
 import {
@@ -7,6 +7,7 @@ import {
   SectionTitle,
   PriorityBadge,
   CaseStatusBadge,
+  CaseKindBadge,
   EmptyState,
   Avatar,
 } from "@/components/ui";
@@ -17,16 +18,26 @@ export const dynamic = "force-dynamic";
 const PRIORITY_ORDER: Record<string, number> = { alta: 0, media: 1, baja: 2 };
 
 export default async function HoyPage() {
-  const ctx = await requireTeam();
+  const ctx = await requireCapability(["case.operate.operational", "case.operate.finance"]);
   const service = createServiceClient();
+
+  // La capacidad por TIPO de caso también rige aquí: quien no opera finanzas
+  // no ve casos de finanzas (misma regla que RLS y que las acciones).
+  const canFinance = hasCapability(ctx, "case.operate.finance");
+  const canOperative = hasCapability(ctx, "case.operate.operational");
+  const visibleKinds = [
+    ...(canOperative ? ["entrega", "pase", "registro", "comunidad", "operacion"] : []),
+    ...(canFinance ? ["finanzas"] : []),
+  ];
 
   const { data: cases } = await service
     .from("cases")
     .select(
-      "id, title, priority, status, due_at, opened_at, subject_person_id, cohort_id, people:subject_person_id(full_name), cohorts(name), signals(id, explanation, definition_id, signal_definitions(name))"
+      "id, title, kind, priority, status, due_at, opened_at, subject_person_id, stage_run_id, people:subject_person_id(full_name), stage_runs(name), signals(id, explanation, definition_id, signal_definitions(name))"
     )
     .eq("organization_id", ctx.organizationId)
     .in("status", ["abierto", "en_progreso", "esperando"])
+    .in("kind", visibleKinds.length > 0 ? visibleKinds : ["operacion"])
     .order("opened_at", { ascending: true });
 
   const queue = (cases ?? []).sort((a, b) => {
@@ -120,6 +131,7 @@ export default async function HoyPage() {
                       <div className="flex flex-wrap items-center gap-2">
                         <p className="font-medium">{item.title}</p>
                         <PriorityBadge priority={item.priority} />
+                        <CaseKindBadge kind={item.kind} />
                         {item.status !== "abierto" && (
                           <CaseStatusBadge status={item.status} />
                         )}
@@ -130,7 +142,7 @@ export default async function HoyPage() {
                         </p>
                       )}
                       <p className="mt-1.5 text-xs text-faint">
-                        {item.cohorts?.name && <>{item.cohorts.name} · </>}
+                        {item.stage_runs?.name && <>{item.stage_runs.name} · </>}
                         abierto {dateShort(item.opened_at)}
                         {item.due_at && (
                           <>

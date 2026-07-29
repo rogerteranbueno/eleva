@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { requireTeam } from "@/lib/context";
+import { requireCapability, hasCapability } from "@/lib/capabilities";
+import { readablePersonIds, applyScope } from "@/lib/scope";
 import { createServiceClient } from "@/lib/supabase/server";
-import { Avatar, ParticipationStateBadge, EmptyState } from "@/components/ui";
+import { Avatar, DeliveryBadge, EmptyState } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -11,25 +12,34 @@ export default async function PersonasPage({
   searchParams: Promise<{ q?: string }>;
 }) {
   const { q } = await searchParams;
-  const ctx = await requireTeam();
+  const ctx = await requireCapability(["people.read.assigned", "people.read.operational"]);
   const service = createServiceClient();
+
+  // El directorio se recorta al ámbito del rol: el staff ve a su grupo, no a
+  // las 63 personas del centro.
+  const scope = await readablePersonIds(ctx);
+  const contactAllowed = hasCapability(ctx, "people.read.contact");
 
   let query = service
     .from("people")
     .select(
-      "id, full_name, email, phone, organization_memberships!inner(organization_id), participations(state, cohorts(name, status))"
+      "id, full_name, email, phone, organization_memberships!inner(organization_id), stage_participations(delivery_status, created_at, stage_runs(name, status, generation_cycles(name, status)))"
     )
     .eq("organization_memberships.organization_id", ctx.organizationId)
     .order("full_name");
+  query = applyScope(query, "id", scope);
   if (q) query = query.ilike("full_name", `%${q}%`);
   const { data: people } = await query;
 
   const rows = (people ?? []).map((p) => {
-    const active = p.participations?.find(
-      (pa) => pa.cohorts?.status === "activa"
+    const parts = [...(p.stage_participations ?? [])].sort((a, b) =>
+      (b.created_at ?? "").localeCompare(a.created_at ?? "")
     );
-    const latest = active ?? p.participations?.[p.participations.length - 1];
-    return { ...p, participation: latest };
+    const current =
+      parts.find((pa) => pa.stage_runs?.status === "activa") ??
+      parts.find((pa) => pa.stage_runs?.generation_cycles?.status === "activa") ??
+      parts[0];
+    return { ...p, participation: current };
   });
 
   return (
@@ -75,13 +85,15 @@ export default async function PersonasPage({
                 <div className="min-w-0 flex-1">
                   <p className="font-medium">{p.full_name}</p>
                   <p className="truncate text-xs text-faint">
-                    {p.participation?.cohorts?.name ?? "Sin generación"}
-                    {!p.phone && " · sin teléfono"}
-                    {!p.email && " · sin email"}
+                    {p.participation?.stage_runs
+                      ? `${p.participation.stage_runs.generation_cycles?.name} · ${p.participation.stage_runs.name}`
+                      : "Sin generación"}
+                    {contactAllowed && !p.phone && " · sin teléfono"}
+                    {contactAllowed && !p.email && " · sin email"}
                   </p>
                 </div>
                 {p.participation && (
-                  <ParticipationStateBadge state={p.participation.state} />
+                  <DeliveryBadge status={p.participation.delivery_status} />
                 )}
               </Link>
             </li>

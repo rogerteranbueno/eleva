@@ -4,6 +4,7 @@ import { requireMember } from "@/lib/context";
 import { createUserClient, createServiceClient } from "@/lib/supabase/server";
 import { giveRecognition } from "@/app/actions/member";
 import { Card, SectionTitle, Avatar, Badge } from "@/components/ui";
+import { RelationBar } from "@/components/hub/RelationBar";
 import { dateShort } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -20,20 +21,25 @@ export default async function PerfilPersonaPage({
   const supabase = await createUserClient();
   const { data: person } = await supabase
     .from("people")
-    .select("id, full_name, preferred_name, declaration, looking_for")
+    .select("id, full_name, preferred_name, declaration, looking_for, bio, city, interests, skills, offers, available_to_serve, accepts_messages")
     .eq("id", id)
     .maybeSingle();
   if (!person) notFound();
 
   const service = createServiceClient();
-  const [{ data: trajectory }, { data: recognitions }, postsCount] =
+  const [{ data: trajectory }, { data: serviceRoles }, { data: recognitions }, postsCount] =
     await Promise.all([
       service
-        .from("participations")
-        .select("state, cohorts(name, status)")
+        .from("stage_participations")
+        .select("delivery_status, stage_runs(stage, name, status, generation_cycles(name, status))")
         .eq("person_id", id)
         .eq("organization_id", ctx.organizationId)
         .order("created_at"),
+      service
+        .from("team_assignments")
+        .select("role, starts_at, ends_at, stage_runs(name)")
+        .eq("person_id", id)
+        .eq("organization_id", ctx.organizationId),
       supabase
         .from("recognitions")
         .select("text, impact, created_at, people:from_person_id(full_name)")
@@ -46,7 +52,51 @@ export default async function PerfilPersonaPage({
         .eq("author_person_id", id),
     ]);
 
+  // Logros (etapas completadas / graduación) + servicio con vigencia.
+  // Nunca "staff" como nivel: servir es una asignación, no un escalafón.
+  const nowIso = new Date().toISOString();
+  const achievements = (trajectory ?? [])
+    .filter((t) => t.delivery_status === "completo" && t.stage_runs)
+    .map((t) =>
+      t.stage_runs!.stage === "pl"
+        ? `Graduación del ${t.stage_runs!.name}`
+        : `Completó ${t.stage_runs!.name}`
+    );
+  const current = (trajectory ?? []).find(
+    (t) => ["activo", "esperado"].includes(t.delivery_status) && t.stage_runs?.status !== "cerrada"
+  );
+  const activeService = (serviceRoles ?? []).filter(
+    (t) => t.starts_at <= nowIso && (!t.ends_at || t.ends_at > nowIso)
+  );
+
   const isSelf = id === ctx.personId;
+
+  // Estado de la relación: seguir, conectar y escribir son actos distintos.
+  const [{ data: follow }, { data: conn }, { data: req }] = isSelf
+    ? [{ data: null }, { data: null }, { data: null }]
+    : await Promise.all([
+        supabase
+          .from("follows")
+          .select("id")
+          .eq("follower_person_id", ctx.personId)
+          .eq("followed_person_id", id)
+          .maybeSingle(),
+        supabase
+          .from("connections")
+          .select("id")
+          .eq("person_a", [ctx.personId, id].sort()[0])
+          .eq("person_b", [ctx.personId, id].sort()[1])
+          .maybeSingle(),
+        supabase
+          .from("connection_requests")
+          .select("id, status")
+          .eq("from_person_id", ctx.personId)
+          .eq("to_person_id", id)
+          .maybeSingle(),
+      ]);
+  const following = !!follow;
+  const connected = !!conn;
+  const requestPending = req?.status === "pendiente";
 
   return (
     <div className="space-y-8 max-w-2xl">
@@ -65,28 +115,65 @@ export default async function PerfilPersonaPage({
               “{person.declaration}”
             </blockquote>
           )}
-          {(person.looking_for ?? []).length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {person.looking_for!.map((l) => (
-                <Badge key={l} variant="aqua">Busca: {l}</Badge>
-              ))}
-            </div>
+          {person.bio && <p className="mt-2 text-sm text-muted">{person.bio}</p>}
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {person.city && <Badge variant="neutral">{person.city}</Badge>}
+            {person.available_to_serve && <Badge variant="aqua">Disponible para servir</Badge>}
+            {(person.skills ?? []).map((s) => (
+              <Badge key={`sk-${s}`} variant="neutral">{s}</Badge>
+            ))}
+            {(person.interests ?? []).map((i) => (
+              <Badge key={`in-${i}`} variant="neutral">{i}</Badge>
+            ))}
+            {(person.looking_for ?? []).map((l) => (
+              <Badge key={`lf-${l}`} variant="gold">Busca: {l}</Badge>
+            ))}
+          </div>
+          {(person.offers ?? []).length > 0 && (
+            <p className="mt-2 text-sm">
+              <span className="font-medium">Ofrece:</span>{" "}
+              <span className="text-muted">{person.offers!.join(" · ")}</span>
+            </p>
           )}
         </div>
       </header>
 
+      {!isSelf && (
+        <RelationBar
+          personId={person.id}
+          personName={person.preferred_name ?? person.full_name.split(" ")[0]}
+          following={following}
+          connected={connected}
+          requestPending={requestPending}
+          acceptsMessages={person.accepts_messages ?? "centro"}
+        />
+      )}
+
       <section aria-label="Trayectoria">
         <SectionTitle>Camino de transformación</SectionTitle>
         <ul className="space-y-1.5">
-          {(trajectory ?? []).map((t, i) => (
+          {achievements.map((a, i) => (
             <li key={i} className="flex items-center gap-2 text-sm text-muted">
-              <span aria-hidden className="text-accent">◆</span>
-              {t.cohorts?.name}
-              {t.cohorts?.status === "activa" && (
-                <Badge variant="ok">En curso</Badge>
-              )}
+              <span aria-hidden className="text-gold">◆</span>
+              {a}
             </li>
           ))}
+          {current && (
+            <li className="flex items-center gap-2 text-sm text-muted">
+              <span aria-hidden className="text-accent">◆</span>
+              {current.stage_runs?.name}
+              <Badge variant="ok">En curso</Badge>
+            </li>
+          )}
+          {activeService.map((t, i) => (
+            <li key={`s-${i}`} className="flex items-center gap-2 text-sm text-muted">
+              <span aria-hidden className="text-aqua">◆</span>
+              Sirve como {t.role === "capitan" ? "capitán" : t.role} · {t.stage_runs?.name}
+            </li>
+          ))}
+          {achievements.length === 0 && !current && activeService.length === 0 && (
+            <li className="text-sm text-muted">Su camino apenas comienza.</li>
+          )}
           <li className="text-xs text-faint">
             {postsCount.count ?? 0} publicaciones en su comunidad
           </li>

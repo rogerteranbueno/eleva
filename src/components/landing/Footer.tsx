@@ -29,6 +29,12 @@ export function Footer() {
                 <Link href="/plataforma" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
                   La plataforma
                 </Link>
+                <Link href="/hub-centro" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Hub Centro
+                </Link>
+                <Link href="/red-eleva" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Red ELEVA
+                </Link>
                 <Link href="/estandar-eleva" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
                   Estándar ELEVA
                 </Link>

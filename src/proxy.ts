@@ -38,6 +38,8 @@ export async function proxy(request: NextRequest) {
   const PUBLIC_PREFIXES = [
     "/login",
     "/plataforma",
+    "/hub-centro",
+    "/red-eleva",
     "/estandar-eleva",
     "/historia-transformacion",
     "/build",

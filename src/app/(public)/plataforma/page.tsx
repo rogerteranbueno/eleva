@@ -32,12 +32,13 @@ const CAPABILITIES = [
     name: "ELEVA Hub Centro",
     status: "Disponible en Alpha",
     statusColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/25",
-    desc: "La comunidad digital privada de cada centro. La experiencia empieza con la generación real de la persona: qué le toca hacer, quién la acompaña y qué está ocurriendo en su grupo.",
+    desc: "La comunidad digital privada de cada centro, en tres círculos: la generación (confianza inmediata), el centro entero (avisos y eventos abiertos) y alumni con círculos temáticos con anfitrión. Cada expansión de audiencia es una decisión explícita.",
     bullets: [
-      "Generaciones, misiones, eventos y conversación con significado",
-      "Reacciones y reconocimientos, no likes vacíos",
-      "Toda primera contribución recibe respuesta",
+      "Perfiles con privacidad por campo, directorio con búsqueda y mensajes directos que el centro nunca lee",
+      "Reacciones y reconocimientos con significado, no likes vacíos",
+      "Consola de comunidad: toda primera contribución sin respuesta, visible",
     ],
+    href: "/hub-centro",
   },
   {
     icon: Megaphone,
@@ -52,14 +53,16 @@ const CAPABILITIES = [
   },
   {
     icon: Globe2,
-    name: "ELEVA Hub Global",
+    name: "Red ELEVA",
     status: "Tras sus gates",
     statusColor: "text-violet-300 bg-violet-500/10 border-violet-500/25",
     desc: "La red entre personas entrenadas de distintos centros, ciudades y metodologías. Nace de comunidades reales ya activas — nunca como una red vacía. Participación siempre voluntaria.",
     bullets: [
       "Nada privado del centro pasa automáticamente a la red global",
       "Cada persona decide qué parte de su trayectoria comparte",
+      "Los criterios para abrirla son públicos, con lista de espera",
     ],
+    href: "/red-eleva",
   },
   {
     icon: GraduationCap,
@@ -157,6 +160,14 @@ export default function PlataformaPage() {
                       </li>
                     ))}
                   </ul>
+                  {"href" in cap && cap.href && (
+                    <Link
+                      href={cap.href}
+                      className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-violet-300 hover:text-violet-200"
+                    >
+                      Conocer más <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  )}
                 </div>
               </motion.div>
             ))}

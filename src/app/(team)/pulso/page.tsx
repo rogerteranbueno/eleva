@@ -1,18 +1,29 @@
 import Link from "next/link";
-import { requireTeam, can } from "@/lib/context";
+import { requireCapability, hasCapability } from "@/lib/capabilities";
 import { createServiceClient } from "@/lib/supabase/server";
 import { computePulse } from "@/modules/intelligence/metrics";
 import { computeMomentum, MOMENTUM_DEFINITION } from "@/modules/intelligence/momentum";
 import { MomentumGauge } from "@/components/MomentumGauge";
 import { Card, SectionTitle, MetricStateBadge, PriorityBadge } from "@/components/ui";
 import { money, plural } from "@/lib/format";
+import { audienceFor } from "@/lib/ai";
 import { WeeklySummary } from "./WeeklySummary";
 
 export const dynamic = "force-dynamic";
 
 export default async function PulsoPage() {
-  const ctx = await requireTeam(["dueno", "oficinas", "finanzas", "entrenador"]);
+  const ctx = await requireCapability("pulse.read");
   const service = createServiceClient();
+
+  const financeAllowed = hasCapability(ctx, "finance.read");
+  const visibleKinds = [
+    "entrega",
+    "pase",
+    "registro",
+    "comunidad",
+    "operacion",
+    ...(financeAllowed ? ["finanzas"] : []),
+  ];
 
   const [{ metrics, integrity }, momentum, casesRes, insightsRes] =
     await Promise.all([
@@ -22,29 +33,36 @@ export default async function PulsoPage() {
         .from("cases")
         .select("id", { count: "exact", head: true })
         .eq("organization_id", ctx.organizationId)
-        .in("status", ["abierto", "en_progreso", "esperando"]),
+        .in("status", ["abierto", "en_progreso", "esperando"])
+        .in("kind", visibleKinds),
       service
         .from("cases")
         .select("id, title, priority, signals(explanation)")
         .eq("organization_id", ctx.organizationId)
         .in("status", ["abierto", "en_progreso"])
+        .in("kind", visibleKinds)
         .order("opened_at")
         .limit(4),
     ]);
 
-  const financeAllowed = can.viewFinance(ctx);
   const byId = (id: string) => metrics.find((m) => m.id === id);
   const cash = byId("cash_collected");
   const receivable = byId("receivable");
   const openCases = casesRes.count ?? 0;
-  const activeParticipants = momentum.cohorts.reduce(
+  const activeParticipants = momentum.cycles.reduce(
     (s, c) => s + c.participants.length,
     0
   );
 
+  // Lo que este rol no puede ver no se muestra NI entra al prompt de la IA.
   const visible = financeAllowed
     ? metrics
     : metrics.filter((m) => !["cash_collected", "receivable"].includes(m.id));
+  const audience = audienceFor({
+    finance: financeAllowed,
+    cycle: hasCapability(ctx, "cycle.read.all"),
+    cases: hasCapability(ctx, "case.operate.operational"),
+  });
 
   const kpis = [
     ...(financeAllowed && cash
@@ -56,7 +74,7 @@ export default async function PulsoPage() {
     {
       label: "Participantes activos",
       value: String(activeParticipants),
-      note: plural(momentum.cohorts.length, "generación activa", "generaciones activas"),
+      note: plural(momentum.cycles.length, "generación activa", "generaciones activas"),
       href: "/generaciones",
     },
     {
@@ -132,23 +150,23 @@ export default async function PulsoPage() {
           </details>
         </Card>
         <div className="grid gap-3 sm:grid-cols-2">
-          {momentum.cohorts.map((cohort) => (
-            <Link key={cohort.cohortId} href={`/generaciones/${cohort.cohortId}`}>
+          {momentum.cycles.map((cycle) => (
+            <Link key={cycle.cycleId} href={`/generaciones/${cycle.cycleId}`}>
               <Card className="h-full transition-colors hover:border-line-strong">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="font-semibold">{cohort.name}</p>
+                    <p className="font-semibold">{cycle.name}</p>
                     <p className="mt-0.5 text-xs text-faint">
-                      {plural(cohort.participants.length, "participante activo", "participantes activos")}
+                      {plural(cycle.participants.length, "participante activo", "participantes activos")}
                     </p>
                   </div>
-                  <MomentumGauge score={cohort.score} size="sm" showLabel={false} animated={false} />
+                  <MomentumGauge score={cycle.score} size="sm" showLabel={false} animated={false} />
                 </div>
-                {cohort.participants[0] && cohort.participants[0].score < 40 && (
+                {cycle.participants[0] && cycle.participants[0].score < 40 && (
                   <p className="mt-3 text-xs text-muted">
                     Acompañar primero:{" "}
                     <span className="text-danger">
-                      {cohort.participants
+                      {cycle.participants
                         .filter((p) => p.score < 40)
                         .slice(0, 2)
                         .map((p) => p.name)
@@ -162,14 +180,15 @@ export default async function PulsoPage() {
         </div>
       </section>
 
-      {/* Resumen semanal (IA) */}
+      {/* Resumen semanal (IA) — recibe SOLO las métricas que este rol puede ver */}
       <WeeklySummary
         organizationId={ctx.organizationId}
         organizationName={ctx.organizationName}
-        metrics={metrics}
+        audience={audience}
+        metrics={visible}
         centerMomentum={momentum.center}
         openCases={openCases}
-        integrity={integrity}
+        integrity={financeAllowed ? integrity : []}
       />
 
       {/* Insights del sistema */}

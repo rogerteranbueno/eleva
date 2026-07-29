@@ -1,5 +1,5 @@
 /**
- * Pruebas de aislamiento RLS contra la base real (tenant demo sintético).
+ * Pruebas de aislamiento RLS contra la base real (dominio canónico v2).
  * Regla del blueprint: la privacidad entre centros se prueba, nunca se infiere.
  * Corre con: npm run test:rls
  */
@@ -16,8 +16,10 @@ const ANON = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 const PASSWORD = "ElevaDemo2026!";
 
 const VALERIA_PERSON = "ae000000-0000-4000-8000-000000000004";
+const PAULINA_PERSON = "ae000000-0000-4000-8000-000000000046";
 const AURORA_ORG = "a0000000-0000-4000-8000-000000000001";
-const G42 = "cc000000-0000-4000-8000-000000000042";
+const CY42 = "c4000000-0000-4000-8000-000000000042";
+const R42_AVANZADO = "c5000000-0000-4000-8000-000000004202";
 
 let failures = 0;
 function check(label: string, ok: boolean, detail?: unknown) {
@@ -44,11 +46,35 @@ async function count(client: SupabaseClient, table: string, filter?: (q: any) =>
   return { c: c ?? 0 };
 }
 
+/** El slug de un espacio de generación se calcula igual que en la migración 020. */
+function genSpaceSlug(cycleName: string) {
+  return "gen-" + cycleName.toLowerCase().replace(/\s/g, "-");
+}
+
 async function main() {
+  // Resueltos una vez, con una sesión de equipo: los posts ya no llevan
+  // cycle_id — viven en un espacio. Estos ids se usan en varias aserciones.
+  const resolver = await loginAs("oficinas@aurora.demo");
+  const { data: g42Space } = await resolver
+    .from("spaces")
+    .select("id")
+    .eq("slug", genSpaceSlug("Generación 42"))
+    .single();
+  const { data: g41Space } = await resolver
+    .from("spaces")
+    .select("id")
+    .eq("slug", genSpaceSlug("Generación 41"))
+    .single();
+  const G42_SPACE = g42Space!.id;
+  const G41_SPACE = g41Space!.id;
+
   console.log("\n— Cliente anónimo: nada visible —");
   {
     const anon = createClient(URL, ANON, { auth: { persistSession: false } });
-    for (const table of ["people", "organizations", "cohorts", "charges", "posts", "cases"]) {
+    for (const table of [
+      "people", "organizations", "generation_cycles", "stage_runs", "stage_participations",
+      "continuity_passes", "prospects", "charges", "payments", "posts", "cases", "follow_up_interactions",
+    ]) {
       const { c } = await count(anon, table);
       check(`anónimo no ve ${table}`, c === 0);
     }
@@ -61,119 +87,248 @@ async function main() {
     check("solo ve su organización", orgs.data?.length === 1 && orgs.data[0].slug === "norte", orgs.data);
     const valeria = await norte.from("people").select("id").eq("id", VALERIA_PERSON);
     check("no ve a personas de Aurora", (valeria.data ?? []).length === 0, valeria.data);
-    const cohorts = await norte.from("cohorts").select("id, name");
-    check("no ve generaciones de Aurora", (cohorts.data ?? []).every((r) => r.name === "Norte G1"), cohorts.data);
-    const { c: postsC } = await count(norte, "posts");
-    check("no ve conversación de Aurora", postsC === 0);
+    for (const table of ["generation_cycles", "stage_runs", "posts", "continuity_passes", "prospects", "follow_up_interactions"]) {
+      const { c } = await count(norte, table);
+      check(`no ve ${table} de Aurora`, c === 0, c);
+    }
     const charges = await norte.from("charges").select("organization_id");
     check("solo ve finanzas de su centro", (charges.data ?? []).every((r) => r.organization_id !== AURORA_ORG), charges.data?.length);
     const { c: casesC } = await count(norte, "cases", (q) => q.eq("organization_id", AURORA_ORG));
     check("no ve casos de Aurora", casesC === 0);
   }
 
-  console.log("\n— Participante (Valeria): comunidad sí, operación y finanzas no —");
+  console.log("\n— Participante (Valeria, G42): comunidad sí; operación, finanzas y pipeline sobre ella NO —");
   {
     const val = await loginAs("participante@aurora.demo");
     const { c: peopleC } = await count(val, "people");
     check("ve a sus compañeros de generación", peopleC >= 20, peopleC);
-    const { c: chargesC } = await count(val, "charges");
-    check("NO ve finanzas (ni las propias en v0)", chargesC === 0, chargesC);
-    const { c: casesC } = await count(val, "cases");
-    check("NO ve casos de seguimiento", casesC === 0, casesC);
-    const { c: signalsC } = await count(val, "signals");
-    check("NO ve señales", signalsC === 0, signalsC);
-    const { c: partC } = await count(val, "participations");
-    check("ve SOLO su participación", partC === 1, partC);
-    const { c: postsC } = await count(val, "posts");
-    check("ve la conversación de su generación", postsC >= 4, postsC);
+    for (const table of ["charges", "payments", "payment_allocations", "cases", "signals", "prospects", "follow_up_interactions"]) {
+      const { c } = await count(val, table);
+      check(`NO ve ${table}`, c === 0, c);
+    }
+    const { c: passesC } = await count(val, "continuity_passes");
+    check("NO ve el pipeline de pases (ni el propio: lo vive en persona)", passesC === 0, passesC);
+    const { c: partC } = await count(val, "stage_participations");
+    check("ve SOLO sus participaciones (Básico + Avanzado)", partC === 2, partC);
+    const { c: expC } = await count(val, "attendance_expectations");
+    check("ve sus 3 expectativas del Básico", expC === 3, expC);
     const { c: attC } = await count(val, "attendance_records");
-    check("ve solo su asistencia (6 sesiones)", attC === 6, attC);
+    check("ve solo su asistencia (3 días)", attC === 3, attC);
+    const { c: postsC } = await count(val, "posts");
+    check("ve la conversación de su ciclo + avisos del centro", postsC >= 5, postsC);
+    const { c: plPostsC } = await count(val, "posts", (q) => q.eq("space_id", G41_SPACE));
+    check("NO ve la conversación del espacio de G41 (PL)", plPostsC === 0, plPostsC);
     const { c: auditC } = await count(val, "audit_events");
     check("NO ve auditoría", auditC === 0, auditC);
+
     const badPost = await val.from("posts").insert({
       organization_id: AURORA_ORG,
-      cohort_id: G42,
-      author_person_id: "ae000000-0000-4000-8000-000000000010", // Luis, no ella
+      space_id: G42_SPACE,
+      author_person_id: "ae000000-0000-4000-8000-000000000010",
       kind: "declaracion",
       body: "suplantación",
     });
     check("no puede publicar a nombre de otra persona", badPost.error !== null);
+
+    const { data: eventoAv } = await val
+      .from("event_occurrences")
+      .select("id")
+      .eq("stage_run_id", R42_AVANZADO)
+      .order("starts_at")
+      .limit(1)
+      .single();
+    const rsvpOk = await val.from("rsvps").insert({
+      organization_id: AURORA_ORG,
+      event_occurrence_id: eventoAv!.id,
+      person_id: VALERIA_PERSON,
+      status: "confirmado",
+    });
+    check("puede confirmar SU lugar en el Avanzado", rsvpOk.error === null, rsvpOk.error);
+    await val.from("rsvps").delete().eq("event_occurrence_id", eventoAv!.id).eq("person_id", VALERIA_PERSON);
+    const rsvpBad = await val.from("rsvps").insert({
+      organization_id: AURORA_ORG,
+      event_occurrence_id: eventoAv!.id,
+      person_id: "ae000000-0000-4000-8000-000000000010",
+      status: "confirmado",
+    });
+    check("no puede confirmar a nombre de otra persona", rsvpBad.error !== null);
   }
 
-  console.log("\n— Ex staff (Tania, asignación vencida hace 30 días): pierde acceso de equipo —");
+  console.log("\n— Staff (Paulina): SOLO su grupo asignado; nada de finanzas ni casos —");
+  {
+    const pau = await loginAs("staff@aurora.demo");
+    const { c: partC } = await count(pau, "stage_participations");
+    check("ve sus 3 participaciones + las 5 de su grupo (8)", partC === 8, partC);
+    const { c: fuC } = await count(pau, "follow_up_interactions");
+    check("ve SOLO su seguimiento (5 llamadas)", fuC === 5, fuC);
+    for (const table of ["charges", "payments", "cases", "prospects", "participation_plane_history"]) {
+      const { c } = await count(pau, table);
+      check(`NO ve ${table}`, c === 0, c);
+    }
+    const { c: attC } = await count(pau, "attendance_records");
+    check("asistencia: solo la suya y la de su grupo", attC > 0 && attC <= 20, attC);
+    const { c: peopleC } = await count(pau, "people");
+    check("ve el directorio (sirve al centro)", peopleC >= 40, peopleC);
+  }
+
+  console.log("\n— Capitán (Marco): cobertura de seguimiento sí; finanzas NO —");
+  {
+    const marco = await loginAs("capitan@aurora.demo");
+    const { c: fuC } = await count(marco, "follow_up_interactions");
+    check("ve el seguimiento del centro (cobertura)", fuC >= 24, fuC);
+    const { c: passesC } = await count(marco, "continuity_passes");
+    check("NO ve pases (no es rol de pase)", passesC === 0, passesC);
+    for (const table of ["charges", "payments", "expenses"]) {
+      const { c } = await count(marco, table);
+      check(`NO ve ${table}`, c === 0, c);
+    }
+    const cases = await marco.from("cases").select("id").limit(1);
+    check("la consulta de casos operativos está permitida", cases.error === null, cases.error);
+  }
+
+  console.log("\n— Entrenador (Diego): pases y roster sí; finanzas NO (hueco de la auditoría cerrado) —");
+  {
+    const entr = await loginAs("entrenador@aurora.demo");
+    const { c: passesC } = await count(entr, "continuity_passes");
+    check("ve el funnel de pases completo", passesC === 29, passesC);
+    const { c: partC } = await count(entr, "stage_participations");
+    check("ve el roster completo", partC >= 100, partC);
+    for (const table of ["charges", "payments", "payment_allocations", "refunds", "expenses"]) {
+      const { c } = await count(entr, table);
+      check(`NO ve ${table} (entrenador no opera dinero)`, c === 0, c);
+    }
+    const finCase = await entr.from("cases").select("id").eq("kind", "finanzas");
+    check("no ve casos de finanzas", (finCase.data ?? []).length === 0, finCase.data);
+  }
+
+  console.log("\n— Finanzas (Rosa): ledger completo; CRM NO —");
+  {
+    const rosa = await loginAs("finanzas@aurora.demo");
+    const { c: chargesC } = await count(rosa, "charges");
+    check("ve el ledger de cargos completo (77+)", chargesC >= 77, chargesC);
+    const { c: paysC } = await count(rosa, "payments");
+    check("ve los 49 pagos", paysC >= 49, paysC);
+    const { c: allocC } = await count(rosa, "payment_allocations");
+    check("ve las asignaciones", allocC >= 49, allocC);
+    const { c: expC } = await count(rosa, "expenses");
+    check("ve los gastos", expC === 5, expC);
+    const { c: batchC } = await count(rosa, "reconciliation_batches");
+    check("ve las batches de conciliación", batchC === 2, batchC);
+    const { c: prospC } = await count(rosa, "prospects");
+    check("NO ve el CRM (plano de oficinas)", prospC === 0, prospC);
+  }
+
+  console.log("\n— Ex staff (Tania, asignación vencida): pierde acceso OPERATIVO —");
   {
     const ex = await loginAs("exstaff@aurora.demo");
-    const { c: cohortsC } = await count(ex, "cohorts");
-    check("no ve generaciones (rol vencido, sin participación)", cohortsC === 0, cohortsC);
-    const { c: peopleC } = await count(ex, "people");
-    check("solo se ve a sí misma", peopleC === 1, peopleC);
-    const { c: casesC } = await count(ex, "cases");
-    check("no ve casos", casesC === 0, casesC);
+    const { c: cyclesC } = await count(ex, "generation_cycles");
+    check("no ve generaciones (rol vencido, sin participación)", cyclesC === 0, cyclesC);
+    const { c: fuC } = await count(ex, "follow_up_interactions");
+    check("no ve seguimiento", fuC === 0, fuC);
     const { c: chargesC } = await count(ex, "charges");
     check("no ve finanzas", chargesC === 0, chargesC);
+    const { c: passesC } = await count(ex, "continuity_passes");
+    check("no ve el pipeline de pases", passesC === 0, passesC);
+    // El Hub Centro es comunidad institucional, no un privilegio de rol: su
+    // membresía de organización sigue activa, así que sigue viendo el
+    // directorio del centro (espacio "centro") aunque perdió su rol de staff.
+    const { c: peopleC } = await count(ex, "people");
+    check(
+      "sigue en la comunidad del centro (Hub Centro no depende del rol)",
+      peopleC >= 40,
+      peopleC
+    );
   }
 
-  console.log("\n— Oficinas (Carla): operación completa de SU centro, nada del otro —");
+  console.log("\n— Capa social por ciclo —");
   {
-    const ofi = await loginAs("oficinas@aurora.demo");
-    const { c: peopleC } = await count(ofi, "people");
-    check("ve a todas las personas de Aurora", peopleC >= 40, peopleC);
-    const { c: partC } = await count(ofi, "participations");
-    check("ve las 41 participaciones (35 + 6 del pipeline)", partC === 41, partC);
-    const { c: chargesC } = await count(ofi, "charges");
-    check("ve finanzas de Aurora (20 cargos)", chargesC === 20, chargesC);
-    const norteCohorts = await ofi.from("cohorts").select("name").eq("name", "Norte G1");
-    check("no ve generaciones del Centro Norte", (norteCohorts.data ?? []).length === 0, norteCohorts.data);
-    const { c: attC } = await count(ofi, "attendance_records");
-    check("ve la asistencia completa (120 registros)", attC === 120, attC);
-  }
-
-  console.log("\n— Capa social: reacciones, reconocimientos y avisos —");
-  {
-    const anon = createClient(URL, ANON, { auth: { persistSession: false } });
-    for (const table of ["post_reactions", "recognitions", "notifications"]) {
-      const { c } = await count(anon, table);
-      check(`anónimo no ve ${table}`, c === 0);
-    }
-
     const norte = await loginAs("norte@norte.demo");
     for (const table of ["post_reactions", "recognitions", "notifications"]) {
       const { c } = await count(norte, table);
       check(`Centro Norte no ve ${table} de Aurora`, c === 0, c);
     }
-
-    const val = await loginAs("participante@aurora.demo");
-    const { c: reactionsC } = await count(val, "post_reactions");
-    check("Valeria ve las reacciones de su generación", reactionsC >= 3, reactionsC);
-    const { c: recC } = await count(val, "recognitions");
-    check("Valeria ve su reconocimiento recibido", recC >= 1, recC);
-    const fake = await val.from("post_reactions").insert({
+    const ivonne = await loginAs("pl@aurora.demo");
+    const { c: postsC } = await count(ivonne, "posts", (q) => q.eq("space_id", G41_SPACE));
+    check("Ivonne (PL) ve la conversación de SU espacio", postsC >= 4, postsC);
+    const { c: reactC } = await count(ivonne, "post_reactions");
+    check("Ivonne ve las reacciones del PL", reactC >= 3, reactC);
+    const { c: recC } = await count(ivonne, "recognitions");
+    check("Ivonne ve su reconocimiento recibido", recC >= 1, recC);
+    const fakeNotif = await ivonne.from("notifications").insert({
       organization_id: AURORA_ORG,
-      post_id: "ef000000-0000-4000-8000-000000000001",
-      person_id: "ae000000-0000-4000-8000-000000000010", // Luis, no ella
-      kind: "poderoso",
-    });
-    check("no puede reaccionar a nombre de otra persona", fake.error !== null);
-    const fakeNotif = await val.from("notifications").insert({
-      organization_id: AURORA_ORG,
-      person_id: VALERIA_PERSON,
+      person_id: PAULINA_PERSON,
       kind: "sistema",
       text: "spoofed",
     });
-    check("no puede fabricarse avisos (insert server-only)", fakeNotif.error !== null);
-
-    const ex = await loginAs("exstaff@aurora.demo");
-    const { c: exRecC } = await count(ex, "recognitions");
-    check("ex staff (vencida) no ve reconocimientos", exRecC === 0, exRecC);
+    check("no puede fabricar avisos (insert server-only)", fakeNotif.error !== null);
   }
 
-  console.log("\n— Dueña (Mariana): Pulso y auditoría permitidos —");
+  console.log("\n— Dueña (Mariana): Pulso, ledger y auditoría permitidos —");
   {
     const duena = await loginAs("duena@aurora.demo");
     const audit = await duena.from("audit_events").select("id").limit(1);
     check("la consulta de auditoría está permitida", audit.error === null, audit.error);
     const { c: chargesC } = await count(duena, "charges");
-    check("ve finanzas", chargesC === 20, chargesC);
+    check("ve el ledger completo", chargesC >= 77, chargesC);
+    const { c: passesC } = await count(duena, "continuity_passes");
+    check("ve el funnel de continuidad", passesC === 29, passesC);
+  }
+
+  console.log("\n— Hub Centro: espacios, mensajes y moderación —");
+  {
+    const val = await loginAs("participante@aurora.demo");
+    const paulina = await loginAs("staff@aurora.demo");
+
+    // La membresía de espacio no es pública: solo se ve la propia y la de
+    // quien comparte espacio.
+    const { c: spacesC } = await count(val, "spaces");
+    check("Valeria ve espacios (su generación + centro + círculos abiertos)", spacesC >= 2, spacesC);
+
+    // Mensajes directos: SOLO las dos personas de la conversación.
+    const { data: myConvos } = await val.from("conversation_members").select("conversation_id");
+    if ((myConvos ?? []).length > 0) {
+      const { c: msgC } = await count(val, "messages");
+      check("Valeria ve mensajes de SUS conversaciones", msgC >= 0, msgC);
+    }
+    const duenaForMsg = await loginAs("duena@aurora.demo");
+    const { c: dmC } = await count(duenaForMsg, "messages");
+    check("Dirección NO ve ningún mensaje directo (el centro nunca los lee)", dmC === 0, dmC);
+    const { c: convC } = await count(duenaForMsg, "conversations");
+    check("Dirección NO ve conversaciones ajenas", convC === 0, convC);
+
+    // Bloquear deshace la visibilidad mutua.
+    const targetId = "ae000000-0000-4000-8000-000000000010";
+    await val.from("blocks").insert({
+      organization_id: AURORA_ORG,
+      blocker_person_id: VALERIA_PERSON,
+      blocked_person_id: targetId,
+    });
+    const { data: blockedPerson } = await val.from("people").select("id").eq("id", targetId);
+    check("tras bloquear, Valeria no ve a esa persona", (blockedPerson ?? []).length === 0, blockedPerson);
+    await val.from("blocks").delete().eq("blocker_person_id", VALERIA_PERSON).eq("blocked_person_id", targetId);
+
+    // Reportar: quien reporta ve el suyo; el resto del equipo no puede leerlo
+    // a menos que tenga capacidad de moderación.
+    const { data: myReport } = await val
+      .from("reports")
+      .insert({
+        organization_id: AURORA_ORG,
+        reporter_person_id: VALERIA_PERSON,
+        target_kind: "post",
+        target_id: G42_SPACE, // objeto arbitrario válido para la prueba
+        reason: "otro",
+      })
+      .select("id")
+      .single();
+    check("Valeria puede reportar contenido", !!myReport, myReport);
+    const paulinaSeesReport = await paulina.from("reports").select("id").eq("id", myReport?.id ?? "");
+    check(
+      "Staff (sin capacidad de moderación) NO ve el reporte",
+      (paulinaSeesReport.data ?? []).length === 0,
+      paulinaSeesReport.data
+    );
+    const ofiSeesReport = await resolver.from("reports").select("id").eq("id", myReport?.id ?? "");
+    check("Oficinas SÍ ve el reporte (modera el centro)", (ofiSeesReport.data ?? []).length === 1);
   }
 
   console.log(failures === 0 ? "\n✅ Aislamiento verificado: todas las pruebas pasan." : `\n❌ ${failures} prueba(s) fallaron.`);

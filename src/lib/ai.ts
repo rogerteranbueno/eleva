@@ -40,7 +40,12 @@ async function runClaude(args: {
   maxTokens?: number;
 }): Promise<{ text: string; model: string } | null> {
   if (!aiEnabled()) return null;
-  const client = new Anthropic();
+  // baseURL explícito: el proceso puede heredar un ANTHROPIC_BASE_URL ajeno
+  // (p. ej. del harness de desarrollo) que desviaría las llamadas.
+  const client = new Anthropic({
+    apiKey: process.env.ANTHROPIC_API_KEY,
+    baseURL: process.env.ELEVA_AI_BASE_URL ?? "https://api.anthropic.com",
+  });
   const started = Date.now();
   try {
     const response = await client.beta.messages.create({
@@ -82,10 +87,29 @@ async function runClaude(args: {
 // Resumen semanal del Pulso
 // ---------------------------------------------------------------------------
 
+/**
+ * Audiencia del resumen. NO es cosmética: define qué métricas entran al prompt
+ * y bajo qué clave se cachea. Sin esto, un entrenador recibía el resumen que se
+ * generó con las cifras financieras que solo dirección puede ver.
+ */
+export type Audience = "direccion" | "operacion" | "entrenador" | "finanzas";
+
+export function audienceFor(caps: {
+  finance: boolean;
+  cycle: boolean;
+  cases: boolean;
+}): Audience {
+  if (caps.finance && caps.cycle) return "direccion";
+  if (caps.finance) return "finanzas";
+  if (caps.cases) return "operacion";
+  return "entrenador";
+}
+
 export type WeeklySummaryResult = {
   lines: string[];
   source: "claude" | "plantilla";
   model?: string;
+  audience: Audience;
   generatedAt: string;
 };
 
@@ -127,6 +151,7 @@ function templateSummary(args: {
 export async function getWeeklySummary(
   service: Service,
   organizationId: string,
+  audience: Audience,
   data: {
     metrics: Metric[];
     centerMomentum: number;
@@ -135,12 +160,14 @@ export async function getWeeklySummary(
     organizationName: string;
   }
 ): Promise<WeeklySummaryResult> {
-  // Cache: un resumen por día es suficiente para un Pulso.
+  // Cache por AUDIENCIA: dos roles con permisos distintos nunca comparten
+  // resumen, ni siquiera si se pidió hace un minuto.
   const { data: cached } = await service
     .from("ai_summaries")
     .select("content, source, model, created_at")
     .eq("organization_id", organizationId)
     .eq("kind", "pulso_semanal")
+    .eq("audience", audience)
     .gt("created_at", new Date(Date.now() - 20 * 3600_000).toISOString())
     .order("created_at", { ascending: false })
     .limit(1)
@@ -151,6 +178,7 @@ export async function getWeeklySummary(
       lines: content.lines,
       source: cached.source as "claude" | "plantilla",
       model: cached.model ?? undefined,
+      audience,
       generatedAt: cached.created_at,
     };
   }
@@ -204,12 +232,13 @@ Devuelve entre 3 y 5 líneas, una por renglón, sin viñetas ni numeración. Cad
   await service.from("ai_summaries").insert({
     organization_id: organizationId,
     kind: "pulso_semanal",
+    audience,
     content: { lines } as never,
     source,
     model,
   });
 
-  return { lines, source, model, generatedAt: new Date().toISOString() };
+  return { lines, source, model, audience, generatedAt: new Date().toISOString() };
 }
 
 // ---------------------------------------------------------------------------

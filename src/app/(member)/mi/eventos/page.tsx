@@ -2,7 +2,7 @@ import { requireMember } from "@/lib/context";
 import { createUserClient } from "@/lib/supabase/server";
 import { rsvpToEvent } from "@/app/actions/member";
 import { Card, SectionTitle, EmptyState, Badge } from "@/components/ui";
-import { dateTime, MODALITY_LABEL } from "@/lib/format";
+import { dateTime, MODALITY_LABEL, EVENT_KIND_LABEL } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
@@ -13,15 +13,17 @@ export default async function MisEventosPage() {
   const now = new Date().toISOString();
   const [{ data: upcoming }, { data: myRsvps }] = await Promise.all([
     supabase
-      .from("events")
-      .select("id, title, description, starts_at, modality, location_text, cohort_id, cohorts(name)")
+      .from("event_occurrences")
+      .select(
+        "id, name, kind, description, starts_at, modality, location_text, stage_runs(name, generation_cycles(name))"
+      )
       .eq("organization_id", ctx.organizationId)
       .gt("starts_at", now)
       .order("starts_at"),
-    supabase.from("rsvps").select("event_id, status").eq("person_id", ctx.personId),
+    supabase.from("rsvps").select("event_occurrence_id, status").eq("person_id", ctx.personId),
   ]);
 
-  const rsvpBy = new Map((myRsvps ?? []).map((r) => [r.event_id, r.status]));
+  const rsvpBy = new Map((myRsvps ?? []).map((r) => [r.event_occurrence_id, r.status]));
 
   return (
     <div className="space-y-6 max-w-2xl">
@@ -47,9 +49,13 @@ export default async function MisEventosPage() {
                 <Card>
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="font-semibold">{event.title}</p>
+                      <p className="font-semibold">{event.name}</p>
                       <p className="mt-0.5 text-xs text-faint">
-                        {event.cohorts?.name ?? "Todo el centro"}
+                        {EVENT_KIND_LABEL[event.kind] ?? event.kind}
+                        {" · "}
+                        {event.stage_runs
+                          ? `${event.stage_runs.generation_cycles?.name}`
+                          : "Todo el centro"}
                       </p>
                     </div>
                     {status === "confirmado" && <Badge variant="ok">Confirmado</Badge>}
