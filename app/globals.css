@@ -1,0 +1,261 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  /* ELEVA brand colors */
+  --color-violet: #7C3AED;
+  --color-cyan: #06B6D4;
+  --color-violet-dim: rgba(124, 58, 237, 0.15);
+  --color-cyan-dim: rgba(6, 182, 212, 0.15);
+  /* Section backgrounds */
+  --color-section-a: var(--section-a);
+  --color-section-b: var(--section-b);
+}
+
+/* ─── DARK THEME (default) ─── */
+:root {
+  --background: #0A0A0F;
+  --foreground: #F0F0F8;
+  --card: #13131A;
+  --card-foreground: #F0F0F8;
+  --popover: #1A1A24;
+  --popover-foreground: #F0F0F8;
+  --primary: #7C3AED;
+  --primary-foreground: #ffffff;
+  --secondary: #1E1E2E;
+  --secondary-foreground: #A0A0B8;
+  --muted: #1A1A26;
+  --muted-foreground: #A8A8CC;
+  --accent: #7C3AED;
+  --accent-foreground: #ffffff;
+  --destructive: #EF4444;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: #7C3AED;
+  --radius: 0.75rem;
+  --sidebar: #0E0E16;
+  --sidebar-foreground: #A0A0B8;
+  --sidebar-primary: #7C3AED;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgba(124, 58, 237, 0.12);
+  --sidebar-accent-foreground: #F0F0F8;
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+  --sidebar-ring: #7C3AED;
+  /* Section alternation */
+  --section-a: #0A0A0F;
+  --section-b: #0E0D18;
+  --section-accent: #0B0B16;
+}
+
+/* ─── LIGHT THEME ─── */
+html.light {
+  --background: #F7F7FC;
+  --foreground: #0A0A14;
+  --card: #FFFFFF;
+  --card-foreground: #0A0A14;
+  --popover: #FFFFFF;
+  --popover-foreground: #0A0A14;
+  --primary: #6D28D9;
+  --primary-foreground: #ffffff;
+  --secondary: #EEEDf8;
+  --secondary-foreground: #3D3D5C;
+  --muted: #EEEDF8;
+  --muted-foreground: #6B6B8A;
+  --accent: #6D28D9;
+  --accent-foreground: #ffffff;
+  --destructive: #DC2626;
+  --border: rgba(0, 0, 0, 0.09);
+  --input: rgba(0, 0, 0, 0.06);
+  --ring: #6D28D9;
+  --sidebar: #F0EFF8;
+  --sidebar-foreground: #3D3D5C;
+  --sidebar-primary: #6D28D9;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgba(109, 40, 217, 0.08);
+  --sidebar-accent-foreground: #0A0A14;
+  --sidebar-border: rgba(0, 0, 0, 0.06);
+  --sidebar-ring: #6D28D9;
+  /* Section alternation */
+  --section-a: #F7F7FC;
+  --section-b: #EEEDF8;
+  --section-accent: #F2F0FB;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    transition: background-color 0.3s ease, color 0.2s ease;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ─── Glassmorphism ─── */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+html.light .glass {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.glass-violet {
+  background: rgba(124, 58, 237, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+html.light .glass-violet {
+  background: rgba(109, 40, 217, 0.07);
+  border: 1px solid rgba(109, 40, 217, 0.18);
+}
+
+.glass-cyan {
+  background: rgba(6, 182, 212, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+}
+html.light .glass-cyan {
+  background: rgba(6, 182, 212, 0.07);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+/* ─── Gradient text ─── */
+.gradient-text {
+  background: linear-gradient(135deg, #7C3AED 0%, #06B6D4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-warm {
+  background: linear-gradient(135deg, #A855F7 0%, #7C3AED 50%, #06B6D4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Section backgrounds ─── */
+.section-a { background-color: var(--section-a); }
+.section-b { background-color: var(--section-b); }
+.section-accent { background-color: var(--section-accent); }
+
+/* Section divider lines */
+.section-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.3), rgba(6, 182, 212, 0.2), transparent);
+}
+html.light .section-rule {
+  background: linear-gradient(90deg, transparent, rgba(109, 40, 217, 0.2), rgba(6, 182, 212, 0.15), transparent);
+}
+
+/* ─── Glow effects ─── */
+.glow-violet {
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
+}
+.glow-cyan {
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+}
+
+/* ─── Light mode: darken accent text for WCAG contrast ─── */
+/*
+  In dark mode, violet-400/cyan-400/etc. work great on near-black backgrounds.
+  In light mode (#F7F7FC), those same hues are too light (~3:1 ratio).
+  These overrides shift them to darker Tailwind 700/800 equivalents.
+*/
+html.light {
+  /* Violet: #a78bfa → #5b21b6 (violet-800, 7.5:1 on white) */
+  .text-violet-400 { color: #5b21b6; }
+  /* Cyan: #22d3ee → #0e7490 (cyan-700, 5.2:1 on white) */
+  .text-cyan-400   { color: #0e7490; }
+  /* Green: #4ade80 → #065f46 (green-800, 8.9:1 on white) */
+  .text-green-400  { color: #065f46; }
+  /* Yellow: #facc15 → #92400e (amber-800, 7.1:1 on white) */
+  .text-yellow-400 { color: #92400e; }
+  /* Pink: #f472b6 → #9d174d (pink-800, 7.0:1 on white) */
+  .text-pink-400   { color: #9d174d; }
+  /* Red: #f87171 → #991b1b (red-800, 7.2:1 on white) */
+  .text-red-400    { color: #991b1b; }
+  /* Emerald: #34d399 → #064e3b (emerald-900, 10:1 on white) */
+  .text-emerald-400 { color: #065f46; }
+  /* Amber: #fbbf24 → #92400e */
+  .text-amber-400  { color: #92400e; }
+  /* Cyan/teal variants used in CTAs */
+  .text-cyan-300   { color: #0e7490; }
+  .text-violet-300 { color: #5b21b6; }
+  .text-green-300  { color: #065f46; }
+}
+
+/* ─── Scrollbar ─── */
+.scrollbar-none { scrollbar-width: none; -ms-overflow-style: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.4);
+  border-radius: 2px;
+}
+
+/* ─── Animations ─── */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-count {
+  animation: count-up 0.5s ease-out forwards;
+}
+
+/* ─── Mobile nav ─── */
+@media (max-width: 768px) {
+  .demo-sidebar { display: none; }
+  .demo-mobile-nav { display: flex; }
+}

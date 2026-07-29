@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Allow: /funcionalidades
+Allow: /precios
+Allow: /simulador
+Allow: /build
+
+# Demo uses fictional data — exclude from indexing
+Disallow: /demo
+
+Sitemap: https://elevaapp-drab.vercel.app/sitemap.xml
